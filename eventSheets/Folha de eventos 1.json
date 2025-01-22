@@ -1,0 +1,226 @@
+{
+	"name": "Folha de eventos 1",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "create",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "createGrid",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 956526726469709
+						},
+						{
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 977320665348911
+						},
+						{
+							"name": "wordLength",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 253371844054454
+						},
+						{
+							"name": "string",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 214355997318265
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 165146400356368,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 726193413614610,
+									"parameters": {
+										"name": "\"\"",
+										"start-index": "0",
+										"end-index": "wordLength -1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 249279686400393,
+									"parameters": {
+										"object-to-create": "Sprite",
+										"layer": "0",
+										"x": "x*Sprite.Height + loopindex * Sprite.Height",
+										"y": "y*Sprite.Height",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Sprite",
+									"sid": 912576320628661,
+									"parameters": {
+										"instance-variable": "letter",
+										"value": "mid(string, loopindex , 1)"
+									}
+								}
+							],
+							"sid": 584413822377194,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 579566905350497,
+											"parameters": {
+												"first-value": "abs(x - 8)",
+												"comparison": 0,
+												"second-value": "loopindex"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "Sprite",
+											"sid": 556344371182125,
+											"parameters": {
+												"frame-number": "1"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Sprite",
+											"sid": 906903930409330,
+											"parameters": {
+												"instance-variable": "isMain",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 817294396677185
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "createSymbol",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 971331867441520
+						},
+						{
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 470944623304962
+						},
+						{
+							"name": "animationIndex",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 296311977128020
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 390615061860573,
+							"parameters": {
+								"object-to-create": "Sprite2",
+								"layer": "0",
+								"x": "x + 64",
+								"y": "y + 25",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "Sprite2",
+							"sid": 935679629421125,
+							"parameters": {
+								"width": "35",
+								"height": "35"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "Sprite2",
+							"sid": 769921702110960,
+							"parameters": {
+								"animation": "\"1\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "Sprite2",
+							"sid": 444334789515825,
+							"parameters": {
+								"frame-number": "animationIndex"
+							}
+						}
+					],
+					"sid": 110226824995521,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [],
+							"sid": 503113238247182
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [],
+					"sid": 280756503532817
+				}
+			],
+			"sid": 513911357917201
+		}
+	],
+	"sid": 439734330431058
+}

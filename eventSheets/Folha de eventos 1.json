@@ -165,29 +165,20 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 390615061860573,
+							"sid": 360405325008796,
 							"parameters": {
 								"object-to-create": "Sprite2",
 								"layer": "0",
-								"x": "x + 64",
+								"x": "x + 72",
 								"y": "y + 25",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
 						},
 						{
-							"id": "set-size",
-							"objectClass": "Sprite2",
-							"sid": 935679629421125,
-							"parameters": {
-								"width": "35",
-								"height": "35"
-							}
-						},
-						{
 							"id": "set-animation",
 							"objectClass": "Sprite2",
-							"sid": 769921702110960,
+							"sid": 207169169305469,
 							"parameters": {
 								"animation": "\"1\"",
 								"from": "beginning"
@@ -196,7 +187,7 @@
 						{
 							"id": "set-animation-frame",
 							"objectClass": "Sprite2",
-							"sid": 444334789515825,
+							"sid": 415776549443930,
 							"parameters": {
 								"frame-number": "animationIndex"
 							}

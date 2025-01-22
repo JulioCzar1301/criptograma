@@ -135,7 +135,7 @@ function getUniqueCharacters(words) {
 }
 
 function getSymbol(letters){
-    let symbolsIndex = Array.from({ length: 25 }, (_, i) => i);
+    let symbolsIndex = Array.from({ length: 27 }, (_, i) => i);
 	let symbolsChar = [];
 	for( let i = 0; i < letters.length; i++){
 		const index = symbolsIndex[Math.floor(Math.random() * symbolsIndex.length)]

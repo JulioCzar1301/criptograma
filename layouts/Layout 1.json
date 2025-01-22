@@ -35,10 +35,50 @@
 					"world": {
 						"x": -208,
 						"y": 68,
-						"width": 100,
-						"height": 100,
+						"width": 107.6923076923077,
+						"height": 107.6923076923077,
 						"originX": 0,
 						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "Sprite2",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 3,
+					"sid": 716915417055709,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 716915417055709,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 249,
+						"y": -40,
+						"width": 35,
+						"height": 35,
+						"originX": 0.5,
+						"originY": 0.5,
 						"color": [
 							1,
 							1,

@@ -68,19 +68,19 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 249279686400393,
+									"sid": 437259743607643,
 									"parameters": {
-										"object-to-create": "Sprite",
-										"layer": "0",
-										"x": "x*Sprite.Height + loopindex * Sprite.Height",
-										"y": "y*Sprite.Height",
+										"object-to-create": "celula",
+										"layer": "1",
+										"x": "x*celula.Height + loopindex * celula.Height +1000",
+										"y": "y*celula.Height+200",
 										"create-hierarchy": false,
 										"template-name": "\"\""
 									}
 								},
 								{
 									"id": "set-instvar-value",
-									"objectClass": "Sprite",
+									"objectClass": "celula",
 									"sid": 912576320628661,
 									"parameters": {
 										"instance-variable": "letter",
@@ -96,9 +96,9 @@
 										{
 											"id": "compare-two-values",
 											"objectClass": "System",
-											"sid": 579566905350497,
+											"sid": 204879204482465,
 											"parameters": {
-												"first-value": "abs(x - 8)",
+												"first-value": "abs(x - 5)",
 												"comparison": 0,
 												"second-value": "loopindex"
 											}
@@ -107,7 +107,7 @@
 									"actions": [
 										{
 											"id": "set-animation-frame",
-											"objectClass": "Sprite",
+											"objectClass": "celula",
 											"sid": 556344371182125,
 											"parameters": {
 												"frame-number": "1"
@@ -115,7 +115,7 @@
 										},
 										{
 											"id": "set-boolean-instvar",
-											"objectClass": "Sprite",
+											"objectClass": "celula",
 											"sid": 906903930409330,
 											"parameters": {
 												"instance-variable": "isMain",
@@ -165,19 +165,19 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 360405325008796,
+							"sid": 645493778985857,
 							"parameters": {
-								"object-to-create": "Sprite2",
-								"layer": "0",
-								"x": "x + 72",
-								"y": "y + 25",
+								"object-to-create": "simbolo",
+								"layer": "1",
+								"x": "x + 32",
+								"y": "y + 15",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
 						},
 						{
 							"id": "set-animation",
-							"objectClass": "Sprite2",
+							"objectClass": "simbolo",
 							"sid": 207169169305469,
 							"parameters": {
 								"animation": "\"1\"",
@@ -186,28 +186,14 @@
 						},
 						{
 							"id": "set-animation-frame",
-							"objectClass": "Sprite2",
+							"objectClass": "simbolo",
 							"sid": 415776549443930,
 							"parameters": {
 								"frame-number": "animationIndex"
 							}
 						}
 					],
-					"sid": 110226824995521,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [],
-							"sid": 503113238247182
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [],
-					"sid": 280756503532817
+					"sid": 110226824995521
 				}
 			],
 			"sid": 513911357917201

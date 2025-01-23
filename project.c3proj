@@ -17,12 +17,14 @@
 	"uniqueId": "fzcyzi3wmpw",
 	"objectTypes": {
 		"items": [
-			"Sprite"
+			"celula",
+			"fundo",
+			"malha"
 		],
 		"subfolders": [
 			{
 				"items": [
-					"Sprite2"
+					"simbolo"
 				],
 				"subfolders": [],
 				"name": "simbolos"
@@ -37,7 +39,7 @@
 	},
 	"layouts": {
 		"items": [
-			"Layout 1"
+			"Game"
 		],
 		"subfolders": []
 	},
@@ -212,7 +214,7 @@
 		"exportFileStructure": "folders",
 		"uidAllocationMode": "increment"
 	},
-	"viewportWidth": 1920,
-	"viewportHeight": 1800,
+	"viewportWidth": 1900,
+	"viewportHeight": 1000,
 	"firstLayout": null
 }

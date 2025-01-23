@@ -18,16 +18,16 @@ async function OnBeforeProjectStart(runtime)
 	
 	runtime.addEventListener("tick", () => Tick(runtime));
 	
-	const words = ["banana", "maca", "carambola", "maracuja", "damasco", "roma", "limao", "laranja"];
+	const words = ["banana", "maca", "carambola", "maracuja", "damasco", "roma", "limao", "laranja", "goiaba", "graviola", "abacate"];
 	const wordsMainChoice = [];
 	let isOk = false;
 	let attempt = 0;
 	const maxAttempt = 1000;
-    const x = 8;
-	const y = 8;
+    const x = 5;
+	const y = 3;
 	let board = [];
     
-	let letters = getUniqueCharacters(words)
+	const letters = getUniqueCharacters(words)
 	console.log(letters)
 	const symbols = getSymbol(letters)
 	while (!isOk && attempt < maxAttempt) {
@@ -59,7 +59,7 @@ async function OnBeforeProjectStart(runtime)
 		  wordsChoice.push(otherword);
 		} else {
 		
-		  let wordAttempt = [];
+		  const wordAttempt = [];
 		  let found = false;
           console.log("Nao consegui inserir a palavra, tentar outras")
 		  while (!found && wordAttempt.length < copyWord.length) {
@@ -94,9 +94,9 @@ async function OnBeforeProjectStart(runtime)
 
 	  console.log(board)
 	  
-	  for(let i = 1; i < runtime.objects.Sprite.getAllInstances().length ; i++){
+	  for(let i = 1; i < runtime.objects.celula.getAllInstances().length ; i++){
 	   
-	    const letterBox = runtime.objects.Sprite.getAllInstances()[i]
+	    const letterBox = runtime.objects.celula.getAllInstances()[i]
 		if(!letterBox.instVars.isMain){
 			console.log(letterBox.instVars.letter)
 			let foundItem = symbols.find(item => item.letter === letterBox.instVars.letter);

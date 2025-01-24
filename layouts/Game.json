@@ -188,12 +188,68 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 249,
-						"y": -40,
+						"x": -80,
+						"y": 77,
 						"width": 18,
 						"height": 18,
 						"originX": 0.5,
 						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "Texto",
+					"properties": {
+						"text": "Texto",
+						"enable-bbcode": true,
+						"font": "Bahnschrift",
+						"size": 14,
+						"line-height": 0,
+						"bold": true,
+						"italic": false,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 6,
+					"sid": 518845912878674,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 518845912878674,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -205,
+						"y": 141,
+						"width": 50,
+						"height": 77,
+						"originX": 0,
+						"originY": 0,
 						"color": [
 							1,
 							1,

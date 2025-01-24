@@ -2,6 +2,46 @@
 	"name": "Folha de eventos 1",
 	"events": [
 		{
+			"eventType": "variable",
+			"name": "first_word",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 651661716608954
+		},
+		{
+			"eventType": "variable",
+			"name": "board",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 678846618944216
+		},
+		{
+			"eventType": "variable",
+			"name": "minY",
+			"type": "number",
+			"initialValue": "245",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 232886346585945
+		},
+		{
+			"eventType": "variable",
+			"name": "minX",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 492108096397551
+		},
+		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "create",
@@ -68,12 +108,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 437259743607643,
+									"sid": 296412802357094,
 									"parameters": {
 										"object-to-create": "celula",
 										"layer": "1",
-										"x": "x*celula.Height + loopindex * celula.Height +1000",
-										"y": "y*celula.Height+200",
+										"x": "x*celula.Height + loopindex * celula.Height + minX",
+										"y": "y*celula.Height + minY - max(0, (len(first_word) - 6)) * celula.Height\r\n",
 										"create-hierarchy": false,
 										"template-name": "\"\""
 									}
@@ -90,6 +130,43 @@
 							],
 							"sid": 584413822377194,
 							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 475042900929854,
+											"parameters": {
+												"object": "celula"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 837267663005778,
+											"parameters": {
+												"object-to-create": "Texto",
+												"layer": "1",
+												"x": "celula.X ",
+												"y": "celula.Y \r\n",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "Texto",
+											"sid": 733533349874217,
+											"parameters": {
+												"text": "uppercase(celula.letter)"
+											}
+										}
+									],
+									"sid": 685861812587235
+								},
 								{
 									"eventType": "block",
 									"conditions": [
@@ -165,11 +242,11 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 645493778985857,
+							"sid": 336639697362766,
 							"parameters": {
 								"object-to-create": "simbolo",
 								"layer": "1",
-								"x": "x + 32",
+								"x": "x + 35",
 								"y": "y + 15",
 								"create-hierarchy": false,
 								"template-name": "\"\""

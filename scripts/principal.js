@@ -34,6 +34,10 @@ async function OnBeforeProjectStart(runtime)
 	  attempt++;
 
 	  const mainWord = escolherPalavraAleatoria(words, wordsMainChoice);
+	  
+	  // aux
+	  runtime.globalVars.first_word = mainWord;
+	  
 	  console.log("palavra principal escolhida: ", mainWord);
 	  
 	  if (!mainWord) {
@@ -83,12 +87,44 @@ async function OnBeforeProjectStart(runtime)
 
 	  if (valid) {
 		isOk = true; // Palavra principal processada com sucesso
-		for(let j=0; j < board.length; j++){
-			runtime.callFunction("createGrid", x +  board[j].posX, y + board[j].posY, board[j].string.length, board[j].string)
+		
+		// parte em que to testando e me estressando horrores
+		let coordinates = []; // Array para armazenar todas as coordenadas
+
+		for (let j = 0; j < board.length; j++) {
+		  // (len, posX)
+		  coordinates.push([board[j].string.length, board[j].posX]);
+		}
+		
+		// Encontrar a menor e a maior coordenada X, considerando os tamanhos
+		const minX = coordinates.reduce((min, curr) => Math.min(min, curr[1]), coordinates[0][1]);
+		const maxX = coordinates.reduce((max, curr) => Math.max(max, curr[1] + curr[0] - 1), coordinates[0][1] + coordinates[0][0] - 1);
+
+		// Quantidade de células no eixo x
+		const gridWidth = maxX - minX + 1;
+
+		console.log("Coordenadas:", coordinates);
+		console.log("Quantidade de células para a esquerda:", minX);
+		console.log("Quantidade de células para a direita:", maxX);
+		console.log("Células totais:", gridWidth);
+		
+		runtime.globalVars.minX = 1025; // só falta resolver essa dESGRAÇA
+		// o grande problema eh que só tá centralizando em relação às células da palavra principal
+		// como fazer toda a malha se mover para direita/esquerda dinamicamente?
+		
+		// Chamada da malha final
+		for (let j = 0; j < board.length; j++) {
+		  runtime.callFunction(
+			"createGrid",
+			x + board[j].posX,
+			y + board[j].posY,
+			board[j].string.length,
+			board[j].string
+		  );
 		}
 		
 	  }
-	  else{
+	  else {
 	  	board = [];
 	  }
 

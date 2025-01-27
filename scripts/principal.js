@@ -12,11 +12,70 @@ runOnStartup(async runtime =>
 
 async function OnBeforeProjectStart(runtime)
 {
-	// Code to run just before 'On start of layout' on
-	// the first layout. Loading has finished and initial
-	// instances are created and available to use here.
+	// CHAMADA DA API
+
+	//let parts = window.Namespace.message.split(",");
+	//let isSecOrChap = parts[1] === "section";
+	//let chapterID = isSecOrChap ? "" : parts[2];
+	//let sectionID = isSecOrChap ? parts[2] : "";
+	//runtime.globalVars.idJogador = parts[0];
+	
+	let isSecOrChap = "section";
+	let sectionID = "c3c980a3-e832-4fbd-b964-42faa9a4145c";
+	let chapterID = "a34bcf82-1dd7-40a6-9d12-cca35c2aa035";
+	runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
+	
+	//window.Namespace.idSecao = sectionID;
+	//window.Namespace.isSecOrChap = isSecOrChap;
+	//window.Namespace.idChapter = chapterID;
+	
+		// BLOCO 1: NOME DA SEÇÃO/CAPÍTULO
+		try {
+			var xhr = new XMLHttpRequest();
+			if (isSecOrChap == "section") {	
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/name/${sectionID}`, false);
+			}
+			else {
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/name/${chapterID}`, false);
+			}
+			xhr.send(null);
+			if (xhr.status === 200) {
+				var data = JSON.parse(xhr.responseText);
+				//console.log('nome da seção:', data);
+				runtime.globalVars.nomeSecao = JSON.stringify(data);
+			} else {
+				throw new Error('Network response was not ok');
+			}
+		} catch (error) {
+			console.error('Failed to fetch data:', error);
+		}
+
+		// BLOCO 2: QUESTÕES DA SEÇÃO/CAPÍTULO
+		try {
+			var xhr = new XMLHttpRequest();
+			if (isSecOrChap == "section") {	
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/questions/${sectionID}`, false);
+			}
+			else {
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/questions/${chapterID}`, false);
+			}
+			xhr.send(null);
+			if (xhr.status === 200) {
+				var data = JSON.parse(xhr.responseText);
+				console.log('questões:', data);
+				//runtime.globalVars.rawData = JSON.stringify(data);
+			} else {
+				throw new Error('Network response was not ok');
+			}
+		} catch (error) {
+			console.error('Failed to fetch data:', error);
+		}
+		
+	//runtime.globalVars.complete = true;
 	
 	runtime.addEventListener("tick", () => Tick(runtime));
+	
+	// LOGICA DE GERAÇÃO DA MALHA
 	
 	const words = ["banana", "maca", "carambola", "maracuja", "damasco", "roma", "limao", "laranja", "goiaba", "graviola", "abacate"];
 	const wordsMainChoice = [];

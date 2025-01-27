@@ -13,6 +13,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "nomeSecao",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 237034185197289
+		},
+		{
+			"eventType": "variable",
 			"name": "board",
 			"type": "string",
 			"initialValue": "",

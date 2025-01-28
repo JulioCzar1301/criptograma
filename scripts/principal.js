@@ -296,9 +296,7 @@ async function OnBeforeProjectStart(runtime)
 			console.log("Quantidade de células para a direita:", maxX);
 			console.log("Células totais:", gridWidth);
 
-			runtime.globalVars.minX = 1025; // só falta resolver essa dESGRAÇA
-			// o grande problema eh que só tá centralizando em relação às células da palavra principal
-			// como fazer toda a malha se mover para direita/esquerda dinamicamente?
+			runtime.globalVars.minX = 640 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
 			// Chamada da malha final
 			for (let j = 0; j < boardComplete.length; j++) {

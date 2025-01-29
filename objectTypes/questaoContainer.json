@@ -1,0 +1,83 @@
+{
+	"name": "questaoContainer",
+	"plugin-id": "Sprite",
+	"sid": 696969593634862,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "idQuestao",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 708456659388029
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pin",
+			"name": "Fixar",
+			"sid": 337475157398174
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "Seleção"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "Acerto"
+		}
+	],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 792,
+						"height": 140,
+						"originX": 0,
+						"originY": 0,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 9204377,
+						"collisionPoly": {
+							"points": [
+								0.013888888888888888,
+								0,
+								0.9911616161616161,
+								0.014285714285714285,
+								1,
+								0.07857142857142857,
+								1,
+								0.9214285714285714,
+								0.9861111111111112,
+								1,
+								0.008838383838383838,
+								0.9857142857142858,
+								0,
+								0.9214285714285714,
+								0,
+								0.07857142857142857
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 366404094553046,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

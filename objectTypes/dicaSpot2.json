@@ -1,0 +1,87 @@
+{
+	"name": "dicaSpot2",
+	"plugin-id": "Sprite",
+	"sid": 355280543684461,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "isSelected",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 876577994446442
+		},
+		{
+			"name": "Tipo",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 104902447472337
+		},
+		{
+			"name": "isBuyed",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 955556296663884
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "Comprada"
+		}
+	],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 148,
+						"height": 148,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 2546198,
+						"collisionPoly": {
+							"points": [
+								0.16891891891891891,
+								0.08108108108108109,
+								0.7837837837837838,
+								0.0945945945945946,
+								0.8378378378378378,
+								0.16891891891891891,
+								0.8243243243243243,
+								0.7837837837837838,
+								0.7567567567567568,
+								0.8378378378378378,
+								0.13513513513513514,
+								0.8243243243243243,
+								0.08108108108108109,
+								0.75,
+								0.0945945945945946,
+								0.13513513513513514
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 464126077604371,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

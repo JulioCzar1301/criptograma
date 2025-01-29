@@ -1,8 +1,9 @@
 {
-	"name": "Texto",
+	"name": "moedaTexto",
 	"plugin-id": "Text",
-	"sid": 250435669476064,
+	"sid": 733026895509137,
 	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": []

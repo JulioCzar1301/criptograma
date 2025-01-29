@@ -1,0 +1,66 @@
+{
+	"name": "moedaContainer",
+	"plugin-id": "Sprite",
+	"sid": 314364476107484,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 853885181674435
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 149,
+						"height": 48,
+						"originX": 0,
+						"originY": 0,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 5925917,
+						"collisionPoly": {
+							"points": [
+								0.06377551020408163,
+								0.08108108108108109,
+								0.9183673469387755,
+								0.0945945945945946,
+								0.9387755102040817,
+								0.16891891891891891,
+								0.9336734693877551,
+								0.7837837837837838,
+								0.9081632653061225,
+								0.8378378378378378,
+								0.05102040816326531,
+								0.8243243243243243,
+								0.030612244897959183,
+								0.75,
+								0.03571428571428571,
+								0.13513513513513514
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 299678229490612,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

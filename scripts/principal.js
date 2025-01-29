@@ -272,7 +272,7 @@ async function OnBeforeProjectStart(runtime)
 			console.log("Quantidade de células para a direita:", maxX);
 			console.log("Células totais:", gridWidth);
 
-			runtime.globalVars.minX = 640 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
+			runtime.globalVars.minX = 643 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
 			// Chamada da malha final
 			for (let j = 0; j < boardComplete.length; j++) {
@@ -282,6 +282,19 @@ async function OnBeforeProjectStart(runtime)
 				y + boardComplete[j].posY,
 				boardComplete[j].string.length,
 				boardComplete[j].string
+			  );
+			}
+			
+			for (let j = 0; j < questionsSelected.length; j++) {
+			  runtime.callFunction(
+				"createQuestion",
+				questionsSelected[j].id, 
+				questionsSelected[j].idSecao,
+				questionsSelected[j].pergunta, 
+				questionsSelected[j].resposta, 
+				questionsSelected[j].categoria, 
+				questionsSelected[j].dica,
+				questionsSelected[j].imagePath || ""
 			  );
 			}
 

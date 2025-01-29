@@ -1,0 +1,52 @@
+{
+	"name": "secContainer",
+	"plugin-id": "Sprite",
+	"sid": 150583238202509,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 824,
+						"height": 112,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 8501942,
+						"collisionPoly": {
+							"points": [
+								0.032766990291262135,
+								0.14285714285714285,
+								0.9720873786407767,
+								0.16071428571428573,
+								0.9672330097087378,
+								0.8571428571428571,
+								0.027912621359223302,
+								0.8392857142857143
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 265808821466621,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

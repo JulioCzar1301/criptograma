@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 41602,
+	"savedWithRelease": 42400,
 	"name": "criptograma",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -19,6 +19,41 @@
 			"name": "Texto",
 			"author": "Scirra",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "DragnDrop",
+			"name": "Arrastar & Soltar",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "NoSave",
+			"name": "Não salvar",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Pin",
+			"name": "Fixar",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Sin",
+			"name": "Senóide",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "setcolor",
+			"name": "Definir cor",
+			"author": "Scirra",
+			"bundled": false
 		}
 	],
 	"uniqueId": "fzcyzi3wmpw",
@@ -27,7 +62,27 @@
 			"celula",
 			"fundo",
 			"malha",
-			"Texto"
+			"Letra",
+			"secNome",
+			"secContainer",
+			"hudContainer",
+			"moedaTexto",
+			"moedaContainer",
+			"dicaSpot0",
+			"dicaSpot1",
+			"dicaSpot2",
+			"Scroll",
+			"dica2",
+			"tempoBarra",
+			"tempoTotal",
+			"tempoIcon",
+			"textQuestao",
+			"botaoImagem",
+			"questaoContainer",
+			"Resposta",
+			"Lacuna",
+			"Hub",
+			"malhaContainer"
 		],
 		"subfolders": [
 			{
@@ -84,7 +139,296 @@
 			"subfolders": []
 		},
 		"font": {
-			"items": [],
+			"items": [
+				{
+					"name": "OpenSans_Condensed-Bold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 413849885491748,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-BoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 355857222798445,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-ExtraBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 769112749537880,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-ExtraBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 274239934610224,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-Italic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 944969007827483,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-Light.ttf",
+					"type": "application/font-sfnt",
+					"sid": 329876007898771,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-LightItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 285040774090450,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-Medium.ttf",
+					"type": "application/font-sfnt",
+					"sid": 550407956866188,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-MediumItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 115426890447433,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-Regular.ttf",
+					"type": "application/font-sfnt",
+					"sid": 189872639630858,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-SemiBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 973560295366293,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_Condensed-SemiBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 457994414493267,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-Bold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 523806558653389,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-BoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 311113245637322,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-ExtraBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 333574000095384,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-ExtraBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 673491053084579,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-Italic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 179626373125917,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-Light.ttf",
+					"type": "application/font-sfnt",
+					"sid": 839389354416445,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-LightItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 607547131372415,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-Medium.ttf",
+					"type": "application/font-sfnt",
+					"sid": 679281844728060,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-MediumItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 333383258959990,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-Regular.ttf",
+					"type": "application/font-sfnt",
+					"sid": 320948802015846,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-SemiBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 834568748711962,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans_SemiCondensed-SemiBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 550212797329308,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-Bold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 331997098400748,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-BoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 148114809793775,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-ExtraBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 249260972217888,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-ExtraBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 920196064069008,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-Italic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 819095992973631,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-Light.ttf",
+					"type": "application/font-sfnt",
+					"sid": 180040221510404,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-LightItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 925968079713449,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-Medium.ttf",
+					"type": "application/font-sfnt",
+					"sid": 486581094586510,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-MediumItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 584908061358973,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-Regular.ttf",
+					"type": "application/font-sfnt",
+					"sid": 594448717824267,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-SemiBold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 909677631367571,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "OpenSans-SemiBoldItalic.ttf",
+					"type": "application/font-sfnt",
+					"sid": 193111913742314,
+					"file-info": {
+						"purpose": "none"
+					}
+				}
+			],
 			"subfolders": []
 		},
 		"icon": {
@@ -173,6 +517,7 @@
 	"properties": {
 		"description": "",
 		"version": "1.0.0.0",
+		"autoIncrementVersion": false,
 		"author": "",
 		"authorEmail": "",
 		"authorWebsite": "",
@@ -222,7 +567,7 @@
 		"exportFileStructure": "folders",
 		"uidAllocationMode": "increment"
 	},
-	"viewportWidth": 1900,
+	"viewportWidth": 1920,
 	"viewportHeight": 1000,
 	"firstLayout": null
 }

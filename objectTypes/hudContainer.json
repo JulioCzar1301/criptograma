@@ -1,0 +1,52 @@
+{
+	"name": "hudContainer",
+	"plugin-id": "Sprite",
+	"sid": 648221004658340,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 824,
+						"height": 112,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 8731521,
+						"collisionPoly": {
+							"points": [
+								0.05825242718446602,
+								0.14285714285714285,
+								0.9502427184466019,
+								0.16071428571428573,
+								0.941747572815534,
+								0.8571428571428571,
+								0.04975728155339806,
+								0.8392857142857143
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 773343488260152,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

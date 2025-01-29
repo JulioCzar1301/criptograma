@@ -23,16 +23,6 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "board",
-			"type": "string",
-			"initialValue": "",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 678846618944216
-		},
-		{
-			"eventType": "variable",
 			"name": "minY",
 			"type": "number",
 			"initialValue": "200",
@@ -52,6 +42,16 @@
 			"sid": 492108096397551
 		},
 		{
+			"eventType": "variable",
+			"name": "PosY",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Para que uma pergunta seja posicionada abaixo da outra",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 333162667739003
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -68,13 +68,46 @@
 				},
 				{
 					"id": "destroy",
-					"objectClass": "Texto",
+					"objectClass": "Letra",
 					"sid": 239396769735722
 				},
 				{
 					"id": "destroy",
 					"objectClass": "simbolo",
 					"sid": 464354328222178
+				},
+				{
+					"id": "destroy",
+					"objectClass": "textQuestao",
+					"sid": 879502586380984
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Lacuna",
+					"sid": 687738977901680
+				},
+				{
+					"id": "destroy",
+					"objectClass": "questaoContainer",
+					"sid": 885908087903056
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Resposta",
+					"sid": 378442005997574
+				},
+				{
+					"id": "destroy",
+					"objectClass": "botaoImagem",
+					"sid": 545488717407962
+				},
+				{
+					"id": "set-text",
+					"objectClass": "secNome",
+					"sid": 743041634827256,
+					"parameters": {
+						"text": "uppercase(replace(nomeSecao, \"\"\"\", \"\"))"
+					}
 				}
 			],
 			"sid": 412088733952578
@@ -86,6 +119,16 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"eventType": "comment",
+					"text": "FUNÇÃO PARA CRIAR A MALHA DO CRIPTOGRAMA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
 				{
 					"functionName": "createGrid",
 					"functionDescription": "",
@@ -186,7 +229,7 @@
 											"objectClass": "System",
 											"sid": 837267663005778,
 											"parameters": {
-												"object-to-create": "Texto",
+												"object-to-create": "Letra",
 												"layer": "1",
 												"x": "celula.X ",
 												"y": "celula.Y \r\n",
@@ -196,7 +239,7 @@
 										},
 										{
 											"id": "set-text",
-											"objectClass": "Texto",
+											"objectClass": "Letra",
 											"sid": 733533349874217,
 											"parameters": {
 												"text": "uppercase(celula.letter)"
@@ -242,6 +285,16 @@
 								}
 							]
 						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "FUNÇÃO PARA CRIAR OS SÍMBOLOS ALEATÓRIOS NAS CÉLULAS",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
 					]
 				},
 				{
@@ -309,6 +362,741 @@
 						}
 					],
 					"sid": 110226824995521
+				},
+				{
+					"eventType": "comment",
+					"text": "FUNÇÃO PARA CRIAR AS QUESTÕES NO LAYOUT",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "createQuestion",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "id",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 923385821852913
+						},
+						{
+							"name": "idSecao",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 734773664278060
+						},
+						{
+							"name": "pergunta",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 569722381855721
+						},
+						{
+							"name": "resposta",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 930582612316811
+						},
+						{
+							"name": "categoria",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 297246649470006
+						},
+						{
+							"name": "dica",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 992432248347708
+						},
+						{
+							"name": "imagePath",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 882441541156216
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "CRIAR OBJETOS",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 576400655663468,
+							"parameters": {
+								"object-to-create": "textQuestao",
+								"layer": "1",
+								"x": "0",
+								"y": "0",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 503774695200609,
+							"parameters": {
+								"object-to-create": "questaoContainer",
+								"layer": "0",
+								"x": "0",
+								"y": "0",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"type": "comment",
+							"text": "DEFINIR VALORES E VARIÁVEIS DE INSTÂNCIA",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 522923223566117,
+							"parameters": {
+								"instance-variable": "idQuestao",
+								"value": "id"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "questaoContainer",
+							"sid": 384473901460862,
+							"parameters": {
+								"instance-variable": "idQuestao",
+								"value": "id"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 897996696479811,
+							"parameters": {
+								"instance-variable": "idSecao",
+								"value": "idSecao"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 522829256886383,
+							"parameters": {
+								"instance-variable": "resposta",
+								"value": "resposta"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 347114135004355,
+							"parameters": {
+								"instance-variable": "categoria",
+								"value": "categoria"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 953310131290840,
+							"parameters": {
+								"instance-variable": "dica",
+								"value": "dica"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 118514591948489,
+							"parameters": {
+								"instance-variable": "imagem",
+								"value": "imagePath"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "textQuestao",
+							"sid": 517070552579122,
+							"parameters": {
+								"text": "pergunta"
+							}
+						},
+						{
+							"type": "comment",
+							"text": "DEFINIR PROPRIEDADES DOS OBJETOS",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"id": "set-opacity",
+							"objectClass": "questaoContainer",
+							"sid": 359508723091240,
+							"parameters": {
+								"opacity": "80"
+							}
+						}
+					],
+					"sid": 187727860144629,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "Gap",
+							"type": "number",
+							"initialValue": "30",
+							"comment": "Para que uma pergunta seja posicionada abaixo da outra",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 582039607081943
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 1: PERGUNTAS DE LACUNA",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "evaluate-expression",
+									"objectClass": "System",
+									"sid": 832121574073946,
+									"parameters": {
+										"value": "categoria = \"gap\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 837224349295004,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "CRIAR O ESPAÇO PARA AS TAGS DE LACUNA",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 411883484217508,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "0",
+												"end-index": "tokencount(resposta, \",\")"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 428411162562611,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "evaluate-expression",
+													"objectClass": "System",
+													"sid": 927516501569887,
+													"parameters": {
+														"value": "find(textQuestao.Text, \"#\") >= 0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "textQuestao",
+													"sid": 562824730538047,
+													"parameters": {
+														"text": "mid(textQuestao.Text, 0, find(textQuestao.Text, \"#\")) & \"ㅤㅤ\" & \"[hide][tag=lacuna]\" & tokenat(resposta, loopindex, \",\") & \"[/tag][/hide]\" & \"ㅤㅤ\"& mid(textQuestao.Text, find(textQuestao.Text, \"#\") + 1, len(textQuestao.Text) - 1)"
+													}
+												}
+											],
+											"sid": 688218030831269
+										}
+									]
+								},
+								{
+									"eventType": "comment",
+									"text": "DIMENSÕES E PROPORÇÕES DO TEXTO DAS QUESTÕES",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-size",
+											"objectClass": "textQuestao",
+											"sid": 985397832478567,
+											"parameters": {
+												"width": "710",
+												"height": "textQuestao.TextHeight"
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "textQuestao",
+											"sid": 669170271565087,
+											"parameters": {
+												"x": "78",
+												"y": "secNome.Y + 190 + PosY"
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "questaoContainer",
+											"sid": 220548839100711,
+											"parameters": {
+												"x": "48",
+												"y": "secNome.Y + 170 + PosY"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 437889375675946,
+											"parameters": {
+												"variable": "PosY",
+												"value": "textQuestao.TextHeight + Gap*2"
+											}
+										},
+										{
+											"id": "set-size",
+											"objectClass": "questaoContainer",
+											"sid": 189883356457777,
+											"parameters": {
+												"width": "758",
+												"height": "textQuestao.TextHeight + 40"
+											}
+										}
+									],
+									"sid": 417458750649267
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 1: PERGUNTAS SIMPLES E DE MÚLTIPLA ESCOLHA",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 543739494032912
+								}
+							],
+							"actions": [],
+							"sid": 977819051277571,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "ADICIONAR O ESPAÇO PARA AS LACUNAS AO FINAL DA PERGUNTA",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 832144095614398,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "0",
+												"end-index": "tokencount(resposta, \",\")"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 202856476293403,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "evaluate-expression",
+													"objectClass": "System",
+													"sid": 607723628355952,
+													"parameters": {
+														"value": "find(textQuestao.Text, \"(capaz/incapaz)\") < 0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "textQuestao",
+													"sid": 610854555453858,
+													"parameters": {
+														"text": "textQuestao.Text & \"#\""
+													}
+												}
+											],
+											"sid": 894379617492717
+										}
+									]
+								},
+								{
+									"eventType": "comment",
+									"text": "CRIAR O ESPAÇO PARA AS TAGS DE LACUNA",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 452027508143081,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "0",
+												"end-index": "tokencount(resposta, \",\")"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 222661339089423,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "evaluate-expression",
+													"objectClass": "System",
+													"sid": 860300662961371,
+													"parameters": {
+														"value": "find(textQuestao.Text, \"#\") >= 0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "textQuestao",
+													"sid": 841864726028917,
+													"parameters": {
+														"text": "mid(textQuestao.Text, 0, find(textQuestao.Text, \"#\")) & \"ㅤㅤ\" & \"[hide][tag=lacuna]\" & tokenat(resposta, loopindex, \",\") & \"[/tag][/hide]\" & \"ㅤ\"& mid(textQuestao.Text, find(textQuestao.Text, \"#\") + 1, len(textQuestao.Text) - 1)"
+													}
+												}
+											],
+											"sid": 844592017443745
+										}
+									]
+								},
+								{
+									"eventType": "comment",
+									"text": "DIMENSÕES E PROPORÇÕES DO TEXTO DAS QUESTÕES",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-size",
+											"objectClass": "textQuestao",
+											"sid": 243315698701696,
+											"parameters": {
+												"width": "710",
+												"height": "textQuestao.TextHeight"
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "textQuestao",
+											"sid": 379995643519486,
+											"parameters": {
+												"x": "78",
+												"y": "secNome.Y + 190 + PosY"
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "questaoContainer",
+											"sid": 452974377920500,
+											"parameters": {
+												"x": "48",
+												"y": "secNome.Y + 170 + PosY"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 355604087206405,
+											"parameters": {
+												"variable": "PosY",
+												"value": "textQuestao.TextHeight + Gap*2"
+											}
+										},
+										{
+											"id": "set-size",
+											"objectClass": "questaoContainer",
+											"sid": 651038148460959,
+											"parameters": {
+												"width": "758",
+												"height": "textQuestao.TextHeight + 40"
+											}
+										}
+									],
+									"sid": 631292031524401
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "FUNÇÃO PARA CRIAR AS LACUNAS DAS QUESTÕES",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "group",
+							"disabled": false,
+							"title": "createGaps",
+							"description": "",
+							"isActiveOnStart": true,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 182183704277498,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "0",
+												"end-index": "tokencount(Resposta, \",\") - 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 851607694235139,
+											"parameters": {
+												"object-to-create": "Lacuna",
+												"layer": "1",
+												"x": "textQuestao.TagX(\"lacuna\", loopindex) - 28",
+												"y": "textQuestao.TagY(\"lacuna\", loopindex) - 5",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "Lacuna",
+											"sid": 730951589186525,
+											"parameters": {
+												"frame-number": "1"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Lacuna",
+											"sid": 183004184028652,
+											"parameters": {
+												"instance-variable": "idPergunta",
+												"value": "textQuestao.idQuestao"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Lacuna",
+											"sid": 414007514901455,
+											"parameters": {
+												"instance-variable": "resposta",
+												"value": "tokenat(resposta, loopindex, \",\")"
+											}
+										},
+										{
+											"id": "set-width",
+											"objectClass": "Lacuna",
+											"sid": 820103449956033,
+											"parameters": {
+												"width": "textQuestao.TagWidth(\"lacuna\", loopindex) + 58"
+											}
+										}
+									],
+									"sid": 723098524078217
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "textQuestao",
+											"sid": 358972225328298,
+											"parameters": {
+												"instance-variable": "imagem",
+												"comparison": 1,
+												"value": "\"\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 262715240073564,
+									"disabled": true,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-evaluate",
+													"objectClass": "System",
+													"sid": 347140158130406,
+													"parameters": {
+														"object": "questaoContainer",
+														"expression": "questaoContainer.idQuestao = textQuestao.idQuestao"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "create-object",
+													"objectClass": "System",
+													"sid": 641128808807104,
+													"parameters": {
+														"object-to-create": "botaoImagem",
+														"layer": "2",
+														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" ))",
+														"y": "textQuestao.TagY(\"lacuna\", tokencount(resposta, \",\" ))",
+														"create-hierarchy": false,
+														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "botaoImagem",
+													"sid": 490786584574934,
+													"parameters": {
+														"instance-variable": "idQuestao",
+														"value": "textQuestao.idQuestao"
+													}
+												},
+												{
+													"id": "set-height",
+													"objectClass": "questaoContainer",
+													"sid": 276745131569123,
+													"parameters": {
+														"height": "questaoContainer.Height + botaoImagem.Height + 17"
+													}
+												},
+												{
+													"id": "add-to-eventvar",
+													"objectClass": "System",
+													"sid": 429418775285509,
+													"parameters": {
+														"variable": "PosY",
+														"value": "botaoImagem.Height + 17"
+													}
+												},
+												{
+													"id": "set-position",
+													"objectClass": "textQuestao",
+													"sid": 492918869301605,
+													"parameters": {
+														"x": "78",
+														"y": "secNome.Y + 190 + PosY"
+													}
+												},
+												{
+													"id": "set-position",
+													"objectClass": "questaoContainer",
+													"sid": 428245778722870,
+													"parameters": {
+														"x": "48",
+														"y": "secNome.Y + 170 + PosY"
+													}
+												}
+											],
+											"sid": 371883534328535,
+											"disabled": true
+										}
+									]
+								}
+							],
+							"sid": 874698448601336
+						}
+					]
 				}
 			],
 			"sid": 513911357917201

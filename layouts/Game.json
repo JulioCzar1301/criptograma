@@ -16,24 +16,17 @@
 						"live-preview": false
 					},
 					"uid": 4,
-					"sid": 452364930260579,
+					"sid": 323788450650961,
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
-					"instanceFolderItem": {
-						"sid": 452364930260579,
-						"expanded": true,
-						"folderName": "",
-						"indexInFolder": -1,
-						"folderNestingLevel": -1
-					},
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": -11,
-						"y": 0,
-						"width": 1920,
-						"height": 1000,
+						"x": -115,
+						"y": -197,
+						"width": 2259,
+						"height": 1358,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -71,7 +64,7 @@
 					"locked": false,
 					"world": {
 						"x": 889,
-						"y": 33,
+						"y": 40,
 						"width": 920,
 						"height": 920,
 						"originX": 0,
@@ -84,6 +77,43 @@
 						],
 						"angle": 0,
 						"zElevation": 0
+					}
+				},
+				{
+					"type": "tempoTotal",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 11,
+					"sid": 440341558403258,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1809,
+						"y": 445,
+						"width": 77,
+						"height": 960,
+						"originX": 0,
+						"originY": 0.4444444444444444,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 1
 					}
 				}
 			],
@@ -189,8 +219,8 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": -80,
-						"y": 77,
+						"x": -168,
+						"y": 84,
 						"width": 18,
 						"height": 18,
 						"originX": 0.5,
@@ -206,7 +236,7 @@
 					}
 				},
 				{
-					"type": "Texto",
+					"type": "Letra",
 					"properties": {
 						"text": "Texto",
 						"enable-bbcode": true,
@@ -260,9 +290,943 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "tempoBarra",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 12,
+					"sid": 891887320011956,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1856,
+						"y": 946,
+						"width": 830,
+						"height": 20,
+						"originX": 0,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 4.71238898038469,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "tempoIcon",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Bomba",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 13,
+					"sid": 939414813181746,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"Senóide": {
+							"properties": {
+								"movement": "size",
+								"wave": "sine",
+								"period": 2,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 7,
+								"magnitude-random": 0,
+								"enabled": true,
+								"live-preview": false
+							}
+						},
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1857,
+						"y": 940,
+						"width": 108,
+						"height": 108,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.004349087929822915,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "questaoContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 10,
+					"sid": 396129701070363,
+					"tags": "",
+					"instanceVariables": {
+						"idQuestao": ""
+					},
+					"behaviors": {
+						"Fixar": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"effects": {
+						"Seleção": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.09411764705882353,
+									0.24313725490196078,
+									0.4392156862745098,
+									1
+								]
+							}
+						},
+						"Acerto": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0,
+									0.3607843137254902,
+									0.19215686274509805,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 396129701070363,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -869,
+						"y": -364,
+						"width": 792,
+						"height": 140,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "textQuestao",
+					"properties": {
+						"text": "perguntaAleatoria\n",
+						"enable-bbcode": true,
+						"font": "OpenSans-SemiBold",
+						"size": 17,
+						"line-height": 2.5,
+						"bold": true,
+						"italic": false,
+						"color": [
+							0.12156862745098039,
+							0.1568627450980392,
+							0.2,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 9,
+					"sid": 860452676459843,
+					"tags": "",
+					"instanceVariables": {
+						"idSecao": "",
+						"idQuestao": "",
+						"categoria": "",
+						"dica": "",
+						"imagem": "",
+						"resposta": ""
+					},
+					"behaviors": {
+						"Fixar": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"effects": {
+						"Acerto": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						"Seleção": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -837,
+						"y": -347,
+						"width": 370.29686821103854,
+						"height": 35,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 1
+					}
+				},
+				{
+					"type": "botaoImagem",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 8,
+					"sid": 781417408367677,
+					"tags": "",
+					"instanceVariables": {
+						"idQuestao": ""
+					},
+					"behaviors": {
+						"Fixar": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"effects": {
+						"Seleção": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 781417408367677,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -833,
+						"y": -293,
+						"width": 694,
+						"height": 56,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 1
+					}
+				},
+				{
+					"type": "Lacuna",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Normal",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 24,
+					"sid": 708817780865613,
+					"tags": "",
+					"instanceVariables": {
+						"idPergunta": "",
+						"resposta": "",
+						"isSelected": false,
+						"isCorrect": false,
+						"tempoQuestao": 0,
+						"startColuna": 0,
+						"startLinha": 0,
+						"Direcao": "",
+						"Invertida": false
+					},
+					"behaviors": {
+						"Fixar": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"effects": {
+						"Seleção": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -830,
+						"y": -203,
+						"width": 177,
+						"height": 28,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 1
+					}
+				},
+				{
+					"type": "Hub",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 25,
+					"sid": 825341419373014,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 825341419373014,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 452,
+						"y": 483,
+						"width": 866.6631396081928,
+						"height": 996.8022806717253,
+						"originX": 0.5,
+						"originY": 0.47898799313893653,
+						"color": [
+							1,
+							1,
+							1,
+							0.997
+						],
+						"angle": 0,
+						"zElevation": 2
+					}
+				},
+				{
+					"type": "Resposta",
+					"properties": {
+						"text": "Texto",
+						"enable-bbcode": true,
+						"font": "OpenSans-Bold",
+						"size": 15,
+						"line-height": 0,
+						"bold": true,
+						"italic": false,
+						"color": [
+							0.12156862745098039,
+							0.1568627450980392,
+							0.2,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 7,
+					"sid": 831246416803249,
+					"tags": "",
+					"instanceVariables": {
+						"idQuestao": "",
+						"isCorrect": false,
+						"dificuldade": 0,
+						"categoria": ""
+					},
+					"behaviors": {
+						"Fixar": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -809,
+						"y": -203,
+						"width": 143.93868504629665,
+						"height": 30,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.004618904797056428,
+						"zElevation": 2
+					}
+				},
+				{
+					"type": "hudContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 14,
+					"sid": 900983171992439,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 900983171992439,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 455,
+						"y": 197,
+						"width": 824,
+						"height": 112,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 2
+					}
+				},
+				{
+					"type": "secContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 15,
+					"sid": 855035562448851,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 855035562448851,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 455,
+						"y": 93,
+						"width": 824,
+						"height": 112,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 2
+					}
+				},
+				{
+					"type": "dicaSpot0",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 17,
+					"sid": 211258183323433,
+					"tags": "",
+					"instanceVariables": {
+						"isSelected": false,
+						"Tipo": 0,
+						"isBuyed": false
+					},
+					"behaviors": {},
+					"effects": {
+						"Comprada": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.9450980392156862,
+									0.9450980392156862,
+									0.9450980392156862,
+									1
+								]
+							}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 642,
+						"y": 204,
+						"width": 75,
+						"height": 75,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				},
+				{
+					"type": "dicaSpot1",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 18,
+					"sid": 270288590045581,
+					"tags": "",
+					"instanceVariables": {
+						"isSelected": false,
+						"Tipo": 0,
+						"isBuyed": false
+					},
+					"behaviors": {},
+					"effects": {
+						"Comprada": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.9450980392156862,
+									0.9450980392156862,
+									0.9450980392156862,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 270288590045581,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 713,
+						"y": 204,
+						"width": 75,
+						"height": 75,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				},
+				{
+					"type": "dicaSpot2",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 19,
+					"sid": 594421830738902,
+					"tags": "",
+					"instanceVariables": {
+						"isSelected": false,
+						"Tipo": 0,
+						"isBuyed": false
+					},
+					"behaviors": {},
+					"effects": {
+						"Comprada": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.9450980392156862,
+									0.9450980392156862,
+									0.9450980392156862,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 594421830738902,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 784,
+						"y": 204,
+						"width": 75,
+						"height": 75,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				},
+				{
+					"type": "moedaContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 22,
+					"sid": 191921289422740,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 90,
+						"y": 177,
+						"width": 150.00000000000003,
+						"height": 46.95652173913044,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				},
+				{
+					"type": "Scroll",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 21,
+					"sid": 954243887457476,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"ArrastarSoltar": {
+							"properties": {
+								"axes": "vertical-only",
+								"enabled": true
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 954243887457476,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 843,
+						"y": 498,
+						"width": 12,
+						"height": 255.593220338983,
+						"originX": 0.5,
+						"originY": 0.9336870026525199,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				},
+				{
+					"type": "moedaTexto",
+					"properties": {
+						"text": "0000",
+						"enable-bbcode": true,
+						"font": "system-ui",
+						"size": 18,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 23,
+					"sid": 433766943998394,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 159,
+						"y": 184,
+						"width": 105.32054550321845,
+						"height": 43.92689579998633,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 4
+					}
 				}
 			],
 			"sid": 642220014611765,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "Assets",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "secNome",
+					"properties": {
+						"text": "Seção",
+						"enable-bbcode": true,
+						"font": "OpenSans-Bold",
+						"size": 24,
+						"line-height": 0,
+						"bold": true,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 16,
+					"sid": 209004773375307,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 84,
+						"y": 82,
+						"width": 743.3850386335795,
+						"height": 42.01708226017835,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 3
+					}
+				}
+			],
+			"sid": 453592421911425,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
 			"isInitiallyInteractive": true,
@@ -299,8 +1263,8 @@
 	"sid": 780335904203862,
 	"nonworld-instances": [],
 	"effectTypes": [],
-	"width": 1708,
-	"height": 960,
+	"width": 1920,
+	"height": 1000,
 	"unboundedScrolling": false,
 	"vpX": 0.5,
 	"vpY": 0.5,

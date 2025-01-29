@@ -1,0 +1,68 @@
+{
+	"name": "textQuestao",
+	"plugin-id": "Text",
+	"sid": 208447393219182,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "idSecao",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 630507476350217
+		},
+		{
+			"name": "idQuestao",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 517803045280252
+		},
+		{
+			"name": "categoria",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 680227076964715
+		},
+		{
+			"name": "dica",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 578144381434505
+		},
+		{
+			"name": "imagem",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 811057553399187
+		},
+		{
+			"name": "resposta",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 554837421144415
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pin",
+			"name": "Fixar",
+			"sid": 402102342488867
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "Acerto"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "Seleção"
+		}
+	]
+}

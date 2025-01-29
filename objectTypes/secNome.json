@@ -1,0 +1,10 @@
+{
+	"name": "secNome",
+	"plugin-id": "Text",
+	"sid": 659027031046551,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

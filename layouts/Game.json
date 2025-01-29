@@ -135,7 +135,8 @@
 					"tags": "",
 					"instanceVariables": {
 						"letter": "",
-						"isMain": false
+						"isMain": false,
+						"posX": 0
 					},
 					"behaviors": {},
 					"instanceFolderItem": {

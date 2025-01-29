@@ -17,6 +17,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 631833838484010
+		},
+		{
+			"name": "posX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 179144149934135
 		}
 	],
 	"behaviorTypes": [],

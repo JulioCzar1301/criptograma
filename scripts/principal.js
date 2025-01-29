@@ -90,9 +90,12 @@ async function OnBeforeProjectStart(runtime)
 	let boardComplete = []
 	
 	let letters;
+	let questionsSelected = [];
 	while(!isOkGame){
 	    
 	    boardComplete = []
+		let min = -10000;
+		let max = -10000;
 		const wordsChoiceComplete = []
 		const wordsMainChoiceComplete = [];
 		
@@ -100,6 +103,8 @@ async function OnBeforeProjectStart(runtime)
 		const firstQuestion = escolherPalavraAleatoria(data, attemptWord);
 		let firstWord ;
 		console.log(firstQuestion.resposta);
+		
+		questionsSelected.push(firstQuestion);
 		
 		if(firstQuestion.resposta.length == 1){
 			if(!attemptWord.includes(firstQuestion.resposta)){
@@ -134,6 +139,7 @@ async function OnBeforeProjectStart(runtime)
 		let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
 		
 		while(indexGoal.length != 0){
+		   
 			if(multipleAnswer != null){
 				for(let j=0; j < firstWord.length; j++){
 					const letter = firstWord[j];
@@ -146,14 +152,28 @@ async function OnBeforeProjectStart(runtime)
 					for(let word of multipleAnswer){
 					    word = normalizeWord(word)
 						
-						console.log(wordsChoiceComplete[wordsChoiceComplete.length - 1])
+						
 						if(word.indexOf(letter) !== -1 && indexGoal.includes(j) && !wordsChoiceComplete.includes(word)){
-						    console.log("Proxima palavra escolhida: ", word)
-						    console.log(`a palavra ${word} cruzou com a vertical no indice ${j} com letra ${letter}`)
-							boardComplete.push({ string: word, posX: -word.indexOf(letter), posY: j });
-							indexGoal = indexGoal.filter(item => item != j)
-							wordsChoiceComplete.push(word);
-							multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word)
+							//verificar minimos e maximos da malha
+							if(word.indexOf(letter) > min){
+								min = word.indexOf(letter)
+							}
+
+							if((word.length  - (Math.abs(-word.indexOf(letter)) + 1)) > max){
+								max = (word.length  - (Math.abs(-word.indexOf(letter)) + 1))
+							}
+								
+							
+						    if(max + min < 16){
+								console.log("Proxima palavra escolhida: ", word)
+								console.log(`A palavra ${word} cruzou com a vertical no indice ${j} com letra ${letter}`)
+								boardComplete.push({ string: word, posX: -word.indexOf(letter), posY: j });
+								indexGoal = indexGoal.filter(item => item != j)
+								wordsChoiceComplete.push(word);
+								multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word)
+
+								
+							}	
 						}
 					}
 
@@ -165,6 +185,9 @@ async function OnBeforeProjectStart(runtime)
 			}
 			else{
 				const otherQuestion = escolherPalavraAleatoria(data, attemptWord);
+				
+				questionsSelected.push(otherQuestion);
+				
 				if(otherQuestion.resposta.length > 1){
 				    multipleAnswer = otherQuestion.resposta;
 					continue;
@@ -175,11 +198,24 @@ async function OnBeforeProjectStart(runtime)
 					for(const index of indexGoal){
 					    const letter = firstWord[index]
 					    if(otherWord.indexOf(letter) != -1 && !wordsChoiceComplete.includes(otherWord)){
-							console.log(`a palavra ${otherWord} cruzou com a vertical no indice ${index} com letra ${letter}`)
-							boardComplete.push({ string: otherWord, posX: -otherWord.indexOf(letter), posY: index });
-							indexGoal = indexGoal.filter(item => item != index)
-							wordsChoiceComplete.push(otherWord);
-							match = true;
+							//verificar minimos e maximos da malha
+							if(otherWord.indexOf(letter) > min){
+								min = otherWord.indexOf(letter)
+							}
+
+							if((otherWord.length  - (Math.abs(-otherWord.indexOf(letter)) + 1)) > max){
+								max = (otherWord.length  - (Math.abs(-otherWord.indexOf(letter)) + 1))
+							}
+								
+						   if((max + min < 16)){
+						   		console.log(`a palavra ${otherWord} cruzou com a vertical no indice ${index} com letra ${letter}`)
+								boardComplete.push({ string: otherWord, posX: -otherWord.indexOf(letter), posY: index });
+								indexGoal = indexGoal.filter(item => item != index)
+								wordsChoiceComplete.push(otherWord);
+								match = true;
+	
+						   }
+							
 						}
 					}
 					
@@ -196,9 +232,13 @@ async function OnBeforeProjectStart(runtime)
 			  .map(item => item.string);   // Mapeia apenas o valor do atributo 'string'
 
 			console.log(words);
+			console.log(questionsSelected)
 			letters = getUniqueCharacters(words)
 			symbols = getSymbol(letters)
 			
+		}
+		else{
+			questionsSelected = [];
 		}
 
 
@@ -209,72 +249,8 @@ async function OnBeforeProjectStart(runtime)
 	runtime.addEventListener("tick", () => Tick(runtime));
 	
 	// LOGICA DE GERAÇÃO DA MALHA
-	
-// 		const words = ["banana", "maca", "carambola", "maracuja", "damasco", "roma", "limao", "laranja", "goiaba", "graviola", "abacate"];
-		
-// 		let isOk = false;
-// 		let board = [];
-//         const wordsMainChoice = []
-// 		const letters = getUniqueCharacters(words)
-// 		console.log(letters)
-// 		const symbols = getSymbol(letters)
-// 		while (!isOk && attempt < maxAttempt) {
-// 		  attempt++;
-
-// 		  const mainWord = escolherPalavraAleatoria(words, wordsMainChoice);
-
-// 		  // aux
-// 		  runtime.globalVars.first_word = mainWord;
-
-// 		  console.log("palavra principal escolhida: ", mainWord);
-
-// 		  if (!mainWord) {
-// 			console.log("Nenhuma palavra disponível para escolher como palavra principal.");
-// 			break;
-// 		  }
-
-// 		  wordsMainChoice.push(mainWord);
-
-// 		  const wordsChoice = [];
-// 		  const copyWord = words.filter(item => item !== mainWord);
-// 		  console.log(copyWord)
-// 		  let valid = true; // Indica se a palavra principal foi completamente processada
-// 		  for (let i = 0; i < mainWord.length; i++) {
-
-// 			const letter = mainWord[i];
-
-// 			let otherword = escolherPalavraAleatoria(copyWord, wordsChoice);
-// 			console.log("Proxima palavra escolhida: ", otherword)
-
-// 			if (otherword && otherword.indexOf(letter) !== -1) {
-// 			  board.push({ string: otherword, posX: -otherword.indexOf(letter), posY: i });
-// 			  wordsChoice.push(otherword);
-// 			} else {
-
-// 			  const wordAttempt = [];
-// 			  let found = false;
-// 			  console.log("Nao consegui inserir a palavra, tentar outras")
-// 			  while (!found && wordAttempt.length < copyWord.length) {
-// 				wordAttempt.push(otherword);
-// 				otherword = escolherPalavraAleatoria(copyWord, [...wordsChoice, ...wordAttempt]);
-// 				console.log("nova proxima palavra escolhida: ", otherword)
-// 				if (otherword && otherword.indexOf(letter) !== -1) {
-// 				  board.push({ string: otherword, posX:-otherword.indexOf(letter), posY: i });
-// 				  wordsChoice.push(otherword);
-// 				  found = true;
-// 				}
-// 			  }
-
-// 			  if (!found) {
-// 				console.log("Nenhuma palavra contém a letra:", letter);
-// 				valid = false;
-// 				break;
-// 			  }
-// 			}
-// 		  }
 
 		  if (valid) {
-// 			isOk = true; // Palavra principal processada com sucesso
 
 			// parte em que to testando e me estressando horrores
 			let coordinates = []; // Array para armazenar todas as coordenadas
@@ -320,9 +296,7 @@ async function OnBeforeProjectStart(runtime)
 
 			const letterBox = runtime.objects.celula.getAllInstances()[i]
 			if(!letterBox.instVars.isMain){
-				console.log(letterBox.instVars.letter)
 				let foundItem = symbols.find(item => item.letter === letterBox.instVars.letter);
-				console.log("indice simbolo: ", foundItem)
 				runtime.callFunction("createSymbol", letterBox.x, letterBox.y, foundItem.symbols)
 			}
 

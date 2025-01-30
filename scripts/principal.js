@@ -285,6 +285,13 @@ async function OnBeforeProjectStart(runtime)
 			  );
 			}
 			
+			// Remover duplicatas das questões com base no 'id'
+			questionsSelected = questionsSelected.filter(
+				(value, index, self) =>
+					index === self.findIndex((item) => item.id === value.id)
+			);
+
+			// Chamada das questões escolhidas
 			for (let j = 0; j < questionsSelected.length; j++) {
 			  runtime.callFunction(
 				"createQuestion",

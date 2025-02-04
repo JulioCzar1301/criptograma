@@ -91,9 +91,11 @@ async function OnBeforeProjectStart(runtime)
 	
 	let letters;
 	let questionsSelected = [];
+	
 	while(!isOkGame){
-	    
+	   
 	    boardComplete = []
+		questionsSelected = []
 		let min = -10000;
 		let max = -10000;
 		const wordsChoiceComplete = []
@@ -104,7 +106,7 @@ async function OnBeforeProjectStart(runtime)
 		let firstWord ;
 		console.log(firstQuestion.resposta);
 		
-		questionsSelected.push(firstQuestion);
+// 		questionsSelected.push(firstQuestion);
 		
 		if(firstQuestion.resposta.length == 1){
 			if(!attemptWord.includes(firstQuestion.resposta)){
@@ -119,6 +121,7 @@ async function OnBeforeProjectStart(runtime)
 					attemptWord.push(word);
 					firstWord = normalizeWord(word)
 					multipleAnswer = firstQuestion.resposta.filter(item => normalizeWord(item) != firstWord)
+					console.log(multipleAnswer)
 					console.log("primeira palavra escolhida: ", firstWord)
 					break;
 				}
@@ -138,14 +141,22 @@ async function OnBeforeProjectStart(runtime)
 		console.log(firstWord, firstQuestion.resposta[0])
 		let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
 		
+		let otherQuestion = firstQuestion;
 		while(indexGoal.length != 0){
 		   
 			if(multipleAnswer != null){
+			    const aux = []
 				for(let j=0; j < firstWord.length; j++){
 					const letter = firstWord[j];
-
+                 
 					if(multipleAnswer.length == 0){
 					   multipleAnswer = null;
+					   console.log("Questao de multiplas respostas: ",otherQuestion)
+					   questionsSelected.push(otherQuestion);
+					   for(const word of aux){
+					   		boardComplete.push(word);
+					   }
+					   
 					   break;		
 					}
 
@@ -167,7 +178,7 @@ async function OnBeforeProjectStart(runtime)
 						    if(max + min < 16){
 								console.log("Proxima palavra escolhida: ", word)
 								console.log(`A palavra ${word} cruzou com a vertical no indice ${j} com letra ${letter}`)
-								boardComplete.push({ string: word, posX: -word.indexOf(letter), posY: j });
+								aux.push({ string: word, posX: -word.indexOf(letter), posY: j })
 								indexGoal = indexGoal.filter(item => item != j)
 								wordsChoiceComplete.push(word);
 								multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word)
@@ -184,9 +195,9 @@ async function OnBeforeProjectStart(runtime)
 				}
 			}
 			else{
-				const otherQuestion = escolherPalavraAleatoria(data, attemptWord);
+				otherQuestion = escolherPalavraAleatoria(data, attemptWord);
 				
-				questionsSelected.push(otherQuestion);
+				
 				
 				if(otherQuestion.resposta.length > 1){
 				    multipleAnswer = otherQuestion.resposta;
@@ -213,6 +224,9 @@ async function OnBeforeProjectStart(runtime)
 								indexGoal = indexGoal.filter(item => item != index)
 								wordsChoiceComplete.push(otherWord);
 								match = true;
+								
+								console.log("Questao de resposta unica: ",otherQuestion)
+								questionsSelected.push(otherQuestion);
 	
 						   }
 							
@@ -235,6 +249,9 @@ async function OnBeforeProjectStart(runtime)
 			console.log(questionsSelected)
 			letters = getUniqueCharacters(words)
 			symbols = getSymbol(letters)
+			
+			boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
+
 			
 		}
 		else{
@@ -286,13 +303,14 @@ async function OnBeforeProjectStart(runtime)
 			}
 			
 			// Remover duplicatas das questões com base no 'id'
-			questionsSelected = questionsSelected.filter(
-				(value, index, self) =>
-					index === self.findIndex((item) => item.id === value.id)
-			);
+// 			questionsSelected = questionsSelected.filter(
+// 				(value, index, self) =>
+// 					index === self.findIndex((item) => item.id === value.id)
+// 			);
 
 			// Chamada das questões escolhidas
 			for (let j = 0; j < questionsSelected.length; j++) {
+			 console.log(questionsSelected[j])
 			  runtime.callFunction(
 				"createQuestion",
 				questionsSelected[j].id, 
@@ -311,6 +329,7 @@ async function OnBeforeProjectStart(runtime)
 		  }
 
 		  console.log(boardComplete)
+		  console.log(questionsSelected)
 
 		  for(let i = 1; i < runtime.objects.celula.getAllInstances().length ; i++){
 

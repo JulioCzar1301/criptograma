@@ -80,6 +80,50 @@
 					}
 				},
 				{
+					"type": "dicaSair",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 29,
+					"sid": 759263472347308,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 759263472347308,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -223,
+						"y": 517,
+						"width": 70,
+						"height": 70,
+						"originX": 0.11904761904761904,
+						"originY": 1.0531400966183575,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
 					"type": "tempoTotal",
 					"properties": {
 						"initially-visible": true,
@@ -485,7 +529,10 @@
 						"categoria": "",
 						"dica": "",
 						"imagem": "",
-						"resposta": ""
+						"resposta": "",
+						"isSelected": false,
+						"isCorrect": false,
+						"tempoQuestao": 0
 					},
 					"behaviors": {
 						"Fixar": {
@@ -611,15 +658,10 @@
 					"sid": 708817780865613,
 					"tags": "",
 					"instanceVariables": {
-						"idPergunta": "",
+						"idQuestao": "",
 						"resposta": "",
 						"isSelected": false,
-						"isCorrect": false,
-						"tempoQuestao": 0,
-						"startColuna": 0,
-						"startLinha": 0,
-						"Direcao": "",
-						"Invertida": false
+						"isCorrect": false
 					},
 					"behaviors": {
 						"Fixar": {
@@ -760,7 +802,7 @@
 							1,
 							1
 						],
-						"angle": 0.004618904797056428,
+						"angle": 0.013706197024617645,
 						"zElevation": 2
 					}
 				},
@@ -1227,6 +1269,118 @@
 				}
 			],
 			"sid": 453592421911425,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "Image",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "questaoImagem",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 28,
+					"sid": 374329544781058,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 374329544781058,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -591,
+						"y": 160,
+						"width": 684.0173410404624,
+						"height": 521.8,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "fundoDesfoque",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 27,
+					"sid": 247831162759319,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"NãoSalvar": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -114,
+						"y": 1160,
+						"width": 2370,
+						"height": 1080,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							0.3
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 265759936451864,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
 			"isInitiallyInteractive": true,

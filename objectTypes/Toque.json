@@ -1,0 +1,14 @@
+{
+	"name": "Toque",
+	"plugin-id": "Touch",
+	"sid": 111522025703961,
+	"singleglobal-inst": {
+		"type": "Toque",
+		"properties": {
+			"use-mouse-input": true
+		},
+		"uid": 26,
+		"sid": 521400356715961,
+		"tags": ""
+	}
+}

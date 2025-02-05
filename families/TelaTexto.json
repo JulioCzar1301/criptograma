@@ -1,0 +1,15 @@
+{
+	"name": "TelaTexto",
+	"plugin-id": "Text",
+	"sid": 959263211305804,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"Letra",
+		"Resposta",
+		"moedaTexto",
+		"secNome",
+		"textQuestao"
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"name": "TelaSprites",
+	"plugin-id": "Sprite",
+	"sid": 389480727427114,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"celula",
+		"botaoImagem",
+		"dica2",
+		"dicaSpot0",
+		"dicaSpot1",
+		"dicaSpot2",
+		"Lacuna",
+		"malha",
+		"moedaContainer",
+		"questaoContainer",
+		"simbolo",
+		"Scroll",
+		"secContainer",
+		"hudContainer",
+		"tempoBarra",
+		"tempoTotal",
+		"tempoIcon"
+	]
+}

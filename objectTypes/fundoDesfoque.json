@@ -1,0 +1,58 @@
+{
+	"name": "fundoDesfoque",
+	"plugin-id": "Sprite",
+	"sid": 861798954863125,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 293075676976347
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 1094,
+						"height": 520,
+						"originX": 0,
+						"originY": 0,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 7391459,
+						"collisionPoly": {
+							"points": [
+								0.019195612431444242,
+								0.0057692307692307696,
+								0.9890310786106032,
+								0.032692307692307694,
+								0.9762340036563071,
+								0.9711538461538461,
+								0.005484460694698354,
+								0.9442307692307692
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 410708213367924,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

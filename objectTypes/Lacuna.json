@@ -6,7 +6,7 @@
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [
 		{
-			"name": "idPergunta",
+			"name": "idQuestao",
 			"type": "string",
 			"desc": "",
 			"show": true,
@@ -32,41 +32,6 @@
 			"desc": "",
 			"show": true,
 			"sid": 905753621499884
-		},
-		{
-			"name": "tempoQuestao",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 972408680356848
-		},
-		{
-			"name": "startColuna",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 658506237205364
-		},
-		{
-			"name": "startLinha",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 864037158637144
-		},
-		{
-			"name": "Direcao",
-			"type": "string",
-			"desc": "",
-			"show": true,
-			"sid": 895899942585339
-		},
-		{
-			"name": "Invertida",
-			"type": "boolean",
-			"desc": "",
-			"show": true,
-			"sid": 284892817519974
 		}
 	],
 	"behaviorTypes": [

@@ -46,6 +46,27 @@
 			"desc": "",
 			"show": true,
 			"sid": 554837421144415
+		},
+		{
+			"name": "isSelected",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 203511940095773
+		},
+		{
+			"name": "isCorrect",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 705610902747969
+		},
+		{
+			"name": "tempoQuestao",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 483474253463709
 		}
 	],
 	"behaviorTypes": [

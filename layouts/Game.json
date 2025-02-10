@@ -210,7 +210,10 @@
 					"instanceVariables": {
 						"letter": "",
 						"isMain": false,
-						"posX": 0
+						"posX": 0,
+						"letraUID": 0,
+						"idQuestao": 0,
+						"block": false
 					},
 					"behaviors": {},
 					"instanceFolderItem": {
@@ -307,7 +310,10 @@
 					"uid": 6,
 					"sid": 518845912878674,
 					"tags": "",
-					"instanceVariables": {},
+					"instanceVariables": {
+						"idQuestion": 0,
+						"letter": ""
+					},
 					"behaviors": {},
 					"instanceFolderItem": {
 						"sid": 518845912878674,

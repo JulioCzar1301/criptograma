@@ -8,6 +8,13 @@
 	"usedAddons": [
 		{
 			"type": "plugin",
+			"id": "Keyboard",
+			"name": "Teclado",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "Mouse",
 			"name": "Mouse",
 			"author": "Scirra",
@@ -101,7 +108,8 @@
 			"Toque",
 			"fundoDesfoque",
 			"questaoImagem",
-			"dicaSair"
+			"dicaSair",
+			"Teclado"
 		],
 		"subfolders": [
 			{

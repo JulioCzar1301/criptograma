@@ -52,6 +52,36 @@
 			"sid": 333162667739003
 		},
 		{
+			"eventType": "variable",
+			"name": "letterChosen",
+			"type": "number",
+			"initialValue": "-1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 540008036582057
+		},
+		{
+			"eventType": "variable",
+			"name": "cedulaChosen",
+			"type": "number",
+			"initialValue": "-1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 869577521175076
+		},
+		{
+			"eventType": "variable",
+			"name": "questionChosen",
+			"type": "number",
+			"initialValue": "-1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 409826810904159
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -1840,6 +1870,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 214355997318265
+						},
+						{
+							"name": "index",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 320132785903582
 						}
 					],
 					"eventType": "function-block",
@@ -1878,10 +1915,19 @@
 								{
 									"id": "set-instvar-value",
 									"objectClass": "celula",
-									"sid": 912576320628661,
+									"sid": 953277929992989,
 									"parameters": {
 										"instance-variable": "letter",
 										"value": "mid(string, loopindex , 1)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "celula",
+									"sid": 253941300451560,
+									"parameters": {
+										"instance-variable": "idQuestao",
+										"value": "index"
 									}
 								}
 							],
@@ -1916,9 +1962,27 @@
 										{
 											"id": "set-text",
 											"objectClass": "Letra",
-											"sid": 733533349874217,
+											"sid": 601142926621927,
 											"parameters": {
-												"text": "uppercase(celula.letter)"
+												"text": "\"\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "celula",
+											"sid": 365419062992144,
+											"parameters": {
+												"instance-variable": "letraUID",
+												"value": "Letra.IID - 1"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Letra",
+											"sid": 665830254415647,
+											"parameters": {
+												"instance-variable": "idQuestion",
+												"value": "index"
 											}
 										}
 									],
@@ -2869,6 +2933,426 @@
 				}
 			],
 			"sid": 513911357917201
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "manage keyboard",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Selecionar celula"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 906489405306962,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "celula"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "celula",
+							"sid": 372438511237465,
+							"parameters": {
+								"instance-variable": "block"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 856204890014952,
+							"parameters": {
+								"variable": "letterChosen",
+								"value": "celula.letraUID"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 597123569037071,
+							"parameters": {
+								"variable": "questionChosen",
+								"value": "celula.idQuestao"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 861083307562399,
+							"parameters": {
+								"variable": "cedulaChosen",
+								"value": "celula.IID"
+							}
+						}
+					],
+					"sid": 846764580180712
+				},
+				{
+					"eventType": "comment",
+					"text": "Escrita na celula"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 717302689778541,
+							"parameters": {
+								"object": "Letra",
+								"instance": "letterChosen"
+							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 401918148507142,
+							"parameters": {
+								"first-value": "Letra.idQuestion",
+								"comparison": 1,
+								"second-value": "questionChosen"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 283341432291763,
+							"parameters": {
+								"variable": "letterChosen",
+								"value": "-1"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 990809776993294,
+							"parameters": {
+								"variable": "questionChosen",
+								"value": "-1"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 143935258317246,
+							"parameters": {
+								"variable": "cedulaChosen",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 706552232066065
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-key-pressed",
+							"objectClass": "Teclado",
+							"sid": 416093231813975
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 610577248470458,
+							"parameters": {
+								"first-value": "letterChosen",
+								"comparison": 1,
+								"second-value": "-1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 632823471684277,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 189399746156491,
+									"parameters": {
+										"object": "Letra",
+										"instance": "letterChosen"
+									}
+								},
+								{
+									"id": "key-is-down",
+									"objectClass": "Teclado",
+									"sid": 648736061169334,
+									"parameters": {
+										"key": 8
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "Letra",
+									"sid": 883132289405039,
+									"parameters": {
+										"text": "uppercase(Teclado.TypedKey)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 490054091077516,
+									"parameters": {
+										"variable": "letterChosen",
+										"value": "letterChosen +1"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 738052373198444,
+									"parameters": {
+										"variable": "cedulaChosen",
+										"value": "cedulaChosen + 1"
+									}
+								}
+							],
+							"sid": 300888552656397
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "key-is-down",
+									"objectClass": "Teclado",
+									"sid": 807991306074500,
+									"parameters": {
+										"key": 8
+									}
+								},
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 152005490126593,
+									"parameters": {
+										"object": "Letra",
+										"instance": "letterChosen"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 161223584080514,
+									"parameters": {
+										"variable": "letterChosen",
+										"value": "letterChosen - 1"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 668775787564200,
+									"parameters": {
+										"variable": "cedulaChosen",
+										"value": "cedulaChosen - 1"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "Letra",
+									"sid": 396172824454870,
+									"parameters": {
+										"text": "\"\""
+									}
+								}
+							],
+							"sid": 396596941015584
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Ajuste na animação das celulas"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 664162662611656,
+							"parameters": {
+								"object": "celula"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 172091218754577,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 563283814523284,
+									"parameters": {
+										"first-value": "celula.idQuestao",
+										"comparison": 1,
+										"second-value": "questionChosen"
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 983815204715518,
+									"parameters": {
+										"first-value": "celula.AnimationFrame",
+										"comparison": 1,
+										"second-value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 254480459695947,
+									"parameters": {
+										"frame-number": "0"
+									}
+								}
+							],
+							"sid": 650935204287240
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 813099905838885,
+									"parameters": {
+										"first-value": "celula.idQuestao",
+										"comparison": 0,
+										"second-value": "questionChosen"
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 580505406783755,
+									"parameters": {
+										"first-value": "celula.AnimationFrame",
+										"comparison": 1,
+										"second-value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 523834824731416,
+									"parameters": {
+										"frame-number": "2"
+									}
+								}
+							],
+							"sid": 723878589063270
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "celula",
+									"sid": 834800672333342,
+									"parameters": {
+										"instance-variable": "isMain"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 897731888230256,
+									"parameters": {
+										"frame-number": "1"
+									}
+								}
+							],
+							"sid": 670785806503389
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 763035820192233,
+									"parameters": {
+										"first-value": "celula.IID",
+										"comparison": 0,
+										"second-value": "cedulaChosen"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 873077765695067,
+									"parameters": {
+										"frame-number": "3"
+									}
+								}
+							],
+							"sid": 547213452385509
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "celula",
+									"sid": 121219979725570,
+									"parameters": {
+										"instance-variable": "block"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 346193048883135,
+									"parameters": {
+										"frame-number": "4"
+									}
+								}
+							],
+							"sid": 681307035599368
+						}
+					]
+				}
+			],
+			"sid": 305621375817112
 		}
 	],
 	"sid": 439734330431058

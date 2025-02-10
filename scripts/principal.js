@@ -91,9 +91,9 @@ async function OnBeforeProjectStart(runtime)
 	
 	let letters;
 	let questionsSelected = [];
-	
-	while(!isOkGame){
-	   
+	let attemptGame = 0;
+	while(!isOkGame && attemptGame < 10000){
+	    attemptGame++;
 	    boardComplete = []
 		questionsSelected = []
 		let min = -10000;
@@ -160,31 +160,32 @@ async function OnBeforeProjectStart(runtime)
 					   break;		
 					}
 
-					for(let word of multipleAnswer){
-					    word = normalizeWord(word)
-						
-						
-						if(word.indexOf(letter) !== -1 && indexGoal.includes(j) && !wordsChoiceComplete.includes(word)){
-							//verificar minimos e maximos da malha
-							if(word.indexOf(letter) > min){
-								min = word.indexOf(letter)
-							}
+					for (let word of multipleAnswer) {
+						word = normalizeWord(word);
 
-							if((word.length  - (Math.abs(-word.indexOf(letter)) + 1)) > max){
-								max = (word.length  - (Math.abs(-word.indexOf(letter)) + 1))
-							}
-								
-							
-						    if(max + min < 16){
-								console.log("Proxima palavra escolhida: ", word)
-								console.log(`A palavra ${word} cruzou com a vertical no indice ${j} com letra ${letter}`)
-								aux.push({ string: word, posX: -word.indexOf(letter), posY: j })
-								indexGoal = indexGoal.filter(item => item != j)
-								wordsChoiceComplete.push(word);
-								multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word)
+						// Verifica todas as letras da palavra para encontrar uma que permita a junção
+						for (let k = 0; k < word.length; k++) {
+							const currentLetter = word[k];
 
-								
-							}	
+							if (currentLetter === letter && indexGoal.includes(j) && !wordsChoiceComplete.includes(word)) {
+								if (k > min) {
+									min = k;
+								}
+
+								if ((word.length - (Math.abs(-k) + 1)) > max) {
+									max = (word.length - (Math.abs(-k) + 1));
+								}
+
+								if (max + min < 16) {
+									console.log("Próxima palavra escolhida: ", word);
+									console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
+									aux.push({ string: word, posX: -k, posY: j , index:j});
+									indexGoal = indexGoal.filter(item => item != j);
+									wordsChoiceComplete.push(word);
+									multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word);
+									break; // Sai do loop interno após encontrar uma letra que permite a junção
+								}
+							}
 						}
 					}
 
@@ -208,32 +209,34 @@ async function OnBeforeProjectStart(runtime)
 					let match = false;
 					for(const index of indexGoal){
 					    const letter = firstWord[index]
-					    if(otherWord.indexOf(letter) != -1 && !wordsChoiceComplete.includes(otherWord)){
-							//verificar minimos e maximos da malha
-							if(otherWord.indexOf(letter) > min){
-								min = otherWord.indexOf(letter)
-							}
+					   // Verifica todas as letras da palavra para encontrar uma que permita a junção
+						for (let k = 0; k < otherWord.length; k++) {
+							const currentLetter = otherWord[k];
 
-							if((otherWord.length  - (Math.abs(-otherWord.indexOf(letter)) + 1)) > max){
-								max = (otherWord.length  - (Math.abs(-otherWord.indexOf(letter)) + 1))
+							if (currentLetter === letter && !wordsChoiceComplete.includes(otherWord)) {
+								if (k > min) {
+									min = k;
+								}
+
+								if ((otherWord.length - (Math.abs(-k) + 1)) > max) {
+									max = (otherWord.length - (Math.abs(-k) + 1));
+								}
+
+								if ((max + min < 16)) {
+									console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
+									boardComplete.push({ string: otherWord, posX: -k, posY: index ,index:index});
+									indexGoal = indexGoal.filter(item => item != index);
+									wordsChoiceComplete.push(otherWord);
+									match = true;
+
+									console.log("Questão de resposta única: ", otherQuestion);
+									questionsSelected.push(otherQuestion);
+									break; // Sai do loop interno após encontrar uma letra que permite a junção
+								}
 							}
-								
-						   if((max + min < 16)){
-						   		console.log(`a palavra ${otherWord} cruzou com a vertical no indice ${index} com letra ${letter}`)
-								boardComplete.push({ string: otherWord, posX: -otherWord.indexOf(letter), posY: index });
-								indexGoal = indexGoal.filter(item => item != index)
-								wordsChoiceComplete.push(otherWord);
-								match = true;
-								
-								console.log("Questao de resposta unica: ",otherQuestion)
-								questionsSelected.push(otherQuestion);
-	
-						   }
-							
 						}
-					}
 					
-				}
+				}}
 			}
 		}
 		
@@ -298,7 +301,8 @@ async function OnBeforeProjectStart(runtime)
 				x + boardComplete[j].posX,
 				y + boardComplete[j].posY,
 				boardComplete[j].string.length,
-				boardComplete[j].string
+				boardComplete[j].string,
+				boardComplete[j].index,
 			  );
 			}
 			
@@ -345,11 +349,68 @@ async function OnBeforeProjectStart(runtime)
 
 }
 
-function Tick(runtime)
-{
-	// Code to run every tick
-	
-	
+function Tick(runtime) {
+    // Obtém todas as instâncias de celula e letra
+    const celulas = runtime.objects.celula.getAllInstances();
+    const letras = runtime.objects.Letra.getAllInstances();
+
+    // Verifica se o número de células e letras é o mesmo
+    if (celulas.length !== letras.length) {
+        console.error("O número de células e letras não é o mesmo.");
+        return null; // Retorna null se os tamanhos forem diferentes
+    }
+
+    // Cria um mapa para agrupar células e letras por idQuestao
+    const grupos = new Map();
+
+    // Agrupa as células e letras por idQuestao
+    for (let i = 0; i < celulas.length; i++) {
+        const celula = celulas[i];
+        const letter = letras[i];
+        const idQuestao = celula.instVars.idQuestao;
+
+        // Se o grupo ainda não existe, cria um novo
+        if (!grupos.has(idQuestao)) {
+            grupos.set(idQuestao, { celulas: [], letras: [] });
+        }
+
+        // Adiciona a célula e a letra ao grupo correspondente
+        grupos.get(idQuestao).celulas.push(celula);
+        grupos.get(idQuestao).letras.push(letter);
+		
+    }
+	console.log(grupos)
+    // Verifica cada grupo
+    for (const [idQuestao, grupo] of grupos) {
+        let grupoValido = true;
+
+        // Verifica se todas as células do grupo cumprem a condição
+        for (let i = 0; i < grupo.celulas.length; i++) {
+            const celula = grupo.celulas[i];
+            const letter = grupo.letras[i];
+
+            if (celula.instVars.letter.toUpperCase() !== letter.text) {
+                grupoValido = false; // Se uma célula não cumprir, o grupo é inválido
+                break;
+            }
+        }
+
+        // Se o grupo for válido, retorna o idQuestao
+        if (grupoValido) {
+            console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
+//             return idQuestao;
+             for (let i = 0; i < grupo.celulas.length; i++) {
+			    const celula = grupo.celulas[i];
+				celula.instVars.block = true
+				
+        	}
+
+        }
+    }
+
+    // Se nenhum grupo cumprir a condição, retorna null
+    console.log("Nenhum grupo cumpre a condição.");
+    return null;
 }
 
 function escolherPalavraAleatoria(lista, wordChoice) {

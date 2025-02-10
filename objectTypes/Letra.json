@@ -4,7 +4,22 @@
 	"sid": 250435669476064,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "idQuestion",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 453622862484213
+		},
+		{
+			"name": "letter",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 433188993209517
+		}
+	],
 	"behaviorTypes": [],
 	"effectTypes": []
 }

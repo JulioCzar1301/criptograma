@@ -46,6 +46,34 @@
 			"desc": "",
 			"show": true,
 			"sid": 446184558645327
+		},
+		{
+			"name": "anterior",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 711667813040925
+		},
+		{
+			"name": "posterior",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 394684726025403
+		},
+		{
+			"name": "anteriorMain",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 471558456415193
+		},
+		{
+			"name": "posteriorMain",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 632669845149508
 		}
 	],
 	"behaviorTypes": [],

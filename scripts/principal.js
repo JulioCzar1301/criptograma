@@ -306,6 +306,102 @@ async function OnBeforeProjectStart(runtime)
 			  );
 			}
 			
+			 // Obtém todas as instâncias de celula e letra
+			const celulas = runtime.objects.celula.getAllInstances();
+			const letras = runtime.objects.Letra.getAllInstances();
+
+			// Verifica se o número de células e letras é o mesmo
+			if (celulas.length !== letras.length) {
+				console.error("O número de células e letras não é o mesmo.");
+				return null; // Retorna null se os tamanhos forem diferentes
+			}
+
+			// Cria um mapa para agrupar células e letras por idQuestao
+			const grupos = new Map();
+            grupos.set(-1, { celulas: []});
+			// Agrupa as células e letras por idQuestao
+			for (let i = 1; i < celulas.length; i++) {
+				const celula = celulas[i];
+				const idQuestao = celula.instVars.idQuestao;
+
+				// Se o grupo ainda não existe, cria um novo
+				if (!grupos.has(idQuestao)) {
+					grupos.set(idQuestao, { celulas: []});
+				}
+                
+				if(celula.instVars.isMain){
+					// Adiciona a célula e a letra ao grupo correspondente
+					grupos.get(-1).celulas.push(celula);
+				}
+				
+				grupos.get(idQuestao).celulas.push(celula);
+
+			}
+			
+			// Organiza as células com índice -1 de acordo com o idQuestao
+			grupos.get(-1).celulas.sort((a, b) => {
+				const idQuestaoA = a.instVars.idQuestao;
+				const idQuestaoB = b.instVars.idQuestao;
+				return idQuestaoA - idQuestaoB;
+			});
+            
+			
+			// Verifica cada grupo
+			for (const [idQuestao, grupo] of grupos) {
+				
+				if(idQuestao != -1){
+					
+					for (let i = 0; i < grupo.celulas.length; i++) {
+						const celula = grupo.celulas[i];
+
+						if(i != 0 && i < grupo.celulas.length - 1){
+							const celulaAnt = grupo.celulas[i - 1]
+							const celulaPos = grupo.celulas[i + 1]
+							celula.instVars.anterior = celulaAnt.uid
+							celula.instVars.posterior = celulaPos.uid
+						}
+						else if(i == grupo.celulas.length - 1){
+							const celulaAnt = grupo.celulas[i - 1]
+							const celulaPos = grupo.celulas[0]
+							celula.instVars.anterior = celulaAnt.uid
+							celula.instVars.posterior = celulaPos.uid
+						}
+						else{
+							const celulaAnt = grupo.celulas[grupo.celulas.length - 1]
+							const celulaPos = grupo.celulas[i + 1]
+							celula.instVars.anterior = celulaAnt.uid 
+							celula.instVars.posterior = celulaPos.uid 
+						}
+
+					}
+				}
+				else{
+					for (let i = 0; i < grupo.celulas.length; i++) {
+						const celula = grupo.celulas[i];
+
+						if(i != 0 && i < grupo.celulas.length - 1){
+							const celulaAnt = grupo.celulas[i - 1]
+							const celulaPos = grupo.celulas[i + 1]
+							celula.instVars.anteriorMain = celulaAnt.uid 
+							celula.instVars.posteriorMain = celulaPos.uid 
+						}
+						else if(i == grupo.celulas.length - 1){
+							const celulaAnt = grupo.celulas[i - 1]
+							const celulaPos = grupo.celulas[0]
+							celula.instVars.anteriorMain = celulaAnt.uid 
+							celula.instVars.posteriorMain = celulaPos.uid 
+						}
+						else{
+							const celulaAnt = grupo.celulas[grupo.celulas.length - 1]
+							const celulaPos = grupo.celulas[i + 1]
+							celula.instVars.anteriorMain = celulaAnt.uid 
+							celula.instVars.posteriorMain = celulaPos.uid 
+						}
+
+					}
+				}
+			}
+			
 			// Remover duplicatas das questões com base no 'id'
 // 			questionsSelected = questionsSelected.filter(
 // 				(value, index, self) =>
@@ -359,10 +455,11 @@ function Tick(runtime) {
         console.error("O número de células e letras não é o mesmo.");
         return null; // Retorna null se os tamanhos forem diferentes
     }
-
+ 
     // Cria um mapa para agrupar células e letras por idQuestao
     const grupos = new Map();
-
+    grupos.set(-1, { celulas: [], letras: [] });
+	
     // Agrupa as células e letras por idQuestao
     for (let i = 0; i < celulas.length; i++) {
         const celula = celulas[i];
@@ -373,13 +470,19 @@ function Tick(runtime) {
         if (!grupos.has(idQuestao)) {
             grupos.set(idQuestao, { celulas: [], letras: [] });
         }
+		
+		if(celula.instVars.isMain){
+			// Adiciona a célula e a letra ao grupo correspondente
+			grupos.get(-1).celulas.push(celula);
+			grupos.get(-1).letras.push(letter);
+		}
 
         // Adiciona a célula e a letra ao grupo correspondente
         grupos.get(idQuestao).celulas.push(celula);
         grupos.get(idQuestao).letras.push(letter);
 		
     }
-	console.log(grupos)
+	
     // Verifica cada grupo
     for (const [idQuestao, grupo] of grupos) {
         let grupoValido = true;
@@ -409,7 +512,7 @@ function Tick(runtime) {
     }
 
     // Se nenhum grupo cumprir a condição, retorna null
-    console.log("Nenhum grupo cumpre a condição.");
+//     console.log("Nenhum grupo cumpre a condição.");
     return null;
 }
 

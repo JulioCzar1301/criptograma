@@ -213,7 +213,11 @@
 						"posX": 0,
 						"letraUID": 0,
 						"idQuestao": 0,
-						"block": false
+						"block": false,
+						"anterior": 0,
+						"posterior": 0,
+						"anteriorMain": 0,
+						"posteriorMain": 0
 					},
 					"behaviors": {},
 					"instanceFolderItem": {

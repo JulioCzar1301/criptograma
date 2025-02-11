@@ -152,7 +152,7 @@ async function OnBeforeProjectStart(runtime)
 					if(multipleAnswer.length == 0){
 					   multipleAnswer = null;
 					   console.log("Questao de multiplas respostas: ",otherQuestion)
-					   questionsSelected.push(otherQuestion);
+					   questionsSelected.push({question:otherQuestion, index:j});
 					   for(const word of aux){
 					   		boardComplete.push(word);
 					   }
@@ -230,7 +230,7 @@ async function OnBeforeProjectStart(runtime)
 									match = true;
 
 									console.log("Questão de resposta única: ", otherQuestion);
-									questionsSelected.push(otherQuestion);
+									questionsSelected.push({question:otherQuestion, index:index});
 									break; // Sai do loop interno após encontrar uma letra que permite a junção
 								}
 							}
@@ -254,7 +254,7 @@ async function OnBeforeProjectStart(runtime)
 			symbols = getSymbol(letters)
 			
 			boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
-
+			questionsSelected.sort((a, b) => a.index - b.index);
 			
 		}
 		else{
@@ -413,13 +413,14 @@ async function OnBeforeProjectStart(runtime)
 			 console.log(questionsSelected[j])
 			  runtime.callFunction(
 				"createQuestion",
-				questionsSelected[j].id, 
-				questionsSelected[j].idSecao,
-				questionsSelected[j].pergunta, 
-				questionsSelected[j].resposta, 
-				questionsSelected[j].categoria, 
-				questionsSelected[j].dica,
-				questionsSelected[j].imagePath || ""
+				questionsSelected[j].question.id, 
+				questionsSelected[j].question.idSecao,
+				questionsSelected[j].question.pergunta, 
+				questionsSelected[j].question.resposta, 
+				questionsSelected[j].question.categoria, 
+				questionsSelected[j].question.dica,
+				questionsSelected[j].question.imagePath || "",
+				questionsSelected[j].question.index,
 			  );
 			}
 
@@ -500,7 +501,7 @@ function Tick(runtime) {
 
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
-            console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
+//             console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
 //             return idQuestao;
              for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];

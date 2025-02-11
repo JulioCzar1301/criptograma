@@ -367,9 +367,9 @@
 										{
 											"id": "set-text",
 											"objectClass": "Letra",
-											"sid": 961652123001239,
+											"sid": 325734169083058,
 											"parameters": {
-												"text": "\"\""
+												"text": " uppercase(celula.letter)"
 											}
 										},
 										{
@@ -574,6 +574,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 882441541156216
+						},
+						{
+							"name": "idQuestao",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 418041156655620
 						}
 					],
 					"eventType": "function-block",
@@ -686,6 +693,15 @@
 							"parameters": {
 								"instance-variable": "imagem",
 								"value": "imagePath"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 268744161612121,
+							"parameters": {
+								"instance-variable": "idQuestao",
+								"value": "idQuestao"
 							}
 						},
 						{

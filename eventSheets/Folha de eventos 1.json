@@ -13,6 +13,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "words",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 441990749419765
+		},
+		{
+			"eventType": "variable",
 			"name": "nomeSecao",
 			"type": "string",
 			"initialValue": "",
@@ -63,7 +73,7 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "cedulaChosen",
+			"name": "celulaChosen",
 			"type": "number",
 			"initialValue": "-1",
 			"comment": "",
@@ -110,6 +120,16 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 830685010675787
+		},
+		{
+			"eventType": "variable",
+			"name": "isCelulaSelect",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 543277408225442
 		},
 		{
 			"eventType": "block",
@@ -183,6 +203,30 @@
 					"id": "destroy",
 					"objectClass": "dicaSair",
 					"sid": 571313789650938
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Indice",
+					"sid": 288085357074691
+				},
+				{
+					"type": "comment",
+					"text": "ADICIONAR A PALAVRA PRINCIPAL À LISTA DE PALAVRAS",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 232734316076503,
+					"parameters": {
+						"variable": "words",
+						"value": "first_word & \",\" & words"
+					}
 				}
 			],
 			"sid": 412088733952578
@@ -368,8 +412,17 @@
 											"id": "set-text",
 											"objectClass": "Letra",
 											"sid": 325734169083058,
+											"disabled": true,
 											"parameters": {
 												"text": " uppercase(celula.letter)"
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "Letra",
+											"sid": 749677223851892,
+											"parameters": {
+												"text": "\"\""
 											}
 										},
 										{
@@ -574,13 +627,6 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 882441541156216
-						},
-						{
-							"name": "idQuestao",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"sid": 418041156655620
 						}
 					],
 					"eventType": "function-block",
@@ -693,15 +739,6 @@
 							"parameters": {
 								"instance-variable": "imagem",
 								"value": "imagePath"
-							}
-						},
-						{
-							"id": "set-instvar-value",
-							"objectClass": "textQuestao",
-							"sid": 268744161612121,
-							"parameters": {
-								"instance-variable": "idQuestao",
-								"value": "idQuestao"
 							}
 						},
 						{
@@ -1283,12 +1320,22 @@
 							"isActiveOnStart": true,
 							"children": [
 								{
+									"eventType": "variable",
+									"name": "indice",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 581834583844472
+								},
+								{
 									"eventType": "block",
 									"conditions": [
 										{
 											"id": "for",
 											"objectClass": "System",
-											"sid": 536459946036893,
+											"sid": 888950091841773,
 											"parameters": {
 												"name": "\"\"",
 												"start-index": "0",
@@ -1300,7 +1347,7 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 612204764447705,
+											"sid": 607620554674526,
 											"parameters": {
 												"object-to-create": "Lacuna",
 												"layer": "1",
@@ -1313,7 +1360,7 @@
 										{
 											"id": "set-animation-frame",
 											"objectClass": "Lacuna",
-											"sid": 711323582368429,
+											"sid": 317540008927585,
 											"parameters": {
 												"frame-number": "1"
 											}
@@ -1321,7 +1368,7 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "Lacuna",
-											"sid": 353157276591271,
+											"sid": 632723681668091,
 											"parameters": {
 												"instance-variable": "idQuestao",
 												"value": "textQuestao.idQuestao"
@@ -1330,7 +1377,7 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "Lacuna",
-											"sid": 446553613707168,
+											"sid": 365947524165801,
 											"parameters": {
 												"instance-variable": "resposta",
 												"value": "tokenat(resposta, loopindex, \",\")"
@@ -1339,13 +1386,80 @@
 										{
 											"id": "set-width",
 											"objectClass": "Lacuna",
-											"sid": 207387432452586,
+											"sid": 588314120877097,
 											"parameters": {
 												"width": "textQuestao.TagWidth(\"lacuna\", loopindex) + 58"
 											}
+										},
+										{
+											"type": "script",
+											"script": "// Obtém a instância atual de Lacuna\nconst lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();\n\n// Obtém a resposta da instância atual\nconst resposta = lacunaInstance.instVars.resposta;\n\n// Obtém a lista de palavras\nconst words = runtime.globalVars.words;\n\n// Função para normalizar a palavra\nfunction normalizeWord(word) {\n  return word\n    .toLowerCase() // Converte para caixa baixa\n    .normalize(\"NFD\") // Decompõe caracteres com acentos\n    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos\n    .replace(/\\s+/g, \"\"); // Remove todos os espaços\n}\n\n// Função para encontrar o índice da resposta na lista de palavras\nfunction findWordIndex(words, resposta) {\n  // Divide a string `words` em um array usando a vírgula como separador\n  const wordsArray = words.split(\",\");\n\n  // Normaliza a resposta\n  const respostaNormalizada = normalizeWord(resposta);\n\n  // Encontra o índice da resposta no array\n  const index = wordsArray.findIndex(word => normalizeWord(word) === respostaNormalizada);\n\n  // Retorna o índice (ou -1 se não encontrar)\n  return index;\n}\n\n// Encontra o índice da palavra\nconst indice = findWordIndex(words, resposta);\n\n// Atribui o índice à variável de instância `idteste`\nlocalVars.indice = indice;"
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Lacuna",
+											"sid": 524759624523272,
+											"parameters": {
+												"instance-variable": "indice",
+												"value": "indice + 1"
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 918188399200774,
+											"parameters": {
+												"object-to-create": "Indice",
+												"layer": "1",
+												"x": "Lacuna.X - 5",
+												"y": "Lacuna.Y + 1\r\n",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Indice",
+											"sid": 217063535946909,
+											"parameters": {
+												"instance-variable": "idLacuna",
+												"value": "Lacuna.IID"
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "Indice",
+											"sid": 251147475120634,
+											"parameters": {
+												"text": "indice = -1 ? \"?\" : indice + 1\r\n"
+											}
+										},
+										{
+											"id": "set-width",
+											"objectClass": "Indice",
+											"sid": 822995044054718,
+											"parameters": {
+												"width": "textQuestao.TagWidth(\"lacuna\", loopindex) + 58"
+											}
+										},
+										{
+											"id": "set-z-elevation",
+											"objectClass": "Indice",
+											"sid": 588571084233710,
+											"parameters": {
+												"z": "0"
+											}
+										},
+										{
+											"id": "set-y",
+											"objectClass": "Indice",
+											"sid": 251353851880696,
+											"parameters": {
+												"y": "Indice.IID > 3 ? Lacuna.Y + 3 : Lacuna.Y + 1"
+											}
 										}
 									],
-									"sid": 942129736585491
+									"sid": 750850998739201
 								}
 							],
 							"sid": 816130140655317
@@ -1680,6 +1794,14 @@
 											}
 										},
 										{
+											"id": "set-animation-frame",
+											"objectClass": "Lacuna",
+											"sid": 677412316575106,
+											"parameters": {
+												"frame-number": "1"
+											}
+										},
+										{
 											"id": "set-boolean-instvar",
 											"objectClass": "textQuestao",
 											"sid": 830136269960380,
@@ -1695,14 +1817,6 @@
 											"parameters": {
 												"mode": "disable",
 												"effect": "\"Seleção\""
-											}
-										},
-										{
-											"id": "set-animation-frame",
-											"objectClass": "Lacuna",
-											"sid": 721996247131560,
-											"parameters": {
-												"frame-number": "1"
 											}
 										}
 									],
@@ -2470,32 +2584,32 @@
 			"sid": 741285895283447
 		},
 		{
+			"eventType": "variable",
+			"name": "lacunaSelectedIID",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 357072639533713
+		},
+		{
+			"eventType": "variable",
+			"name": "idPerguntaSelec",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 943236283486057
+		},
+		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "manage gaps",
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
-				{
-					"eventType": "variable",
-					"name": "lacunaSelectedIID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 352764329814657
-				},
-				{
-					"eventType": "variable",
-					"name": "idPerguntaSelec",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 667057656883495
-				},
 				{
 					"eventType": "variable",
 					"name": "auxTempo",
@@ -2576,28 +2690,10 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 527804497230351,
-									"parameters": {
-										"variable": "lacunaSelectedIID",
-										"value": "Lacuna.IID"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
 									"sid": 316119599001955,
 									"parameters": {
 										"variable": "idPerguntaSelec",
 										"value": "Lacuna.idQuestao"
-									}
-								},
-								{
-									"id": "set-boolean-instvar",
-									"objectClass": "Lacuna",
-									"sid": 349184540293107,
-									"parameters": {
-										"instance-variable": "isSelected",
-										"value": "true"
 									}
 								},
 								{
@@ -2607,6 +2703,15 @@
 									"parameters": {
 										"variable": "lacunaSelectedIID",
 										"value": "Lacuna.IID"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Lacuna",
+									"sid": 164021694779494,
+									"parameters": {
+										"instance-variable": "isSelected",
+										"value": "true"
 									}
 								},
 								{
@@ -2625,240 +2730,349 @@
 									"parameters": {
 										"frame-number": "1"
 									}
+								},
+								{
+									"id": "signal",
+									"objectClass": "System",
+									"sid": 843826371770769,
+									"parameters": {
+										"tag": "\"selecionarLacuna\""
+									}
 								}
 							],
-							"sid": 892523529936334,
+							"sid": 892523529936334
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-signal",
+							"objectClass": "System",
+							"sid": 597794400535375,
+							"parameters": {
+								"tag": "\"selecionarLacuna\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 370847809138091,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "APENAS UMA LACUNA PODE SER MARCADA POR VEZ",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 157632779178449,
+									"parameters": {
+										"object": "Lacuna"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 971003961712636,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.IID <> lacunaSelectedIID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Lacuna",
+									"sid": 723106515614933,
+									"parameters": {
+										"instance-variable": "isSelected",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "Lacuna",
+									"sid": 226054727504971,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Seleção\""
+									}
+								}
+							],
+							"sid": 938871603427265,
 							"children": [
 								{
-									"eventType": "comment",
-									"text": "APENAS UMA LACUNA PODE SER MARCADA POR VEZ",
-									"text-color": [
-										1,
-										1,
-										1,
-										1
-									]
-								},
-								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "pick-all",
-											"objectClass": "System",
-											"sid": 270255965198168,
-											"parameters": {
-												"object": "Lacuna"
-											}
-										},
-										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 772456752617399,
+											"sid": 244197651725983,
 											"parameters": {
 												"object": "Lacuna",
-												"expression": "Lacuna.IID <> lacunaSelectedIID"
+												"expression": "Lacuna.idQuestao = idPerguntaSelec & Lacuna.IID<> lacunaSelectedIID"
 											}
 										}
 									],
 									"actions": [
 										{
-											"id": "set-boolean-instvar",
+											"id": "set-animation-frame",
 											"objectClass": "Lacuna",
-											"sid": 627621157301736,
+											"sid": 508164075295633,
 											"parameters": {
-												"instance-variable": "isSelected",
-												"value": "false"
+												"frame-number": "2"
 											}
 										},
 										{
 											"id": "set-effect-enabled",
 											"objectClass": "Lacuna",
-											"sid": 976617163291634,
+											"sid": 874629642101011,
 											"parameters": {
 												"mode": "disable",
 												"effect": "\"Seleção\""
 											}
 										}
 									],
-									"sid": 787514144602483,
-									"children": [
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-by-evaluate",
-													"objectClass": "System",
-													"sid": 925042407957790,
-													"parameters": {
-														"object": "Lacuna",
-														"expression": "Lacuna.idQuestao = idPerguntaSelec & Lacuna.IID<> lacunaSelectedIID"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "set-animation-frame",
-													"objectClass": "Lacuna",
-													"sid": 412334340663039,
-													"parameters": {
-														"frame-number": "2"
-													}
-												},
-												{
-													"id": "set-effect-enabled",
-													"objectClass": "Lacuna",
-													"sid": 256334277975893,
-													"parameters": {
-														"mode": "disable",
-														"effect": "\"Seleção\""
-													}
-												}
-											],
-											"sid": 807210909656494
-										}
-									]
-								},
-								{
-									"eventType": "comment",
-									"text": "CASO 1: SELEÇÃO DE COMPONENTES DA QUESTÃO",
-									"text-color": [
-										1,
-										1,
-										1,
-										1
-									]
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 823415431442502,
-											"parameters": {
-												"object": "textQuestao",
-												"expression": "textQuestao.idQuestao = Lacuna.idQuestao"
-											}
-										},
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 960780405369712,
-											"parameters": {
-												"object": "questaoContainer",
-												"expression": "Lacuna.idQuestao = questaoContainer.idQuestao"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-effect-enabled",
-											"objectClass": "textQuestao",
-											"sid": 179290266135606,
-											"parameters": {
-												"mode": "enable",
-												"effect": "\"Seleção\""
-											}
-										},
-										{
-											"id": "set-opacity",
-											"objectClass": "questaoContainer",
-											"sid": 661230533942384,
-											"parameters": {
-												"opacity": "100"
-											}
-										},
-										{
-											"id": "set-effect-enabled",
-											"objectClass": "questaoContainer",
-											"sid": 325913611779840,
-											"parameters": {
-												"mode": "enable",
-												"effect": "\"Seleção\""
-											}
-										}
-									],
-									"sid": 854002304250859
-								},
-								{
-									"eventType": "comment",
-									"text": "CASO 2: TIRADA DE SELEÇÃO DE COMPONENTES DA QUESTÃO",
-									"text-color": [
-										1,
-										1,
-										1,
-										1
-									]
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-all",
-											"objectClass": "System",
-											"sid": 838533464854496,
-											"parameters": {
-												"object": "textQuestao"
-											}
-										},
-										{
-											"id": "pick-all",
-											"objectClass": "System",
-											"sid": 137130846468557,
-											"parameters": {
-												"object": "questaoContainer"
-											}
-										},
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 572185741382222,
-											"parameters": {
-												"object": "textQuestao",
-												"expression": "textQuestao.idQuestao <> Lacuna.idQuestao"
-											}
-										},
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 682573635076043,
-											"parameters": {
-												"object": "questaoContainer",
-												"expression": "Lacuna.idQuestao<> questaoContainer.idQuestao"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-effect-enabled",
-											"objectClass": "textQuestao",
-											"sid": 244992605622381,
-											"parameters": {
-												"mode": "disable",
-												"effect": "\"Seleção\""
-											}
-										},
-										{
-											"id": "set-opacity",
-											"objectClass": "questaoContainer",
-											"sid": 945824831212052,
-											"parameters": {
-												"opacity": "80"
-											}
-										},
-										{
-											"id": "set-effect-enabled",
-											"objectClass": "questaoContainer",
-											"sid": 764774592561776,
-											"parameters": {
-												"mode": "disable",
-												"effect": "\"Seleção\""
-											}
-										}
-									],
-									"sid": 929016825188727
+									"sid": 150009293670581
 								}
 							]
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 1: SELEÇÃO DE COMPONENTES DA QUESTÃO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Lacuna",
+									"sid": 597837755330742,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 470251626687661,
+									"parameters": {
+										"object": "textQuestao",
+										"expression": "textQuestao.idQuestao = Lacuna.idQuestao"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 558926083424755,
+									"parameters": {
+										"object": "questaoContainer",
+										"expression": "Lacuna.idQuestao = questaoContainer.idQuestao"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "textQuestao",
+									"sid": 813433479666751,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Seleção\""
+									}
+								},
+								{
+									"id": "set-opacity",
+									"objectClass": "questaoContainer",
+									"sid": 431680719180565,
+									"parameters": {
+										"opacity": "100"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "questaoContainer",
+									"sid": 679765708930964,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Seleção\""
+									}
+								}
+							],
+							"sid": 506679325067907
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 1B: SELEÇÃO DE BOTÃO DE IMAGEM (FORA DO BLOCO PRINCIPAL PARA EVITAR BUGS)",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Lacuna",
+									"sid": 587615276863800,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 396619762124311,
+									"parameters": {
+										"object": "botaoImagem",
+										"expression": "botaoImagem.idQuestao = Lacuna.idQuestao"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "botaoImagem",
+									"sid": 777630527310803,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Seleção\""
+									}
+								}
+							],
+							"sid": 828998573193665
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 2: TIRADA DE SELEÇÃO DE COMPONENTES DA QUESTÃO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Lacuna",
+									"sid": 577469495040456,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								},
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 807212274241546,
+									"parameters": {
+										"object": "textQuestao"
+									}
+								},
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 408173533933558,
+									"parameters": {
+										"object": "questaoContainer"
+									}
+								},
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 972290108434835,
+									"parameters": {
+										"object": "botaoImagem"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 737783105530730,
+									"parameters": {
+										"object": "textQuestao",
+										"expression": "textQuestao.idQuestao <> Lacuna.idQuestao"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 554220023667031,
+									"parameters": {
+										"object": "questaoContainer",
+										"expression": "Lacuna.idQuestao<> questaoContainer.idQuestao"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 521169050322515,
+									"parameters": {
+										"object": "botaoImagem",
+										"expression": "Lacuna.idQuestao<> botaoImagem.idQuestao"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "textQuestao",
+									"sid": 756122330269524,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Seleção\""
+									}
+								},
+								{
+									"id": "set-opacity",
+									"objectClass": "questaoContainer",
+									"sid": 618497337395392,
+									"parameters": {
+										"opacity": "80"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "questaoContainer",
+									"sid": 717083512292584,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Seleção\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "botaoImagem",
+									"sid": 473111799124564,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Seleção\""
+									}
+								}
+							],
+							"sid": 455490707793421
 						}
 					]
 				},
@@ -2907,7 +3121,7 @@
 				},
 				{
 					"eventType": "comment",
-					"text": "LACUNA SELECIONADA",
+					"text": "LACUNA SELECIONADA (TEMPO)",
 					"text-color": [
 						1,
 						1,
@@ -2983,7 +3197,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 984434421959455,
+							"sid": 334441274048824,
 							"parameters": {
 								"object": "textQuestao",
 								"expression": "textQuestao.idQuestao = Lacuna.idQuestao"
@@ -2992,7 +3206,7 @@
 						{
 							"id": "pick-by-highest-lowest-value",
 							"objectClass": "System",
-							"sid": 474933911685199,
+							"sid": 105635790314110,
 							"parameters": {
 								"object": "Lacuna",
 								"which": "lowest",
@@ -3004,7 +3218,7 @@
 						{
 							"id": "add-to-eventvar",
 							"objectClass": "System",
-							"sid": 256556550062078,
+							"sid": 553556735143848,
 							"parameters": {
 								"variable": "auxTempo",
 								"value": "0.01"
@@ -3012,6 +3226,638 @@
 						}
 					],
 					"sid": 114735093626062
+				},
+				{
+					"eventType": "comment",
+					"text": "TROCA DE QUADRO PARA LACUNA NÃO SELECIONADA (VISUAL)",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 244925345194793,
+							"parameters": {
+								"object": "Lacuna",
+								"expression": "Lacuna.isSelected = 0 & Lacuna.idQuestao <> idPerguntaSelec "
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "Lacuna",
+							"sid": 772132914090898,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 980464792162182
+				},
+				{
+					"eventType": "comment",
+					"text": "AUXILIAR PARA DEFINIR A POSIÇÃO DA CÉLULA DA PRIMEIRA RESPOSTA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "variable",
+					"name": "auxY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 733483564424398
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-highest-lowest-value",
+							"objectClass": "System",
+							"sid": 165458936478284,
+							"parameters": {
+								"object": "celula",
+								"which": "lowest",
+								"expression": "celula.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 777575067559376,
+							"parameters": {
+								"variable": "auxY",
+								"value": "celula.Y"
+							}
+						}
+					],
+					"sid": 148353842524015
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 1: O USUÁRIO COMEÇAR SELECIONANDO UMA LACUNA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 884299622885629,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "Lacuna"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 986368223924823,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "CASO A: A LACUNA NÃO É A INDEXADA À PALAVRA PRINCIPAL",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "evaluate-expression",
+									"objectClass": "System",
+									"sid": 600464777654161,
+									"parameters": {
+										"value": "Lacuna.indice <> 0"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 979086529120111,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "celula",
+											"sid": 544656165765282,
+											"parameters": {
+												"instance-variable": "block"
+											},
+											"isInverted": true
+										},
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 261526548789483,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.Y = auxY + (celula.Height * (Lacuna.indice - 1))"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 628021873845583,
+											"parameters": {
+												"variable": "questionChosen",
+												"value": "celula.idQuestao"
+											}
+										},
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 399882056347182,
+											"parameters": {
+												"variable": "isMainSelect",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 667225571879215,
+									"children": [
+										{
+											"eventType": "comment",
+											"text": "SELECIONAR A PRIMEIRA CÉLULA DA PERGUNTA",
+											"text-color": [
+												1,
+												1,
+												1,
+												1
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-highest-lowest-value",
+													"objectClass": "System",
+													"sid": 462019596368868,
+													"parameters": {
+														"object": "celula",
+														"which": "lowest",
+														"expression": "celula.UID "
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 980599025056924,
+													"parameters": {
+														"variable": "celulaChosen",
+														"value": "celula.UID"
+													}
+												}
+											],
+											"sid": 490259489098876
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-evaluate",
+													"objectClass": "System",
+													"sid": 221934011710835,
+													"parameters": {
+														"object": "celula",
+														"expression": "celula.UID = celulaChosen & celula.isMain = 1"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 732607070306368,
+													"parameters": {
+														"variable": "isMainSelect",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 209766467622212
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO B: A LACUNA É A INDEXADA À PALAVRA PRINCIPAL",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 966972178967603
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 208938728323940,
+									"parameters": {
+										"object": "celula",
+										"expression": "celula.isMain = 1"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 257173763051085,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "SELECIONAR A PRIMEIRA CÉLULA DA PERGUNTA",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-highest-lowest-value",
+											"objectClass": "System",
+											"sid": 500902035527609,
+											"parameters": {
+												"object": "celula",
+												"which": "lowest",
+												"expression": "celula.Y"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 880387214201692,
+											"parameters": {
+												"variable": "celulaChosen",
+												"value": "celula.UID"
+											}
+										}
+									],
+									"sid": 875522877637335
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 301719269402967,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.UID = celulaChosen & celula.isMain = 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 932010648770513,
+											"parameters": {
+												"variable": "isMainSelect",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 397850748853065
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 2: O USUÁRIO COMEÇAR SELECIONANDO UMA QUESTÃO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 551497360371186,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "questaoContainer"
+							}
+						},
+						{
+							"id": "is-touching-object",
+							"objectClass": "Toque",
+							"sid": 285154528805559,
+							"parameters": {
+								"object": "Lacuna"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 363717268343613,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "CASO A: A LACUNA NÃO É A INDEXADA À PALAVRA PRINCIPAL",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 608225117512561,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.idQuestao = questaoContainer.idQuestao & Lacuna.isSelected = 1"
+									}
+								},
+								{
+									"id": "pick-by-highest-lowest-value",
+									"objectClass": "System",
+									"sid": 327317864699127,
+									"parameters": {
+										"object": "Lacuna",
+										"which": "lowest",
+										"expression": "Lacuna.IID"
+									}
+								},
+								{
+									"id": "evaluate-expression",
+									"objectClass": "System",
+									"sid": 363114716164551,
+									"parameters": {
+										"value": "Lacuna.indice <> 0"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 363691113373670,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "celula",
+											"sid": 466657852803831,
+											"parameters": {
+												"instance-variable": "block"
+											},
+											"isInverted": true
+										},
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 382966396597786,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.Y = auxY + (celula.Height * (Lacuna.indice - 1))"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 954365072757108,
+											"parameters": {
+												"variable": "questionChosen",
+												"value": "celula.idQuestao"
+											}
+										},
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 591826560304860,
+											"parameters": {
+												"variable": "isMainSelect",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 100138811495316,
+									"children": [
+										{
+											"eventType": "comment",
+											"text": "SELECIONAR A PRIMEIRA CÉLULA DA PERGUNTA",
+											"text-color": [
+												1,
+												1,
+												1,
+												1
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-highest-lowest-value",
+													"objectClass": "System",
+													"sid": 571549262193287,
+													"parameters": {
+														"object": "celula",
+														"which": "lowest",
+														"expression": "celula.UID "
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 539571470708524,
+													"parameters": {
+														"variable": "celulaChosen",
+														"value": "celula.UID"
+													}
+												}
+											],
+											"sid": 132488312430606
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-evaluate",
+													"objectClass": "System",
+													"sid": 676587839242743,
+													"parameters": {
+														"object": "celula",
+														"expression": "celula.UID = celulaChosen & celula.isMain = 1"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 549256348375841,
+													"parameters": {
+														"variable": "isMainSelect",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 900502563547103
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO B: A LACUNA É A INDEXADA À PALAVRA PRINCIPAL",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 225837758695471
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 739888028867141,
+									"parameters": {
+										"object": "celula",
+										"expression": "celula.isMain = 1"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 227216223440294,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "SELECIONAR A PRIMEIRA CÉLULA DA PERGUNTA",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-highest-lowest-value",
+											"objectClass": "System",
+											"sid": 181275520096227,
+											"parameters": {
+												"object": "celula",
+												"which": "lowest",
+												"expression": "celula.Y"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 189828052496448,
+											"parameters": {
+												"variable": "celulaChosen",
+												"value": "celula.UID"
+											}
+										}
+									],
+									"sid": 263776826132372
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 561669056895421,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.UID = celulaChosen & celula.isMain = 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 715555090087089,
+											"parameters": {
+												"variable": "isMainSelect",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 981697221291217
+								}
+							]
+						}
+					]
 				}
 			],
 			"sid": 462461275856463
@@ -3023,6 +3869,46 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"eventType": "comment",
+					"text": "NÃO TROCAR O STATIC OU QUEBRA (não sei pq)",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "variable",
+					"name": "respostaLacuna",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 287229478168343
+				},
+				{
+					"eventType": "variable",
+					"name": "iidLacuna",
+					"type": "number",
+					"initialValue": "-1",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 598722518936400
+				},
+				{
+					"eventType": "variable",
+					"name": "celSelecY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 820337345017989
+				},
 				{
 					"eventType": "comment",
 					"text": "Selecionar celula"
@@ -3054,6 +3940,15 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
+							"sid": 887613247391818,
+							"parameters": {
+								"variable": "respostaLacuna",
+								"value": "\"\""
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
 							"sid": 597123569037071,
 							"parameters": {
 								"variable": "questionChosen",
@@ -3065,7 +3960,7 @@
 							"objectClass": "System",
 							"sid": 896833225990831,
 							"parameters": {
-								"variable": "cedulaChosen",
+								"variable": "celulaChosen",
 								"value": "celula.UID"
 							}
 						},
@@ -3076,6 +3971,23 @@
 							"parameters": {
 								"variable": "isMainSelect",
 								"value": "false"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 564877643670379,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 723360876191724,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
 							}
 						}
 					],
@@ -3110,6 +4022,260 @@
 				},
 				{
 					"eventType": "comment",
+					"text": "AUXILIAR PARA CAPTURAR A RESPOSTA DA LACUNA CORRESPONDENTE ÀS CÉLULAS SELECIONADAS",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-signal",
+							"objectClass": "System",
+							"sid": 797997482005390,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 208488135408831,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 384403602477656,
+									"parameters": {
+										"variable": "isMainSelect"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 458686493457436,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 588902757957715,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.Y = celSelecY"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 834329777912592,
+									"children": [
+										{
+											"eventType": "comment",
+											"text": "A RESPOSTA FORMADA PELAS CÉLULAS É ARMAZENADA NA VARIÁVEL RESPOSTALACUNA",
+											"text-color": [
+												1,
+												1,
+												1,
+												1
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "for-each-ordered",
+													"objectClass": "System",
+													"sid": 697927565285304,
+													"parameters": {
+														"object": "celula",
+														"expression": "celula.IID",
+														"order": "ascending"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 208665746299544,
+													"parameters": {
+														"variable": "respostaLacuna",
+														"value": "respostaLacuna & celula.letter"
+													}
+												}
+											],
+											"sid": 889419217270503
+										},
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"type": "script",
+													"script": "// Obtém a resposta a ser comparada\nconst respostaLacunaNormalizada = normalizeWord(localVars.respostaLacuna);\n\n// Função para normalizar a palavra\nfunction normalizeWord(word) {\n  return word\n    .toLowerCase() // Converte para caixa baixa\n    .normalize(\"NFD\") // Decompõe caracteres com acentos\n    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos\n    .replace(/\\s+/g, \"\"); // Remove todos os espaços\n}\n\n// Percorre todas as instâncias de Lacuna\nconst lacunas = runtime.objects.Lacuna.getAllInstances();\nlet idEncontrado = null; // Variável para armazenar o iid ou uid\n\nfor (const lacuna of lacunas) {\n  // Normaliza a resposta da instância atual\n  const respostaNormalizada = normalizeWord(lacuna.instVars.resposta);\n\n  // Compara com a resposta normalizada\n  if (respostaNormalizada === respostaLacunaNormalizada) {\n    // Armazena o iid ou uid da instância encontrada\n    idEncontrado = lacuna.uid; // ou lacuna.uid, dependendo do que você precisa\n    break; // Sai do loop após encontrar a instância\n  }\n}\n\n// Armazena o resultado em uma variável (global ou local)\nlocalVars.iidLacuna = idEncontrado; "
+												}
+											],
+											"sid": 329643068745611,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-by-evaluate",
+															"objectClass": "System",
+															"sid": 519554052653464,
+															"parameters": {
+																"object": "Lacuna",
+																"expression": "Lacuna.UID = iidLacuna"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-boolean-instvar",
+															"objectClass": "Lacuna",
+															"sid": 413206247332119,
+															"parameters": {
+																"instance-variable": "isSelected",
+																"value": "true"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 111426309655915,
+															"parameters": {
+																"variable": "lacunaSelectedIID",
+																"value": "Lacuna.IID"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 224343992211549,
+															"parameters": {
+																"variable": "idPerguntaSelec",
+																"value": "Lacuna.idQuestao"
+															}
+														},
+														{
+															"id": "set-effect-enabled",
+															"objectClass": "Lacuna",
+															"sid": 584961833560314,
+															"parameters": {
+																"mode": "enable",
+																"effect": "\"Seleção\""
+															}
+														},
+														{
+															"id": "set-animation-frame",
+															"objectClass": "Lacuna",
+															"sid": 685967371266045,
+															"parameters": {
+																"frame-number": "1"
+															}
+														},
+														{
+															"id": "signal",
+															"objectClass": "System",
+															"sid": 761733753873989,
+															"parameters": {
+																"tag": "\"selecionarLacuna\""
+															}
+														}
+													],
+													"sid": 536183582790843
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "(PASSIVEL DE AJUSTE = ENQUANTO NÃO TIVER DIFERENCIAÇÃO DE SELEÇÃO HORIZONTAL E VERTICAL PRA PALAVRA PRINCIPAL, ISSO PODE FALHAR)",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 890674722922779,
+									"parameters": {
+										"variable": "isMainSelect"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 845571031556948,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 745311506902229,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.isMain = 1"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 482561333836099,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "for-each-ordered",
+													"objectClass": "System",
+													"sid": 787515976585965,
+													"parameters": {
+														"object": "celula",
+														"expression": "celula.IID",
+														"order": "ascending"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 714361159224112,
+													"parameters": {
+														"variable": "respostaLacuna",
+														"value": "respostaLacuna & celula.letter"
+													}
+												}
+											],
+											"sid": 217285643986026
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "comment",
 					"text": "Caso a célula estiver bloqueada, e não pertencer a palavra principal "
 				},
 				{
@@ -3123,7 +4289,7 @@
 								"object": "celula",
 								"expression": "celula.UID",
 								"comparison": 0,
-								"value": "cedulaChosen"
+								"value": "celulaChosen"
 							}
 						},
 						{
@@ -3150,7 +4316,7 @@
 							"objectClass": "System",
 							"sid": 254668954429686,
 							"parameters": {
-								"variable": "cedulaChosen",
+								"variable": "celulaChosen",
 								"value": "celula.posterior"
 							}
 						}
@@ -3172,7 +4338,7 @@
 								"object": "celula",
 								"expression": "celula.UID",
 								"comparison": 0,
-								"value": "cedulaChosen"
+								"value": "celulaChosen"
 							}
 						},
 						{
@@ -3198,7 +4364,7 @@
 							"objectClass": "System",
 							"sid": 222297377261701,
 							"parameters": {
-								"variable": "cedulaChosen",
+								"variable": "celulaChosen",
 								"value": "celula.posteriorMain"
 							}
 						}
@@ -3233,7 +4399,7 @@
 								"object": "celula",
 								"expression": "celula.UID",
 								"comparison": 0,
-								"value": "cedulaChosen"
+								"value": "celulaChosen"
 							}
 						},
 						{
@@ -3278,7 +4444,7 @@
 									"objectClass": "System",
 									"sid": 852540265204509,
 									"parameters": {
-										"variable": "cedulaChosen",
+										"variable": "celulaChosen",
 										"value": "celula.anteriorMain"
 									}
 								}
@@ -3304,7 +4470,7 @@
 									"objectClass": "System",
 									"sid": 454895659076859,
 									"parameters": {
-										"variable": "cedulaChosen",
+										"variable": "celulaChosen",
 										"value": "celula.anterior"
 									}
 								}
@@ -3341,7 +4507,7 @@
 								"object": "celula",
 								"expression": "celula.UID",
 								"comparison": 0,
-								"value": "cedulaChosen"
+								"value": "celulaChosen"
 							}
 						},
 						{
@@ -3374,7 +4540,7 @@
 									"objectClass": "System",
 									"sid": 622932303182515,
 									"parameters": {
-										"variable": "cedulaChosen",
+										"variable": "celulaChosen",
 										"value": "celula.anteriorMain"
 									}
 								}
@@ -3400,7 +4566,7 @@
 									"objectClass": "System",
 									"sid": 469351920023869,
 									"parameters": {
-										"variable": "cedulaChosen",
+										"variable": "celulaChosen",
 										"value": "celula.anterior"
 									}
 								}
@@ -3456,7 +4622,7 @@
 										"object": "celula",
 										"expression": "celula.UID",
 										"comparison": 0,
-										"value": "cedulaChosen"
+										"value": "celulaChosen"
 									}
 								},
 								{
@@ -3511,7 +4677,7 @@
 											"objectClass": "System",
 											"sid": 901812556707445,
 											"parameters": {
-												"variable": "cedulaChosen",
+												"variable": "celulaChosen",
 												"value": "celula.posterior"
 											}
 										}
@@ -3536,7 +4702,7 @@
 											"objectClass": "System",
 											"sid": 157114995915062,
 											"parameters": {
-												"variable": "cedulaChosen",
+												"variable": "celulaChosen",
 												"value": "celula.posteriorMain"
 											}
 										}
@@ -3672,7 +4838,7 @@
 									"parameters": {
 										"first-value": "celula.UID",
 										"comparison": 0,
-										"second-value": "cedulaChosen"
+										"second-value": "celulaChosen"
 									}
 								}
 							],

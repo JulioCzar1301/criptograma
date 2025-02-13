@@ -4,12 +4,22 @@
 	"sid": 959263211305804,
 	"instanceVariables": [],
 	"behaviorTypes": [],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "blurhorizontal",
+			"name": "DesfoqueHorizontal"
+		},
+		{
+			"effectId": "blurvertical",
+			"name": "DesfoqueVertical"
+		}
+	],
 	"members": [
 		"Letra",
 		"Resposta",
 		"moedaTexto",
 		"secNome",
-		"textQuestao"
+		"textQuestao",
+		"Indice"
 	]
 }

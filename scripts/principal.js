@@ -141,7 +141,11 @@ async function OnBeforeProjectStart(runtime)
 		console.log(firstWord, firstQuestion.resposta[0])
 		let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
 		
+		runtime.globalVars.first_word = firstWord
+		
 		let otherQuestion = firstQuestion;
+		wordsChoiceComplete.push(firstWord)
+		
 		while(indexGoal.length != 0){
 		   
 			if(multipleAnswer != null){
@@ -294,6 +298,8 @@ async function OnBeforeProjectStart(runtime)
 
 			runtime.globalVars.minX = 643 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
+			boardComplete.sort((a, b) => a.index - b.index);
+
 			// Chamada da malha final
 			for (let j = 0; j < boardComplete.length; j++) {
 			  runtime.callFunction(
@@ -304,6 +310,8 @@ async function OnBeforeProjectStart(runtime)
 				boardComplete[j].string,
 				boardComplete[j].index,
 			  );
+			  
+			   runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
 			}
 			
 			 // Obtém todas as instâncias de celula e letra
@@ -419,8 +427,7 @@ async function OnBeforeProjectStart(runtime)
 				questionsSelected[j].question.resposta, 
 				questionsSelected[j].question.categoria, 
 				questionsSelected[j].question.dica,
-				questionsSelected[j].question.imagePath || "",
-				questionsSelected[j].question.index,
+				questionsSelected[j].question.imagePath || ""
 			  );
 			}
 

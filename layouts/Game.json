@@ -53,6 +53,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 268016108814346,
 						"expanded": true,
@@ -141,6 +155,20 @@
 							"properties": {}
 						}
 					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -220,6 +248,20 @@
 						"posteriorMain": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 909467041637509,
 						"expanded": true,
@@ -261,6 +303,18 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"DefinirCor": {
 							"isEnabled": true,
 							"parameters": {
@@ -332,6 +386,20 @@
 						"letter": ""
 					},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 518845912878674,
 						"expanded": true,
@@ -374,6 +442,20 @@
 					"behaviors": {
 						"NãoSalvar": {
 							"properties": {}
+						}
+					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
 						}
 					},
 					"showing": true,
@@ -427,6 +509,20 @@
 							"properties": {}
 						}
 					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -469,6 +565,18 @@
 						}
 					},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Seleção": {
 							"isEnabled": false,
 							"parameters": {
@@ -565,6 +673,18 @@
 						}
 					},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Acerto": {
 							"isEnabled": false,
 							"parameters": {
@@ -630,6 +750,18 @@
 						}
 					},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Seleção": {
 							"isEnabled": false,
 							"parameters": {
@@ -684,7 +816,8 @@
 						"idQuestao": "",
 						"resposta": "",
 						"isSelected": false,
-						"isCorrect": false
+						"isCorrect": false,
+						"indice": 0
 					},
 					"behaviors": {
 						"Fixar": {
@@ -694,6 +827,18 @@
 						}
 					},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Seleção": {
 							"isEnabled": false,
 							"parameters": {
@@ -810,6 +955,20 @@
 							}
 						}
 					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -843,6 +1002,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 900983171992439,
 						"expanded": true,
@@ -883,6 +1056,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 855035562448851,
 						"expanded": true,
@@ -928,6 +1115,18 @@
 					},
 					"behaviors": {},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Comprada": {
 							"isEnabled": false,
 							"parameters": {
@@ -978,6 +1177,18 @@
 					},
 					"behaviors": {},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Comprada": {
 							"isEnabled": false,
 							"parameters": {
@@ -1035,6 +1246,18 @@
 					},
 					"behaviors": {},
 					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
 						"Comprada": {
 							"isEnabled": false,
 							"parameters": {
@@ -1091,6 +1314,20 @@
 							"properties": {}
 						}
 					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -1128,6 +1365,20 @@
 							"properties": {
 								"axes": "vertical-only",
 								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
 							}
 						}
 					},
@@ -1187,6 +1438,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -1271,6 +1536,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
 					"showing": true,
 					"locked": false,
 					"world": {
@@ -1397,6 +1676,78 @@
 							1,
 							1,
 							0.3
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "Indice",
+					"properties": {
+						"text": "Texto",
+						"enable-bbcode": true,
+						"font": "OpenSans-SemiBold",
+						"size": 12,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							0.12156862745098039,
+							0.1568627450980392,
+							0.2,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 31,
+					"sid": 709762481061485,
+					"tags": "",
+					"instanceVariables": {
+						"idLacuna": 0
+					},
+					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 709762481061485,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -698.2207521743633,
+						"y": -201.42302048341452,
+						"width": 200,
+						"height": 28,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
 						],
 						"angle": 0,
 						"zElevation": 0

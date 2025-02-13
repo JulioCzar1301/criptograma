@@ -4,7 +4,16 @@
 	"sid": 389480727427114,
 	"instanceVariables": [],
 	"behaviorTypes": [],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "blurhorizontal",
+			"name": "DesfoqueHorizontal"
+		},
+		{
+			"effectId": "blurvertical",
+			"name": "DesfoqueVertical"
+		}
+	],
 	"members": [
 		"celula",
 		"botaoImagem",

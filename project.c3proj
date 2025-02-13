@@ -71,6 +71,20 @@
 		},
 		{
 			"type": "effect",
+			"id": "blurhorizontal",
+			"name": "Desfoque horizontal",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "blurvertical",
+			"name": "Desfoque vertical",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "setcolor",
 			"name": "Definir cor",
 			"author": "Scirra",
@@ -109,7 +123,8 @@
 			"fundoDesfoque",
 			"questaoImagem",
 			"dicaSair",
-			"Teclado"
+			"Teclado",
+			"Indice"
 		],
 		"subfolders": [
 			{

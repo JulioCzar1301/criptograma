@@ -1,0 +1,18 @@
+{
+	"name": "Indice",
+	"plugin-id": "Text",
+	"sid": 312892853613387,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "idLacuna",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 520489656053640
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

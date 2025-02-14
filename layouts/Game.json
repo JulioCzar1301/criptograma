@@ -1393,11 +1393,11 @@
 					"locked": false,
 					"world": {
 						"x": 843,
-						"y": 498,
+						"y": 252,
 						"width": 12,
-						"height": 255.593220338983,
-						"originX": 0.5,
-						"originY": 0.9336870026525199,
+						"height": 255.59322,
+						"originX": 0,
+						"originY": 0,
 						"color": [
 							1,
 							1,
@@ -1748,6 +1748,60 @@
 							1,
 							1,
 							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "scrolArea",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 32,
+					"sid": 829634509636454,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0.5
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 829634509636454,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 51,
+						"y": 252,
+						"width": 801,
+						"height": 707,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							0.5
 						],
 						"angle": 0,
 						"zElevation": 0

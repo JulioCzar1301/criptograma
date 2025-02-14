@@ -31,6 +31,8 @@
 		"hudContainer",
 		"tempoBarra",
 		"tempoTotal",
-		"tempoIcon"
+		"tempoIcon",
+		"scrolArea",
+		"indiceMalha"
 	]
 }

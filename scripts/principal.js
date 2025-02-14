@@ -92,7 +92,7 @@ async function OnBeforeProjectStart(runtime)
 	let letters;
 	let questionsSelected = [];
 	let attemptGame = 0;
-	while(!isOkGame && attemptGame < 10000){
+	while(!isOkGame && attemptGame < 1000000){
 	    attemptGame++;
 	    boardComplete = []
 		questionsSelected = []
@@ -419,6 +419,9 @@ async function OnBeforeProjectStart(runtime)
 			// Chamada das questões escolhidas
 			for (let j = 0; j < questionsSelected.length; j++) {
 			 console.log(questionsSelected[j])
+			  if(questionsSelected[j].question.imagePath){
+			  	 runtime.globalVars.existImage = true;
+			  }
 			  runtime.callFunction(
 				"createQuestion",
 				questionsSelected[j].question.id, 
@@ -435,7 +438,8 @@ async function OnBeforeProjectStart(runtime)
 		  else {
 			boardComplete = [];
 		  }
-
+          
+		  runtime.callFunction("scrol",);
 		  console.log(boardComplete)
 		  console.log(questionsSelected)
 

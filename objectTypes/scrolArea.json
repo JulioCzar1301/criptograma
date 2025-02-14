@@ -1,46 +1,36 @@
 {
-	"name": "Scroll",
+	"name": "scrolArea",
 	"plugin-id": "Sprite",
-	"sid": 668266212508502,
+	"sid": 637511903198978,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [],
-	"behaviorTypes": [
-		{
-			"behaviorId": "DragnDrop",
-			"name": "ArrastarSoltar",
-			"sid": 270048441631989
-		}
-	],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 12,
-						"height": 377,
+						"width": 920,
+						"height": 920,
 						"originX": 0,
 						"originY": 0,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 4097525,
+						"imageSpriteId": 4844805,
 						"collisionPoly": {
 							"points": [
-								0.5,
+								0.016304347826086956,
 								0,
 								1,
-								0,
-								1,
-								1,
-								0.5,
+								0.016304347826086956,
+								0.9836956521739131,
 								1,
 								0,
-								1,
-								0,
-								0
+								0.9836956521739131
 							]
 						},
 						"useCollisionPoly": true,
@@ -48,7 +38,7 @@
 						"tag": ""
 					}
 				],
-				"sid": 282775873991408,
+				"sid": 605288656737295,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

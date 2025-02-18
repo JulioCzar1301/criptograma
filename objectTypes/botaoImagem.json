@@ -11,6 +11,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 995768208504292
+		},
+		{
+			"name": "posInitial",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 897831688049890
 		}
 	],
 	"behaviorTypes": [

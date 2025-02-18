@@ -135,7 +135,7 @@
 			"eventType": "variable",
 			"name": "speedScrol",
 			"type": "number",
-			"initialValue": "10",
+			"initialValue": "1",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -941,6 +941,15 @@
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "textQuestao",
+											"sid": 281487708629654,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "textQuestao.Y"
+											}
+										},
+										{
 											"id": "set-position",
 											"objectClass": "questaoContainer",
 											"sid": 586957643839927,
@@ -965,6 +974,15 @@
 											"parameters": {
 												"width": "758",
 												"height": "textQuestao.TextHeight + 40"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "questaoContainer",
+											"sid": 826437061101095,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "questaoContainer.Y"
 											}
 										}
 									],
@@ -1027,10 +1045,10 @@
 												{
 													"id": "create-object",
 													"objectClass": "System",
-													"sid": 388595479722079,
+													"sid": 293454216094122,
 													"parameters": {
 														"object-to-create": "botaoImagem",
-														"layer": "2",
+														"layer": "1",
 														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" ))",
 														"y": "textQuestao.TagY(\"lacuna\", tokencount(resposta, \",\" ))",
 														"create-hierarchy": false,
@@ -1040,10 +1058,19 @@
 												{
 													"id": "set-instvar-value",
 													"objectClass": "botaoImagem",
-													"sid": 875340751485950,
+													"sid": 741818021142393,
 													"parameters": {
 														"instance-variable": "idQuestao",
 														"value": "textQuestao.idQuestao"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "botaoImagem",
+													"sid": 133591548808542,
+													"parameters": {
+														"instance-variable": "posInitial",
+														"value": "botaoImagem.Y"
 													}
 												},
 												{
@@ -1231,6 +1258,15 @@
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "textQuestao",
+											"sid": 757501359849873,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "textQuestao.Y"
+											}
+										},
+										{
 											"id": "set-position",
 											"objectClass": "questaoContainer",
 											"sid": 508478577890905,
@@ -1255,6 +1291,15 @@
 											"parameters": {
 												"width": "758",
 												"height": "textQuestao.TextHeight + 40"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "questaoContainer",
+											"sid": 185458693475402,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "questaoContainer.Y"
 											}
 										}
 									],
@@ -1321,6 +1366,15 @@
 														"y": "textQuestao.TagY(\"lacuna\", tokencount(resposta, \",\" ))",
 														"create-hierarchy": false,
 														"template-name": "\"\""
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "botaoImagem",
+													"sid": 223043201977963,
+													"parameters": {
+														"instance-variable": "posInitial",
+														"value": "botaoImagem.Y"
 													}
 												},
 												{
@@ -1459,6 +1513,15 @@
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "Lacuna",
+											"sid": 523513051423146,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "Lacuna.Y"
+											}
+										},
+										{
 											"id": "create-object",
 											"objectClass": "System",
 											"sid": 918188399200774,
@@ -1510,6 +1573,15 @@
 											"sid": 251353851880696,
 											"parameters": {
 												"y": "Indice.IID > 3 ? Lacuna.Y + 3 : Lacuna.Y + 1"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Indice",
+											"sid": 215682031024995,
+											"parameters": {
+												"instance-variable": "posInitial",
+												"value": "Indice.Y"
 											}
 										}
 									],
@@ -1597,9 +1669,9 @@
 								{
 									"id": "set-height",
 									"objectClass": "Scroll",
-									"sid": 464919416646601,
+									"sid": 963331672320280,
 									"parameters": {
-										"height": "((scrolArea.Height/heigthTotal)*(scrolArea.Height))/3"
+										"height": "((scrolArea.Height/heigthTotal)*(scrolArea.Height))/2"
 									}
 								}
 							],
@@ -5058,6 +5130,47 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 472546282541278,
+							"parameters": {
+								"variable": "existImage"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 446976286601651,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 109660884476261,
+									"parameters": {
+										"object": "botaoImagem"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "botaoImagem",
+									"sid": 311328073409098,
+									"parameters": {
+										"y": "botaoImagem.posInitial - (Scroll.Y  - Scroll.posInitial)"
+									}
+								}
+							],
+							"sid": 242467017279833
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "on-mouse-wheel",
 							"objectClass": "Mouse",
 							"sid": 311432803246201,
@@ -5068,139 +5181,25 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 589654645151018,
+							"sid": 326401514763212,
 							"parameters": {
-								"first-value": "Scroll.Y + speedScrol + Scroll.Height",
+								"first-value": "Scroll.Y + speedScrol  + Scroll.Height",
 								"comparison": 2,
 								"second-value": "scrolArea.Y + scrolArea.Height"
 							}
 						}
 					],
-					"actions": [],
-					"sid": 995917709393038,
-					"children": [
+					"actions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 237584733787855,
-									"parameters": {
-										"variable": "existImage"
-									}
-								}
-							],
-							"actions": [],
-							"sid": 268891225721921,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-all",
-											"objectClass": "System",
-											"sid": 232096743293050,
-											"parameters": {
-												"object": "botaoImagem"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-y",
-											"objectClass": "botaoImagem",
-											"sid": 235515860880995,
-											"parameters": {
-												"y": "botaoImagem.Y - speedScrol"
-											}
-										}
-									],
-									"sid": 939488222006052
-								}
-							]
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 254108899876249,
-									"parameters": {
-										"object": "questaoContainer"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 104016206009522,
-									"parameters": {
-										"object": "Lacuna"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 182003945208450,
-									"parameters": {
-										"object": "textQuestao"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 684111582667641,
-									"parameters": {
-										"object": "Indice"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-y",
-									"objectClass": "questaoContainer",
-									"sid": 272774167253561,
-									"parameters": {
-										"y": "questaoContainer.Y - speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Lacuna",
-									"sid": 942994049486257,
-									"parameters": {
-										"y": "Lacuna.Y - speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "textQuestao",
-									"sid": 908688480120471,
-									"parameters": {
-										"y": "textQuestao.Y- speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Indice",
-									"sid": 142210577899766,
-									"parameters": {
-										"y": "Indice.Y- speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Scroll",
-									"sid": 273981622436643,
-									"parameters": {
-										"y": "Scroll.Y + speedScrol"
-									}
-								}
-							],
-							"sid": 494860429881909
+							"id": "set-y",
+							"objectClass": "Scroll",
+							"sid": 353271826214950,
+							"parameters": {
+								"y": "Scroll.Y + speedScrol"
+							}
 						}
-					]
+					],
+					"sid": 995917709393038
 				},
 				{
 					"eventType": "block",
@@ -5224,133 +5223,141 @@
 							}
 						}
 					],
-					"actions": [],
-					"sid": 385940597181399,
-					"children": [
+					"actions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 102115421326204,
-									"parameters": {
-										"object": "questaoContainer"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 178604444659397,
-									"parameters": {
-										"object": "Lacuna"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 220190536132461,
-									"parameters": {
-										"object": "textQuestao"
-									}
-								},
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 283215093428955,
-									"parameters": {
-										"object": "Indice"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-y",
-									"objectClass": "questaoContainer",
-									"sid": 314581132092397,
-									"parameters": {
-										"y": "questaoContainer.Y + speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Lacuna",
-									"sid": 406223752821518,
-									"parameters": {
-										"y": "Lacuna.Y + speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "textQuestao",
-									"sid": 633566048862152,
-									"parameters": {
-										"y": "textQuestao.Y+ speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Indice",
-									"sid": 400259685378350,
-									"parameters": {
-										"y": "Indice.Y+ speedScrol"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "Scroll",
-									"sid": 975806182596026,
-									"parameters": {
-										"y": "Scroll.Y- speedScrol"
-									}
-								}
-							],
-							"sid": 610144716806105,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 207059344922712,
-											"parameters": {
-												"variable": "existImage"
-											}
-										}
-									],
-									"actions": [],
-									"sid": 380690173291675,
-									"children": [
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-all",
-													"objectClass": "System",
-													"sid": 239603994079011,
-													"parameters": {
-														"object": "botaoImagem"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "set-y",
-													"objectClass": "botaoImagem",
-													"sid": 864463056530759,
-													"parameters": {
-														"y": "botaoImagem.Y + speedScrol"
-													}
-												}
-											],
-											"sid": 476471001049661
-										}
-									]
-								}
-							]
+							"id": "set-y",
+							"objectClass": "Scroll",
+							"sid": 647715363449884,
+							"parameters": {
+								"y": "Scroll.Y- speedScrol"
+							}
 						}
-					]
+					],
+					"sid": 385940597181399
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 934886701960834,
+							"parameters": {
+								"first-value": "Scroll.Y ",
+								"comparison": 2,
+								"second-value": "scrolArea.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "Scroll",
+							"sid": 599541156575164,
+							"parameters": {
+								"y": "scrolArea.Y"
+							}
+						}
+					],
+					"sid": 122478728347893
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 705210943931973,
+							"parameters": {
+								"first-value": "Scroll.Y + Scroll.Height",
+								"comparison": 4,
+								"second-value": "scrolArea.Y + scrolArea.Height"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "Scroll",
+							"sid": 153766586320660,
+							"parameters": {
+								"y": "scrolArea.Y + scrolArea.Height - Scroll.Height"
+							}
+						}
+					],
+					"sid": 673941977270625
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 930452716877396,
+							"parameters": {
+								"object": "questaoContainer"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 549567056395342,
+							"parameters": {
+								"object": "Lacuna"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 181172824667272,
+							"parameters": {
+								"object": "textQuestao"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 928198018175750,
+							"parameters": {
+								"object": "Indice"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "questaoContainer",
+							"sid": 120776149150151,
+							"parameters": {
+								"y": "questaoContainer.posInitial- (Scroll.Y  - Scroll.posInitial)"
+							}
+						},
+						{
+							"id": "set-y",
+							"objectClass": "Lacuna",
+							"sid": 749850240434403,
+							"parameters": {
+								"y": "Lacuna.posInitial  - (Scroll.Y  - Scroll.posInitial)"
+							}
+						},
+						{
+							"id": "set-y",
+							"objectClass": "textQuestao",
+							"sid": 324603044523024,
+							"parameters": {
+								"y": "textQuestao.posInitial - (Scroll.Y  - Scroll.posInitial)"
+							}
+						},
+						{
+							"id": "set-y",
+							"objectClass": "Indice",
+							"sid": 590293248398100,
+							"parameters": {
+								"y": "Indice.posInitial - (Scroll.Y  - Scroll.posInitial)"
+							}
+						}
+					],
+					"sid": 548255458216275
 				}
 			],
 			"sid": 514990389849655

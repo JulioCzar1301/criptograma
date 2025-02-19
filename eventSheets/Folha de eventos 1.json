@@ -135,7 +135,7 @@
 			"eventType": "variable",
 			"name": "speedScrol",
 			"type": "number",
-			"initialValue": "1",
+			"initialValue": "7",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -1706,32 +1706,32 @@
 			"sid": 108082512346501
 		},
 		{
+			"eventType": "variable",
+			"name": "lacunaSelectedIID",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 359424846324302
+		},
+		{
+			"eventType": "variable",
+			"name": "idPerguntaSelec",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 368685621663122
+		},
+		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "manage questions",
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
-				{
-					"eventType": "variable",
-					"name": "questaoSelec",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 569516843810019
-				},
-				{
-					"eventType": "variable",
-					"name": "LacunaSelecIID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 360284402468430
-				},
 				{
 					"eventType": "variable",
 					"name": "qtdeLacunas",
@@ -1784,10 +1784,10 @@
 								{
 									"id": "pick-by-evaluate",
 									"objectClass": "System",
-									"sid": 348492391639856,
+									"sid": 815549802154856,
 									"parameters": {
 										"object": "textQuestao",
-										"expression": "textQuestao.idQuestao = questaoContainer.idQuestao & textQuestao.isSelected = 0 & textQuestao.isCorrect = 0"
+										"expression": "textQuestao.idQuestao = questaoContainer.idQuestao & textQuestao.isCorrect = 0"
 									}
 								},
 								{
@@ -1797,16 +1797,6 @@
 									"parameters": {
 										"object": "Lacuna",
 										"expression": "Lacuna.idQuestao = questaoContainer.idQuestao & Lacuna.isCorrect = 0"
-									}
-								},
-								{
-									"id": "pick-by-highest-lowest-value",
-									"objectClass": "System",
-									"sid": 298199850813221,
-									"parameters": {
-										"object": "Lacuna",
-										"which": "lowest",
-										"expression": "Lacuna.IID"
 									}
 								}
 							],
@@ -1818,6 +1808,15 @@
 									"parameters": {
 										"instance-variable": "isSelected",
 										"value": "true"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "textQuestao",
+									"sid": 844678224468682,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Seleção\""
 									}
 								},
 								{
@@ -1839,62 +1838,72 @@
 								},
 								{
 									"id": "set-effect-enabled",
-									"objectClass": "textQuestao",
-									"sid": 266411862138592,
+									"objectClass": "Lacuna",
+									"sid": 447434255814554,
 									"parameters": {
 										"mode": "enable",
 										"effect": "\"Seleção\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "Lacuna",
-									"sid": 419608726339856,
-									"parameters": {
-										"mode": "enable",
-										"effect": "\"Seleção\""
-									}
-								},
-								{
-									"id": "toggle-boolean-instvar",
-									"objectClass": "Lacuna",
-									"sid": 755061412111840,
-									"parameters": {
-										"instance-variable": "isSelected"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 860189295008778,
-									"parameters": {
-										"variable": "questaoSelec",
-										"value": "questaoContainer.idQuestao"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 387110465370307,
-									"parameters": {
-										"variable": "LacunaSelecIID",
-										"value": "Lacuna.IID"
 									}
 								},
 								{
 									"id": "set-animation-frame",
 									"objectClass": "Lacuna",
-									"sid": 308638517107591,
+									"sid": 798221046226488,
 									"parameters": {
 										"frame-number": "1"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Lacuna",
+									"sid": 803519630925094,
+									"parameters": {
+										"instance-variable": "isSelected",
+										"value": "true"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 591184550733569,
+									"parameters": {
+										"variable": "idPerguntaSelec",
+										"value": "questaoContainer.idQuestao"
 									}
 								}
 							],
 							"sid": 208318088674544,
 							"children": [
 								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-highest-lowest-value",
+											"objectClass": "System",
+											"sid": 133324691636970,
+											"parameters": {
+												"object": "Lacuna",
+												"which": "lowest",
+												"expression": "Lacuna.IID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 890772967784554,
+											"parameters": {
+												"variable": "lacunaSelectedIID",
+												"value": "Lacuna.IID"
+											}
+										}
+									],
+									"sid": 896757514460333
+								},
+								{
 									"eventType": "comment",
-									"text": "CASO A PARTE CASO A QUESTÃO TENHA IMAGEM ",
+									"text": "CASO A QUESTÃO TENHA IMAGEM ",
 									"text-color": [
 										1,
 										1,
@@ -1930,6 +1939,58 @@
 								},
 								{
 									"eventType": "comment",
+									"text": "ATIVAR EFEITO DE NÃO SELEÇÃO PARA LACUNAS NÃO SELECIONADAS, MAS DA MESMA QUESTÃO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 843549794401726,
+											"parameters": {
+												"object": "Lacuna"
+											}
+										},
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 218443293280820,
+											"parameters": {
+												"object": "Lacuna",
+												"expression": "Lacuna.idQuestao = idPerguntaSelec & Lacuna.IID <> lacunaSelectedIID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "Lacuna",
+											"sid": 385577022601476,
+											"parameters": {
+												"frame-number": "2"
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "Lacuna",
+											"sid": 799761023458338,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Seleção\""
+											}
+										}
+									],
+									"sid": 965558813501034
+								},
+								{
+									"eventType": "comment",
 									"text": "SELECIONAR APENAS UM BLOCO DE QUESTÕES POR VEZ",
 									"text-color": [
 										1,
@@ -1952,10 +2013,10 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 288621763903196,
+											"sid": 124377388483386,
 											"parameters": {
 												"object": "questaoContainer",
-												"expression": "questaoContainer.idQuestao <> questaoSelec"
+												"expression": "questaoContainer.idQuestao <> idPerguntaSelec"
 											}
 										},
 										{
@@ -1969,10 +2030,10 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 354952053816333,
+											"sid": 138323181583236,
 											"parameters": {
 												"object": "textQuestao",
-												"expression": "textQuestao.idQuestao <> questaoSelec & textQuestao.isCorrect = 0"
+												"expression": "textQuestao.idQuestao <> idPerguntaSelec & textQuestao.isCorrect = 0"
 											}
 										},
 										{
@@ -1986,10 +2047,10 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 879519190197211,
+											"sid": 412552253558205,
 											"parameters": {
 												"object": "Lacuna",
-												"expression": "Lacuna.IID <> LacunaSelecIID &Lacuna.isCorrect = 0"
+												"expression": "Lacuna.IID <> lacunaSelectedIID & Lacuna.isCorrect = 0"
 											}
 										}
 									],
@@ -2027,14 +2088,6 @@
 											"parameters": {
 												"instance-variable": "isSelected",
 												"value": "false"
-											}
-										},
-										{
-											"id": "set-animation-frame",
-											"objectClass": "Lacuna",
-											"sid": 677412316575106,
-											"parameters": {
-												"frame-number": "1"
 											}
 										},
 										{
@@ -2082,10 +2135,10 @@
 												{
 													"id": "pick-by-evaluate",
 													"objectClass": "System",
-													"sid": 783128185666794,
+													"sid": 415580735496305,
 													"parameters": {
 														"object": "botaoImagem",
-														"expression": "botaoImagem.idQuestao <> questaoSelec"
+														"expression": "botaoImagem.idQuestao <> idPerguntaSelec"
 													}
 												}
 											],
@@ -2101,66 +2154,6 @@
 												}
 											],
 											"sid": 231625540406616
-										},
-										{
-											"eventType": "comment",
-											"text": "ATIVAR EFEITO DE NÃO SELEÇÃO PARA LACUNAS NÃO SELECIONADAS, MAS DA MESMA QUESTÃO",
-											"text-color": [
-												1,
-												1,
-												1,
-												1
-											]
-										},
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-all",
-													"objectClass": "System",
-													"sid": 859631441307602,
-													"parameters": {
-														"object": "Lacuna"
-													}
-												},
-												{
-													"id": "pick-by-evaluate",
-													"objectClass": "System",
-													"sid": 860832300996431,
-													"parameters": {
-														"object": "Lacuna",
-														"expression": "Lacuna.idQuestao = questaoSelec & Lacuna.IID <> LacunaSelecIID"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "set-animation-frame",
-													"objectClass": "Lacuna",
-													"sid": 729053601525403,
-													"parameters": {
-														"frame-number": "2"
-													}
-												},
-												{
-													"id": "set-opacity",
-													"objectClass": "questaoContainer",
-													"sid": 543468448558932,
-													"parameters": {
-														"opacity": "80"
-													}
-												},
-												{
-													"id": "set-effect-enabled",
-													"objectClass": "Lacuna",
-													"sid": 723685857089358,
-													"parameters": {
-														"mode": "disable",
-														"effect": "\"Seleção\""
-													}
-												}
-											],
-											"sid": 634954020977403
 										}
 									]
 								}
@@ -2820,26 +2813,6 @@
 			"sid": 741285895283447
 		},
 		{
-			"eventType": "variable",
-			"name": "lacunaSelectedIID",
-			"type": "number",
-			"initialValue": "0",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 357072639533713
-		},
-		{
-			"eventType": "variable",
-			"name": "idPerguntaSelec",
-			"type": "string",
-			"initialValue": "",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 943236283486057
-		},
-		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "manage gaps",
@@ -2924,24 +2897,6 @@
 							],
 							"actions": [
 								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 316119599001955,
-									"parameters": {
-										"variable": "idPerguntaSelec",
-										"value": "Lacuna.idQuestao"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 426875888084893,
-									"parameters": {
-										"variable": "lacunaSelectedIID",
-										"value": "Lacuna.IID"
-									}
-								},
-								{
 									"id": "set-boolean-instvar",
 									"objectClass": "Lacuna",
 									"sid": 164021694779494,
@@ -2968,6 +2923,24 @@
 									}
 								},
 								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 369746676699392,
+									"parameters": {
+										"variable": "idPerguntaSelec",
+										"value": "Lacuna.idQuestao"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 811189455393419,
+									"parameters": {
+										"variable": "lacunaSelectedIID",
+										"value": "Lacuna.IID"
+									}
+								},
+								{
 									"id": "signal",
 									"objectClass": "System",
 									"sid": 843826371770769,
@@ -2978,6 +2951,16 @@
 							],
 							"sid": 892523529936334
 						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "LÓGICA DE SELEÇÃO (VOLTADA PARA LACUNAS)",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
 					]
 				},
 				{
@@ -3069,15 +3052,6 @@
 											"parameters": {
 												"frame-number": "2"
 											}
-										},
-										{
-											"id": "set-effect-enabled",
-											"objectClass": "Lacuna",
-											"sid": 874629642101011,
-											"parameters": {
-												"mode": "disable",
-												"effect": "\"Seleção\""
-											}
 										}
 									],
 									"sid": 150009293670581
@@ -3135,68 +3109,62 @@
 									}
 								},
 								{
+									"id": "set-effect-enabled",
+									"objectClass": "questaoContainer",
+									"sid": 901537663552424,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Seleção\""
+									}
+								},
+								{
 									"id": "set-opacity",
 									"objectClass": "questaoContainer",
 									"sid": 431680719180565,
 									"parameters": {
 										"opacity": "100"
 									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "questaoContainer",
-									"sid": 679765708930964,
-									"parameters": {
-										"mode": "enable",
-										"effect": "\"Seleção\""
-									}
 								}
 							],
-							"sid": 506679325067907
-						},
-						{
-							"eventType": "comment",
-							"text": "CASO 1B: SELEÇÃO DE BOTÃO DE IMAGEM (FORA DO BLOCO PRINCIPAL PARA EVITAR BUGS)",
-							"text-color": [
-								1,
-								1,
-								1,
-								1
+							"sid": 506679325067907,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "SELEÇÃO DE BOTÃO DE IMAGEM (FORA DO BLOCO PRINCIPAL PARA EVITAR BUGS)",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 696205792981298,
+											"parameters": {
+												"object": "botaoImagem",
+												"expression": "botaoImagem.idQuestao = Lacuna.idQuestao"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "botaoImagem",
+											"sid": 125702419272898,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Seleção\""
+											}
+										}
+									],
+									"sid": 213324037469616
+								}
 							]
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Lacuna",
-									"sid": 587615276863800,
-									"parameters": {
-										"instance-variable": "isSelected"
-									}
-								},
-								{
-									"id": "pick-by-evaluate",
-									"objectClass": "System",
-									"sid": 396619762124311,
-									"parameters": {
-										"object": "botaoImagem",
-										"expression": "botaoImagem.idQuestao = Lacuna.idQuestao"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "botaoImagem",
-									"sid": 777630527310803,
-									"parameters": {
-										"mode": "enable",
-										"effect": "\"Seleção\""
-									}
-								}
-							],
-							"sid": 828998573193665
 						},
 						{
 							"eventType": "comment",
@@ -3222,60 +3190,61 @@
 								{
 									"id": "pick-all",
 									"objectClass": "System",
-									"sid": 807212274241546,
+									"sid": 562920354954118,
 									"parameters": {
 										"object": "textQuestao"
 									}
 								},
 								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 204596857207453,
+									"parameters": {
+										"object": "textQuestao",
+										"expression": "textQuestao.idQuestao <> idPerguntaSelec"
+									}
+								},
+								{
 									"id": "pick-all",
 									"objectClass": "System",
-									"sid": 408173533933558,
+									"sid": 819769668687337,
 									"parameters": {
 										"object": "questaoContainer"
 									}
 								},
 								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 972290108434835,
-									"parameters": {
-										"object": "botaoImagem"
-									}
-								},
-								{
 									"id": "pick-by-evaluate",
 									"objectClass": "System",
-									"sid": 737783105530730,
-									"parameters": {
-										"object": "textQuestao",
-										"expression": "textQuestao.idQuestao <> Lacuna.idQuestao"
-									}
-								},
-								{
-									"id": "pick-by-evaluate",
-									"objectClass": "System",
-									"sid": 554220023667031,
+									"sid": 227335606619598,
 									"parameters": {
 										"object": "questaoContainer",
-										"expression": "Lacuna.idQuestao<> questaoContainer.idQuestao"
-									}
-								},
-								{
-									"id": "pick-by-evaluate",
-									"objectClass": "System",
-									"sid": 521169050322515,
-									"parameters": {
-										"object": "botaoImagem",
-										"expression": "Lacuna.idQuestao<> botaoImagem.idQuestao"
+										"expression": "questaoContainer.idQuestao <> idPerguntaSelec"
 									}
 								}
 							],
 							"actions": [
 								{
+									"id": "set-boolean-instvar",
+									"objectClass": "textQuestao",
+									"sid": 302434466931427,
+									"parameters": {
+										"instance-variable": "isSelected",
+										"value": "false"
+									}
+								},
+								{
 									"id": "set-effect-enabled",
 									"objectClass": "textQuestao",
 									"sid": 756122330269524,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Seleção\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "questaoContainer",
+									"sid": 523659859134562,
 									"parameters": {
 										"mode": "disable",
 										"effect": "\"Seleção\""
@@ -3288,27 +3257,55 @@
 									"parameters": {
 										"opacity": "80"
 									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "questaoContainer",
-									"sid": 717083512292584,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"Seleção\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "botaoImagem",
-									"sid": 473111799124564,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"Seleção\""
-									}
 								}
 							],
-							"sid": 455490707793421
+							"sid": 455490707793421,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "SELEÇÃO DE BOTÃO DE IMAGEM (FORA DO BLOCO PRINCIPAL PARA EVITAR BUGS)",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 214418710420115,
+											"parameters": {
+												"object": "botaoImagem"
+											}
+										},
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 641579686266541,
+											"parameters": {
+												"object": "botaoImagem",
+												"expression": "botaoImagem.idQuestao <> idPerguntaSelec"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "botaoImagem",
+											"sid": 275042336718029,
+											"parameters": {
+												"mode": "disable",
+												"effect": "\"Seleção\""
+											}
+										}
+									],
+									"sid": 896002734152185
+								}
+							]
 						}
 					]
 				},

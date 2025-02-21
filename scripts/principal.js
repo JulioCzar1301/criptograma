@@ -20,9 +20,9 @@ async function OnBeforeProjectStart(runtime)
 	//let sectionID = isSecOrChap ? parts[2] : "";
 	//runtime.globalVars.idJogador = parts[0];
 	
-	let isSecOrChap = "section";
+	let isSecOrChap = "chapter";
 	let sectionID = "c3c980a3-e832-4fbd-b964-42faa9a4145c";
-	let chapterID = "a34bcf82-1dd7-40a6-9d12-cca35c2aa035";
+	let chapterID = "25ba2c14-a291-4f90-a444-414252245737";
 	const questionsChosen = []
 	runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
 	

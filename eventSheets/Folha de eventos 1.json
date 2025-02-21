@@ -4255,6 +4255,115 @@
 				},
 				{
 					"eventType": "comment",
+					"text": "Alternar entre a palavra principal e a palavra intercessora"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 324997066321302,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "double-clicked",
+								"object-clicked": "celula"
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 956553198495276,
+							"parameters": {
+								"variable": "isMainSelect"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "celula",
+							"sid": 773352982526131,
+							"parameters": {
+								"instance-variable": "isMain"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "celula",
+							"sid": 542068426127075,
+							"parameters": {
+								"instance-variable": "block"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 983262577987151,
+							"parameters": {
+								"variable": "respostaLacuna",
+								"value": "\"\""
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 891386135621791,
+							"parameters": {
+								"variable": "questionChosen",
+								"value": "celula.idQuestao"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 691713239695762,
+							"parameters": {
+								"variable": "celulaChosen",
+								"value": "celula.UID"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 798073943076854,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 945309317202924,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 777798484403128,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 154082485286903,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 838634462169635
+				},
+				{
+					"eventType": "comment",
 					"text": "AUXILIAR PARA CAPTURAR A RESPOSTA DA LACUNA CORRESPONDENTE ÀS CÉLULAS SELECIONADAS",
 					"text-color": [
 						1,
@@ -4948,6 +5057,250 @@
 				},
 				{
 					"eventType": "comment",
+					"text": "Ajustar a palavra a cada célula escolhida"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 262800450571713,
+							"parameters": {
+								"object": "celula",
+								"expression": "celula.UID",
+								"comparison": 0,
+								"value": "celulaChosen"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 601924271205532,
+							"parameters": {
+								"variable": "questionChosen",
+								"value": "celula.idQuestao"
+							}
+						}
+					],
+					"sid": 427420435273448
+				},
+				{
+					"eventType": "comment",
+					"text": "Mover-se para esquerda"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Teclado",
+							"sid": 855916996050659,
+							"parameters": {
+								"key": 37
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 314912844607754,
+							"parameters": {
+								"object": "celula",
+								"expression": "celula.UID",
+								"comparison": 0,
+								"value": "celulaChosen"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 140668537473220,
+							"parameters": {
+								"variable": "celulaChosen",
+								"value": "celula.anterior"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 247102915511810,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 416331813847176
+				},
+				{
+					"eventType": "comment",
+					"text": "Mover-se para direita"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Teclado",
+							"sid": 792333978948938,
+							"parameters": {
+								"key": 39
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 956275664096072,
+							"parameters": {
+								"object": "celula",
+								"expression": "celula.UID",
+								"comparison": 0,
+								"value": "celulaChosen"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 763826407822408,
+							"parameters": {
+								"variable": "celulaChosen",
+								"value": "celula.posterior"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 726389098777820,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 823818604658820
+				},
+				{
+					"eventType": "comment",
+					"text": "Mover-se para cima, caso a palavra seja a principal(vertical)"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Teclado",
+							"sid": 730636779834494,
+							"parameters": {
+								"key": 38
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 614162413582999,
+							"parameters": {
+								"object": "celula",
+								"expression": "celula.UID",
+								"comparison": 0,
+								"value": "celulaChosen"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "celula",
+							"sid": 716429044176932,
+							"parameters": {
+								"instance-variable": "isMain"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 375362891021449,
+							"parameters": {
+								"variable": "celulaChosen",
+								"value": "celula.anteriorMain"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 484572116406180,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 482553335345510
+				},
+				{
+					"eventType": "comment",
+					"text": "Mover-se para baixo, caso a palavra seja a principal(vertical)"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Teclado",
+							"sid": 144384642848907,
+							"parameters": {
+								"key": 40
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 458268725815769,
+							"parameters": {
+								"object": "celula",
+								"expression": "celula.UID",
+								"comparison": 0,
+								"value": "celulaChosen"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "celula",
+							"sid": 342758689636990,
+							"parameters": {
+								"instance-variable": "isMain"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 997517807154797,
+							"parameters": {
+								"variable": "celulaChosen",
+								"value": "celula.posteriorMain"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 830214615663922,
+							"parameters": {
+								"variable": "isMainSelect",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 814404677570045
+				},
+				{
+					"eventType": "comment",
 					"text": "Ajuste na animação das celulas"
 				},
 				{
@@ -4987,6 +5340,15 @@
 										"comparison": 1,
 										"second-value": "1"
 									}
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 220500077855728,
+									"parameters": {
+										"variable": "isMainSelect"
+									},
+									"isInverted": true
 								}
 							],
 							"actions": [
@@ -5023,6 +5385,15 @@
 										"comparison": 1,
 										"second-value": "1"
 									}
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 639230792073235,
+									"parameters": {
+										"variable": "isMainSelect"
+									},
+									"isInverted": true
 								}
 							],
 							"actions": [
@@ -5036,6 +5407,30 @@
 								}
 							],
 							"sid": 723878589063270
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 112910409058755,
+									"parameters": {
+										"variable": "isMainSelect"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 231700760031496,
+									"parameters": {
+										"frame-number": "0"
+									}
+								}
+							],
+							"sid": 973642915751970
 						},
 						{
 							"eventType": "block",

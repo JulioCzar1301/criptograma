@@ -1591,116 +1591,6 @@
 							"sid": 816130140655317
 						}
 					]
-				},
-				{
-					"functionName": "scrol",
-					"functionDescription": "",
-					"functionCategory": "",
-					"functionReturnType": "none",
-					"functionCopyPicked": false,
-					"functionIsAsync": false,
-					"functionParameters": [],
-					"eventType": "function-block",
-					"conditions": [],
-					"actions": [],
-					"sid": 752057730228319,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 486812188542560,
-									"parameters": {
-										"variable": "heigthInicial",
-										"value": "252"
-									}
-								}
-							],
-							"sid": 290034354626891
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-last-created",
-									"objectClass": "System",
-									"sid": 747166295441009,
-									"parameters": {
-										"object": "questaoContainer"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 822819910538062,
-									"parameters": {
-										"variable": "heigthFinal",
-										"value": "questaoContainer.Y + questaoContainer.Height"
-									}
-								}
-							],
-							"sid": 198276051902691
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 612253051033518,
-									"parameters": {
-										"variable": "heigthTotal",
-										"value": "heigthFinal - heigthInicial"
-									}
-								}
-							],
-							"sid": 437243251688884
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "set-height",
-									"objectClass": "Scroll",
-									"sid": 963331672320280,
-									"parameters": {
-										"height": "((scrolArea.Height/heigthTotal)*(scrolArea.Height))/2"
-									}
-								}
-							],
-							"sid": 928865995106621
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-two-values",
-									"objectClass": "System",
-									"sid": 358472522767047,
-									"parameters": {
-										"first-value": "heigthFinal",
-										"comparison": 3,
-										"second-value": "scrolArea.Height"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "destroy",
-									"objectClass": "Scroll",
-									"sid": 509019690601717
-								}
-							],
-							"sid": 650229292886177
-						}
-					]
 				}
 			],
 			"sid": 108082512346501
@@ -3511,7 +3401,7 @@
 					"type": "number",
 					"initialValue": "0",
 					"comment": "",
-					"isStatic": false,
+					"isStatic": true,
 					"isConstant": false,
 					"sid": 733483564424398
 				},
@@ -3591,7 +3481,17 @@
 									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 168307610594238,
+									"parameters": {
+										"variable": "isMainSelect",
+										"value": "false"
+									}
+								}
+							],
 							"sid": 979086529120111,
 							"children": [
 								{
@@ -3624,15 +3524,6 @@
 											"parameters": {
 												"variable": "questionChosen",
 												"value": "celula.idQuestao"
-											}
-										},
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 399882056347182,
-											"parameters": {
-												"variable": "isMainSelect",
-												"value": "false"
 											}
 										}
 									],
@@ -3682,6 +3573,7 @@
 													"id": "pick-by-evaluate",
 													"objectClass": "System",
 													"sid": 221934011710835,
+													"disabled": true,
 													"parameters": {
 														"object": "celula",
 														"expression": "celula.UID = celulaChosen & celula.isMain = 1"
@@ -3699,7 +3591,8 @@
 													}
 												}
 											],
-											"sid": 209766467622212
+											"sid": 209766467622212,
+											"disabled": true
 										}
 									]
 								}
@@ -3719,9 +3612,12 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "else",
+									"id": "evaluate-expression",
 									"objectClass": "System",
-									"sid": 966972178967603
+									"sid": 595944524009462,
+									"parameters": {
+										"value": "Lacuna.indice = 0"
+									}
 								},
 								{
 									"id": "pick-by-evaluate",
@@ -3733,7 +3629,26 @@
 									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 454012854213901,
+									"parameters": {
+										"variable": "isMainSelect",
+										"value": "true"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 562186308689251,
+									"parameters": {
+										"variable": "questionChosen",
+										"value": "celula.idQuestao"
+									}
+								}
+							],
 							"sid": 257173763051085,
 							"children": [
 								{
@@ -3749,6 +3664,15 @@
 								{
 									"eventType": "block",
 									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "celula",
+											"sid": 290046091776632,
+											"parameters": {
+												"instance-variable": "block"
+											},
+											"isInverted": true
+										},
 										{
 											"id": "pick-by-highest-lowest-value",
 											"objectClass": "System",
@@ -3772,32 +3696,6 @@
 										}
 									],
 									"sid": 875522877637335
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 301719269402967,
-											"parameters": {
-												"object": "celula",
-												"expression": "celula.UID = celulaChosen & celula.isMain = 1"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 932010648770513,
-											"parameters": {
-												"variable": "isMainSelect",
-												"value": "true"
-											}
-										}
-									],
-									"sid": 397850748853065
 								}
 							]
 						}
@@ -3880,7 +3778,17 @@
 									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 323786142702403,
+									"parameters": {
+										"variable": "isMainSelect",
+										"value": "false"
+									}
+								}
+							],
 							"sid": 363691113373670,
 							"children": [
 								{
@@ -3913,15 +3821,6 @@
 											"parameters": {
 												"variable": "questionChosen",
 												"value": "celula.idQuestao"
-											}
-										},
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 591826560304860,
-											"parameters": {
-												"variable": "isMainSelect",
-												"value": "false"
 											}
 										}
 									],
@@ -3981,14 +3880,15 @@
 												{
 													"id": "set-boolean-eventvar",
 													"objectClass": "System",
-													"sid": 549256348375841,
+													"sid": 157048187054436,
 													"parameters": {
 														"variable": "isMainSelect",
 														"value": "true"
 													}
 												}
 											],
-											"sid": 900502563547103
+											"sid": 900502563547103,
+											"disabled": true
 										}
 									]
 								}
@@ -4008,9 +3908,31 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "else",
+									"id": "pick-by-evaluate",
 									"objectClass": "System",
-									"sid": 225837758695471
+									"sid": 167379637821339,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.idQuestao = questaoContainer.idQuestao & Lacuna.isSelected = 1"
+									}
+								},
+								{
+									"id": "pick-by-highest-lowest-value",
+									"objectClass": "System",
+									"sid": 538606910193410,
+									"parameters": {
+										"object": "Lacuna",
+										"which": "lowest",
+										"expression": "Lacuna.IID"
+									}
+								},
+								{
+									"id": "evaluate-expression",
+									"objectClass": "System",
+									"sid": 159478038775688,
+									"parameters": {
+										"value": "Lacuna.indice = 0"
+									}
 								},
 								{
 									"id": "pick-by-evaluate",
@@ -4022,7 +3944,26 @@
 									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 699577126042475,
+									"parameters": {
+										"variable": "questionChosen",
+										"value": "celula.idQuestao"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 152771356449057,
+									"parameters": {
+										"variable": "isMainSelect",
+										"value": "true"
+									}
+								}
+							],
 							"sid": 227216223440294,
 							"children": [
 								{
@@ -4061,32 +4002,6 @@
 										}
 									],
 									"sid": 263776826132372
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 561669056895421,
-											"parameters": {
-												"object": "celula",
-												"expression": "celula.UID = celulaChosen & celula.isMain = 1"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 715555090087089,
-											"parameters": {
-												"variable": "isMainSelect",
-												"value": "true"
-											}
-										}
-									],
-									"sid": 981697221291217
 								}
 							]
 						}
@@ -4173,15 +4088,6 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 887613247391818,
-							"parameters": {
-								"variable": "respostaLacuna",
-								"value": "\"\""
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
 							"sid": 597123569037071,
 							"parameters": {
 								"variable": "questionChosen",
@@ -4247,6 +4153,14 @@
 										"variable": "isMainSelect",
 										"value": "true"
 									}
+								},
+								{
+									"id": "signal",
+									"objectClass": "System",
+									"sid": 147718159390410,
+									"parameters": {
+										"tag": "\"chamarLacuna\""
+									}
 								}
 							],
 							"sid": 915311275094697
@@ -4300,15 +4214,6 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 983262577987151,
-							"parameters": {
-								"variable": "respostaLacuna",
-								"value": "\"\""
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
 							"sid": 891386135621791,
 							"parameters": {
 								"variable": "questionChosen",
@@ -4343,20 +4248,20 @@
 							}
 						},
 						{
-							"id": "signal",
-							"objectClass": "System",
-							"sid": 777798484403128,
-							"parameters": {
-								"tag": "\"chamarLacuna\""
-							}
-						},
-						{
 							"id": "set-boolean-eventvar",
 							"objectClass": "System",
 							"sid": 154082485286903,
 							"parameters": {
 								"variable": "isMainSelect",
 								"value": "false"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 722304217986322,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
 							}
 						}
 					],
@@ -4388,6 +4293,16 @@
 					"sid": 208488135408831,
 					"children": [
 						{
+							"eventType": "comment",
+							"text": "CASO A: NÃO É A PALAVRA PRINCIPAL",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
 							"eventType": "block",
 							"conditions": [
 								{
@@ -4416,7 +4331,17 @@
 											}
 										}
 									],
-									"actions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 289727351333479,
+											"parameters": {
+												"variable": "respostaLacuna",
+												"value": "\"\""
+											}
+										}
+									],
 									"sid": 834329777912592,
 									"children": [
 										{
@@ -4482,15 +4407,6 @@
 													],
 													"actions": [
 														{
-															"id": "set-boolean-instvar",
-															"objectClass": "Lacuna",
-															"sid": 413206247332119,
-															"parameters": {
-																"instance-variable": "isSelected",
-																"value": "true"
-															}
-														},
-														{
 															"id": "set-eventvar-value",
 															"objectClass": "System",
 															"sid": 111426309655915,
@@ -4506,6 +4422,15 @@
 															"parameters": {
 																"variable": "idPerguntaSelec",
 																"value": "Lacuna.idQuestao"
+															}
+														},
+														{
+															"id": "set-boolean-instvar",
+															"objectClass": "Lacuna",
+															"sid": 583263963142864,
+															"parameters": {
+																"instance-variable": "isSelected",
+																"value": "true"
 															}
 														},
 														{
@@ -4544,7 +4469,7 @@
 						},
 						{
 							"eventType": "comment",
-							"text": "(PASSIVEL DE AJUSTE = ENQUANTO NÃO TIVER DIFERENCIAÇÃO DE SELEÇÃO HORIZONTAL E VERTICAL PRA PALAVRA PRINCIPAL, ISSO PODE FALHAR)",
+							"text": "CASO B: É A PALAVRA PRINCIPAL",
 							"text-color": [
 								1,
 								1,
@@ -4580,7 +4505,17 @@
 											}
 										}
 									],
-									"actions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 804204061858411,
+											"parameters": {
+												"variable": "respostaLacuna",
+												"value": "\"\""
+											}
+										}
+									],
 									"sid": 482561333836099,
 									"children": [
 										{
@@ -4609,6 +4544,75 @@
 												}
 											],
 											"sid": 217285643986026
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-evaluate",
+													"objectClass": "System",
+													"sid": 559989421544826,
+													"parameters": {
+														"object": "Lacuna",
+														"expression": "Lacuna.indice = 0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "Lacuna",
+													"sid": 306986622236145,
+													"parameters": {
+														"instance-variable": "isSelected",
+														"value": "true"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 631810751821007,
+													"parameters": {
+														"variable": "lacunaSelectedIID",
+														"value": "Lacuna.IID"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 957254812170355,
+													"parameters": {
+														"variable": "idPerguntaSelec",
+														"value": "Lacuna.idQuestao"
+													}
+												},
+												{
+													"id": "set-effect-enabled",
+													"objectClass": "Lacuna",
+													"sid": 632862626247074,
+													"parameters": {
+														"mode": "enable",
+														"effect": "\"Seleção\""
+													}
+												},
+												{
+													"id": "set-animation-frame",
+													"objectClass": "Lacuna",
+													"sid": 102339491656282,
+													"parameters": {
+														"frame-number": "1"
+													}
+												},
+												{
+													"id": "signal",
+													"objectClass": "System",
+													"sid": 661810143041576,
+													"parameters": {
+														"tag": "\"selecionarLacuna\""
+													}
+												}
+											],
+											"sid": 277240960792534
 										}
 									]
 								}
@@ -5083,6 +5087,24 @@
 								"variable": "questionChosen",
 								"value": "celula.idQuestao"
 							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 785122052927806,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 120800857739626,
+							"parameters": {
+								"variable": "respostaLacuna",
+								"value": "\"\""
+							}
 						}
 					],
 					"sid": 427420435273448
@@ -5132,6 +5154,23 @@
 								"variable": "isMainSelect",
 								"value": "false"
 							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 869488538718117,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 100610973783108,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
+							}
 						}
 					],
 					"sid": 416331813847176
@@ -5180,6 +5219,23 @@
 							"parameters": {
 								"variable": "isMainSelect",
 								"value": "false"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 725563446138187,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 204665371042758,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
 							}
 						}
 					],
@@ -5238,6 +5294,23 @@
 								"variable": "isMainSelect",
 								"value": "true"
 							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 429395043095696,
+							"parameters": {
+								"variable": "celSelecY",
+								"value": "celula.Y"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 638111864821524,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
+							}
 						}
 					],
 					"sid": 482553335345510
@@ -5294,6 +5367,14 @@
 							"parameters": {
 								"variable": "isMainSelect",
 								"value": "true"
+							}
+						},
+						{
+							"id": "signal",
+							"objectClass": "System",
+							"sid": 452280561570599,
+							"parameters": {
+								"tag": "\"chamarLacuna\""
 							}
 						}
 					],
@@ -5518,6 +5599,116 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"functionName": "scrol",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 705837731592825,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 957058682540731,
+									"parameters": {
+										"variable": "heigthInicial",
+										"value": "252"
+									}
+								}
+							],
+							"sid": 870443139423167
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 468067620807131,
+									"parameters": {
+										"object": "questaoContainer"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 100575927089238,
+									"parameters": {
+										"variable": "heigthFinal",
+										"value": "questaoContainer.Y + questaoContainer.Height"
+									}
+								}
+							],
+							"sid": 846219358388417
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 325545909296502,
+									"parameters": {
+										"variable": "heigthTotal",
+										"value": "heigthFinal - heigthInicial"
+									}
+								}
+							],
+							"sid": 925289048019853
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-height",
+									"objectClass": "Scroll",
+									"sid": 688513973882713,
+									"parameters": {
+										"height": "((scrolArea.Height/heigthTotal)*(scrolArea.Height))/2"
+									}
+								}
+							],
+							"sid": 813138201278365
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 771670815858589,
+									"parameters": {
+										"first-value": "heigthFinal",
+										"comparison": 3,
+										"second-value": "scrolArea.Height"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "Scroll",
+									"sid": 430762533848745
+								}
+							],
+							"sid": 106713383773237
+						}
+					]
+				},
 				{
 					"eventType": "block",
 					"conditions": [

@@ -2101,7 +2101,7 @@
 								{
 									"id": "on-object-clicked",
 									"objectClass": "Mouse",
-									"sid": 334319603572775,
+									"sid": 143636207576874,
 									"parameters": {
 										"mouse-button": "left",
 										"click-type": "clicked",
@@ -2110,7 +2110,7 @@
 								}
 							],
 							"actions": [],
-							"sid": 882594547785720,
+							"sid": 302262232867691,
 							"children": [
 								{
 									"eventType": "variable",
@@ -2120,7 +2120,7 @@
 									"comment": "",
 									"isStatic": false,
 									"isConstant": false,
-									"sid": 348339445074771
+									"sid": 281191326841521
 								},
 								{
 									"eventType": "comment",
@@ -2138,7 +2138,7 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 381295384414563,
+											"sid": 350880967361278,
 											"parameters": {
 												"object": "textQuestao",
 												"expression": "textQuestao.idQuestao = botaoImagem.idQuestao & textQuestao.isCorrect = 0"
@@ -2147,7 +2147,7 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 721436399218029,
+											"sid": 923784830147996,
 											"parameters": {
 												"object": "Lacuna",
 												"expression": "Lacuna.idQuestao = botaoImagem.idQuestao"
@@ -2158,7 +2158,7 @@
 										{
 											"id": "set-eventvar-value",
 											"objectClass": "System",
-											"sid": 238395183584037,
+											"sid": 728739874450264,
 											"parameters": {
 												"variable": "auxQuestao",
 												"value": "textQuestao.Text"
@@ -2167,7 +2167,7 @@
 										{
 											"id": "set-visible",
 											"objectClass": "fundoDesfoque",
-											"sid": 998453253820297,
+											"sid": 447940877550104,
 											"parameters": {
 												"visibility": "visible"
 											}
@@ -2175,7 +2175,7 @@
 										{
 											"id": "set-position",
 											"objectClass": "fundoDesfoque",
-											"sid": 803992608055621,
+											"sid": 450107326149843,
 											"parameters": {
 												"x": "0",
 												"y": "0"
@@ -2184,7 +2184,7 @@
 										{
 											"id": "set-effect-enabled",
 											"objectClass": "TelaSprites",
-											"sid": 434770502120529,
+											"sid": 203893970440988,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"DesfoqueVertical\""
@@ -2193,7 +2193,7 @@
 										{
 											"id": "set-effect-enabled",
 											"objectClass": "TelaSprites",
-											"sid": 922812822765261,
+											"sid": 329544402193452,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"DesfoqueHorizontal\""
@@ -2202,7 +2202,7 @@
 										{
 											"id": "set-effect-enabled",
 											"objectClass": "TelaTexto",
-											"sid": 188265075805297,
+											"sid": 897952291012497,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"DesfoqueVertical\""
@@ -2211,7 +2211,7 @@
 										{
 											"id": "set-effect-enabled",
 											"objectClass": "TelaTexto",
-											"sid": 931472763008243,
+											"sid": 315991588972157,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"DesfoqueHorizontal\""
@@ -2220,7 +2220,7 @@
 										{
 											"id": "load-image-from-url",
 											"objectClass": "questaoImagem",
-											"sid": 388506129509414,
+											"sid": 460373511841455,
 											"parameters": {
 												"uri": "\"https://pense-bem.s3.us-east-1.amazonaws.com\" & textQuestao.imagem",
 												"size": "keep-current-size",
@@ -2230,7 +2230,7 @@
 										{
 											"id": "set-position",
 											"objectClass": "questaoImagem",
-											"sid": 804461485689743,
+											"sid": 913904591865765,
 											"parameters": {
 												"x": "LayoutWidth/2",
 												"y": "LayoutHeight/2 - textQuestao.TextHeight/2 - 15"
@@ -2239,7 +2239,7 @@
 										{
 											"id": "set-visible",
 											"objectClass": "questaoImagem",
-											"sid": 889562312934840,
+											"sid": 546944378743860,
 											"parameters": {
 												"visibility": "visible"
 											}
@@ -2247,33 +2247,51 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 971977261041554,
+											"sid": 671698054658263,
 											"parameters": {
 												"object-to-create": "questaoContainer",
 												"layer": "3",
-												"x": "LayoutWidth/2 - questaoContainer.Width/2 + 38",
+												"x": "LayoutWidth/2 - questaoContainer.Width/2 + 37",
 												"y": "questaoImagem.BBoxBottom + 20",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "questaoContainer",
+											"sid": 116064678888034,
+											"parameters": {
+												"instance-variable": "idQuestao",
+												"value": "\"temp\""
+											}
+										},
+										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 897560292018376,
+											"sid": 582095284734629,
 											"parameters": {
 												"object-to-create": "textQuestao",
 												"layer": "3",
 												"x": "questaoContainer.X + 30",
-												"y": "questaoContainer.Y + 10",
+												"y": "questaoContainer.Y + 15",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "textQuestao",
+											"sid": 731984483052314,
+											"parameters": {
+												"instance-variable": "idQuestao",
+												"value": "\"temp\""
+											}
+										},
+										{
 											"id": "set-eventvar-value",
 											"objectClass": "System",
-											"sid": 276071215463941,
+											"sid": 161151738209858,
 											"parameters": {
 												"variable": "qtdeLacunas",
 												"value": "Lacuna.PickedCount"
@@ -2282,7 +2300,7 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 473551855056840,
+											"sid": 818807022337633,
 											"parameters": {
 												"object-to-create": "dicaSair",
 												"layer": "3",
@@ -2293,7 +2311,7 @@
 											}
 										}
 									],
-									"sid": 273482839965820,
+									"sid": 410847979579910,
 									"children": [
 										{
 											"eventType": "comment",
@@ -2311,7 +2329,7 @@
 												{
 													"id": "pick-last-created",
 													"objectClass": "System",
-													"sid": 364113585810799,
+													"sid": 891570722705027,
 													"parameters": {
 														"object": "questaoContainer"
 													}
@@ -2319,7 +2337,7 @@
 												{
 													"id": "pick-last-created",
 													"objectClass": "System",
-													"sid": 108375514166643,
+													"sid": 415090847202696,
 													"parameters": {
 														"object": "textQuestao"
 													}
@@ -2329,7 +2347,7 @@
 												{
 													"id": "set-text",
 													"objectClass": "textQuestao",
-													"sid": 525322742315976,
+													"sid": 307956170650056,
 													"parameters": {
 														"text": "auxQuestao"
 													}
@@ -2337,16 +2355,16 @@
 												{
 													"id": "set-size",
 													"objectClass": "textQuestao",
-													"sid": 211911071788475,
+													"sid": 277937506161933,
 													"parameters": {
-														"width": "questaoImagem.Width - 70",
+														"width": "questaoImagem.Width - 50",
 														"height": "textQuestao.TextHeight"
 													}
 												},
 												{
 													"id": "set-visible",
 													"objectClass": "textQuestao",
-													"sid": 598087257931684,
+													"sid": 805021738536644,
 													"parameters": {
 														"visibility": "visible"
 													}
@@ -2354,7 +2372,7 @@
 												{
 													"id": "set-font-size",
 													"objectClass": "textQuestao",
-													"sid": 886877665138984,
+													"sid": 883200351750564,
 													"parameters": {
 														"size-pt": "16"
 													}
@@ -2362,7 +2380,7 @@
 												{
 													"id": "set-z-elevation",
 													"objectClass": "textQuestao",
-													"sid": 993786584198898,
+													"sid": 738699257492831,
 													"parameters": {
 														"z": "5"
 													}
@@ -2370,22 +2388,22 @@
 												{
 													"id": "set-size",
 													"objectClass": "questaoContainer",
-													"sid": 503495158441087,
+													"sid": 788426379963512,
 													"parameters": {
-														"width": "questaoImagem.Width ",
-														"height": "textQuestao.TextHeight + 25"
+														"width": "questaoImagem.Width - 5",
+														"height": "textQuestao.TextHeight + 20"
 													}
 												},
 												{
 													"id": "set-opacity",
 													"objectClass": "questaoContainer",
-													"sid": 717586324830895,
+													"sid": 903875861721270,
 													"parameters": {
 														"opacity": "100"
 													}
 												}
 											],
-											"sid": 314873636556677,
+											"sid": 501593665419145,
 											"children": [
 												{
 													"eventType": "comment",
@@ -2403,7 +2421,7 @@
 														{
 															"id": "for",
 															"objectClass": "System",
-															"sid": 301068889602901,
+															"sid": 703905925336670,
 															"parameters": {
 																"name": "\"\"",
 																"start-index": "0",
@@ -2415,7 +2433,7 @@
 														{
 															"id": "create-object",
 															"objectClass": "System",
-															"sid": 378512686898288,
+															"sid": 534801542009562,
 															"parameters": {
 																"object-to-create": "Lacuna",
 																"layer": "3",
@@ -2428,7 +2446,7 @@
 														{
 															"id": "set-width",
 															"objectClass": "Lacuna",
-															"sid": 954534900647398,
+															"sid": 641839813765517,
 															"parameters": {
 																"width": "textQuestao.TagWidth(\"lacuna\", loopindex) + 58"
 															}
@@ -2436,7 +2454,7 @@
 														{
 															"id": "set-animation-frame",
 															"objectClass": "Lacuna",
-															"sid": 780466383006234,
+															"sid": 627815893832252,
 															"parameters": {
 																"frame-number": "1"
 															}
@@ -2444,7 +2462,7 @@
 														{
 															"id": "set-z-elevation",
 															"objectClass": "Lacuna",
-															"sid": 210069971124022,
+															"sid": 631893548190122,
 															"parameters": {
 																"z": "5"
 															}
@@ -2453,7 +2471,7 @@
 															"type": "comment",
 															"text": "O ID \"TEMP\" SERVE PARA IDENTIFICAR AS LACUNAS ESTÉTICAS QUE DEVEM SER REMOVIDAS NA SAÍDA DO POP-UP",
 															"text-color": [
-																1,
+																0,
 																1,
 																1,
 																1
@@ -2462,14 +2480,14 @@
 														{
 															"id": "set-instvar-value",
 															"objectClass": "Lacuna",
-															"sid": 765603812128013,
+															"sid": 789634470331497,
 															"parameters": {
 																"instance-variable": "idQuestao",
 																"value": "\"temp\""
 															}
 														}
 													],
-													"sid": 532583995000371
+													"sid": 858197617987649
 												}
 											]
 										}
@@ -5660,10 +5678,10 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 325545909296502,
+									"sid": 358981066334919,
 									"parameters": {
 										"variable": "heigthTotal",
-										"value": "heigthFinal - heigthInicial"
+										"value": "heigthFinal - heigthInicial + scrolArea.Height"
 									}
 								}
 							],
@@ -5676,9 +5694,9 @@
 								{
 									"id": "set-height",
 									"objectClass": "Scroll",
-									"sid": 688513973882713,
+									"sid": 147901059249228,
 									"parameters": {
-										"height": "((scrolArea.Height/heigthTotal)*(scrolArea.Height))/2"
+										"height": "((scrolArea.Height/heigthTotal)*scrolArea.Height/(ceil(heigthTotal/scrolArea.Height)))"
 									}
 								}
 							],
@@ -5874,27 +5892,30 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-all",
+							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 930452716877396,
+							"sid": 274433439384136,
 							"parameters": {
-								"object": "questaoContainer"
+								"object": "questaoContainer",
+								"expression": "questaoContainer.idQuestao <> \"temp\""
 							}
 						},
 						{
-							"id": "pick-all",
+							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 549567056395342,
+							"sid": 971324248067307,
 							"parameters": {
-								"object": "Lacuna"
+								"object": "Lacuna",
+								"expression": "Lacuna.idQuestao <> \"temp\""
 							}
 						},
 						{
-							"id": "pick-all",
+							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 181172824667272,
+							"sid": 697098253204095,
 							"parameters": {
-								"object": "textQuestao"
+								"object": "textQuestao",
+								"expression": "textQuestao.idQuestao <> \"temp\""
 							}
 						},
 						{

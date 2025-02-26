@@ -31,6 +31,10 @@
 		{
 			"effectId": "setcolor",
 			"name": "Seleção"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "Acerto"
 		}
 	],
 	"animations": {

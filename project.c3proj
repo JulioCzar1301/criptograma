@@ -126,7 +126,14 @@
 			"Teclado",
 			"Indice",
 			"scrolArea",
-			"indiceMalha"
+			"indiceMalha",
+			"telaFinal",
+			"jogPontuacao",
+			"jogMoedas",
+			"fimReiniciar",
+			"fimProximo",
+			"fimVoltar",
+			"jogMelhorPontuacao"
 		],
 		"subfolders": [
 			{

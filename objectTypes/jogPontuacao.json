@@ -1,0 +1,16 @@
+{
+	"name": "jogPontuacao",
+	"plugin-id": "Text",
+	"sid": 464105279055195,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 607482945744054
+		}
+	],
+	"effectTypes": []
+}

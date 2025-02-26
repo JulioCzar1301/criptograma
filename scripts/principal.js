@@ -457,6 +457,9 @@ async function OnBeforeProjectStart(runtime)
 
 }
 
+//grupos validos
+const goal = [];
+
 function Tick(runtime) {
     // Obtém todas as instâncias de celula e letra
     const celulas = runtime.objects.celula.getAllInstances();
@@ -498,7 +501,10 @@ function Tick(runtime) {
     // Verifica cada grupo
     for (const [idQuestao, grupo] of grupos) {
         let grupoValido = true;
-
+        
+		if(goal.includes(idQuestao)){
+			continue;
+		}
         // Verifica se todas as células do grupo cumprem a condição
         for (let i = 0; i < grupo.celulas.length; i++) {
             const celula = grupo.celulas[i];
@@ -512,14 +518,15 @@ function Tick(runtime) {
 
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
+		
 //             console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
 //             return idQuestao;
              for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
 				celula.instVars.block = true
-				
         	}
-
+			runtime.callFunction("marcarAcerto")
+			goal.push(idQuestao)
         }
     }
 

@@ -11,15 +11,19 @@
 			"desc": "",
 			"show": true,
 			"sid": 520489656053640
-		},
-		{
-			"name": "posInitial",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 648545820198134
 		}
 	],
-	"behaviorTypes": [],
-	"effectTypes": []
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pin",
+			"name": "Fixar",
+			"sid": 346381340838974
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "Seleção"
+		}
+	]
 }

@@ -1,0 +1,16 @@
+{
+	"name": "jogMoedas",
+	"plugin-id": "Text",
+	"sid": 929379151831702,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 318755754506477
+		}
+	],
+	"effectTypes": []
+}

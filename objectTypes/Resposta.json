@@ -4,36 +4,7 @@
 	"sid": 364767295226255,
 	"isGlobal": true,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [
-		{
-			"name": "idQuestao",
-			"type": "string",
-			"desc": "",
-			"show": true,
-			"sid": 834568688994714
-		},
-		{
-			"name": "isCorrect",
-			"type": "boolean",
-			"desc": "",
-			"show": true,
-			"sid": 908338804661027
-		},
-		{
-			"name": "dificuldade",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 236455456172217
-		},
-		{
-			"name": "categoria",
-			"type": "string",
-			"desc": "",
-			"show": true,
-			"sid": 669304458298988
-		}
-	],
+	"instanceVariables": [],
 	"behaviorTypes": [
 		{
 			"behaviorId": "Pin",
@@ -41,5 +12,10 @@
 			"sid": 498859394270362
 		}
 	],
-	"effectTypes": []
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "Seleção"
+		}
+	]
 }

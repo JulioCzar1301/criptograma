@@ -1,0 +1,16 @@
+{
+	"name": "jogMelhorPontuacao",
+	"plugin-id": "Text",
+	"sid": 735495413993603,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 246886036138052
+		}
+	],
+	"effectTypes": []
+}

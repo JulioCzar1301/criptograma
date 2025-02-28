@@ -328,8 +328,8 @@
 					"world": {
 						"x": -208,
 						"y": 68,
-						"width": 54,
-						"height": 54,
+						"width": 52.07142857142857,
+						"height": 53.035714285714285,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -1835,6 +1835,105 @@
 						"y": -201.42302048341452,
 						"width": 200,
 						"height": 28,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "IndicePalavra",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 40,
+					"sid": 943710477477524,
+					"tags": "",
+					"instanceVariables": {
+						"idQuestao": 0,
+						"celula": 0
+					},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 943710477477524,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 502,
+						"y": -529,
+						"width": 53.99999999999999,
+						"height": 54,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "textIndicePalavra",
+					"properties": {
+						"text": "Texto",
+						"enable-bbcode": true,
+						"font": "Bahnschrift",
+						"size": 16,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top-left",
+						"read-aloud": false
+					},
+					"uid": 41,
+					"sid": 530635280281343,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 530635280281343,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 783,
+						"y": -529,
+						"width": 54,
+						"height": 54,
 						"originX": 0,
 						"originY": 0,
 						"color": [

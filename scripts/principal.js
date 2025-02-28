@@ -180,7 +180,7 @@ async function OnBeforeProjectStart(runtime)
 									max = (word.length - (Math.abs(-k) + 1));
 								}
 
-								if (max + min < 16) {
+								if (max + min < 15) {
 									console.log("Próxima palavra escolhida: ", word);
 									console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
 									aux.push({ string: word, posX: -k, posY: j , index:j});
@@ -226,7 +226,7 @@ async function OnBeforeProjectStart(runtime)
 									max = (otherWord.length - (Math.abs(-k) + 1));
 								}
 
-								if ((max + min < 16)) {
+								if ((max + min < 15)) {
 									console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
 									boardComplete.push({ string: otherWord, posX: -k, posY: index ,index:index});
 									indexGoal = indexGoal.filter(item => item != index);
@@ -285,11 +285,11 @@ async function OnBeforeProjectStart(runtime)
 			}
 
 			// Encontrar a menor e a maior coordenada X, considerando os tamanhos
-			const minX = coordinates.reduce((min, curr) => Math.min(min, curr[1]), coordinates[0][1]);
+			const minX = coordinates.reduce((min, curr) => Math.min(min, curr[1]), coordinates[0][1]) - 2;
 			const maxX = coordinates.reduce((max, curr) => Math.max(max, curr[1] + curr[0] - 1), coordinates[0][1] + coordinates[0][0] - 1);
 
 			// Quantidade de células no eixo x
-			const gridWidth = maxX - minX + 1;
+			const gridWidth = maxX - minX + 2;
 
 			console.log("Coordenadas:", coordinates);
 			console.log("Quantidade de células para a esquerda:", minX);
@@ -518,14 +518,16 @@ function Tick(runtime) {
 
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
-		
+		     let question;
 //             console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
 //             return idQuestao;
              for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
 				celula.instVars.block = true
+				question = celula.instVars.idQuestao
         	}
 			runtime.callFunction("marcarAcerto")
+			runtime.callFunction("goal", idQuestao)
 			goal.push(idQuestao)
         }
     }

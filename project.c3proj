@@ -133,7 +133,9 @@
 			"fimReiniciar",
 			"fimProximo",
 			"fimVoltar",
-			"jogMelhorPontuacao"
+			"jogMelhorPontuacao",
+			"IndicePalavra",
+			"textIndicePalavra"
 		],
 		"subfolders": [
 			{

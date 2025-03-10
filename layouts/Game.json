@@ -328,8 +328,8 @@
 					"world": {
 						"x": -208,
 						"y": 68,
-						"width": 52.07142857142857,
-						"height": 53.035714285714285,
+						"width": 52,
+						"height": 52,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -373,9 +373,9 @@
 							"isEnabled": true,
 							"parameters": {
 								"color": [
-									0.11764705882352941,
-									0.1411764705882353,
-									0.4627450980392157,
+									0.3137254901960784,
+									0.3137254901960784,
+									0.3137254901960784,
 									1
 								]
 							}
@@ -393,8 +393,8 @@
 					"world": {
 						"x": -168,
 						"y": 83,
-						"width": 17,
-						"height": 17,
+						"width": 15,
+						"height": 15,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -418,9 +418,9 @@
 						"bold": true,
 						"italic": false,
 						"color": [
-							0.11764705882352941,
-							0.1411764705882353,
-							0.4627450980392157,
+							0.2823529411764706,
+							0.2823529411764706,
+							0.2823529411764706,
 							1
 						],
 						"horizontal-alignment": "center",
@@ -451,6 +451,17 @@
 							"isEnabled": false,
 							"parameters": {
 								"intensity": 1
+							}
+						},
+						"Main": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
 							}
 						}
 					},
@@ -1864,6 +1875,20 @@
 						"celula": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 943710477477524,
 						"expanded": true,
@@ -1895,15 +1920,15 @@
 					"properties": {
 						"text": "Texto",
 						"enable-bbcode": true,
-						"font": "Bahnschrift",
+						"font": "OpenSans-SemiBold",
 						"size": 16,
 						"line-height": 0,
 						"bold": false,
 						"italic": false,
 						"color": [
-							0,
-							0,
-							0,
+							0.2823529411764706,
+							0.2823529411764706,
+							0.2823529411764706,
 							1
 						],
 						"horizontal-alignment": "center",
@@ -1920,6 +1945,20 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 530635280281343,
 						"expanded": true,

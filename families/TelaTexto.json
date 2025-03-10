@@ -20,6 +20,7 @@
 		"moedaTexto",
 		"secNome",
 		"textQuestao",
-		"Indice"
+		"Indice",
+		"textIndicePalavra"
 	]
 }

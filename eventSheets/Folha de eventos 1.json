@@ -35,7 +35,7 @@
 			"eventType": "variable",
 			"name": "minY",
 			"type": "number",
-			"initialValue": "200",
+			"initialValue": "250",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -190,6 +190,16 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 136584064925594
+		},
+		{
+			"eventType": "variable",
+			"name": "celulaHeight",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 813454761756785
 		},
 		{
 			"eventType": "block",
@@ -375,12 +385,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 932429130532021,
+									"sid": 578690806109268,
 									"parameters": {
 										"object-to-create": "celula",
 										"layer": "1",
 										"x": "x*celula.Height + loopindex * celula.Height + minX",
-										"y": "y*celula.Height + minY - max(0, (len(first_word) - 6)) * celula.Height\r\n",
+										"y": "len(first_word) - 1 < 6 ? (y*celula.Height + minY) : (y*celula.Height + minY - (len(first_word) - 1) * celula.Height/6)\r\n",
 										"create-hierarchy": false,
 										"template-name": "\"\""
 									}
@@ -401,6 +411,15 @@
 									"parameters": {
 										"instance-variable": "idQuestao",
 										"value": "index"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 996839231613919,
+									"parameters": {
+										"variable": "celulaHeight",
+										"value": "celula.Height"
 									}
 								}
 							],
@@ -510,12 +529,12 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 306122671308551,
+											"sid": 676611537961972,
 											"parameters": {
 												"object-to-create": "Letra",
 												"layer": "1",
 												"x": "celula.X ",
-												"y": "celula.Y \r\n",
+												"y": "celula.Y - 3\r\n",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
@@ -611,11 +630,11 @@
 												{
 													"id": "create-object",
 													"objectClass": "System",
-													"sid": 676206046925699,
+													"sid": 820547648570352,
 													"parameters": {
 														"object-to-create": "IndicePalavra",
 														"layer": "1",
-														"x": "celula.X",
+														"x": "celula.X - 2.5",
 														"y": "celula.Y - celula.Height -5",
 														"create-hierarchy": false,
 														"template-name": "\"\""
@@ -3891,22 +3910,22 @@
 									"eventType": "block",
 									"conditions": [
 										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 355572344055237,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.Y = auxY + (celulaHeight  * (Lacuna.indice - 1))"
+											}
+										},
+										{
 											"id": "is-boolean-instance-variable-set",
 											"objectClass": "celula",
-											"sid": 544656165765282,
+											"sid": 124747556234767,
 											"parameters": {
 												"instance-variable": "block"
 											},
 											"isInverted": true
-										},
-										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 261526548789483,
-											"parameters": {
-												"object": "celula",
-												"expression": "celula.Y = auxY + (celula.Height * (Lacuna.indice - 1))"
-											}
 										}
 									],
 									"actions": [
@@ -4030,15 +4049,6 @@
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "is-boolean-instance-variable-set",
-											"objectClass": "celula",
-											"sid": 290046091776632,
-											"parameters": {
-												"instance-variable": "block"
-											},
-											"isInverted": true
-										},
-										{
 											"id": "pick-by-highest-lowest-value",
 											"objectClass": "System",
 											"sid": 500902035527609,
@@ -4047,6 +4057,15 @@
 												"which": "lowest",
 												"expression": "celula.Y"
 											}
+										},
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "celula",
+											"sid": 350333378907166,
+											"parameters": {
+												"instance-variable": "block"
+											},
+											"isInverted": true
 										}
 									],
 									"actions": [
@@ -4171,10 +4190,10 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 382966396597786,
+											"sid": 946321824865864,
 											"parameters": {
 												"object": "celula",
-												"expression": "celula.Y = auxY + (celula.Height * (Lacuna.indice - 1))"
+												"expression": "celula.Y = auxY + (celulaHeight  * (Lacuna.indice - 1))"
 											}
 										}
 									],
@@ -4708,6 +4727,10 @@
 					]
 				},
 				{
+					"eventType": "comment",
+					"text": "Caso a célula estiver bloqueada, e não pertencer a palavra principal "
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -5067,10 +5090,6 @@
 							]
 						}
 					]
-				},
-				{
-					"eventType": "comment",
-					"text": "Caso a célula estiver bloqueada, e não pertencer a palavra principal "
 				},
 				{
 					"eventType": "block",
@@ -6075,7 +6094,35 @@
 									}
 								}
 							],
-							"sid": 449692975906053
+							"sid": 449692975906053,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 118200918650866,
+											"parameters": {
+												"object": "Letra",
+												"expression": "Letra.IID = celula.IID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "Letra",
+											"sid": 973270398677808,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Main\""
+											}
+										}
+									],
+									"sid": 900801247103920
+								}
+							]
 						}
 					]
 				},
@@ -6191,22 +6238,6 @@
 					"children": [
 						{
 							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "wait",
-									"objectClass": "System",
-									"sid": 883368121915187,
-									"parameters": {
-										"seconds": "10.0",
-										"use-timescale": true
-									}
-								}
-							],
-							"sid": 412577294836799
-						},
-						{
-							"eventType": "block",
 							"conditions": [
 								{
 									"id": "for-each",
@@ -6251,6 +6282,22 @@
 									"sid": 857331542140479
 								}
 							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 293636577518976,
+									"parameters": {
+										"seconds": "10.0",
+										"use-timescale": true
+									}
+								}
+							],
+							"sid": 868175672182417
 						}
 					]
 				}
@@ -7162,10 +7209,10 @@
 												{
 													"id": "pick-by-evaluate",
 													"objectClass": "System",
-													"sid": 647155478122891,
+													"sid": 326346458273558,
 													"parameters": {
 														"object": "celula",
-														"expression": "celula.Y = auxY + (celula.Height * (Lacuna.indice - 1))"
+														"expression": "celula.Y = auxY + (celulaHeight * (Lacuna.indice - 1))"
 													}
 												}
 											],
@@ -7484,6 +7531,14 @@
 									"sid": 686813067289172,
 									"parameters": {
 										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogPontuacao",
+									"sid": 878628719357967,
+									"parameters": {
+										"text": "acertos"
 									}
 								},
 								{

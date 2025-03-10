@@ -296,7 +296,7 @@ async function OnBeforeProjectStart(runtime)
 			console.log("Quantidade de células para a direita:", maxX);
 			console.log("Células totais:", gridWidth);
 
-			runtime.globalVars.minX = 643 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
+			runtime.globalVars.minX = 660 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
 			boardComplete.sort((a, b) => a.index - b.index);
 

@@ -33,6 +33,7 @@
 		"tempoTotal",
 		"tempoIcon",
 		"scrolArea",
-		"indiceMalha"
+		"indiceMalha",
+		"IndicePalavra"
 	]
 }

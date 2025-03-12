@@ -173,6 +173,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "save",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 979822916370034
+		},
+		{
+			"eventType": "variable",
 			"name": "acertos",
 			"type": "number",
 			"initialValue": "0",
@@ -360,6 +370,20 @@
 							"initialValue": "0",
 							"comment": "",
 							"sid": 320132785903582
+						},
+						{
+							"name": "complete",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 784192444697069
+						},
+						{
+							"name": "mainComplete",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 480655814987034
 						}
 					],
 					"eventType": "function-block",
@@ -420,6 +444,15 @@
 									"parameters": {
 										"variable": "celulaHeight",
 										"value": "celula.Height"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "celula",
+									"sid": 401173831891452,
+									"parameters": {
+										"instance-variable": "idLacuna",
+										"value": "index + 1"
 									}
 								}
 							],
@@ -551,7 +584,7 @@
 										{
 											"id": "set-text",
 											"objectClass": "Letra",
-											"sid": 749677223851892,
+											"sid": 752478495929031,
 											"parameters": {
 												"text": "\"\""
 											}
@@ -575,7 +608,67 @@
 											}
 										}
 									],
-									"sid": 544223091188146
+									"sid": 544223091188146,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 842173783043986,
+													"parameters": {
+														"variable": "complete"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "Letra",
+													"sid": 138955242162816,
+													"parameters": {
+														"text": "uppercase(mid(string, loopindex , 1))"
+													}
+												}
+											],
+											"sid": 804417801903131
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 338295465212847,
+													"parameters": {
+														"first-value": "abs(x - 5)",
+														"comparison": 0,
+														"second-value": "loopindex"
+													}
+												},
+												{
+													"id": "compare-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 972609020142959,
+													"parameters": {
+														"variable": "mainComplete"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "Letra",
+													"sid": 839054117443046,
+													"parameters": {
+														"text": "uppercase(mid(string, loopindex , 1))"
+													}
+												}
+											],
+											"sid": 284703873833664
+										}
+									]
 								},
 								{
 									"eventType": "block",
@@ -6656,7 +6749,12 @@
 					"functionParameters": [],
 					"eventType": "function-block",
 					"conditions": [],
-					"actions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "console.log(\"cheguei nessa poha \")"
+						}
+					],
 					"sid": 609050556203862,
 					"children": [
 						{
@@ -6711,6 +6809,10 @@
 										"variable": "qtdeRespostas",
 										"value": "Lacuna.PickedCount"
 									}
+								},
+								{
+									"type": "script",
+									"script": "console.log(\"qtde de respostas : \",localVars.qtdeRespostas)"
 								}
 							],
 							"sid": 543404575268774
@@ -6871,7 +6973,12 @@
 									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "console.log(\"qtde de respostas caso não tenha : \",localVars.qtdeRespostas)"
+								}
+							],
 							"sid": 718867865737449,
 							"children": [
 								{
@@ -7580,6 +7687,10 @@
 									"parameters": {
 										"frame-number": "0"
 									}
+								},
+								{
+									"callFunction": "resetSave",
+									"sid": 754827416997808
 								}
 							],
 							"sid": 822650538684218
@@ -7588,6 +7699,52 @@
 				}
 			],
 			"sid": 264700288934629
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "manage save",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "save",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let jogador = window.Namespace.message.split(',')[0];\nconsole.log(window.Namespace.session)\nwindow.Namespace.saveJSON = {\n\t\"user\": jogador,\n\t\"timestamp\": new Date().toISOString(),\n\t\"state\": 4,\n\t\"session\": window.Namespace.session\n}\n\nif (window.Namespace.message.split(',')[1] == \"section\") {\n\twindow.Namespace.saveJSON.section = window.Namespace.message.split(',')[2];\n} else {\n\twindow.Namespace.saveJSON.chapter = window.Namespace.message.split(',')[2];\n}\n\nlet saveString = JSON.stringify(window.Namespace.saveJSON);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {\n\t\t\tmethod: \"POST\",\n\t\t\tbody: saveString\n\t\t})\n\t\t.then(response => response.json())\n\t\t.then(data => console.log('Success:', data))\n\t\t.catch(error => console.error('Error:', error));"
+						}
+					],
+					"sid": 460193412965834
+				},
+				{
+					"functionName": "resetSave",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let jogador = window.Namespace.message.split(',')[0];\n\nwindow.Namespace.saveJSON = {\n\t\"user\": jogador,\n\t\"timestamp\": new Date().toISOString(),\n\t\"state\": 0,\n\t\"session\": {}\n}\n\nlet saveString = JSON.stringify(window.Namespace.saveJSON);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {\n\t\t\tmethod: \"POST\",\n\t\t\tbody: saveString\n\t\t})\n\t\t.then(response => response.json())\n\t\t.then(data => console.log('Success:', data))\n\t\t.catch(error => console.error('Error:', error));"
+						}
+					],
+					"sid": 435565898189414
+				}
+			],
+			"sid": 393212608266326
 		}
 	],
 	"sid": 439734330431058

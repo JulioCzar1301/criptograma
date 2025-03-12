@@ -1,6 +1,10 @@
 
 // Import any other script files here, e.g.:
 // import * as myModule from "./mymodule.js";
+let questionSave = []
+let boardSave = [];
+let saveExample = ""
+
 
 runOnStartup(async runtime =>
 {
@@ -19,17 +23,45 @@ async function OnBeforeProjectStart(runtime)
 	//let chapterID = isSecOrChap ? "" : parts[2];
 	//let sectionID = isSecOrChap ? parts[2] : "";
 	//runtime.globalVars.idJogador = parts[0];
-	
+	console.log("oi 2")
+	saveExample = window.Namespace.session.rawData;
 	let isSecOrChap = "chapter";
 	let sectionID = "c3c980a3-e832-4fbd-b964-42faa9a4145c";
 	let chapterID = "25ba2c14-a291-4f90-a444-414252245737";
+	
+	window.Namespace.sectionOrChapter = chapterID;
+// 	runtime.callFunction("resetSave")
 	const questionsChosen = []
+	let boardComplete = []
+	let questionsSelected = [];
+	let valid = false;
+	//palavra central completa
+	let mainComplete;
+	const x = 5;
+	const y = 3
+	let symbols;
+	let letters;
+	
 	runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
 	
 	//window.Namespace.idSecao = sectionID;
 	//window.Namespace.isSecOrChap = isSecOrChap;
 	//window.Namespace.idChapter = chapterID;
-	
+	//caso do save
+	if( saveExample != ""){
+		const save = JSON.parse(saveExample)
+		console.log(save)
+		valid = true
+		boardComplete = save.words.words
+		questionsSelected = save.questions
+		symbols = save.words.symbols
+		boardSave = save.words
+		questionSave = save.questions
+		runtime.globalVars.nomeSecao = save.nameSection
+		mainComplete = save.words.wordMainComplete;
+		
+	}
+	else{
 		// BLOCO 1: NOME DA SEÇÃO/CAPÍTULO
 		try {
 			var xhr = new XMLHttpRequest();
@@ -72,204 +104,211 @@ async function OnBeforeProjectStart(runtime)
 			console.error('Failed to fetch data:', error);
 		}
 		
-	//runtime.globalVars.complete = true;
+		//runtime.globalVars.complete = true;
 	
-	console.log(data)
-	
-	//Escolhe palavras para montar o criptograma
-	
-	let isOkGame = false;
-	const attemptWord = [];
-	
-	let attempt = 0;
-	const maxAttempt = 1000;
-	const x = 5;
-	const y = 3
-    let valid = false;
-	let symbols;
-	let boardComplete = []
-	
-	let letters;
-	let questionsSelected = [];
-	let attemptGame = 0;
-	while(!isOkGame && attemptGame < 1000000){
-	    attemptGame++;
-	    boardComplete = []
-		questionsSelected = []
-		let min = -10000;
-		let max = -10000;
-		const wordsChoiceComplete = []
-		const wordsMainChoiceComplete = [];
+		console.log(data)
+
+		//Escolhe palavras para montar o criptograma
+
+		let isOkGame = false;
+		const attemptWord = [];
+
+
+		let attempt = 0;
+		const maxAttempt = 1000;
 		
-		let multipleAnswer = []
-		const firstQuestion = escolherPalavraAleatoria(data, attemptWord);
-		let firstWord ;
-		console.log(firstQuestion.resposta);
 		
-// 		questionsSelected.push(firstQuestion);
 		
-		if(firstQuestion.resposta.length == 1){
-			if(!attemptWord.includes(firstQuestion.resposta)){
-				attemptWord.push(firstQuestion.resposta);
-				firstWord = normalizeWord(firstQuestion.resposta[0]);
-				console.log("primeira palavra escolhida: ", firstWord)
-			}
-		}
-		else{
-			for(const word of firstQuestion.resposta){
-				if(!attemptWord.includes(word)){
-					attemptWord.push(word);
-					firstWord = normalizeWord(word)
-					multipleAnswer = firstQuestion.resposta.filter(item => normalizeWord(item) != firstWord)
-					console.log(multipleAnswer)
+		
+		let attemptGame = 0;
+
+
+		while(!isOkGame && attemptGame < 1000000){
+			attemptGame++;
+			boardComplete = []
+			questionsSelected = []
+			let min = -10000;
+			let max = -10000;
+			const wordsChoiceComplete = []
+			const wordsMainChoiceComplete = [];
+
+			let multipleAnswer = []
+			const firstQuestion = escolherPalavraAleatoria(data, attemptWord);
+			let firstWord ;
+			console.log(firstQuestion.resposta);
+
+	// 		questionsSelected.push(firstQuestion);
+
+			if(firstQuestion.resposta.length == 1){
+				if(!attemptWord.includes(firstQuestion.resposta)){
+					attemptWord.push(firstQuestion.resposta);
+					firstWord = normalizeWord(firstQuestion.resposta[0]);
 					console.log("primeira palavra escolhida: ", firstWord)
-					break;
-				}
-			}
-		}
-		
-		if(firstWord== undefined){
-			continue
-		}
-		
-		if(attemptWord.length == data.length){
-		   console.log("Ja foram avaliadas todas as palavras")
-		   break;
-		}
-		
-		
-		console.log(firstWord, firstQuestion.resposta[0])
-		let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
-		
-		runtime.globalVars.first_word = firstWord
-		
-		let otherQuestion = firstQuestion;
-		wordsChoiceComplete.push(firstWord)
-		
-		while(indexGoal.length != 0){
-		   
-			if(multipleAnswer != null){
-			    const aux = []
-				for(let j=0; j < firstWord.length; j++){
-					const letter = firstWord[j];
-                 
-					if(multipleAnswer.length == 0){
-					   multipleAnswer = null;
-					   console.log("Questao de multiplas respostas: ",otherQuestion)
-					   questionsSelected.push({question:otherQuestion, index:j});
-					   for(const word of aux){
-					   		boardComplete.push(word);
-					   }
-					   
-					   break;		
-					}
-
-					for (let word of multipleAnswer) {
-						word = normalizeWord(word);
-
-						// Verifica todas as letras da palavra para encontrar uma que permita a junção
-						for (let k = 0; k < word.length; k++) {
-							const currentLetter = word[k];
-
-							if (currentLetter === letter && indexGoal.includes(j) && !wordsChoiceComplete.includes(word)) {
-								if (k > min) {
-									min = k;
-								}
-
-								if ((word.length - (Math.abs(-k) + 1)) > max) {
-									max = (word.length - (Math.abs(-k) + 1));
-								}
-
-								if (max + min < 15) {
-									console.log("Próxima palavra escolhida: ", word);
-									console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
-									aux.push({ string: word, posX: -k, posY: j , index:j});
-									indexGoal = indexGoal.filter(item => item != j);
-									wordsChoiceComplete.push(word);
-									multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word);
-									break; // Sai do loop interno após encontrar uma letra que permite a junção
-								}
-							}
-						}
-					}
-
-				}
-				
-				if(multipleAnswer != null){
-					break;
 				}
 			}
 			else{
-				otherQuestion = escolherPalavraAleatoria(data, attemptWord);
-				
-				
-				
-				if(otherQuestion.resposta.length > 1){
-				    multipleAnswer = otherQuestion.resposta;
-					continue;
+				for(const word of firstQuestion.resposta){
+					if(!attemptWord.includes(word)){
+						attemptWord.push(word);
+						firstWord = normalizeWord(word)
+						multipleAnswer = firstQuestion.resposta.filter(item => normalizeWord(item) != firstWord)
+						console.log(multipleAnswer)
+						console.log("primeira palavra escolhida: ", firstWord)
+						break;
+					}
 				}
-				else{
-				    const otherWord = normalizeWord(otherQuestion.resposta[0]) ;
-					let match = false;
-					for(const index of indexGoal){
-					    const letter = firstWord[index]
-					   // Verifica todas as letras da palavra para encontrar uma que permita a junção
-						for (let k = 0; k < otherWord.length; k++) {
-							const currentLetter = otherWord[k];
+			}
 
-							if (currentLetter === letter && !wordsChoiceComplete.includes(otherWord)) {
-								if (k > min) {
-									min = k;
-								}
+			if(firstWord== undefined){
+				continue
+			}
 
-								if ((otherWord.length - (Math.abs(-k) + 1)) > max) {
-									max = (otherWord.length - (Math.abs(-k) + 1));
-								}
+			if(attemptWord.length == data.length){
+			   console.log("Ja foram avaliadas todas as palavras")
+			   break;
+			}
 
-								if ((max + min < 15)) {
-									console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
-									boardComplete.push({ string: otherWord, posX: -k, posY: index ,index:index});
-									indexGoal = indexGoal.filter(item => item != index);
-									wordsChoiceComplete.push(otherWord);
-									match = true;
 
-									console.log("Questão de resposta única: ", otherQuestion);
-									questionsSelected.push({question:otherQuestion, index:index});
-									break; // Sai do loop interno após encontrar uma letra que permite a junção
+			console.log(firstWord, firstQuestion.resposta[0])
+			let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
+
+			runtime.globalVars.first_word = firstWord
+
+			let otherQuestion = firstQuestion;
+			wordsChoiceComplete.push(firstWord)
+
+			while(indexGoal.length != 0){
+
+				if(multipleAnswer != null){
+					const aux = []
+					for(let j=0; j < firstWord.length; j++){
+						const letter = firstWord[j];
+
+						if(multipleAnswer.length == 0){
+						   multipleAnswer = null;
+						   console.log("Questao de multiplas respostas: ",otherQuestion)
+						   questionsSelected.push({question:otherQuestion, index:j});
+						   for(const word of aux){
+								boardComplete.push(word);
+						   }
+
+						   break;		
+						}
+
+						for (let word of multipleAnswer) {
+							word = normalizeWord(word);
+
+							// Verifica todas as letras da palavra para encontrar uma que permita a junção
+							for (let k = 0; k < word.length; k++) {
+								const currentLetter = word[k];
+
+								if (currentLetter === letter && indexGoal.includes(j) && !wordsChoiceComplete.includes(word)) {
+									if (k > min) {
+										min = k;
+									}
+
+									if ((word.length - (Math.abs(-k) + 1)) > max) {
+										max = (word.length - (Math.abs(-k) + 1));
+									}
+
+									if (max + min < 15) {
+										console.log("Próxima palavra escolhida: ", word);
+										console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
+										aux.push({ string: word, posX: -k, posY: j , index:j, complete: false});
+										indexGoal = indexGoal.filter(item => item != j);
+										wordsChoiceComplete.push(word);
+										multipleAnswer = multipleAnswer.filter(item => normalizeWord(item) != word);
+										break; // Sai do loop interno após encontrar uma letra que permite a junção
+									}
 								}
 							}
 						}
-					
-				}}
+
+					}
+
+					if(multipleAnswer != null){
+						break;
+					}
+				}
+				else{
+					otherQuestion = escolherPalavraAleatoria(data, attemptWord);
+
+
+
+					if(otherQuestion.resposta.length > 1){
+						multipleAnswer = otherQuestion.resposta;
+						continue;
+					}
+					else{
+						const otherWord = normalizeWord(otherQuestion.resposta[0]) ;
+						let match = false;
+						for(const index of indexGoal){
+							const letter = firstWord[index]
+						   // Verifica todas as letras da palavra para encontrar uma que permita a junção
+							for (let k = 0; k < otherWord.length; k++) {
+								const currentLetter = otherWord[k];
+
+								if (currentLetter === letter && !wordsChoiceComplete.includes(otherWord)) {
+									if (k > min) {
+										min = k;
+									}
+
+									if ((otherWord.length - (Math.abs(-k) + 1)) > max) {
+										max = (otherWord.length - (Math.abs(-k) + 1));
+									}
+
+									if ((max + min < 15)) {
+										console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
+										boardComplete.push({ string: otherWord, posX: -k, posY: index ,index:index, complete: false});
+										indexGoal = indexGoal.filter(item => item != index);
+										wordsChoiceComplete.push(otherWord);
+										match = true;
+
+										console.log("Questão de resposta única: ", otherQuestion);
+										questionsSelected.push({question:otherQuestion, index:index});
+										break; // Sai do loop interno após encontrar uma letra que permite a junção
+									}
+								}
+							}
+
+					}}
+				}
 			}
-		}
-		
-		if(boardComplete.length == firstWord.length){
-			isOkGame = true;
-			console.log(boardComplete)
-			valid = true
-			const words = boardComplete
-			  .filter(item => item.string) // Filtra os objetos que possuem o atributo 'string'
-			  .map(item => item.string);   // Mapeia apenas o valor do atributo 'string'
 
-			console.log(words);
-			console.log(questionsSelected)
-			letters = getUniqueCharacters(words)
-			symbols = getSymbol(letters)
-			
-			boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
-			questionsSelected.sort((a, b) => a.index - b.index);
-			
-		}
-		else{
-			questionsSelected = [];
-		}
+			if(boardComplete.length == firstWord.length){
+				isOkGame = true;
+				console.log(boardComplete)
+				valid = true
+				const words = boardComplete
+				  .filter(item => item.string) // Filtra os objetos que possuem o atributo 'string'
+				  .map(item => item.string);   // Mapeia apenas o valor do atributo 'string'
+
+				console.log(words);
+				console.log(questionsSelected)
+				letters = getUniqueCharacters(words)
+				symbols = getSymbol(letters)
+
+				boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
+				questionsSelected.sort((a, b) => a.index - b.index);
+
+				boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
+				console.log(boardSave)
+
+			}
+			else{
+				questionsSelected = [];
+			}
 
 
-		
-		
-		
+
+
+
+		}
 	}
+		
+		
+	
+	
 	runtime.addEventListener("tick", () => Tick(runtime));
 	
 	// LOGICA DE GERAÇÃO DA MALHA
@@ -309,6 +348,8 @@ async function OnBeforeProjectStart(runtime)
 				boardComplete[j].string.length,
 				boardComplete[j].string,
 				boardComplete[j].index,
+				boardComplete[j].complete,
+				mainComplete,
 			  );
 			  
 			   runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
@@ -433,6 +474,8 @@ async function OnBeforeProjectStart(runtime)
 				questionsSelected[j].question.imagePath || ""
 			  );
 			}
+			
+			questionSave = [...questionsSelected]
 
 		  }
 		  else {
@@ -459,7 +502,7 @@ async function OnBeforeProjectStart(runtime)
 
 //grupos validos
 const goal = [];
-
+let firstRun = true;
 function Tick(runtime) {
     // Obtém todas as instâncias de celula e letra
     const celulas = runtime.objects.celula.getAllInstances();
@@ -499,9 +542,10 @@ function Tick(runtime) {
     }
 	
     // Verifica cada grupo
+
     for (const [idQuestao, grupo] of grupos) {
         let grupoValido = true;
-        
+      
 		if(goal.includes(idQuestao)){
 			continue;
 		}
@@ -521,20 +565,63 @@ function Tick(runtime) {
 		     let question;
 //             console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
 //             return idQuestao;
-             for (let i = 0; i < grupo.celulas.length; i++) {
+            for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
-				celula.instVars.block = true
-				question = celula.instVars.idQuestao
+				celula.instVars.block = true;
+				question = celula.instVars.idQuestao;
         	}
-			runtime.callFunction("marcarAcerto")
-			runtime.callFunction("goal", idQuestao)
-			goal.push(idQuestao)
+			
+			if(saveExample != "" && firstRun){
+				for(let i = 0; i < runtime.objects.Lacuna.getAllInstances().length;i++){
+					const lacuna = runtime.objects.Lacuna.getAllInstances()[i]
+					lacuna.instVars.isSelected = false
+					console.log(lacuna.instVars.indice)
+					if(idQuestao != -1 && lacuna.instVars.indice == idQuestao + 1 ){
+						runtime.globalVars.idPerguntaSelec = lacuna.instVars.idQuestao
+						lacuna.instVars.isSelected = true;
+						
+						
+					}
+					else if(idQuestao == -1 && lacuna.instVars.indice == 0){
+						runtime.globalVars.idPerguntaSelec = lacuna.instVars.idQuestao
+						lacuna.instVars.isSelected = true;
+						
+						
+					}
+					
+				}
+				
+				console.log(idQuestao)
+				goal.push(idQuestao)
+				console.log(goal)
+				runtime.callFunction("marcarAcerto")
+			}
+			else{
+				runtime.callFunction("marcarAcerto")
+				runtime.callFunction("goal", idQuestao)
+				goal.push(idQuestao)
+
+				if(idQuestao == -1){
+					boardSave.wordMainComplete = true;
+				}
+				else{
+					console.log(boardSave.words)
+					boardSave.words[idQuestao].complete = true;
+				}
+
+				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao}
+				 window.Namespace.session.rawData = JSON.stringify(save)
+				 runtime.callFunction("save");
+			}
+			
         }
     }
 
     // Se nenhum grupo cumprir a condição, retorna null
 //     console.log("Nenhum grupo cumpre a condição.");
+	firstRun = false
     return null;
+	
 }
 
 function escolherPalavraAleatoria(lista, wordChoice) {

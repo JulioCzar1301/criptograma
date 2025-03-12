@@ -299,7 +299,8 @@
 						"anterior": 0,
 						"posterior": 0,
 						"anteriorMain": 0,
-						"posteriorMain": 0
+						"posteriorMain": 0,
+						"idLacuna": 0
 					},
 					"behaviors": {},
 					"effects": {

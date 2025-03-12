@@ -178,6 +178,14 @@
 					"script-info": {
 						"purpose": "main"
 					}
+				},
+				{
+					"name": "reload.js",
+					"type": "application/javascript",
+					"sid": 237069540349218,
+					"script-info": {
+						"purpose": "imports-for-events"
+					}
 				}
 			],
 			"subfolders": []

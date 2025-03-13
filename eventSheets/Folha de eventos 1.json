@@ -6415,7 +6415,7 @@
 					"eventType": "function-block",
 					"conditions": [],
 					"actions": [],
-					"sid": 705837731592825,
+					"sid": 763211117793982,
 					"children": [
 						{
 							"eventType": "block",
@@ -6424,14 +6424,14 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 957058682540731,
+									"sid": 278894818778078,
 									"parameters": {
 										"variable": "heigthInicial",
 										"value": "252"
 									}
 								}
 							],
-							"sid": 870443139423167
+							"sid": 314117990975685
 						},
 						{
 							"eventType": "block",
@@ -6439,7 +6439,7 @@
 								{
 									"id": "pick-last-created",
 									"objectClass": "System",
-									"sid": 468067620807131,
+									"sid": 619849491638186,
 									"parameters": {
 										"object": "questaoContainer"
 									}
@@ -6449,14 +6449,14 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 100575927089238,
+									"sid": 803186047930950,
 									"parameters": {
 										"variable": "heigthFinal",
 										"value": "questaoContainer.Y + questaoContainer.Height"
 									}
 								}
 							],
-							"sid": 846219358388417
+							"sid": 833465163821126
 						},
 						{
 							"eventType": "block",
@@ -6465,14 +6465,14 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 358981066334919,
+									"sid": 700540216402073,
 									"parameters": {
 										"variable": "heigthTotal",
-										"value": "heigthFinal - heigthInicial + scrolArea.Height"
+										"value": "heigthFinal - heigthInicial + scrolArea.Height "
 									}
 								}
 							],
-							"sid": 925289048019853
+							"sid": 314430129996094
 						},
 						{
 							"eventType": "block",
@@ -6481,13 +6481,13 @@
 								{
 									"id": "set-height",
 									"objectClass": "Scroll",
-									"sid": 147901059249228,
+									"sid": 581878112468188,
 									"parameters": {
 										"height": "((scrolArea.Height/heigthTotal)*scrolArea.Height/(ceil(heigthTotal/scrolArea.Height)))"
 									}
 								}
 							],
-							"sid": 813138201278365
+							"sid": 899769511659263
 						},
 						{
 							"eventType": "block",
@@ -6495,7 +6495,7 @@
 								{
 									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 771670815858589,
+									"sid": 299608343116438,
 									"parameters": {
 										"first-value": "heigthFinal",
 										"comparison": 3,
@@ -6507,10 +6507,10 @@
 								{
 									"id": "destroy",
 									"objectClass": "Scroll",
-									"sid": 430762533848745
+									"sid": 269004761723261
 								}
 							],
-							"sid": 106713383773237
+							"sid": 417783089305576
 						}
 					]
 				},
@@ -6520,7 +6520,7 @@
 						{
 							"id": "on-mouse-wheel",
 							"objectClass": "Mouse",
-							"sid": 311432803246201,
+							"sid": 584560365425147,
 							"parameters": {
 								"direction": "down"
 							}
@@ -6528,7 +6528,7 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 326401514763212,
+							"sid": 157393935502997,
 							"parameters": {
 								"first-value": "Scroll.Y + speedScrol  + Scroll.Height",
 								"comparison": 2,
@@ -6540,13 +6540,13 @@
 						{
 							"id": "set-y",
 							"objectClass": "Scroll",
-							"sid": 353271826214950,
+							"sid": 391419407652578,
 							"parameters": {
 								"y": "Scroll.Y + speedScrol"
 							}
 						}
 					],
-					"sid": 995917709393038
+					"sid": 457503631554276
 				},
 				{
 					"eventType": "block",
@@ -6554,7 +6554,7 @@
 						{
 							"id": "on-mouse-wheel",
 							"objectClass": "Mouse",
-							"sid": 376199901398827,
+							"sid": 803605560206866,
 							"parameters": {
 								"direction": "up"
 							}
@@ -6562,7 +6562,7 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 888387172367236,
+							"sid": 893528082029396,
 							"parameters": {
 								"first-value": "Scroll.Y - speedScrol",
 								"comparison": 4,
@@ -6574,13 +6574,13 @@
 						{
 							"id": "set-y",
 							"objectClass": "Scroll",
-							"sid": 647715363449884,
+							"sid": 612745549223060,
 							"parameters": {
 								"y": "Scroll.Y- speedScrol"
 							}
 						}
 					],
-					"sid": 385940597181399
+					"sid": 889653605761947
 				},
 				{
 					"eventType": "block",
@@ -6588,7 +6588,7 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 934886701960834,
+							"sid": 809690871347548,
 							"parameters": {
 								"first-value": "Scroll.Y ",
 								"comparison": 2,
@@ -6600,13 +6600,13 @@
 						{
 							"id": "set-y",
 							"objectClass": "Scroll",
-							"sid": 599541156575164,
+							"sid": 742197613945134,
 							"parameters": {
 								"y": "scrolArea.Y"
 							}
 						}
 					],
-					"sid": 122478728347893
+					"sid": 891196841071827
 				},
 				{
 					"eventType": "block",
@@ -6614,7 +6614,7 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 705210943931973,
+							"sid": 419075508271556,
 							"parameters": {
 								"first-value": "Scroll.Y + Scroll.Height",
 								"comparison": 4,
@@ -6626,13 +6626,13 @@
 						{
 							"id": "set-y",
 							"objectClass": "Scroll",
-							"sid": 153766586320660,
+							"sid": 770485952157274,
 							"parameters": {
 								"y": "scrolArea.Y + scrolArea.Height - Scroll.Height"
 							}
 						}
 					],
-					"sid": 673941977270625
+					"sid": 342543191867129
 				},
 				{
 					"eventType": "block",
@@ -6640,7 +6640,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 274433439384136,
+							"sid": 417869873894959,
 							"parameters": {
 								"object": "questaoContainer",
 								"expression": "questaoContainer.idQuestao <> \"temp\""
@@ -6649,7 +6649,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 971324248067307,
+							"sid": 292188487946372,
 							"parameters": {
 								"object": "Lacuna",
 								"expression": "Lacuna.idQuestao <> \"temp\""
@@ -6658,7 +6658,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 697098253204095,
+							"sid": 446179409374669,
 							"parameters": {
 								"object": "textQuestao",
 								"expression": "textQuestao.idQuestao <> \"temp\""
@@ -6669,29 +6669,29 @@
 						{
 							"id": "set-y",
 							"objectClass": "questaoContainer",
-							"sid": 120776149150151,
+							"sid": 638252009786265,
 							"parameters": {
-								"y": "questaoContainer.posInitial- (Scroll.Y  - Scroll.posInitial)"
+								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? questaoContainer.posInitial- (Scroll.Y*2  - Scroll.posInitial) : questaoContainer.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
 						},
 						{
 							"id": "set-y",
 							"objectClass": "Lacuna",
-							"sid": 749850240434403,
+							"sid": 163594063078295,
 							"parameters": {
-								"y": "Lacuna.posInitial  - (Scroll.Y  - Scroll.posInitial)"
+								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? Lacuna.posInitial- (Scroll.Y*2  - Scroll.posInitial) : Lacuna.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
 						},
 						{
 							"id": "set-y",
 							"objectClass": "textQuestao",
-							"sid": 324603044523024,
+							"sid": 644406000110135,
 							"parameters": {
-								"y": "textQuestao.posInitial - (Scroll.Y  - Scroll.posInitial)"
+								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? textQuestao.posInitial- (Scroll.Y*2  - Scroll.posInitial) : textQuestao.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
 						}
 					],
-					"sid": 548255458216275,
+					"sid": 255846848772351,
 					"children": [
 						{
 							"eventType": "comment",
@@ -6709,7 +6709,7 @@
 								{
 									"id": "pick-all",
 									"objectClass": "System",
-									"sid": 658808206924708,
+									"sid": 326903525395406,
 									"parameters": {
 										"object": "botaoImagem"
 									}
@@ -6719,18 +6719,18 @@
 								{
 									"id": "set-y",
 									"objectClass": "botaoImagem",
-									"sid": 370441932621746,
+									"sid": 738394311113359,
 									"parameters": {
-										"y": "botaoImagem.posInitial - (Scroll.Y  - Scroll.posInitial)"
+										"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? botaoImagem.posInitial- (Scroll.Y*2  - Scroll.posInitial) : botaoImagem.posInitial- (Scroll.Y  - Scroll.posInitial)"
 									}
 								}
 							],
-							"sid": 897227725204968
+							"sid": 418791975564305
 						}
 					]
 				}
 			],
-			"sid": 514990389849655
+			"sid": 101755781811818
 		},
 		{
 			"eventType": "group",

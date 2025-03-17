@@ -212,6 +212,26 @@
 			"sid": 813454761756785
 		},
 		{
+			"eventType": "variable",
+			"name": "TempoJogo",
+			"type": "number",
+			"initialValue": "150",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 845951282858323
+		},
+		{
+			"eventType": "variable",
+			"name": "TempoGasto",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 870539042335985
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -7751,6 +7771,204 @@
 					]
 				},
 				{
+					"eventType": "comment",
+					"text": "CONDIÇÃO DE DERROTA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-time",
+							"objectClass": "System",
+							"sid": 940183330091694,
+							"parameters": {
+								"comparison": 0,
+								"time-seconds": "TempoJogo"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 356883653901017
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "tempoIcon",
+							"sid": 967447255345687,
+							"parameters": {
+								"animation": "\"Explosão\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 240372454917178,
+							"parameters": {
+								"seconds": "2",
+								"use-timescale": true
+							}
+						}
+					],
+					"sid": 474603278029938,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 202213400960196,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "fundoDesfoque",
+									"sid": 338080305771464,
+									"parameters": {
+										"x": "0",
+										"y": "0"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 916647203902592,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 901762411589733,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 845711105855557,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 326921011516644,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fimReiniciar",
+									"sid": 866467680541682,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fimVoltar",
+									"sid": 191241459382872,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "jogMelhorPontuacao",
+									"sid": 304112089622157,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "jogMoedas",
+									"sid": 814004284260015,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "jogPontuacao",
+									"sid": 379454210403096,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "telaFinal",
+									"sid": 199020243864608,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "telaFinal",
+									"sid": 923101979908573,
+									"parameters": {
+										"frame-number": "1"
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "fimReiniciar",
+									"sid": 771225099546380,
+									"parameters": {
+										"frame-number": "0"
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "fimVoltar",
+									"sid": 672161283277464,
+									"parameters": {
+										"frame-number": "0"
+									}
+								},
+								{
+									"type": "comment",
+									"text": "QUANDO O JOGADOR PERDE, O SALVAMENTO DELE É RESETADO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"callFunction": "resetSave",
+									"sid": 206498918389581
+								}
+							],
+							"sid": 254366423125824
+						}
+					]
+				},
+				{
 					"functionName": "marcaTentativa",
 					"functionDescription": "",
 					"functionCategory": "",
@@ -7913,6 +8131,132 @@
 				}
 			],
 			"sid": 264700288934629
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "manage time",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "FUNÇÃO AUXILIAR DE TEMPO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "TimeUpdate",
+					"functionDescription": "Atualiza o tempo gasto até que seja igual ao tempo da partida ou até que o jogador encontre todas as palavras",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 909100233303461,
+							"parameters": {
+								"variable": "TempoGasto",
+								"value": "time"
+							}
+						}
+					],
+					"sid": 881985760338203
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-time",
+							"objectClass": "System",
+							"sid": 384956444435862,
+							"parameters": {
+								"comparison": 2,
+								"time-seconds": "TempoJogo"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "TimeUpdate",
+							"sid": 694693664770269
+						}
+					],
+					"sid": 769208463515193,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "evaluate-expression",
+									"objectClass": "System",
+									"sid": 335281282639217,
+									"parameters": {
+										"value": "time >= TempoJogo - 2"
+									}
+								},
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 354367427245538
+								}
+							],
+							"actions": [
+								{
+									"type": "comment",
+									"text": "se a gente for botar o som de explosão aka segunda guerra mundial do max, entraria nesse bloco"
+								}
+							],
+							"sid": 702821977400896,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "TEMPO DIMINUINDO (VISUAL)",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-width",
+							"objectClass": "tempoBarra",
+							"sid": 727081171970421,
+							"parameters": {
+								"width": "(TempoJogo - TempoGasto) * (860/TempoJogo)"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "tempoBarra",
+							"sid": 705571121084212,
+							"parameters": {
+								"x": "1856",
+								"y": "946"
+							}
+						}
+					],
+					"sid": 989376755706282
+				}
+			],
+			"sid": 317376691717082
 		},
 		{
 			"eventType": "group",

@@ -32,6 +32,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 322621066349297
+		},
+		{
+			"name": "block",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 266777390391387
 		}
 	],
 	"behaviorTypes": [],

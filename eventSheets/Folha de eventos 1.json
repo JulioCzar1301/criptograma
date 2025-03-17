@@ -8074,10 +8074,10 @@
 								{
 									"id": "pick-by-evaluate",
 									"objectClass": "System",
-									"sid": 764492671051851,
+									"sid": 331531010619852,
 									"parameters": {
 										"object": "Letra",
-										"expression": " Letra.isMain = 1"
+										"expression": " Letra.isMain = 1 & Letra.block <> 1"
 									}
 								}
 							],
@@ -8108,10 +8108,10 @@
 								{
 									"id": "pick-by-evaluate",
 									"objectClass": "System",
-									"sid": 822588270864004,
+									"sid": 511839217762726,
 									"parameters": {
 										"object": "Letra",
-										"expression": " Letra.idLacuna = idAnswerr"
+										"expression": " Letra.idLacuna = idAnswerr & Letra.block <> 1"
 									}
 								}
 							],
@@ -8159,18 +8159,35 @@
 					"functionParameters": [],
 					"eventType": "function-block",
 					"conditions": [],
-					"actions": [
+					"actions": [],
+					"sid": 881985760338203,
+					"children": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 909100233303461,
-							"parameters": {
-								"variable": "TempoGasto",
-								"value": "time"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "every-x-seconds",
+									"objectClass": "System",
+									"sid": 840142919123517,
+									"parameters": {
+										"interval-seconds": ".1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 616202886036513,
+									"parameters": {
+										"variable": "TempoGasto",
+										"value": ".1"
+									}
+								}
+							],
+							"sid": 117816825365527
 						}
-					],
-					"sid": 881985760338203
+					]
 				},
 				{
 					"eventType": "block",

@@ -2,7 +2,7 @@
 window.Namespace = window.Namespace || {};
 window.Namespace.reload = false;
 window.Namespace.saveJSON;
-
+window.Namespace.time = 0;
 window.Namespace.session ={};
 window.Namespace.session.rawData = "";
 
@@ -118,6 +118,8 @@ async function main(){
 				console.log('Data fetched successfully:', data);
 				window.Namespace.session = data.session;
 				window.Namespace.session.rawData = window.Namespace.session.rawData;
+				window.Namespace.time = window.Namespace.session.rawData.time
+				
 			} else {
 				throw new Error('Network response was not ok');
 			}

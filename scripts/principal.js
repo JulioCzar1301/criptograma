@@ -59,6 +59,9 @@ async function OnBeforeProjectStart(runtime)
 		questionSave = save.questions
 		runtime.globalVars.nomeSecao = save.nameSection
 		mainComplete = save.words.wordMainComplete;
+		console.log(save.time)
+
+		window.Namespace.time = save.time
 		
 	}
 	else{
@@ -503,7 +506,13 @@ async function OnBeforeProjectStart(runtime)
 //grupos validos
 const goal = [];
 let firstRun = true;
+let fitTime = true;
 function Tick(runtime) {
+    if(saveExample != "" && fitTime){
+	    console.log(window.Namespace.time)
+		runtime.globalVars.TempoGasto = window.Namespace.time;
+		fitTime = false;
+	}
     // Obtém todas as instâncias de celula e letra
     const celulas = runtime.objects.celula.getAllInstances();
     const letras = runtime.objects.Letra.getAllInstances();
@@ -573,7 +582,9 @@ function Tick(runtime) {
 //             return idQuestao;
             for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
+				const letter = grupo.letras[i]
 				celula.instVars.block = true;
+				letter.instVars.block = true;
 				question = celula.instVars.idQuestao;
         	}
 			
@@ -615,7 +626,7 @@ function Tick(runtime) {
 					boardSave.words[idQuestao].complete = true;
 				}
 
-				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao}
+				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao, time: runtime.globalVars.TempoGasto}
 				 window.Namespace.session.rawData = JSON.stringify(save)
 				 runtime.callFunction("save");
 			}

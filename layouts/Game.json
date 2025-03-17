@@ -440,7 +440,8 @@
 						"idQuestion": 0,
 						"letter": "",
 						"idLacuna": 0,
-						"isMain": false
+						"isMain": false,
+						"block": false
 					},
 					"behaviors": {},
 					"effects": {

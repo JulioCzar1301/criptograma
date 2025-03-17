@@ -606,6 +606,15 @@
 												"instance-variable": "idQuestion",
 												"value": "index"
 											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Letra",
+											"sid": 485644346126229,
+											"parameters": {
+												"instance-variable": "idLacuna",
+												"value": "index+ 1"
+											}
 										}
 									],
 									"sid": 544223091188146,
@@ -633,6 +642,10 @@
 												}
 											],
 											"sid": 804417801903131
+										},
+										{
+											"eventType": "comment",
+											"text": "Caso a malha seja formada usando o salvamento e a palavra principal já está completa"
 										},
 										{
 											"eventType": "block",
@@ -667,6 +680,37 @@
 												}
 											],
 											"sid": 284703873833664
+										},
+										{
+											"eventType": "comment",
+											"text": "Caso a letra pertença a palavra principal"
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 479298817538717,
+													"parameters": {
+														"first-value": "abs(x - 5)",
+														"comparison": 0,
+														"second-value": "loopindex"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "Letra",
+													"sid": 935055078387251,
+													"parameters": {
+														"instance-variable": "isMain",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 235388973459219
 										}
 									]
 								},
@@ -7047,6 +7091,15 @@
 												"mode": "enable",
 												"effect": "\"Acerto\""
 											}
+										},
+										{
+											"callFunction": "PostJogada",
+											"sid": 904237582170234,
+											"parameters": [
+												"textQuestao.tempoQuestao",
+												"textQuestao.idQuestao",
+												"textQuestao.tentativas"
+											]
 										}
 									],
 									"sid": 973493540579349,
@@ -7696,6 +7749,167 @@
 							"sid": 822650538684218
 						}
 					]
+				},
+				{
+					"functionName": "marcaTentativa",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "console.log(\"tentativa marcada\")"
+						}
+					],
+					"sid": 978252156486708,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "idAnswerr",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 470631146788877
+						},
+						{
+							"eventType": "comment",
+							"text": "Selecionar lacuna"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 179659272824593,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.isSelected"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 301798644861971,
+									"parameters": {
+										"variable": "idAnswerr",
+										"value": "Lacuna.indice"
+									}
+								}
+							],
+							"sid": 490360868669959,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 964030066012110,
+											"parameters": {
+												"object": "textQuestao",
+												"expression": "Lacuna.idQuestao = textQuestao.idQuestao"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "textQuestao",
+											"sid": 239114080765497,
+											"parameters": {
+												"instance-variable": "tentativas",
+												"value": "textQuestao.tentativas + 1"
+											}
+										}
+									],
+									"sid": 829430580810379
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "Apagar os carácteres das letras, no caso de respostas que não são a palavra principal"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 851661206074018,
+									"parameters": {
+										"first-value": "idAnswerr",
+										"comparison": 0,
+										"second-value": "0"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 764492671051851,
+									"parameters": {
+										"object": "Letra",
+										"expression": " Letra.isMain = 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "Letra",
+									"sid": 771219791097644,
+									"parameters": {
+										"text": "\"\""
+									}
+								}
+							],
+							"sid": 309611189413645
+						},
+						{
+							"eventType": "comment",
+							"text": "Apagar os carácteres das letras, no caso a palavra principal"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 940823727356139
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 822588270864004,
+									"parameters": {
+										"object": "Letra",
+										"expression": " Letra.idLacuna = idAnswerr"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "Letra",
+									"sid": 767420818683295,
+									"parameters": {
+										"text": "\"\""
+									}
+								}
+							],
+							"sid": 860120641453373
+						}
+					]
 				}
 			],
 			"sid": 264700288934629
@@ -7742,6 +7956,46 @@
 						}
 					],
 					"sid": 435565898189414
+				},
+				{
+					"functionName": "PostJogada",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "tempo",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 395847925463392
+						},
+						{
+							"name": "idQuestao",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 872927181888982
+						},
+						{
+							"name": "tentativas",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 973794424661091
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "function generateUUID() {\n    // Gera um UUID v4 no formato padrão\n    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {\n        const r = Math.random() * 16 | 0; // número aleatório entre 0 e 15\n        const v = c === 'x' ? r : (r & 0x3 | 0x8); // força o formato de UUID v4\n        return v.toString(16);\n    });\n}\n\nlet tempo = localVars.tempo;\nlet idQuestao = localVars.idQuestao;\nlet tentativas = localVars.tentativas;\nlet timestamp = new Date().toISOString();\nlet jogo = 4;\nlet secao = window.Namespace.message.split(',')[2];\nlet capitulo = window.Namespace.message.split(',')[2];\nlet jogador = window.Namespace.message.split(',')[0];\nlet id = generateUUID();\nlet isSection = window.Namespace.message.split(',')[1] === \"section\";\n\nlet jsonObject = {\n\t\"tempo\": tempo,\n\t\"status\": true,\n\t\"jogador\": jogador,\n\t\"jogo\": jogo,\n\t\"idQuestao\": idQuestao,\n\t\"timestamp\": timestamp,\n\t\"id\": id,\n\t\"tentativas\": tentativas\n};\n\nif (isSection) {\n    jsonObject[\"secao\"] = secao;\n} else {\n    jsonObject[\"capitulo\"] = capitulo;\n}\n\nlet jsonString = JSON.stringify(jsonObject);\n\nconsole.log(jsonString);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/game\", {\n    method: \"POST\",\n    body: jsonString\n})\n.then(response => response.json())\n.then(data => console.log('Success:', data))\n.catch(error => console.error('Error:', error));"
+						}
+					],
+					"sid": 580571214386684
 				}
 			],
 			"sid": 393212608266326

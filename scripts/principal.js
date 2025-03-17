@@ -23,7 +23,7 @@ async function OnBeforeProjectStart(runtime)
 	//let chapterID = isSecOrChap ? "" : parts[2];
 	//let sectionID = isSecOrChap ? parts[2] : "";
 	//runtime.globalVars.idJogador = parts[0];
-	console.log("oi 2")
+	
 	saveExample = window.Namespace.session.rawData;
 	let isSecOrChap = "chapter";
 	let sectionID = "c3c980a3-e832-4fbd-b964-42faa9a4145c";
@@ -545,20 +545,26 @@ function Tick(runtime) {
 
     for (const [idQuestao, grupo] of grupos) {
         let grupoValido = true;
-      
+        let filledCells = 0;
 		if(goal.includes(idQuestao)){
 			continue;
 		}
+		
         // Verifica se todas as células do grupo cumprem a condição
         for (let i = 0; i < grupo.celulas.length; i++) {
             const celula = grupo.celulas[i];
             const letter = grupo.letras[i];
-
+// 		    console.log(letter.text == "")
+			if(letter.text != ""){
+				filledCells++;
+			}
+            
             if (celula.instVars.letter.toUpperCase() !== letter.text) {
                 grupoValido = false; // Se uma célula não cumprir, o grupo é inválido
-                break;
+//                 break;
             }
         }
+		
 
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
@@ -615,6 +621,10 @@ function Tick(runtime) {
 			}
 			
         }
+		
+		if(!grupoValido && filledCells == grupo.celulas.length){
+			runtime.callFunction("marcaTentativa")
+		}
     }
 
     // Se nenhum grupo cumprir a condição, retorna null

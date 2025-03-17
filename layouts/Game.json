@@ -438,7 +438,9 @@
 					"tags": "",
 					"instanceVariables": {
 						"idQuestion": 0,
-						"letter": ""
+						"letter": "",
+						"idLacuna": 0,
+						"isMain": false
 					},
 					"behaviors": {},
 					"effects": {
@@ -731,7 +733,8 @@
 						"isSelected": false,
 						"isCorrect": false,
 						"tempoQuestao": 0,
-						"posInitial": 0
+						"posInitial": 0,
+						"tentativas": 0
 					},
 					"behaviors": {
 						"Fixar": {

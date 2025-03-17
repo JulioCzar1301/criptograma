@@ -74,6 +74,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 622789102508672
+		},
+		{
+			"name": "tentativas",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 688395220641301
 		}
 	],
 	"behaviorTypes": [

@@ -18,6 +18,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 433188993209517
+		},
+		{
+			"name": "idLacuna",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 280826445706053
+		},
+		{
+			"name": "isMain",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 322621066349297
 		}
 	],
 	"behaviorTypes": [],

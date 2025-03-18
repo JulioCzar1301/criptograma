@@ -1,0 +1,58 @@
+{
+	"name": "dicaDescContainer",
+	"plugin-id": "Sprite",
+	"sid": 914089849522199,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 965795492238756
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 1509,
+						"height": 260,
+						"originX": 0.44731610337972166,
+						"originY": 0.4807692307692308,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 4999360,
+						"collisionPoly": {
+							"points": [
+								0.02109704641350211,
+								0,
+								1,
+								0.021398002853067047,
+								0.9789029535864979,
+								1,
+								0,
+								0.978601997146933
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 144963388624569,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

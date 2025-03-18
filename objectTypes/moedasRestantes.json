@@ -1,0 +1,16 @@
+{
+	"name": "moedasRestantes",
+	"plugin-id": "Text",
+	"sid": 441855543134246,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 707422529304010
+		}
+	],
+	"effectTypes": []
+}

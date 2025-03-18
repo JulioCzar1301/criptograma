@@ -1,0 +1,16 @@
+{
+	"name": "DicaName",
+	"plugin-id": "Text",
+	"sid": 688943856514622,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 245954727302755
+		}
+	],
+	"effectTypes": []
+}

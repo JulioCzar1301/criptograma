@@ -193,6 +193,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "moedas",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 721789724456399
+		},
+		{
+			"eventType": "variable",
 			"name": "existImage",
 			"type": "boolean",
 			"initialValue": "false",
@@ -215,7 +225,7 @@
 			"eventType": "variable",
 			"name": "TempoJogo",
 			"type": "number",
-			"initialValue": "150",
+			"initialValue": "120",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -230,6 +240,26 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 870539042335985
+		},
+		{
+			"eventType": "variable",
+			"name": "precoDica",
+			"type": "number",
+			"initialValue": "20",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 760562099932710
+		},
+		{
+			"eventType": "variable",
+			"name": "endgame",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 872399264850530
 		},
 		{
 			"eventType": "block",
@@ -308,6 +338,26 @@
 					"id": "destroy",
 					"objectClass": "Indice",
 					"sid": 288085357074691
+				},
+				{
+					"id": "destroy",
+					"objectClass": "dicaDescContainer",
+					"sid": 945496112516800
+				},
+				{
+					"id": "destroy",
+					"objectClass": "dicaContainer",
+					"sid": 137342667266397
+				},
+				{
+					"id": "destroy",
+					"objectClass": "dicaConteudo",
+					"sid": 226385492255731
+				},
+				{
+					"id": "destroy",
+					"objectClass": "DicaDescName",
+					"sid": 878098036193982
 				},
 				{
 					"type": "comment",
@@ -1968,6 +2018,15 @@
 								"object": "Lacuna"
 							},
 							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 255801294856360,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [],
@@ -2579,6 +2638,15 @@
 							"parameters": {
 								"object": "botaoImagem"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 614073347527293,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -2816,6 +2884,15 @@
 												"y": "questaoImagem.BBoxTop + 80",
 												"create-hierarchy": false,
 												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 294662483150224,
+											"parameters": {
+												"variable": "endgame",
+												"value": "true"
 											}
 										}
 									],
@@ -3122,6 +3199,15 @@
 										"mode": "disable",
 										"effect": "\"DesfoqueHorizontal\""
 									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 928126238663514,
+									"parameters": {
+										"variable": "endgame",
+										"value": "false"
+									}
 								}
 							],
 							"sid": 267181727474020,
@@ -3272,6 +3358,15 @@
 							"sid": 393893745184068,
 							"parameters": {
 								"instance-variable": "isCorrect"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 364515595866657,
+							"parameters": {
+								"variable": "endgame"
 							},
 							"isInverted": true
 						}
@@ -4023,6 +4118,15 @@
 								"click-type": "clicked",
 								"object-clicked": "Lacuna"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 111727807068504,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [],
@@ -4271,6 +4375,15 @@
 							"sid": 285154528805559,
 							"parameters": {
 								"object": "Lacuna"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 244962994546512,
+							"parameters": {
+								"variable": "endgame"
 							},
 							"isInverted": true
 						}
@@ -4596,6 +4709,15 @@
 								"instance-variable": "block"
 							},
 							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 438172582363829,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -4720,6 +4842,15 @@
 							"sid": 542068426127075,
 							"parameters": {
 								"instance-variable": "block"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 201137680194026,
+							"parameters": {
+								"variable": "endgame"
 							},
 							"isInverted": true
 						}
@@ -5585,6 +5716,15 @@
 								"comparison": 2,
 								"second-value": "91"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 681219415717011,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [],
@@ -6598,6 +6738,15 @@
 								"comparison": 2,
 								"second-value": "scrolArea.Y + scrolArea.Height"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 645695607161436,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -6632,6 +6781,15 @@
 								"comparison": 4,
 								"second-value": "scrolArea.Y"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 880578643988592,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -6658,6 +6816,15 @@
 								"comparison": 2,
 								"second-value": "scrolArea.Y"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 344546515493411,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -6684,6 +6851,24 @@
 								"comparison": 4,
 								"second-value": "scrolArea.Y + scrolArea.Height"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 277570676525900,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 416175789256160,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -6697,6 +6882,53 @@
 						}
 					],
 					"sid": 342543191867129
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 821525810183416,
+							"parameters": {
+								"variable": "endgame"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "Scroll",
+							"sid": 716109672431222,
+							"behaviorType": "ArrastarSoltar",
+							"parameters": {
+								"state": "disabled"
+							}
+						}
+					],
+					"sid": 514447911713851
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 431400760126784
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "Scroll",
+							"sid": 228009130405570,
+							"behaviorType": "ArrastarSoltar",
+							"parameters": {
+								"state": "enabled"
+							}
+						}
+					],
+					"sid": 442780297503045
 				},
 				{
 					"eventType": "block",
@@ -7762,6 +7994,15 @@
 									}
 								},
 								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 821538994117230,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								},
+								{
 									"callFunction": "resetSave",
 									"sid": 754827416997808
 								}
@@ -7784,12 +8025,13 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-time",
+							"id": "compare-eventvar",
 							"objectClass": "System",
-							"sid": 940183330091694,
+							"sid": 123214191804256,
 							"parameters": {
-								"comparison": 0,
-								"time-seconds": "TempoJogo"
+								"variable": "TempoJogo",
+								"comparison": 3,
+								"value": "ceil(TempoGasto)"
 							}
 						},
 						{
@@ -7809,6 +8051,14 @@
 							}
 						},
 						{
+							"id": "set-visible",
+							"objectClass": "tempoBarra",
+							"sid": 362286563092014,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
 							"id": "wait",
 							"objectClass": "System",
 							"sid": 240372454917178,
@@ -7824,6 +8074,14 @@
 							"eventType": "block",
 							"conditions": [],
 							"actions": [
+								{
+									"id": "set-time-scale",
+									"objectClass": "System",
+									"sid": 582806545411227,
+									"parameters": {
+										"time-scale": "0"
+									}
+								},
 								{
 									"id": "set-visible",
 									"objectClass": "fundoDesfoque",
@@ -7950,6 +8208,15 @@
 									}
 								},
 								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 749535640084373,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								},
+								{
 									"type": "comment",
 									"text": "QUANDO O JOGADOR PERDE, O SALVAMENTO DELE É RESETADO",
 									"text-color": [
@@ -7967,6 +8234,31 @@
 							"sid": 254366423125824
 						}
 					]
+				},
+				{
+					"eventType": "comment",
+					"text": "MOEDAS",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "moedaTexto",
+							"sid": 623382550319829,
+							"parameters": {
+								"text": "moedas"
+							}
+						}
+					],
+					"sid": 244151410774472
 				},
 				{
 					"functionName": "marcaTentativa",
@@ -7988,7 +8280,7 @@
 					"children": [
 						{
 							"eventType": "variable",
-							"name": "idAnswerr",
+							"name": "idAnswer",
 							"type": "number",
 							"initialValue": "0",
 							"comment": "",
@@ -8019,7 +8311,7 @@
 									"objectClass": "System",
 									"sid": 301798644861971,
 									"parameters": {
-										"variable": "idAnswerr",
+										"variable": "idAnswer",
 										"value": "Lacuna.indice"
 									}
 								}
@@ -8066,7 +8358,7 @@
 									"objectClass": "System",
 									"sid": 851661206074018,
 									"parameters": {
-										"first-value": "idAnswerr",
+										"first-value": "idAnswer",
 										"comparison": 0,
 										"second-value": "0"
 									}
@@ -8111,7 +8403,7 @@
 									"sid": 511839217762726,
 									"parameters": {
 										"object": "Letra",
-										"expression": " Letra.idLacuna = idAnswerr & Letra.block <> 1"
+										"expression": " Letra.idLacuna = idAnswer & Letra.block <> 1"
 									}
 								}
 							],
@@ -8274,6 +8566,1506 @@
 				}
 			],
 			"sid": 317376691717082
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "manage tips",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "DICAS DEVEM SER DISPONIBILIZADAS APENAS APÓS SELECIONAR UMA LACUNA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "Lacuna",
+							"sid": 309428324859218,
+							"parameters": {
+								"instance-variable": "isSelected"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 426922585347472,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 917627358113687,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot0",
+									"sid": 568749991154218,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 646061549442173
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 178121819447635,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot1",
+									"sid": 799295662064814,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 931444904611694
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 523661892243634,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot2",
+									"sid": 848421592941075,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica2",
+									"sid": 877085879314394,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 673791489979724
+						},
+						{
+							"eventType": "comment",
+							"text": "DICA 2: CONTEÚDO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "cursor-is-over-object",
+									"objectClass": "Mouse",
+									"sid": 956064071910713,
+									"parameters": {
+										"object": "dicaSpot2"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 868478243588411,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 286467483170395,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 831777232247492,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 263997933718896,
+									"parameters": {
+										"variable": "endgame"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "dicaSpot2",
+									"sid": 782784687252165,
+									"parameters": {
+										"opacity": "85"
+									}
+								}
+							],
+							"sid": 679849329683862,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 697225528202547,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "dicaSpot2"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarDica",
+											"sid": 593327096892911
+										},
+										{
+											"id": "set-text",
+											"objectClass": "DicaName",
+											"sid": 452643192190938,
+											"parameters": {
+												"text": "\"Dica Descritiva\""
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "dicaInstruc",
+											"sid": 112602420147735,
+											"parameters": {
+												"text": "\"Revela uma dica de conteúdo.\""
+											}
+										}
+									],
+									"sid": 587515658273576,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 831123518336642,
+													"parameters": {
+														"first-value": "precoDica",
+														"comparison": 3,
+														"second-value": "moedas"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 345433432674289,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 181099974667376,
+															"parameters": {
+																"instance-variable": "isSelected"
+															}
+														},
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 554024747906356,
+															"parameters": {
+																"instance-variable": "isCorrect"
+															},
+															"isInverted": true
+														}
+													],
+													"actions": [
+														{
+															"id": "set-boolean-instvar",
+															"objectClass": "dicaSpot2",
+															"sid": 397963181800058,
+															"parameters": {
+																"instance-variable": "isSelected",
+																"value": "true"
+															}
+														},
+														{
+															"id": "set-default-color",
+															"objectClass": "dicaSpot2",
+															"sid": 136335323489833,
+															"parameters": {
+																"color": "rgbEx(40,40,60)"
+															}
+														}
+													],
+													"sid": 303577062209909
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 546577645763692
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "moedasInsuficiente",
+													"sid": 990095676400575
+												}
+											],
+											"sid": 135007092465255
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "cursor-is-over-object",
+									"objectClass": "Mouse",
+									"sid": 166810824060345,
+									"parameters": {
+										"object": "dicaSpot2"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "dicaSpot2",
+									"sid": 124889075895376,
+									"parameters": {
+										"opacity": "100"
+									}
+								}
+							],
+							"sid": 543648555419059
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 218954113153138
+						}
+					],
+					"actions": [],
+					"sid": 826486727509365,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 199788943841147,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot0",
+									"sid": 939228623253295,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 516979946859451
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 703265724522007,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot1",
+									"sid": 947679158788899,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 769516094885529
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 414351796756076,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot2",
+									"sid": 391479676283380,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica2",
+									"sid": 747928641267616,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
+								}
+							],
+							"sid": 513547861642223
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "DICA 3: DICA DE CONTEÚDO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "mostrarDicaConteudo",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 934430513894895,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "gap",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 211930067361618
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 217835490973592,
+									"parameters": {
+										"object": "textQuestao"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 979503347984071,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.isSelected = 1"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 760133596028525,
+									"parameters": {
+										"object": "textQuestao",
+										"expression": "textQuestao.idQuestao = Lacuna.idQuestao"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 375418485772678,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "fundoDesfoque",
+									"sid": 733170929614910,
+									"parameters": {
+										"x": "0",
+										"y": "0"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 892462809654333,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 851152935401436,
+									"parameters": {
+										"object-to-create": "dicaDescContainer",
+										"layer": "3",
+										"x": "LayoutWidth/2",
+										"y": "LayoutHeight/2",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 332948539857091,
+									"parameters": {
+										"object-to-create": "DicaDescName",
+										"layer": "3",
+										"x": "dicaDescContainer.BBoxLeft - 100",
+										"y": "dicaDescContainer.BBoxTop - 20",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 493589143996840,
+									"parameters": {
+										"object-to-create": "dicaContainer",
+										"layer": "3",
+										"x": "dicaDescContainer.X",
+										"y": "dicaDescContainer.Y + 30",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 215625181234194,
+									"parameters": {
+										"object-to-create": "dicaConteudo",
+										"layer": "3",
+										"x": "0",
+										"y": "0",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-z-elevation",
+									"objectClass": "DicaDescName",
+									"sid": 258356953551788,
+									"parameters": {
+										"z": "1"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "dicaConteudo",
+									"sid": 357087210458086,
+									"parameters": {
+										"text": "textQuestao.dica"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 714787324297595,
+									"parameters": {
+										"variable": "gap",
+										"value": "dicaConteudo.TextHeight"
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "dicaConteudo",
+									"sid": 133637963060794,
+									"parameters": {
+										"width": "780",
+										"height": "gap"
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "dicaDescContainer",
+									"sid": 272703416437783,
+									"parameters": {
+										"width": "1000",
+										"height": "250"
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "dicaContainer",
+									"sid": 891729980695709,
+									"parameters": {
+										"width": "800",
+										"height": "dicaDescContainer.Height/2"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "dicaConteudo",
+									"sid": 106267692536403,
+									"parameters": {
+										"x": "dicaContainer.BBoxMidX",
+										"y": "dicaContainer.BBoxMidY"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 372857034706199,
+									"parameters": {
+										"object-to-create": "dicaSair",
+										"layer": "3",
+										"x": "dicaDescContainer.BBoxRight - 70",
+										"y": "dicaDescContainer.BBoxTop + 72",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 355953361678051,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 436933961942015
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "GERAR SPRITE DE DICA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "mostrarDica",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 455873586756719,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "dicaPopUp",
+									"sid": 101208697435349,
+									"parameters": {
+										"frame-number": "0"
+									}
+								},
+								{
+									"id": "set-font-size",
+									"objectClass": "moedasRestantes",
+									"sid": 105078036315010,
+									"parameters": {
+										"size-pt": "18"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "precoDica",
+									"sid": 775716286726570,
+									"parameters": {
+										"text": "\"- \" & precoDica"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "moedasRestantes",
+									"sid": 672324121130042,
+									"parameters": {
+										"text": "moedas"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "fundoDesfoque",
+									"sid": 994402792461168,
+									"parameters": {
+										"x": "0",
+										"y": "0"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "DicaSprites",
+									"sid": 516003105415303,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "DicaTexto",
+									"sid": 274922437195783,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 414276059044484,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 286532512884468,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 238422904611735,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 816594126718105,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 246716096229234,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 189492588108731,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 216816917673914
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "FLUXOS ALTERNATIVOS",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 0: QUANDO O JOGADOR QUER A DICA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 714402690480630,
+							"parameters": {
+								"object": "botaoSim"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-opacity",
+							"objectClass": "botaoSim",
+							"sid": 680843497216189,
+							"parameters": {
+								"opacity": "80"
+							}
+						}
+					],
+					"sid": 718243152534332,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-tap-object",
+									"objectClass": "Toque",
+									"sid": 970381724687705,
+									"parameters": {
+										"object": "botaoSim"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 714013512408581,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 450157231876757,
+											"parameters": {
+												"object": "dicaSpot2",
+												"expression": "dicaSpot2.isSelected = 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarDicaConteudo",
+											"sid": 736019237198569
+										},
+										{
+											"callFunction": "dicaInvisivel",
+											"sid": 706987663387961
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot2",
+											"sid": 223001359656553,
+											"parameters": {
+												"instance-variable": "isBuyed",
+												"value": "true"
+											}
+										},
+										{
+											"id": "subtract-from-eventvar",
+											"objectClass": "System",
+											"sid": 173724690936591,
+											"parameters": {
+												"variable": "moedas",
+												"value": "precoDica"
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dicaSpot2",
+											"sid": 899507678453168,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dica2",
+											"sid": 356969862983436,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										}
+									],
+									"sid": 826502092528178
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 909640912373428,
+							"parameters": {
+								"object": "botaoSim"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-opacity",
+							"objectClass": "botaoSim",
+							"sid": 701851192134259,
+							"parameters": {
+								"opacity": "100"
+							}
+						}
+					],
+					"sid": 845402752362728
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 1: QUANDO O JOGADOR NÃO QUER A DICA",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 520662110812049,
+							"parameters": {
+								"object": "cancelDica"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "cancelDica",
+							"sid": 961177781682859,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 654097105635714,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-touching-object",
+									"objectClass": "Toque",
+									"sid": 955689782187517,
+									"parameters": {
+										"object": "cancelDica"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "dicaInvisivel",
+									"sid": 396870361685329
+								}
+							],
+							"sid": 922589611967831
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 254884165387372,
+							"parameters": {
+								"object": "cancelDica"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "cancelDica",
+							"sid": 188992422098131,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 226995157148870
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 2: QUANDO NÃO HÁ MOEDAS O SUFICIENTE",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "moedasInsuficiente",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 616538521293087,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "DicaSprites",
+									"sid": 861276797940298,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "DicaTexto",
+									"sid": 838944222276930,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 519760339602384,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "dicaPopUp",
+									"sid": 811358981587156,
+									"parameters": {
+										"frame-number": "1"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "dicaInstruc",
+									"sid": 119145338662603,
+									"parameters": {
+										"y": "dicaInstruc.Y + 15"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "DicaName",
+									"sid": 731291675535835,
+									"parameters": {
+										"y": "DicaName.Y + 15"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "precoDica",
+									"sid": 666448777162255,
+									"parameters": {
+										"y": "precoDica.Y + 18"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "moedasRestantes",
+									"sid": 797518385846643,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "cancelDica",
+									"sid": 778630099781726,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "botaoSim",
+									"sid": 438732417575062,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 158947705560047,
+									"parameters": {
+										"seconds": "2",
+										"use-timescale": true
+									}
+								},
+								{
+									"callFunction": "dicaInvisivel",
+									"sid": 109902539883830
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 112405517739032,
+									"parameters": {
+										"variable": "endgame",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 358312195197059
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "AUXILIARES PARA BLOCO DE DICA DE CONTEÚDO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 586800128442557,
+							"parameters": {
+								"object": "dicaSair"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-cursor-style",
+							"objectClass": "Mouse",
+							"sid": 147645457688788,
+							"parameters": {
+								"cursor-style": "hand"
+							}
+						}
+					],
+					"sid": 106140102737882
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-touching-object",
+							"objectClass": "Toque",
+							"sid": 545320419126665,
+							"parameters": {
+								"object": "dicaSair"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 757364499499798,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 431679207977713,
+									"parameters": {
+										"object": "dicaDescContainer",
+										"expression": "dicaDescContainer.IID = dicaSair.IID"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 479238304109046,
+									"parameters": {
+										"object": "dicaConteudo",
+										"expression": "dicaSair.IID = dicaConteudo.IID "
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "dicaDescContainer",
+									"sid": 369118592633254
+								},
+								{
+									"id": "destroy",
+									"objectClass": "dicaSair",
+									"sid": 731053170532837
+								},
+								{
+									"id": "destroy",
+									"objectClass": "dicaContainer",
+									"sid": 371680062104240
+								},
+								{
+									"id": "destroy",
+									"objectClass": "dicaConteudo",
+									"sid": 553223920661768
+								},
+								{
+									"id": "destroy",
+									"objectClass": "DicaDescName",
+									"sid": 802643046881506
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 734739237325140,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 920505529559122,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 789373609856433,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 128620411246395,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 448960029722065,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								}
+							],
+							"sid": 863326423274017
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "AUXILIAR: TORNAR O SPRITE DE DICA INVISÍVEL",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "dicaInvisivel",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "DicaSprites",
+							"sid": 640656870614846,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "DicaTexto",
+							"sid": 970368068546294,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "dicaSpot0",
+							"sid": 269246942939264,
+							"parameters": {
+								"instance-variable": "isSelected",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "dicaSpot1",
+							"sid": 530387196526907,
+							"parameters": {
+								"instance-variable": "isSelected",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-default-color",
+							"objectClass": "dicaSpot0",
+							"sid": 187253095766590,
+							"parameters": {
+								"color": "rgbEx(100,100,100)"
+							}
+						},
+						{
+							"id": "set-default-color",
+							"objectClass": "dicaSpot1",
+							"sid": 171322278259989,
+							"parameters": {
+								"color": "rgbEx(100,100,100)"
+							}
+						},
+						{
+							"id": "set-default-color",
+							"objectClass": "dicaSpot2",
+							"sid": 462397157360153,
+							"parameters": {
+								"color": "rgbEx(100,100,100)"
+							}
+						}
+					],
+					"sid": 376833786580659,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 774778987976868,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 829195571659029,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 745287319382735,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 207915348027212,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 101077021688522,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 779817410627160,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 539355945673743,
+									"parameters": {
+										"variable": "endgame",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 459792078015376
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 666384086919667,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "dicaSpot2",
+									"sid": 321124032288824,
+									"parameters": {
+										"instance-variable": "isSelected",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 383945618439772
+						}
+					]
+				}
+			],
+			"sid": 312968649701192
 		},
 		{
 			"eventType": "group",

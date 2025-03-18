@@ -1,0 +1,13 @@
+{
+	"name": "DicaSprites",
+	"plugin-id": "Sprite",
+	"sid": 833451945098118,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"cancelDica",
+		"botaoSim",
+		"dicaPopUp"
+	]
+}

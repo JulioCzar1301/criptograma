@@ -135,7 +135,19 @@
 			"fimVoltar",
 			"jogMelhorPontuacao",
 			"IndicePalavra",
-			"textIndicePalavra"
+			"textIndicePalavra",
+			"Sprite",
+			"cancelDica",
+			"dicaPopUp",
+			"moedasRestantes",
+			"DicaName",
+			"dicaInstruc",
+			"precoDica",
+			"botaoSim",
+			"DicaDescName",
+			"dicaDescContainer",
+			"dicaConteudo",
+			"dicaContainer"
 		],
 		"subfolders": [
 			{
@@ -152,7 +164,9 @@
 	"families": {
 		"items": [
 			"TelaSprites",
-			"TelaTexto"
+			"TelaTexto",
+			"DicaSprites",
+			"DicaTexto"
 		],
 		"subfolders": []
 	},

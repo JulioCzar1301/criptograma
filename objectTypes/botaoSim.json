@@ -1,0 +1,76 @@
+{
+	"name": "botaoSim",
+	"plugin-id": "Sprite",
+	"sid": 217850312257573,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 427,
+						"height": 64,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 1417272,
+						"collisionPoly": {
+							"points": [
+								0.05612244897959184,
+								0,
+								0.9438775510204082,
+								0,
+								0.9642857142857143,
+								0.05,
+								0.9897959183673469,
+								0.175,
+								1,
+								0.275,
+								1,
+								0.725,
+								0.9897959183673469,
+								0.825,
+								0.9642857142857143,
+								0.95,
+								0.9438775510204082,
+								1,
+								0.05612244897959184,
+								1,
+								0.03571428571428571,
+								0.95,
+								0.01020408163265306,
+								0.825,
+								0,
+								0.725,
+								0,
+								0.275,
+								0.01020408163265306,
+								0.175,
+								0.03571428571428571,
+								0.05
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 604064751887765,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

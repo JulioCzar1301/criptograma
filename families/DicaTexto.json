@@ -1,0 +1,14 @@
+{
+	"name": "DicaTexto",
+	"plugin-id": "Text",
+	"sid": 760595667040913,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"dicaInstruc",
+		"DicaName",
+		"moedasRestantes",
+		"precoDica"
+	]
+}

@@ -1,0 +1,84 @@
+{
+	"name": "dicaPopUp",
+	"plugin-id": "Sprite",
+	"sid": 369676831708513,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 973797056936212
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 563,
+						"height": 450,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 1546969,
+						"collisionPoly": {
+							"points": [
+								0.0497335701598579,
+								0.06315789473684211,
+								0.9573712255772646,
+								0.07368421052631578,
+								0.9502664298401421,
+								0.9368421052631579,
+								0.04262877442273535,
+								0.9263157894736842
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 547,
+						"height": 412,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 946168,
+						"collisionPoly": {
+							"points": [
+								0.0497335701598579,
+								0.06315789473684211,
+								0.9573712255772646,
+								0.07368421052631578,
+								0.9502664298401421,
+								0.9368421052631579,
+								0.04262877442273535,
+								0.9263157894736842
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 362591523354403,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

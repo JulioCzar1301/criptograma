@@ -1,0 +1,16 @@
+{
+	"name": "dicaInstruc",
+	"plugin-id": "Text",
+	"sid": 793658765399869,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "NoSave",
+			"name": "NãoSalvar",
+			"sid": 951493300869625
+		}
+	],
+	"effectTypes": []
+}

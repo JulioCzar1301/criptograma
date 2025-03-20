@@ -9494,6 +9494,21 @@
 										}
 									],
 									"sid": 826502092528178
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "window.Namespace.tipContentUsed = true;\n\nconsole.log(window.Namespace.board)\nconsole.log(window.Namespace.question)\n\nconst save = { words: window.Namespace.board, \nquestions: window.Namespace.question, \nnameSection: runtime.globalVars.nomeSecao, \ntime: runtime.globalVars.TempoGasto, \ntipContentUsed: window.Namespace.tipContentUsed, coin: runtime.globalVars.moedas}\n\nwindow.Namespace.session.rawData = JSON.stringify(save)"
+										},
+										{
+											"callFunction": "save",
+											"sid": 548236914919357
+										}
+									],
+									"sid": 318762364639244
 								}
 							]
 						}

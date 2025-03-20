@@ -1264,19 +1264,19 @@
 										{
 											"id": "set-size",
 											"objectClass": "textQuestao",
-											"sid": 604395007620047,
+											"sid": 219548020570287,
 											"parameters": {
-												"width": "710",
+												"width": "740",
 												"height": "textQuestao.TextHeight"
 											}
 										},
 										{
 											"id": "set-position",
 											"objectClass": "textQuestao",
-											"sid": 790847823532082,
+											"sid": 124654527567089,
 											"parameters": {
-												"x": "78",
-												"y": "secNome.Y + 190 + PosY"
+												"x": "73",
+												"y": "secNome.Y + 205 + PosY"
 											}
 										},
 										{
@@ -1291,10 +1291,10 @@
 										{
 											"id": "set-position",
 											"objectClass": "questaoContainer",
-											"sid": 586957643839927,
+											"sid": 786530129861692,
 											"parameters": {
-												"x": "48",
-												"y": "secNome.Y + 170 + PosY"
+												"x": "43",
+												"y": "secNome.Y + 185 + PosY"
 											}
 										},
 										{
@@ -1309,9 +1309,9 @@
 										{
 											"id": "set-size",
 											"objectClass": "questaoContainer",
-											"sid": 174790623125443,
+											"sid": 617374010202068,
 											"parameters": {
-												"width": "758",
+												"width": "795",
 												"height": "textQuestao.TextHeight + 40"
 											}
 										},
@@ -1384,11 +1384,11 @@
 												{
 													"id": "create-object",
 													"objectClass": "System",
-													"sid": 293454216094122,
+													"sid": 715268207267553,
 													"parameters": {
 														"object-to-create": "botaoImagem",
 														"layer": "1",
-														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" ))",
+														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" )) + 25",
 														"y": "textQuestao.TagY(\"lacuna\", tokencount(resposta, \",\" ))",
 														"create-hierarchy": false,
 														"template-name": "\"\""
@@ -1581,19 +1581,19 @@
 										{
 											"id": "set-size",
 											"objectClass": "textQuestao",
-											"sid": 879519048431422,
+											"sid": 858326211962016,
 											"parameters": {
-												"width": "710",
+												"width": "740",
 												"height": "textQuestao.TextHeight"
 											}
 										},
 										{
 											"id": "set-position",
 											"objectClass": "textQuestao",
-											"sid": 949697524227892,
+											"sid": 273831674328508,
 											"parameters": {
-												"x": "78",
-												"y": "secNome.Y + 190 + PosY"
+												"x": "73",
+												"y": "secNome.Y + 205 + PosY"
 											}
 										},
 										{
@@ -1608,10 +1608,10 @@
 										{
 											"id": "set-position",
 											"objectClass": "questaoContainer",
-											"sid": 508478577890905,
+											"sid": 142175880511125,
 											"parameters": {
-												"x": "48",
-												"y": "secNome.Y + 170 + PosY"
+												"x": "43",
+												"y": "secNome.Y + 185 + PosY"
 											}
 										},
 										{
@@ -1626,9 +1626,9 @@
 										{
 											"id": "set-size",
 											"objectClass": "questaoContainer",
-											"sid": 667165964514366,
+											"sid": 371318233966364,
 											"parameters": {
-												"width": "758",
+												"width": "798",
 												"height": "textQuestao.TextHeight + 40"
 											}
 										},
@@ -1697,11 +1697,11 @@
 												{
 													"id": "create-object",
 													"objectClass": "System",
-													"sid": 989172663394015,
+													"sid": 900328803329686,
 													"parameters": {
 														"object-to-create": "botaoImagem",
 														"layer": "1",
-														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" ))",
+														"x": "textQuestao.TagX(\"lacuna\", tokencount(resposta, \",\" )) + 25",
 														"y": "textQuestao.TagY(\"lacuna\", tokencount(resposta, \",\" ))",
 														"create-hierarchy": false,
 														"template-name": "\"\""
@@ -2823,12 +2823,12 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 671698054658263,
+											"sid": 514249750730593,
 											"parameters": {
 												"object-to-create": "questaoContainer",
 												"layer": "3",
-												"x": "LayoutWidth/2 - questaoContainer.Width/2 + 37",
-												"y": "questaoImagem.BBoxBottom + 20",
+												"x": "LayoutWidth/2 - questaoContainer.Width/2 + 55",
+												"y": "questaoImagem.BBoxBottom + 23",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
@@ -2845,12 +2845,12 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 582095284734629,
+											"sid": 937559703238837,
 											"parameters": {
 												"object-to-create": "textQuestao",
 												"layer": "3",
-												"x": "questaoContainer.X + 30",
-												"y": "questaoContainer.Y + 15",
+												"x": "questaoContainer.X + 40",
+												"y": "questaoContainer.Y + 12",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
@@ -2940,9 +2940,9 @@
 												{
 													"id": "set-size",
 													"objectClass": "textQuestao",
-													"sid": 277937506161933,
+													"sid": 428681028422861,
 													"parameters": {
-														"width": "questaoImagem.Width - 50",
+														"width": "questaoImagem.Width - 75",
 														"height": "textQuestao.TextHeight"
 													}
 												},
@@ -2973,9 +2973,9 @@
 												{
 													"id": "set-size",
 													"objectClass": "questaoContainer",
-													"sid": 788426379963512,
+													"sid": 855191154242957,
 													"parameters": {
-														"width": "questaoImagem.Width - 5",
+														"width": "questaoImagem.Width ",
 														"height": "textQuestao.TextHeight + 20"
 													}
 												},
@@ -6628,10 +6628,10 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 278894818778078,
+									"sid": 424828989501996,
 									"parameters": {
 										"variable": "heigthInicial",
-										"value": "252"
+										"value": "258"
 									}
 								}
 							],
@@ -8555,9 +8555,9 @@
 						{
 							"id": "set-position",
 							"objectClass": "tempoBarra",
-							"sid": 705571121084212,
+							"sid": 610825160598444,
 							"parameters": {
-								"x": "1856",
+								"x": "1857",
 								"y": "946"
 							}
 						}

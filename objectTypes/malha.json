@@ -12,15 +12,15 @@
 			{
 				"frames": [
 					{
-						"width": 920,
-						"height": 920,
+						"width": 960,
+						"height": 960,
 						"originX": 0,
 						"originY": 0,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 194674,
+						"imageSpriteId": 79675,
 						"collisionPoly": {
 							"points": [
 								0.016304347826086956,

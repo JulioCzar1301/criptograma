@@ -5,6 +5,7 @@ window.Namespace.saveJSON;
 window.Namespace.time = 0;
 window.Namespace.session ={};
 window.Namespace.session.rawData = "";
+window.Namespace.tipContentUsed = false;
 
 async function main(){
 	// Função que verifica se deve recarregar o jogo salvo

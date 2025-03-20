@@ -4,7 +4,11 @@
 let questionSave = []
 let boardSave = [];
 let saveExample = ""
+let goal = [];
+let firstRun = true;
+let fitTime = true;
 
+let coinSave ;
 
 runOnStartup(async runtime =>
 {
@@ -14,13 +18,14 @@ runOnStartup(async runtime =>
 	runtime.addEventListener("beforeprojectstart", () => OnBeforeProjectStart(runtime));
 });
 
+
 async function OnBeforeProjectStart(runtime)
 {
 	// CHAMADA DA API
 
 	//let parts = window.Namespace.message.split(",");
 	//let isSecOrChap = parts[1] === "section";
-	//let chapterID = isSecOrChap ? "" : parts[2];
+	//let chapterID = isSecOrChap ? "" : parts[2];f
 	//let sectionID = isSecOrChap ? parts[2] : "";
 	//runtime.globalVars.idJogador = parts[0];
 	
@@ -44,10 +49,12 @@ async function OnBeforeProjectStart(runtime)
 	
 	runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
 	
+	
 	//window.Namespace.idSecao = sectionID;
 	//window.Namespace.isSecOrChap = isSecOrChap;
 	//window.Namespace.idChapter = chapterID;
 	//caso do save
+	
 	if( saveExample != ""){
 		const save = JSON.parse(saveExample)
 		console.log(save)
@@ -60,8 +67,14 @@ async function OnBeforeProjectStart(runtime)
 		runtime.globalVars.nomeSecao = save.nameSection
 		mainComplete = save.words.wordMainComplete;
 		console.log(save.time)
-
+		coinSave = save.coin
+        console.log(save.coin)
 		window.Namespace.time = save.time
+		
+		if(save.tipContentUsed){
+			runtime.objects.dicaSpot2.getFirstInstance().instVars.isBuyed = true;
+		}
+		window.Namespace.tipContentUsed = save.tipContentUsed;
 		
 	}
 	else{
@@ -295,6 +308,7 @@ async function OnBeforeProjectStart(runtime)
 				questionsSelected.sort((a, b) => a.index - b.index);
 
 				boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
+				window.Namespace.board = boardSave;
 				console.log(boardSave)
 
 			}
@@ -461,6 +475,8 @@ async function OnBeforeProjectStart(runtime)
 // 			);
 
 			// Chamada das questões escolhidas
+			
+			
 			for (let j = 0; j < questionsSelected.length; j++) {
 			 console.log(questionsSelected[j])
 			  if(questionsSelected[j].question.imagePath){
@@ -479,7 +495,7 @@ async function OnBeforeProjectStart(runtime)
 			}
 			
 			questionSave = [...questionsSelected]
-
+            window.Namespace.question = questionSave;
 		  }
 		  else {
 			boardComplete = [];
@@ -504,13 +520,13 @@ async function OnBeforeProjectStart(runtime)
 }
 
 //grupos validos
-const goal = [];
-let firstRun = true;
-let fitTime = true;
+
+
 function Tick(runtime) {
     if(saveExample != "" && fitTime){
 	    console.log(window.Namespace.time)
 		runtime.globalVars.TempoGasto = window.Namespace.time;
+		runtime.globalVars.moedas = coinSave;
 		fitTime = false;
 	}
     // Obtém todas as instâncias de celula e letra
@@ -625,8 +641,12 @@ function Tick(runtime) {
 					console.log(boardSave.words)
 					boardSave.words[idQuestao].complete = true;
 				}
-
-				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao, time: runtime.globalVars.TempoGasto}
+                
+				//Salvar malha
+				window.Namespace.board = boardSave;
+				window.Namespace.question = questionSave;
+				
+				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao, time: runtime.globalVars.TempoGasto, tipContentUsed: window.Namespace.tipContentUsed, coin: runtime.globalVars.moedas}
 				 window.Namespace.session.rawData = JSON.stringify(save)
 				 runtime.callFunction("save");
 			}

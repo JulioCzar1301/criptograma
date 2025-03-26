@@ -54,8 +54,7 @@ async function OnBeforeProjectStart(runtime)
 	//window.Namespace.isSecOrChap = isSecOrChap;
 	//window.Namespace.idChapter = chapterID;
 	//caso do save
-	
-	saveExample = ""
+	// saveExample = ""
 	if( saveExample != ""){
 		const save = JSON.parse(saveExample)
 		console.log(save)
@@ -71,11 +70,23 @@ async function OnBeforeProjectStart(runtime)
 		coinSave = save.coin
         console.log(save.coin)
 		window.Namespace.time = save.time
+		 window.Namespace.board = save.words
 		
 		if(save.tipContentUsed){
 			runtime.objects.dicaSpot2.getFirstInstance().instVars.isBuyed = true;
 		}
+		if(save.tipLetterRandom != ""){
+			runtime.objects.dicaSpot1.getFirstInstance().instVars.isBuyed = true;
+		}
+
+		if(save.tipLetterSelected != ""){
+			runtime.objects.dicaSpot0.getFirstInstance().instVars.isBuyed = true;
+		}
+
 		window.Namespace.tipContentUsed = save.tipContentUsed;
+		window.Namespace.tipLetterRandom = save.tipLetterRandom;
+		window.Namespace.tipLetterSelected = save.tipLetterSelected;
+		console.log(window.Namespace.tipLetterSelected)
 		
 	}
 	else{
@@ -369,6 +380,8 @@ async function OnBeforeProjectStart(runtime)
 				boardComplete[j].index,
 				boardComplete[j].complete,
 				mainComplete,
+				window.Namespace.tipLetterRandom,
+				window.Namespace.tipLetterSelected,
 			  );
 			  
 			   runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
@@ -648,7 +661,15 @@ function Tick(runtime) {
 				window.Namespace.board = boardSave;
 				window.Namespace.question = questionSave;
 				
-				 const save = { words: boardSave, questions: questionSave, nameSection: runtime.globalVars.nomeSecao, time: runtime.globalVars.TempoGasto, tipContentUsed: window.Namespace.tipContentUsed, coin: runtime.globalVars.moedas}
+				 const save = { words: boardSave, 
+				 questions: questionSave, 
+				 nameSection: runtime.globalVars.nomeSecao, 
+				 time: runtime.globalVars.TempoGasto, 
+				 tipContentUsed: window.Namespace.tipContentUsed,
+			     tipLetterRandom: window.Namespace.tipLetterRandom,
+			     tipLetterSelected: window.Namespace.tipLetterSelected,
+				 coin: runtime.globalVars.moedas}
+
 				 window.Namespace.session.rawData = JSON.stringify(save)
 				 runtime.callFunction("save");
 			}

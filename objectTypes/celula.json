@@ -88,10 +88,26 @@
 			"desc": "",
 			"show": true,
 			"sid": 931246475469822
+		},
+		{
+			"name": "isTipUsed",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 561004084227499
 		}
 	],
 	"behaviorTypes": [],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "aCor"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "bCor"
+		}
+	],
 	"animations": {
 		"items": [
 			{

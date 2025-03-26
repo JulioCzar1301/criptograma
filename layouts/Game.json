@@ -301,7 +301,8 @@
 						"anteriorMain": 0,
 						"posteriorMain": 0,
 						"idLacuna": 0,
-						"dica": false
+						"dica": false,
+						"isTipUsed": false
 					},
 					"behaviors": {},
 					"effects": {
@@ -315,6 +316,28 @@
 							"isEnabled": false,
 							"parameters": {
 								"intensity": 1
+							}
+						},
+						"aCor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
+							}
+						},
+						"bCor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									0.8156862745098039,
+									0.30196078431372547,
+									1
+								]
 							}
 						}
 					},

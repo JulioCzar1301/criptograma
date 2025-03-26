@@ -400,7 +400,8 @@
 				},
 				{
 					"callFunction": "resetSave",
-					"sid": 474981509660118
+					"sid": 474981509660118,
+					"disabled": true
 				}
 			],
 			"sid": 412088733952578
@@ -478,6 +479,20 @@
 							"initialValue": "false",
 							"comment": "",
 							"sid": 480655814987034
+						},
+						{
+							"name": "letterRandom",
+							"type": "string",
+							"initialValue": "",
+							"comment": "caso a dica aleatória seja usada",
+							"sid": 628824297647482
+						},
+						{
+							"name": "letterSelected",
+							"type": "string",
+							"initialValue": "",
+							"comment": "caso a dica de escolher o simbolo seja usada",
+							"sid": 169825870149226
 						}
 					],
 					"eventType": "function-block",
@@ -814,6 +829,112 @@
 												}
 											],
 											"sid": 235388973459219
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 544128162703371,
+													"parameters": {
+														"first-value": "celula.letter",
+														"comparison": 0,
+														"second-value": "letterSelected"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "Letra",
+													"sid": 656270279470513,
+													"parameters": {
+														"text": "uppercase(mid(string, loopindex , 1))"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "celula",
+													"sid": 341452810596643,
+													"parameters": {
+														"instance-variable": "isTipUsed",
+														"value": "true"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "celula",
+													"sid": 224387066435803,
+													"parameters": {
+														"instance-variable": "block",
+														"value": "true"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "Letra",
+													"sid": 706387316533258,
+													"parameters": {
+														"instance-variable": "block",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 394414358168726
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 907900407403314,
+													"parameters": {
+														"first-value": "celula.letter",
+														"comparison": 0,
+														"second-value": "letterRandom"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "Letra",
+													"sid": 369613219830418,
+													"parameters": {
+														"text": "uppercase(mid(string, loopindex , 1))"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "celula",
+													"sid": 551601892467599,
+													"parameters": {
+														"instance-variable": "isTipUsed",
+														"value": "true"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "celula",
+													"sid": 373454794283116,
+													"parameters": {
+														"instance-variable": "block",
+														"value": "true"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "Letra",
+													"sid": 250802089519163,
+													"parameters": {
+														"instance-variable": "block",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 580653425168177
 										}
 									]
 								},
@@ -8395,6 +8516,16 @@
 					"children": [
 						{
 							"eventType": "variable",
+							"name": "actualCelula",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 607768763889775
+						},
+						{
+							"eventType": "variable",
 							"name": "idAnswer",
 							"type": "number",
 							"initialValue": "0",
@@ -8533,6 +8664,96 @@
 								}
 							],
 							"sid": 860120641453373
+						},
+						{
+							"eventType": "comment",
+							"text": "Animação da palavra incorreta"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 758780519524935,
+									"parameters": {
+										"variable": "actualCelula",
+										"value": "celulaChosen"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 217994739243961,
+									"parameters": {
+										"variable": "celulaChosen",
+										"value": "-1"
+									}
+								}
+							],
+							"sid": 375037935924153
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 263958750222144,
+									"parameters": {
+										"object": "celula",
+										"expression": "celula.idLacuna = idAnswer"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "celula",
+									"sid": 749671691195936,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"bCor\""
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 392403810243003,
+									"parameters": {
+										"seconds": "1",
+										"use-timescale": true
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "celula",
+									"sid": 301634825077210,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"bCor\""
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "celula",
+									"sid": 171079442047959,
+									"parameters": {
+										"frame-number": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 407370469356497,
+									"parameters": {
+										"variable": "celulaChosen",
+										"value": "actualCelula"
+									}
+								}
+							],
+							"sid": 523169455244631
 						}
 					]
 				}
@@ -9961,6 +10182,25 @@
 														"variable": "aux",
 														"value": "celula.letter"
 													}
+												},
+												{
+													"type": "script",
+													"script": [
+														"window.Namespace.tipLetterRandom = localVars.aux"
+													]
+												},
+												{
+													"callFunction": "saveTips",
+													"sid": 577707994020877
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "celula",
+													"sid": 845321627556706,
+													"parameters": {
+														"instance-variable": "block",
+														"value": "true"
+													}
 												}
 											],
 											"sid": 950230667735601
@@ -10012,6 +10252,15 @@
 											"sid": 732735615217049,
 											"parameters": {
 												"text": "uppercase(aux)"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Letra",
+											"sid": 869098083890896,
+											"parameters": {
+												"instance-variable": "block",
+												"value": "true"
 											}
 										}
 									],
@@ -10681,6 +10930,16 @@
 												"mode": "enable",
 												"effect": "\"Comprada\""
 											}
+										},
+										{
+											"type": "script",
+											"script": [
+												"window.Namespace.tipContentUsed = true;"
+											]
+										},
+										{
+											"callFunction": "saveTips",
+											"sid": 766658552314830
 										}
 									],
 									"sid": 580293496237018
@@ -10694,35 +10953,6 @@
 										1,
 										1
 									]
-								},
-								{
-									"eventType": "block",
-									"conditions": [],
-									"actions": [
-										{
-											"type": "script",
-											"script": [
-												"window.Namespace.tipContentUsed = true;",
-												"",
-												"console.log(window.Namespace.board)",
-												"console.log(window.Namespace.question)",
-												"",
-												"const save = { words: window.Namespace.board,",
-												"\t\t\t   questions: window.Namespace.question,",
-												"\t\t\t   nameSection: runtime.globalVars.nomeSecao, ",
-												"\t\t\t   time: runtime.globalVars.TempoGasto, ",
-												"\t\t\t   tipContentUsed: window.Namespace.tipContentUsed, ",
-												"\t\t\t   coin: runtime.globalVars.moedas}",
-												"\t\t\t   ",
-												"window.Namespace.session.rawData = JSON.stringify(save)"
-											]
-										},
-										{
-											"callFunction": "save",
-											"sid": 254173637938988
-										}
-									],
-									"sid": 399603667586701
 								}
 							]
 						}
@@ -11203,6 +11433,17 @@
 										{
 											"callFunction": "dicaInvisivel",
 											"sid": 182257784905797
+										},
+										{
+											"type": "script",
+											"script": [
+												"window.Namespace.tipLetterSelected = localVars.aux",
+												""
+											]
+										},
+										{
+											"callFunction": "saveTips",
+											"sid": 168736051204223
 										}
 									],
 									"sid": 731439122339482
@@ -11271,6 +11512,15 @@
 											"parameters": {
 												"instance-variable": "dica"
 											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "celula",
+											"sid": 989288148190844,
+											"parameters": {
+												"instance-variable": "block",
+												"value": "true"
+											}
 										}
 									],
 									"sid": 483939144742785
@@ -11295,6 +11545,15 @@
 											"sid": 616671815121059,
 											"parameters": {
 												"text": "uppercase(aux)"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Letra",
+											"sid": 328466024634478,
+											"parameters": {
+												"instance-variable": "block",
+												"value": "true"
 											}
 										}
 									],
@@ -11583,6 +11842,54 @@
 							]
 						}
 					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Salvar as dicas",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "saveTips",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": [
+								"",
+								"",
+								"console.log(window.Namespace.board)",
+								"console.log(window.Namespace.question)",
+								"",
+								"const save = { words: window.Namespace.board,",
+								"\t\t\t   questions: window.Namespace.question,",
+								"\t\t\t   nameSection: runtime.globalVars.nomeSecao, ",
+								"\t\t\t   time: runtime.globalVars.TempoGasto, ",
+								"\t\t\t   tipContentUsed: window.Namespace.tipContentUsed,",
+								"\t\t\t   tipLetterRandom: window.Namespace.tipLetterRandom,",
+								"\t\t\t   tipLetterSelected: window.Namespace.tipLetterSelected,",
+								"\t\t\t   coin: runtime.globalVars.moedas}",
+								"\t\t\t   ",
+								"window.Namespace.session.rawData = JSON.stringify(save)"
+							]
+						},
+						{
+							"callFunction": "save",
+							"sid": 697530182783839
+						}
+					],
+					"sid": 717203415172798
 				}
 			],
 			"sid": 312968649701192

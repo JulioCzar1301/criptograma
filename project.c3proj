@@ -1,11 +1,18 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 42402,
+	"savedWithRelease": 43200,
 	"name": "criptograma",
 	"runtime": "c3",
 	"useWorker": "auto",
 	"bundleAddons": false,
 	"usedAddons": [
+		{
+			"type": "plugin",
+			"id": "Json",
+			"name": "JSON",
+			"author": "Scirra",
+			"bundled": false
+		},
 		{
 			"type": "plugin",
 			"id": "Keyboard",
@@ -136,7 +143,6 @@
 			"jogMelhorPontuacao",
 			"IndicePalavra",
 			"textIndicePalavra",
-			"Sprite",
 			"cancelDica",
 			"dicaPopUp",
 			"moedasRestantes",
@@ -147,7 +153,12 @@
 			"DicaDescName",
 			"dicaDescContainer",
 			"dicaConteudo",
-			"dicaContainer"
+			"dicaContainer",
+			"simboloDicaContainer",
+			"simboloContainer",
+			"JSON",
+			"dica1",
+			"dica0"
 		],
 		"subfolders": [
 			{

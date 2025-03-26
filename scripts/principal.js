@@ -55,6 +55,7 @@ async function OnBeforeProjectStart(runtime)
 	//window.Namespace.idChapter = chapterID;
 	//caso do save
 	
+	saveExample = ""
 	if( saveExample != ""){
 		const save = JSON.parse(saveExample)
 		console.log(save)
@@ -307,6 +308,7 @@ async function OnBeforeProjectStart(runtime)
 				boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
 				questionsSelected.sort((a, b) => a.index - b.index);
 
+				window.Namespace.symbols = JSON.stringify(symbols);
 				boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
 				window.Namespace.board = boardSave;
 				console.log(boardSave)
@@ -685,7 +687,7 @@ function getUniqueCharacters(words) {
 }
 
 function getSymbol(letters){
-    let symbolsIndex = Array.from({ length: 27 }, (_, i) => i);
+    let symbolsIndex = Array.from({ length: 26 }, (_, i) => i);
 	let symbolsChar = [];
 	for( let i = 0; i < letters.length; i++){
 		const index = symbolsIndex[Math.floor(Math.random() * symbolsIndex.length)]

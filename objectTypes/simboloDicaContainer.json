@@ -1,0 +1,52 @@
+{
+	"name": "simboloDicaContainer",
+	"plugin-id": "Sprite",
+	"sid": 470277966851557,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 1030,
+						"height": 176,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 189590,
+						"collisionPoly": {
+							"points": [
+								0.039805825242718446,
+								0.10795454545454546,
+								0.9728155339805825,
+								0.11931818181818182,
+								0.9611650485436893,
+								0.8920454545454546,
+								0.027184466019417475,
+								0.8806818181818182
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 454374839461935,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

@@ -262,6 +262,16 @@
 			"sid": 872399264850530
 		},
 		{
+			"eventType": "variable",
+			"name": "symbols",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 647174212555885
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -336,6 +346,11 @@
 				},
 				{
 					"id": "destroy",
+					"objectClass": "simboloDicaContainer",
+					"sid": 870347120843662
+				},
+				{
+					"id": "destroy",
 					"objectClass": "Indice",
 					"sid": 288085357074691
 				},
@@ -360,6 +375,11 @@
 					"sid": 878098036193982
 				},
 				{
+					"id": "destroy",
+					"objectClass": "simboloContainer",
+					"sid": 409899047251663
+				},
+				{
 					"type": "comment",
 					"text": "ADICIONAR A PALAVRA PRINCIPAL À LISTA DE PALAVRAS",
 					"text-color": [
@@ -377,6 +397,10 @@
 						"variable": "words",
 						"value": "first_word & \",\" & words"
 					}
+				},
+				{
+					"callFunction": "resetSave",
+					"sid": 474981509660118
 				}
 			],
 			"sid": 412088733952578
@@ -505,6 +529,15 @@
 									"parameters": {
 										"instance-variable": "idQuestao",
 										"value": "index"
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "celula",
+									"sid": 545516943363358,
+									"parameters": {
+										"width": "52",
+										"height": "52"
 									}
 								},
 								{
@@ -1362,7 +1395,9 @@
 										},
 										{
 											"type": "script",
-											"script": "runtime.globalVars.existImage = true;"
+											"script": [
+												"runtime.globalVars.existImage = true;"
+											]
 										}
 									],
 									"sid": 216411771324716,
@@ -1840,7 +1875,46 @@
 										},
 										{
 											"type": "script",
-											"script": "// Obtém a instância atual de Lacuna\nconst lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();\n\n// Obtém a resposta da instância atual\nconst resposta = lacunaInstance.instVars.resposta;\n\n// Obtém a lista de palavras\nconst words = runtime.globalVars.words;\n\n// Função para normalizar a palavra\nfunction normalizeWord(word) {\n  return word\n    .toLowerCase() // Converte para caixa baixa\n    .normalize(\"NFD\") // Decompõe caracteres com acentos\n    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos\n    .replace(/\\s+/g, \"\"); // Remove todos os espaços\n}\n\n// Função para encontrar o índice da resposta na lista de palavras\nfunction findWordIndex(words, resposta) {\n  // Divide a string `words` em um array usando a vírgula como separador\n  const wordsArray = words.split(\",\");\n\n  // Normaliza a resposta\n  const respostaNormalizada = normalizeWord(resposta);\n\n  // Encontra o índice da resposta no array\n  const index = wordsArray.findIndex(word => normalizeWord(word) === respostaNormalizada);\n\n  // Retorna o índice (ou -1 se não encontrar)\n  return index;\n}\n\n// Encontra o índice da palavra\nconst indice = findWordIndex(words, resposta);\n\n// Atribui o índice à variável de instância `idteste`\nlocalVars.indice = indice;"
+											"script": [
+												"// Obtém a instância atual de Lacuna",
+												"const lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();",
+												"",
+												"// Obtém a resposta da instância atual",
+												"const resposta = lacunaInstance.instVars.resposta;",
+												"",
+												"// Obtém a lista de palavras",
+												"const words = runtime.globalVars.words;",
+												"",
+												"// Função para normalizar a palavra",
+												"function normalizeWord(word) {",
+												"  return word",
+												"    .toLowerCase() // Converte para caixa baixa",
+												"    .normalize(\"NFD\") // Decompõe caracteres com acentos",
+												"    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos",
+												"    .replace(/\\s+/g, \"\"); // Remove todos os espaços",
+												"}",
+												"",
+												"// Função para encontrar o índice da resposta na lista de palavras",
+												"function findWordIndex(words, resposta) {",
+												"  // Divide a string `words` em um array usando a vírgula como separador",
+												"  const wordsArray = words.split(\",\");",
+												"",
+												"  // Normaliza a resposta",
+												"  const respostaNormalizada = normalizeWord(resposta);",
+												"",
+												"  // Encontra o índice da resposta no array",
+												"  const index = wordsArray.findIndex(word => normalizeWord(word) === respostaNormalizada);",
+												"",
+												"  // Retorna o índice (ou -1 se não encontrar)",
+												"  return index;",
+												"}",
+												"",
+												"// Encontra o índice da palavra",
+												"const indice = findWordIndex(words, resposta);",
+												"",
+												"// Atribui o índice à variável de instância `idteste`",
+												"localVars.indice = indice;"
+											]
 										},
 										{
 											"id": "set-instvar-value",
@@ -5128,7 +5202,38 @@
 											"actions": [
 												{
 													"type": "script",
-													"script": "// Obtém a resposta a ser comparada\nconst respostaLacunaNormalizada = normalizeWord(localVars.respostaLacuna);\n\n// Função para normalizar a palavra\nfunction normalizeWord(word) {\n  return word\n    .toLowerCase() // Converte para caixa baixa\n    .normalize(\"NFD\") // Decompõe caracteres com acentos\n    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos\n    .replace(/\\s+/g, \"\"); // Remove todos os espaços\n}\n\n// Percorre todas as instâncias de Lacuna\nconst lacunas = runtime.objects.Lacuna.getAllInstances();\nlet idEncontrado = null; // Variável para armazenar o iid ou uid\n\nfor (const lacuna of lacunas) {\n  // Normaliza a resposta da instância atual\n  const respostaNormalizada = normalizeWord(lacuna.instVars.resposta);\n\n  // Compara com a resposta normalizada\n  if (respostaNormalizada === respostaLacunaNormalizada) {\n    // Armazena o iid ou uid da instância encontrada\n    idEncontrado = lacuna.uid; // ou lacuna.uid, dependendo do que você precisa\n    break; // Sai do loop após encontrar a instância\n  }\n}\n\n// Armazena o resultado em uma variável (global ou local)\nlocalVars.iidLacuna = idEncontrado; "
+													"script": [
+														"// Obtém a resposta a ser comparada",
+														"const respostaLacunaNormalizada = normalizeWord(localVars.respostaLacuna);",
+														"",
+														"// Função para normalizar a palavra",
+														"function normalizeWord(word) {",
+														"  return word",
+														"    .toLowerCase() // Converte para caixa baixa",
+														"    .normalize(\"NFD\") // Decompõe caracteres com acentos",
+														"    .replace(/[\\u0300-\\u036f]/g, \"\") // Remove marcas de acentos",
+														"    .replace(/\\s+/g, \"\"); // Remove todos os espaços",
+														"}",
+														"",
+														"// Percorre todas as instâncias de Lacuna",
+														"const lacunas = runtime.objects.Lacuna.getAllInstances();",
+														"let idEncontrado = null; // Variável para armazenar o iid ou uid",
+														"",
+														"for (const lacuna of lacunas) {",
+														"  // Normaliza a resposta da instância atual",
+														"  const respostaNormalizada = normalizeWord(lacuna.instVars.resposta);",
+														"",
+														"  // Compara com a resposta normalizada",
+														"  if (respostaNormalizada === respostaLacunaNormalizada) {",
+														"    // Armazena o iid ou uid da instância encontrada",
+														"    idEncontrado = lacuna.uid; // ou lacuna.uid, dependendo do que você precisa",
+														"    break; // Sai do loop após encontrar a instância",
+														"  }",
+														"}",
+														"",
+														"// Armazena o resultado em uma variável (global ou local)",
+														"localVars.iidLacuna = idEncontrado; "
+													]
 												}
 											],
 											"sid": 329643068745611,
@@ -6573,7 +6678,9 @@
 										},
 										{
 											"type": "script",
-											"script": "console.log(\"oi\")"
+											"script": [
+												"console.log(\"oi\")"
+											]
 										}
 									],
 									"sid": 857331542140479
@@ -7048,7 +7155,9 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "console.log(\"cheguei nessa poha \")"
+							"script": [
+								"console.log(\"cheguei nessa poha \")"
+							]
 						}
 					],
 					"sid": 609050556203862,
@@ -7108,7 +7217,9 @@
 								},
 								{
 									"type": "script",
-									"script": "console.log(\"qtde de respostas : \",localVars.qtdeRespostas)"
+									"script": [
+										"console.log(\"qtde de respostas : \",localVars.qtdeRespostas)"
+									]
 								}
 							],
 							"sid": 543404575268774
@@ -7272,7 +7383,9 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "console.log(\"qtde de respostas caso não tenha : \",localVars.qtdeRespostas)"
+									"script": [
+										"console.log(\"qtde de respostas caso não tenha : \",localVars.qtdeRespostas)"
+									]
 								}
 							],
 							"sid": 718867865737449,
@@ -8273,7 +8386,9 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "console.log(\"tentativa marcada\")"
+							"script": [
+								"console.log(\"tentativa marcada\")"
+							]
 						}
 					],
 					"sid": 978252156486708,
@@ -8621,6 +8736,15 @@
 										"mode": "disable",
 										"effect": "\"Comprada\""
 									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica0",
+									"sid": 882166598626997,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
 								}
 							],
 							"sid": 646061549442173
@@ -8643,6 +8767,15 @@
 									"id": "set-effect-enabled",
 									"objectClass": "dicaSpot1",
 									"sid": 799295662064814,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica1",
+									"sid": 395152141080441,
 									"parameters": {
 										"mode": "disable",
 										"effect": "\"Comprada\""
@@ -8688,7 +8821,7 @@
 						},
 						{
 							"eventType": "comment",
-							"text": "DICA 2: CONTEÚDO",
+							"text": "DICA 0: SÍMBOLO ESCOLHIDO",
 							"text-color": [
 								1,
 								1,
@@ -8702,15 +8835,15 @@
 								{
 									"id": "cursor-is-over-object",
 									"objectClass": "Mouse",
-									"sid": 956064071910713,
+									"sid": 784625777516873,
 									"parameters": {
-										"object": "dicaSpot2"
+										"object": "dicaSpot0"
 									}
 								},
 								{
 									"id": "is-boolean-instance-variable-set",
-									"objectClass": "dicaSpot2",
-									"sid": 868478243588411,
+									"objectClass": "dicaSpot0",
+									"sid": 861067765064814,
 									"parameters": {
 										"instance-variable": "isBuyed"
 									},
@@ -8718,8 +8851,8 @@
 								},
 								{
 									"id": "is-boolean-instance-variable-set",
-									"objectClass": "dicaSpot0",
-									"sid": 286467483170395,
+									"objectClass": "dicaSpot1",
+									"sid": 831777232247492,
 									"parameters": {
 										"instance-variable": "isSelected"
 									},
@@ -8727,8 +8860,8 @@
 								},
 								{
 									"id": "is-boolean-instance-variable-set",
-									"objectClass": "dicaSpot1",
-									"sid": 831777232247492,
+									"objectClass": "dicaSpot2",
+									"sid": 412902367600668,
 									"parameters": {
 										"instance-variable": "isSelected"
 									},
@@ -8747,8 +8880,8 @@
 							"actions": [
 								{
 									"id": "set-opacity",
-									"objectClass": "dicaSpot2",
-									"sid": 782784687252165,
+									"objectClass": "dicaSpot0",
+									"sid": 973419441377685,
 									"parameters": {
 										"opacity": "85"
 									}
@@ -8762,11 +8895,11 @@
 										{
 											"id": "on-object-clicked",
 											"objectClass": "Mouse",
-											"sid": 697225528202547,
+											"sid": 554097154213665,
 											"parameters": {
 												"mouse-button": "left",
 												"click-type": "clicked",
-												"object-clicked": "dicaSpot2"
+												"object-clicked": "dicaSpot0"
 											}
 										}
 									],
@@ -8778,17 +8911,17 @@
 										{
 											"id": "set-text",
 											"objectClass": "DicaName",
-											"sid": 452643192190938,
+											"sid": 694097016459355,
 											"parameters": {
-												"text": "\"Dica Descritiva\""
+												"text": "\"Símbolo Escolhido\""
 											}
 										},
 										{
 											"id": "set-text",
 											"objectClass": "dicaInstruc",
-											"sid": 112602420147735,
+											"sid": 299424593489210,
 											"parameters": {
-												"text": "\"Revela uma dica de conteúdo.\""
+												"text": "\"Revela a letra correspondente a um símbolo de sua escolha.\""
 											}
 										}
 									],
@@ -8835,8 +8968,8 @@
 													"actions": [
 														{
 															"id": "set-boolean-instvar",
-															"objectClass": "dicaSpot2",
-															"sid": 397963181800058,
+															"objectClass": "dicaSpot0",
+															"sid": 458238110509011,
 															"parameters": {
 																"instance-variable": "isSelected",
 																"value": "true"
@@ -8844,8 +8977,8 @@
 														},
 														{
 															"id": "set-default-color",
-															"objectClass": "dicaSpot2",
-															"sid": 136335323489833,
+															"objectClass": "dicaSpot0",
+															"sid": 328929962226641,
 															"parameters": {
 																"color": "rgbEx(40,40,60)"
 															}
@@ -8871,6 +9004,386 @@
 												}
 											],
 											"sid": 135007092465255
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "DICA 1: SÍMBOLO ALEATÓRIO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "cursor-is-over-object",
+									"objectClass": "Mouse",
+									"sid": 581958653081965,
+									"parameters": {
+										"object": "dicaSpot1"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 297958397355587,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 875075464934039,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 529556528267412,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 709999109587693,
+									"parameters": {
+										"variable": "endgame"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "dicaSpot1",
+									"sid": 677287999292012,
+									"parameters": {
+										"opacity": "85"
+									}
+								}
+							],
+							"sid": 937539311369529,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 524505796420025,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "dicaSpot1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarDica",
+											"sid": 660726031100868
+										},
+										{
+											"id": "set-text",
+											"objectClass": "DicaName",
+											"sid": 310887884025967,
+											"parameters": {
+												"text": "\"Símbolo Aleatório\""
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "dicaInstruc",
+											"sid": 109585625948896,
+											"parameters": {
+												"text": "\"Revela a letra correspondente a um símbolo aleatório.\""
+											}
+										}
+									],
+									"sid": 974287918624625,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 699336137216630,
+													"parameters": {
+														"first-value": "precoDica",
+														"comparison": 3,
+														"second-value": "moedas"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 619979270058455,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 248235476775953,
+															"parameters": {
+																"instance-variable": "isSelected"
+															}
+														},
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 403756947748531,
+															"parameters": {
+																"instance-variable": "isCorrect"
+															},
+															"isInverted": true
+														}
+													],
+													"actions": [
+														{
+															"id": "set-boolean-instvar",
+															"objectClass": "dicaSpot1",
+															"sid": 110173991356495,
+															"parameters": {
+																"instance-variable": "isSelected",
+																"value": "true"
+															}
+														},
+														{
+															"id": "set-default-color",
+															"objectClass": "dicaSpot1",
+															"sid": 743260542235766,
+															"parameters": {
+																"color": "rgbEx(40,40,60)"
+															}
+														}
+													],
+													"sid": 329273689981077
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 745942411030890
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "moedasInsuficiente",
+													"sid": 184752068149972
+												}
+											],
+											"sid": 474285513859829
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "DICA 2: CONTEÚDO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "cursor-is-over-object",
+									"objectClass": "Mouse",
+									"sid": 306386766268847,
+									"parameters": {
+										"object": "dicaSpot2"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot2",
+									"sid": 699355265659216,
+									"parameters": {
+										"instance-variable": "isBuyed"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 123919053397632,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 961853716000872,
+									"parameters": {
+										"instance-variable": "isSelected"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 305889961649847,
+									"parameters": {
+										"variable": "endgame"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-opacity",
+									"objectClass": "dicaSpot2",
+									"sid": 638884856948729,
+									"parameters": {
+										"opacity": "85"
+									}
+								}
+							],
+							"sid": 386778999185827,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 567584585208606,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "dicaSpot2"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarDica",
+											"sid": 536765125514630
+										},
+										{
+											"id": "set-text",
+											"objectClass": "DicaName",
+											"sid": 401236370458150,
+											"parameters": {
+												"text": "\"Dica Descritiva\""
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "dicaInstruc",
+											"sid": 490480065414726,
+											"parameters": {
+												"text": "\"Revela uma dica de conteúdo.\""
+											}
+										}
+									],
+									"sid": 102798809020363,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 879089164684730,
+													"parameters": {
+														"first-value": "precoDica",
+														"comparison": 3,
+														"second-value": "moedas"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 882716521397307,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 138596792662463,
+															"parameters": {
+																"instance-variable": "isSelected"
+															}
+														},
+														{
+															"id": "is-boolean-instance-variable-set",
+															"objectClass": "Lacuna",
+															"sid": 246585514078008,
+															"parameters": {
+																"instance-variable": "isCorrect"
+															},
+															"isInverted": true
+														}
+													],
+													"actions": [
+														{
+															"id": "set-boolean-instvar",
+															"objectClass": "dicaSpot2",
+															"sid": 385722424912988,
+															"parameters": {
+																"instance-variable": "isSelected",
+																"value": "true"
+															}
+														},
+														{
+															"id": "set-default-color",
+															"objectClass": "dicaSpot2",
+															"sid": 562181392269589,
+															"parameters": {
+																"color": "rgbEx(40,40,60)"
+															}
+														}
+													],
+													"sid": 998064667467577
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 257873853178836
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "moedasInsuficiente",
+													"sid": 297100661747608
+												}
+											],
+											"sid": 300611201605740
 										}
 									]
 								}
@@ -8937,6 +9450,15 @@
 										"mode": "enable",
 										"effect": "\"Comprada\""
 									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica0",
+									"sid": 106711432310603,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
 								}
 							],
 							"sid": 516979946859451
@@ -8959,6 +9481,15 @@
 									"id": "set-effect-enabled",
 									"objectClass": "dicaSpot1",
 									"sid": 947679158788899,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica1",
+									"sid": 986294358784816,
 									"parameters": {
 										"mode": "enable",
 										"effect": "\"Comprada\""
@@ -9001,6 +9532,508 @@
 								}
 							],
 							"sid": 513547861642223
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "DICA 0: DICA DE SÍMBOLO ESCOLHIDO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "mostrarSímboloEscolhido",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 812449826149637,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "gap",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 238197314653067
+						},
+						{
+							"eventType": "comment",
+							"text": "POP-UP DE POSSÍVEIS ESCOLHAS DE SÍMBOLOS",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 596062000902376,
+									"parameters": {
+										"object": "textQuestao"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 196198362762111,
+									"parameters": {
+										"object": "Lacuna",
+										"expression": "Lacuna.isSelected = 1"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 902476326282403,
+									"parameters": {
+										"object": "textQuestao",
+										"expression": "textQuestao.idQuestao = Lacuna.idQuestao"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 608784195156882,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "fundoDesfoque",
+									"sid": 660101123371164,
+									"parameters": {
+										"x": "0",
+										"y": "0"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "fundoDesfoque",
+									"sid": 658584783842506,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 316250536036432,
+									"parameters": {
+										"object-to-create": "simboloDicaContainer",
+										"layer": "3",
+										"x": "LayoutWidth/2",
+										"y": "LayoutHeight/2",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 534076314898559,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								},
+								{
+									"type": "script",
+									"script": [
+										"runtime.globalVars.symbols = window.Namespace.symbols"
+									]
+								},
+								{
+									"id": "parse",
+									"objectClass": "JSON",
+									"sid": 214194414448577,
+									"parameters": {
+										"data": "symbols"
+									}
+								}
+							],
+							"sid": 480077217670760,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "GERANDO OS SÍMBOLOS",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "variable",
+									"name": "aux",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 311810859329476
+								},
+								{
+									"eventType": "variable",
+									"name": "minBlocks",
+									"type": "number",
+									"initialValue": "8",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 587137722895162
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "JSON",
+											"sid": 842462546232457,
+											"parameters": {
+												"path": "JSON.Path"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 603411245957601,
+											"parameters": {
+												"object-to-create": "simboloContainer",
+												"layer": "3",
+												"x": "simboloDicaContainer.BBoxLeft + 76",
+												"y": "simboloDicaContainer.Y - simboloContainer.Height/2",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 210214227050900,
+											"parameters": {
+												"variable": "gap",
+												"value": "simboloContainer.IID * simboloContainer.Width "
+											}
+										},
+										{
+											"id": "set-y",
+											"objectClass": "simboloContainer",
+											"sid": 747951900521043,
+											"parameters": {
+												"y": "simboloContainer.IID > minBlocks ? simboloDicaContainer.Y + simboloContainer.Height - simboloContainer.Height/2 : simboloDicaContainer.Y - simboloContainer.Height/2"
+											}
+										},
+										{
+											"id": "set-x",
+											"objectClass": "simboloContainer",
+											"sid": 751703715153121,
+											"parameters": {
+												"x": "simboloContainer.Y > simboloDicaContainer.Y ? (simboloContainer.X + gap - (simboloContainer.Width * minBlocks)) + (18 - (tokencount(JSON.ToBeautifiedString, \"{\") + 1)) * simboloContainer.Width/2 : simboloContainer.X + gap"
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 211090045440927,
+											"parameters": {
+												"object-to-create": "simbolo",
+												"layer": "3",
+												"x": "simboloContainer.X",
+												"y": "simboloContainer.Y",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-z-elevation",
+											"objectClass": "simbolo",
+											"sid": 818205736007396,
+											"parameters": {
+												"z": "1"
+											}
+										},
+										{
+											"id": "set-size",
+											"objectClass": "simbolo",
+											"sid": 807037752402637,
+											"parameters": {
+												"width": "36",
+												"height": "36"
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "simbolo",
+											"sid": 801149726745749,
+											"parameters": {
+												"mode": "disable",
+												"effect": "\"DefinirCor\""
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "simbolo",
+											"sid": 965630009508980,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"ColorTemp\""
+											}
+										},
+										{
+											"id": "toggle-boolean-instvar",
+											"objectClass": "simbolo",
+											"sid": 832000387313753,
+											"parameters": {
+												"instance-variable": "temp"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 976881309333244,
+											"parameters": {
+												"variable": "aux",
+												"value": "simboloContainer.IID"
+											}
+										},
+										{
+											"type": "comment",
+											"text": "MUDAR O QUADRO PROS SÍMBOLOS DISPONÍVEIS NA MALHA",
+											"text-color": [
+												1,
+												1,
+												1,
+												1
+											]
+										},
+										{
+											"type": "script",
+											"script": [
+												"// CARREGA O JSON A PARTIR DA VARIAVEL GLOBAL SYMBOLS",
+												"const symbolsJSON = runtime.globalVars.symbols;",
+												"",
+												"// PASSA A STRING PRA JSON",
+												"const symbolsData = JSON.parse(symbolsJSON);",
+												"",
+												"// PEGAR O VALOR DE SYMBOLS",
+												"const currentItem = symbolsData[localVars.aux];",
+												"const frameNumber = currentItem.symbols;",
+												"const frameLetter = currentItem.letter;",
+												"",
+												"// PASSAR O VALOR NUMÉRICO PRO QUADRO DO SÍMBOLO",
+												"const simboloInstance = runtime.objects.simbolo.getFirstPickedInstance();",
+												"simboloInstance.animationFrame = frameNumber;",
+												"simboloInstance.instVars.letter = frameLetter"
+											]
+										}
+									],
+									"sid": 283487104786057
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "DICA 1: DICA DE SÍMBOLO ALEATORIO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"functionName": "mostrarSímboloAleatorio",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 283561992015232,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "POP-UP DE POSSÍVEIS ESCOLHAS DE SÍMBOLOS",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot1",
+									"sid": 471175477586381,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 612345351887427,
+									"parameters": {
+										"variable": "endgame",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 405392425632332,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "aux",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 392519826527419
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 425480980271288,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.isMain = 0 & celula.block <> celula.dica = 0"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 973160826675653,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-random-instance",
+													"objectClass": "System",
+													"sid": 353955345856955,
+													"parameters": {
+														"object": "celula"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 321294363580793,
+													"parameters": {
+														"variable": "aux",
+														"value": "celula.letter"
+													}
+												}
+											],
+											"sid": 950230667735601
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 681122546198157,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.letter = aux & celula.isMain = 0 & celula.block = 0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "toggle-boolean-instvar",
+											"objectClass": "celula",
+											"sid": 837678739587425,
+											"parameters": {
+												"instance-variable": "dica"
+											}
+										}
+									],
+									"sid": 771636233120589
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 206387868317571,
+											"parameters": {
+												"object": "Letra",
+												"expression": "Letra.IID = celula.IID & celula.letter = aux & Letra.isMain = 0 & Letra.block = 0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "Letra",
+											"sid": 732735615217049,
+											"parameters": {
+												"text": "uppercase(aux)"
+											}
+										}
+									],
+									"sid": 114470422954296
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 271776665737334,
+											"parameters": {
+												"variable": "endgame",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 210080150422150
+								}
+							]
 						}
 					]
 				},
@@ -9293,6 +10326,14 @@
 									}
 								},
 								{
+									"id": "set-visible",
+									"objectClass": "precoDica",
+									"sid": 529533208688742,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
 									"id": "set-position",
 									"objectClass": "fundoDesfoque",
 									"sid": 994402792461168,
@@ -9435,31 +10476,40 @@
 							"sid": 714013512408581,
 							"children": [
 								{
+									"eventType": "comment",
+									"text": "DICA 0: SÍMBOLO ESCOLHIDO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "pick-by-evaluate",
-											"objectClass": "System",
-											"sid": 450157231876757,
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot0",
+											"sid": 986882538970239,
 											"parameters": {
-												"object": "dicaSpot2",
-												"expression": "dicaSpot2.isSelected = 1"
+												"instance-variable": "isSelected"
 											}
 										}
 									],
 									"actions": [
 										{
-											"callFunction": "mostrarDicaConteudo",
-											"sid": 736019237198569
+											"callFunction": "mostrarSímboloEscolhido",
+											"sid": 289899735604000
 										},
 										{
 											"callFunction": "dicaInvisivel",
-											"sid": 706987663387961
+											"sid": 161968126240967
 										},
 										{
 											"id": "set-boolean-instvar",
-											"objectClass": "dicaSpot2",
-											"sid": 223001359656553,
+											"objectClass": "dicaSpot0",
+											"sid": 297108366708546,
 											"parameters": {
 												"instance-variable": "isBuyed",
 												"value": "true"
@@ -9476,8 +10526,8 @@
 										},
 										{
 											"id": "set-effect-enabled",
-											"objectClass": "dicaSpot2",
-											"sid": 899507678453168,
+											"objectClass": "dicaSpot0",
+											"sid": 134886261527972,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"Comprada\""
@@ -9485,8 +10535,8 @@
 										},
 										{
 											"id": "set-effect-enabled",
-											"objectClass": "dica2",
-											"sid": 356969862983436,
+											"objectClass": "dica0",
+											"sid": 261926702018125,
 											"parameters": {
 												"mode": "enable",
 												"effect": "\"Comprada\""
@@ -9496,12 +10546,176 @@
 									"sid": 826502092528178
 								},
 								{
+									"eventType": "comment",
+									"text": "DICA 1: SÍMBOLO ALEATÓRIO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot1",
+											"sid": 733621871657594,
+											"parameters": {
+												"instance-variable": "isSelected"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarSímboloAleatorio",
+											"sid": 927763482486808
+										},
+										{
+											"callFunction": "dicaInvisivel",
+											"sid": 992657012189045
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot1",
+											"sid": 861632820250110,
+											"parameters": {
+												"instance-variable": "isBuyed",
+												"value": "true"
+											}
+										},
+										{
+											"id": "subtract-from-eventvar",
+											"objectClass": "System",
+											"sid": 146845737310776,
+											"parameters": {
+												"variable": "moedas",
+												"value": "precoDica"
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dicaSpot1",
+											"sid": 885745655552784,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dica1",
+											"sid": 804427735275559,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										}
+									],
+									"sid": 566546948159531
+								},
+								{
+									"eventType": "comment",
+									"text": "DICA 2: CONTEÚDO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot2",
+											"sid": 384708726573538,
+											"parameters": {
+												"instance-variable": "isSelected"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "mostrarDicaConteudo",
+											"sid": 571614098393231
+										},
+										{
+											"callFunction": "dicaInvisivel",
+											"sid": 691431916904101
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot2",
+											"sid": 685211113503948,
+											"parameters": {
+												"instance-variable": "isBuyed",
+												"value": "true"
+											}
+										},
+										{
+											"id": "subtract-from-eventvar",
+											"objectClass": "System",
+											"sid": 767279675359838,
+											"parameters": {
+												"variable": "moedas",
+												"value": "precoDica"
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dicaSpot2",
+											"sid": 419375207105118,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dica2",
+											"sid": 314477986567492,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										}
+									],
+									"sid": 580293496237018
+								},
+								{
+									"eventType": "comment",
+									"text": "LÓGICA DE SALVAMENTO",
+									"text-color": [
+										1,
+										1,
+										1,
+										1
+									]
+								},
+								{
 									"eventType": "block",
 									"conditions": [],
 									"actions": [
 										{
 											"type": "script",
-											"script": "window.Namespace.tipContentUsed = true;\n\nconsole.log(window.Namespace.board)\nconsole.log(window.Namespace.question)\n\nconst save = { words: window.Namespace.board,\n\t\t\t   questions: window.Namespace.question,\n\t\t\t   nameSection: runtime.globalVars.nomeSecao, \n\t\t\t   time: runtime.globalVars.TempoGasto, \n\t\t\t   tipContentUsed: window.Namespace.tipContentUsed, \n\t\t\t   coin: runtime.globalVars.moedas}\n\t\t\t   \nwindow.Namespace.session.rawData = JSON.stringify(save)"
+											"script": [
+												"window.Namespace.tipContentUsed = true;",
+												"",
+												"console.log(window.Namespace.board)",
+												"console.log(window.Namespace.question)",
+												"",
+												"const save = { words: window.Namespace.board,",
+												"\t\t\t   questions: window.Namespace.question,",
+												"\t\t\t   nameSection: runtime.globalVars.nomeSecao, ",
+												"\t\t\t   time: runtime.globalVars.TempoGasto, ",
+												"\t\t\t   tipContentUsed: window.Namespace.tipContentUsed, ",
+												"\t\t\t   coin: runtime.globalVars.moedas}",
+												"\t\t\t   ",
+												"window.Namespace.session.rawData = JSON.stringify(save)"
+											]
 										},
 										{
 											"callFunction": "save",
@@ -9586,6 +10800,15 @@
 								}
 							],
 							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 521454570341480,
+									"parameters": {
+										"variable": "endgame",
+										"value": "false"
+									}
+								},
 								{
 									"callFunction": "dicaInvisivel",
 									"sid": 396870361685329
@@ -9696,11 +10919,11 @@
 									}
 								},
 								{
-									"id": "set-y",
+									"id": "set-visible",
 									"objectClass": "precoDica",
-									"sid": 666448777162255,
+									"sid": 802097350090619,
 									"parameters": {
-										"y": "precoDica.Y + 18"
+										"visibility": "invisible"
 									}
 								},
 								{
@@ -9737,17 +10960,17 @@
 									}
 								},
 								{
-									"callFunction": "dicaInvisivel",
-									"sid": 109902539883830
-								},
-								{
 									"id": "set-boolean-eventvar",
 									"objectClass": "System",
-									"sid": 112405517739032,
+									"sid": 776154027868323,
 									"parameters": {
 										"variable": "endgame",
 										"value": "false"
 									}
+								},
+								{
+									"callFunction": "dicaInvisivel",
+									"sid": 109902539883830
 								}
 							],
 							"sid": 358312195197059
@@ -9852,53 +11075,255 @@
 									"sid": 802643046881506
 								},
 								{
-									"id": "set-visible",
-									"objectClass": "fundoDesfoque",
-									"sid": 734739237325140,
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 885415055005143,
 									"parameters": {
-										"visibility": "invisible"
+										"variable": "endgame",
+										"value": "false"
 									}
 								},
 								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaSprites",
-									"sid": 920505529559122,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueVertical\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaSprites",
-									"sid": 789373609856433,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueHorizontal\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaTexto",
-									"sid": 128620411246395,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueVertical\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaTexto",
-									"sid": 448960029722065,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueHorizontal\""
-									}
+									"callFunction": "dicaInvisivel",
+									"sid": 795816600219106
 								}
 							],
 							"sid": 863326423274017
 						}
 					]
+				},
+				{
+					"eventType": "comment",
+					"text": "AUXILIARES PARA BLOCO DE DICA DE SIMBOLO ESCOLHIDO",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "ESCOLHER UM SÍMBOLO AO TOQUE",
+					"text-color": [
+						1,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 506475773165395,
+							"parameters": {
+								"object": "simboloContainer"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-opacity",
+							"objectClass": "simboloContainer",
+							"sid": 409424919338623,
+							"parameters": {
+								"opacity": "85"
+							}
+						}
+					],
+					"sid": 183733483332474,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "aux",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 297975180112461
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-object-clicked",
+									"objectClass": "Mouse",
+									"sid": 447547871008569,
+									"parameters": {
+										"mouse-button": "left",
+										"click-type": "clicked",
+										"object-clicked": "simboloContainer"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 957790557807662,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 278165469004738,
+											"parameters": {
+												"object": "simbolo",
+												"expression": "simbolo.X = simboloContainer.X & simbolo.Y = simboloContainer.Y"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 841055020098819,
+											"parameters": {
+												"variable": "aux",
+												"value": "simbolo.letter"
+											}
+										},
+										{
+											"id": "destroy",
+											"objectClass": "simboloDicaContainer",
+											"sid": 231043426549288
+										},
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 538471659161318,
+											"parameters": {
+												"variable": "endgame",
+												"value": "false"
+											}
+										},
+										{
+											"callFunction": "dicaInvisivel",
+											"sid": 182257784905797
+										}
+									],
+									"sid": 731439122339482
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 792713600238996,
+											"parameters": {
+												"object": "simbolo",
+												"expression": "simbolo.temp = 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "simbolo",
+											"sid": 806985116765571
+										}
+									],
+									"sid": 636234569217112
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 168676466519936,
+											"parameters": {
+												"object": "simboloContainer"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "simboloContainer",
+											"sid": 688039527980132
+										}
+									],
+									"sid": 187925207581749
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 502023880234416,
+											"parameters": {
+												"object": "celula",
+												"expression": "celula.letter = aux & celula.isMain = 0 & celula.block = 0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "toggle-boolean-instvar",
+											"objectClass": "celula",
+											"sid": 499416799671780,
+											"parameters": {
+												"instance-variable": "dica"
+											}
+										}
+									],
+									"sid": 483939144742785
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 114128103095588,
+											"parameters": {
+												"object": "Letra",
+												"expression": "Letra.IID = celula.IID & celula.letter = aux & Letra.isMain = 0 & Letra.block = 0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "Letra",
+											"sid": 616671815121059,
+											"parameters": {
+												"text": "uppercase(aux)"
+											}
+										}
+									],
+									"sid": 360657167648136
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 156534686302750
+						}
+					],
+					"actions": [
+						{
+							"id": "set-opacity",
+							"objectClass": "simboloContainer",
+							"sid": 702268555470675,
+							"parameters": {
+								"opacity": "100"
+							}
+						}
+					],
+					"sid": 704193937698737
 				},
 				{
 					"eventType": "comment",
@@ -9924,7 +11349,7 @@
 						{
 							"id": "set-visible",
 							"objectClass": "DicaSprites",
-							"sid": 640656870614846,
+							"sid": 361658184113736,
 							"parameters": {
 								"visibility": "invisible"
 							}
@@ -9932,33 +11357,51 @@
 						{
 							"id": "set-visible",
 							"objectClass": "DicaTexto",
-							"sid": 970368068546294,
+							"sid": 534197455228160,
 							"parameters": {
 								"visibility": "invisible"
 							}
 						},
 						{
-							"id": "set-boolean-instvar",
-							"objectClass": "dicaSpot0",
-							"sid": 269246942939264,
+							"id": "set-effect-enabled",
+							"objectClass": "TelaSprites",
+							"sid": 847203823920034,
 							"parameters": {
-								"instance-variable": "isSelected",
-								"value": "false"
+								"mode": "disable",
+								"effect": "\"DesfoqueVertical\""
 							}
 						},
 						{
-							"id": "set-boolean-instvar",
-							"objectClass": "dicaSpot1",
-							"sid": 530387196526907,
+							"id": "set-effect-enabled",
+							"objectClass": "TelaSprites",
+							"sid": 954988251216896,
 							"parameters": {
-								"instance-variable": "isSelected",
-								"value": "false"
+								"mode": "disable",
+								"effect": "\"DesfoqueHorizontal\""
+							}
+						},
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "TelaTexto",
+							"sid": 173876698721551,
+							"parameters": {
+								"mode": "disable",
+								"effect": "\"DesfoqueVertical\""
+							}
+						},
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "TelaTexto",
+							"sid": 592079897454873,
+							"parameters": {
+								"mode": "disable",
+								"effect": "\"DesfoqueHorizontal\""
 							}
 						},
 						{
 							"id": "set-default-color",
 							"objectClass": "dicaSpot0",
-							"sid": 187253095766590,
+							"sid": 694445870098239,
 							"parameters": {
 								"color": "rgbEx(100,100,100)"
 							}
@@ -9966,7 +11409,7 @@
 						{
 							"id": "set-default-color",
 							"objectClass": "dicaSpot1",
-							"sid": 171322278259989,
+							"sid": 809514566066180,
 							"parameters": {
 								"color": "rgbEx(100,100,100)"
 							}
@@ -9974,108 +11417,170 @@
 						{
 							"id": "set-default-color",
 							"objectClass": "dicaSpot2",
-							"sid": 462397157360153,
+							"sid": 509294146097878,
 							"parameters": {
 								"color": "rgbEx(100,100,100)"
 							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "fundoDesfoque",
+							"sid": 878361324301036,
+							"parameters": {
+								"visibility": "invisible"
+							}
 						}
 					],
-					"sid": 376833786580659,
+					"sid": 884882680215482,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "dicaSpot2",
-									"sid": 774778987976868,
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 237662336337971,
 									"parameters": {
-										"instance-variable": "isSelected"
-									},
-									"isInverted": true
+										"variable": "endgame"
+									}
 								}
 							],
 							"actions": [
 								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 786259738507744,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaSprites",
+									"sid": 969987854904305,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 728435728247411,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueVertical\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "TelaTexto",
+									"sid": 279394704991731,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"DesfoqueHorizontal\""
+									}
+								},
+								{
 									"id": "set-visible",
 									"objectClass": "fundoDesfoque",
-									"sid": 829195571659029,
+									"sid": 842740396318037,
 									"parameters": {
-										"visibility": "invisible"
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaSprites",
-									"sid": 745287319382735,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueVertical\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaSprites",
-									"sid": 207915348027212,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueHorizontal\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaTexto",
-									"sid": 101077021688522,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueVertical\""
-									}
-								},
-								{
-									"id": "set-effect-enabled",
-									"objectClass": "TelaTexto",
-									"sid": 779817410627160,
-									"parameters": {
-										"mode": "disable",
-										"effect": "\"DesfoqueHorizontal\""
-									}
-								},
-								{
-									"id": "set-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 539355945673743,
-									"parameters": {
-										"variable": "endgame",
-										"value": "false"
+										"visibility": "visible"
 									}
 								}
 							],
-							"sid": 459792078015376
+							"sid": 821938541854457
 						},
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "dicaSpot2",
-									"sid": 666384086919667,
-									"parameters": {
-										"instance-variable": "isSelected"
-									}
+									"id": "else",
+									"objectClass": "System",
+									"sid": 989792432213713
 								}
 							],
-							"actions": [
+							"actions": [],
+							"sid": 866413578438219,
+							"children": [
 								{
-									"id": "set-boolean-instvar",
-									"objectClass": "dicaSpot2",
-									"sid": 321124032288824,
-									"parameters": {
-										"instance-variable": "isSelected",
-										"value": "false"
-									}
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot1",
+											"sid": 809739135432386,
+											"parameters": {
+												"instance-variable": "isSelected"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot1",
+											"sid": 253906709088766,
+											"parameters": {
+												"instance-variable": "isSelected",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 904252067148174
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot0",
+											"sid": 211382747184005,
+											"parameters": {
+												"instance-variable": "isSelected"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot0",
+											"sid": 789446512566876,
+											"parameters": {
+												"instance-variable": "isSelected",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 550011347761666
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "dicaSpot2",
+											"sid": 947293475175159,
+											"parameters": {
+												"instance-variable": "isSelected"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot2",
+											"sid": 272582689673016,
+											"parameters": {
+												"instance-variable": "isSelected",
+												"value": "false"
+											}
+										}
+									],
+									"sid": 374163477801821
 								}
-							],
-							"sid": 383945618439772
+							]
 						}
 					]
 				}
@@ -10102,7 +11607,32 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "let jogador = window.Namespace.message.split(',')[0];\nconsole.log(window.Namespace.session)\nwindow.Namespace.saveJSON = {\n\t\"user\": jogador,\n\t\"timestamp\": new Date().toISOString(),\n\t\"state\": 4,\n\t\"session\": window.Namespace.session\n}\n\nif (window.Namespace.message.split(',')[1] == \"section\") {\n\twindow.Namespace.saveJSON.section = window.Namespace.message.split(',')[2];\n} else {\n\twindow.Namespace.saveJSON.chapter = window.Namespace.message.split(',')[2];\n}\n\nlet saveString = JSON.stringify(window.Namespace.saveJSON);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {\n\t\t\tmethod: \"POST\",\n\t\t\tbody: saveString\n\t\t})\n\t\t.then(response => response.json())\n\t\t.then(data => console.log('Success:', data))\n\t\t.catch(error => console.error('Error:', error));"
+							"script": [
+								"let jogador = window.Namespace.message.split(',')[0];",
+								"console.log(window.Namespace.session)",
+								"window.Namespace.saveJSON = {",
+								"\t\"user\": jogador,",
+								"\t\"timestamp\": new Date().toISOString(),",
+								"\t\"state\": 4,",
+								"\t\"session\": window.Namespace.session",
+								"}",
+								"",
+								"if (window.Namespace.message.split(',')[1] == \"section\") {",
+								"\twindow.Namespace.saveJSON.section = window.Namespace.message.split(',')[2];",
+								"} else {",
+								"\twindow.Namespace.saveJSON.chapter = window.Namespace.message.split(',')[2];",
+								"}",
+								"",
+								"let saveString = JSON.stringify(window.Namespace.saveJSON);",
+								"",
+								"fetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {",
+								"\t\t\tmethod: \"POST\",",
+								"\t\t\tbody: saveString",
+								"\t\t})",
+								"\t\t.then(response => response.json())",
+								"\t\t.then(data => console.log('Success:', data))",
+								"\t\t.catch(error => console.error('Error:', error));"
+							]
 						}
 					],
 					"sid": 460193412965834
@@ -10120,7 +11650,26 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "let jogador = window.Namespace.message.split(',')[0];\n\nwindow.Namespace.saveJSON = {\n\t\"user\": jogador,\n\t\"timestamp\": new Date().toISOString(),\n\t\"state\": 0,\n\t\"session\": {}\n}\n\nlet saveString = JSON.stringify(window.Namespace.saveJSON);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {\n\t\t\tmethod: \"POST\",\n\t\t\tbody: saveString\n\t\t})\n\t\t.then(response => response.json())\n\t\t.then(data => console.log('Success:', data))\n\t\t.catch(error => console.error('Error:', error));"
+							"script": [
+								"let jogador = window.Namespace.message.split(',')[0];",
+								"",
+								"window.Namespace.saveJSON = {",
+								"\t\"user\": jogador,",
+								"\t\"timestamp\": new Date().toISOString(),",
+								"\t\"state\": 0,",
+								"\t\"session\": {}",
+								"}",
+								"",
+								"let saveString = JSON.stringify(window.Namespace.saveJSON);",
+								"",
+								"fetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/session\", {",
+								"\t\t\tmethod: \"POST\",",
+								"\t\t\tbody: saveString",
+								"\t\t})",
+								"\t\t.then(response => response.json())",
+								"\t\t.then(data => console.log('Success:', data))",
+								"\t\t.catch(error => console.error('Error:', error));"
+							]
 						}
 					],
 					"sid": 435565898189414
@@ -10160,7 +11709,56 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "function generateUUID() {\n    // Gera um UUID v4 no formato padrão\n    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {\n        const r = Math.random() * 16 | 0; // número aleatório entre 0 e 15\n        const v = c === 'x' ? r : (r & 0x3 | 0x8); // força o formato de UUID v4\n        return v.toString(16);\n    });\n}\n\nlet tempo = localVars.tempo;\nlet idQuestao = localVars.idQuestao;\nlet tentativas = localVars.tentativas;\nlet timestamp = new Date().toISOString();\nlet jogo = 4;\nlet secao = window.Namespace.message.split(',')[2];\nlet capitulo = window.Namespace.message.split(',')[2];\nlet jogador = window.Namespace.message.split(',')[0];\nlet id = generateUUID();\nlet isSection = window.Namespace.message.split(',')[1] === \"section\";\n\nlet jsonObject = {\n\t\"tempo\": tempo,\n\t\"status\": true,\n\t\"jogador\": jogador,\n\t\"jogo\": jogo,\n\t\"idQuestao\": idQuestao,\n\t\"timestamp\": timestamp,\n\t\"id\": id,\n\t\"tentativas\": tentativas\n};\n\nif (isSection) {\n    jsonObject[\"secao\"] = secao;\n} else {\n    jsonObject[\"capitulo\"] = capitulo;\n}\n\nlet jsonString = JSON.stringify(jsonObject);\n\nconsole.log(jsonString);\n\nfetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/game\", {\n    method: \"POST\",\n    body: jsonString\n})\n.then(response => response.json())\n.then(data => console.log('Success:', data))\n.catch(error => console.error('Error:', error));"
+							"script": [
+								"function generateUUID() {",
+								"    // Gera um UUID v4 no formato padrão",
+								"    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {",
+								"        const r = Math.random() * 16 | 0; // número aleatório entre 0 e 15",
+								"        const v = c === 'x' ? r : (r & 0x3 | 0x8); // força o formato de UUID v4",
+								"        return v.toString(16);",
+								"    });",
+								"}",
+								"",
+								"let tempo = localVars.tempo;",
+								"let idQuestao = localVars.idQuestao;",
+								"let tentativas = localVars.tentativas;",
+								"let timestamp = new Date().toISOString();",
+								"let jogo = 4;",
+								"let secao = window.Namespace.message.split(',')[2];",
+								"let capitulo = window.Namespace.message.split(',')[2];",
+								"let jogador = window.Namespace.message.split(',')[0];",
+								"let id = generateUUID();",
+								"let isSection = window.Namespace.message.split(',')[1] === \"section\";",
+								"",
+								"let jsonObject = {",
+								"\t\"tempo\": tempo,",
+								"\t\"status\": true,",
+								"\t\"jogador\": jogador,",
+								"\t\"jogo\": jogo,",
+								"\t\"idQuestao\": idQuestao,",
+								"\t\"timestamp\": timestamp,",
+								"\t\"id\": id,",
+								"\t\"tentativas\": tentativas",
+								"};",
+								"",
+								"if (isSection) {",
+								"    jsonObject[\"secao\"] = secao;",
+								"} else {",
+								"    jsonObject[\"capitulo\"] = capitulo;",
+								"}",
+								"",
+								"let jsonString = JSON.stringify(jsonObject);",
+								"",
+								"console.log(jsonString);",
+								"",
+								"fetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/game\", {",
+								"    method: \"POST\",",
+								"    body: jsonString",
+								"})",
+								".then(response => response.json())",
+								".then(data => console.log('Success:', data))",
+								".catch(error => console.error('Error:', error));"
+							]
 						}
 					],
 					"sid": 580571214386684

@@ -34,6 +34,8 @@
 		"tempoIcon",
 		"scrolArea",
 		"indiceMalha",
-		"IndicePalavra"
+		"IndicePalavra",
+		"dica1",
+		"dica0"
 	]
 }

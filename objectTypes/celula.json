@@ -81,6 +81,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 525528979470196
+		},
+		{
+			"name": "dica",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 931246475469822
 		}
 	],
 	"behaviorTypes": [],

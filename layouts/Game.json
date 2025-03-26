@@ -300,7 +300,8 @@
 						"posterior": 0,
 						"anteriorMain": 0,
 						"posteriorMain": 0,
-						"idLacuna": 0
+						"idLacuna": 0,
+						"dica": false
 					},
 					"behaviors": {},
 					"effects": {
@@ -355,7 +356,10 @@
 					"uid": 3,
 					"sid": 716915417055709,
 					"tags": "",
-					"instanceVariables": {},
+					"instanceVariables": {
+						"temp": false,
+						"letter": ""
+					},
 					"behaviors": {},
 					"effects": {
 						"DesfoqueHorizontal": {
@@ -377,6 +381,17 @@
 									0.3137254901960784,
 									0.3137254901960784,
 									0.3137254901960784,
+									1
+								]
+							}
+						},
+						"ColorTemp": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
 									1
 								]
 							}
@@ -1747,9 +1762,139 @@
 					"locked": false,
 					"world": {
 						"x": 773,
+						"y": 184,
+						"width": 34,
+						"height": 34,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": -1
+					}
+				},
+				{
+					"type": "dica1",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 57,
+					"sid": 280987838343490,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"Comprada": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									0.5098039215686274,
+									0.5098039215686274,
+									0.5098039215686274,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 280987838343490,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 702,
+						"y": 187,
+						"width": 39,
+						"height": 39,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": -1
+					}
+				},
+				{
+					"type": "dica0",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 58,
+					"sid": 871458244054030,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"effects": {
+						"DesfoqueHorizontal": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"DesfoqueVertical": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"Comprada": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									0.5098039215686274,
+									0.5098039215686274,
+									0.5098039215686274,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 871458244054030,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 628,
 						"y": 186,
-						"width": 40,
-						"height": 40,
+						"width": 32,
+						"height": 32,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -2148,6 +2293,46 @@
 					}
 				},
 				{
+					"type": "simboloDicaContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 42,
+					"sid": 142131162520529,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 142131162520529,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -545,
+						"y": 737,
+						"width": 768,
+						"height": 230,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
 					"type": "questaoImagem",
 					"properties": {
 						"initially-visible": true,
@@ -2413,8 +2598,8 @@
 					"world": {
 						"x": 930,
 						"y": 553,
-						"width": 465.26989447866265,
-						"height": 30,
+						"width": 440,
+						"height": 60,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -2559,6 +2744,46 @@
 						"y": 497,
 						"width": 545.329748762527,
 						"height": 63.23440627938248,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 1
+					}
+				},
+				{
+					"type": "simboloContainer",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 55,
+					"sid": 307052994627151,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 307052994627151,
+						"expanded": true,
+						"folderName": "",
+						"indexInFolder": -1,
+						"folderNestingLevel": -1
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": -858,
+						"y": 726,
+						"width": 76.36363636363636,
+						"height": 76.36363636363636,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3012,7 +3237,16 @@
 		"subfolders": []
 	},
 	"sid": 780335904203862,
-	"nonworld-instances": [],
+	"nonworld-instances": [
+		{
+			"type": "JSON",
+			"properties": {},
+			"uid": 56,
+			"sid": 277035507222740,
+			"tags": "",
+			"instanceVariables": {}
+		}
+	],
 	"effectTypes": [],
 	"width": 1920,
 	"height": 1000,

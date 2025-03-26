@@ -4,12 +4,31 @@
 	"sid": 433697035205618,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "temp",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 377141375691835
+		},
+		{
+			"name": "letter",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 102820400955237
+		}
+	],
 	"behaviorTypes": [],
 	"effectTypes": [
 		{
 			"effectId": "setcolor",
 			"name": "DefinirCor"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "ColorTemp"
 		}
 	],
 	"animations": {

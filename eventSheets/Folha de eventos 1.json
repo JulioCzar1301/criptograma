@@ -203,6 +203,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "moedasBonus",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 946447741484790
+		},
+		{
+			"eventType": "variable",
 			"name": "existImage",
 			"type": "boolean",
 			"initialValue": "false",
@@ -260,6 +270,26 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 872399264850530
+		},
+		{
+			"eventType": "variable",
+			"name": "pontuacao",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 503065969446773
+		},
+		{
+			"eventType": "variable",
+			"name": "tentativasGeral",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 294696400989268
 		},
 		{
 			"eventType": "variable",
@@ -7278,7 +7308,8 @@
 							"type": "script",
 							"script": [
 								"console.log(\"cheguei nessa poha \")"
-							]
+							],
+							"disabled": true
 						}
 					],
 					"sid": 609050556203862,
@@ -7472,6 +7503,24 @@
 									"sid": 567808046924822,
 									"parameters": {
 										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 595032162227222,
+									"parameters": {
+										"variable": "pontuacao",
+										"value": "tentativasGeral = 0 ? (acertos / 1) * 10 :  (acertos / tentativasGeral) * 100"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 737390545820113,
+									"parameters": {
+										"variable": "moedasBonus",
+										"value": "tentativasGeral = 0 ? int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / 1)* 100))) : int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / tentativasGeral)* 100)))"
 									}
 								}
 							],
@@ -8182,9 +8231,25 @@
 								{
 									"id": "set-text",
 									"objectClass": "jogPontuacao",
-									"sid": 878628719357967,
+									"sid": 983983933239104,
 									"parameters": {
-										"text": "acertos"
+										"text": "pontuacao"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogMelhorPontuacao",
+									"sid": 970809166109378,
+									"parameters": {
+										"text": "pontuacao"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogMoedas",
+									"sid": 997270569402716,
+									"parameters": {
+										"text": "\"+\" & moedas"
 									}
 								},
 								{
@@ -8407,6 +8472,30 @@
 									"sid": 379454210403096,
 									"parameters": {
 										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogPontuacao",
+									"sid": 141935545800321,
+									"parameters": {
+										"text": "pontuacao"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogMelhorPontuacao",
+									"sid": 905180493812684,
+									"parameters": {
+										"text": "pontuacao"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "jogMoedas",
+									"sid": 993850314836921,
+									"parameters": {
+										"text": "\"+\" & moedas"
 									}
 								},
 								{
@@ -9858,12 +9947,25 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 316250536036432,
+									"sid": 594726213089423,
 									"parameters": {
 										"object-to-create": "simboloDicaContainer",
 										"layer": "3",
 										"x": "LayoutWidth/2",
-										"y": "LayoutHeight/2",
+										"y": "LayoutHeight/2 - 40",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 834443186598017,
+									"parameters": {
+										"object-to-create": "symbolDesc",
+										"layer": "3",
+										"x": "simboloDicaContainer.BBoxLeft + 45",
+										"y": "simboloDicaContainer.BBoxTop + 54",
 										"create-hierarchy": false,
 										"template-name": "\"\""
 									}
@@ -9940,12 +10042,12 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 603411245957601,
+											"sid": 663910938816834,
 											"parameters": {
 												"object-to-create": "simboloContainer",
 												"layer": "3",
 												"x": "simboloDicaContainer.BBoxLeft + 76",
-												"y": "simboloDicaContainer.Y - simboloContainer.Height/2",
+												"y": "simboloDicaContainer.Y - simboloContainer.Height",
 												"create-hierarchy": false,
 												"template-name": "\"\""
 											}
@@ -9962,9 +10064,9 @@
 										{
 											"id": "set-y",
 											"objectClass": "simboloContainer",
-											"sid": 747951900521043,
+											"sid": 137877789821533,
 											"parameters": {
-												"y": "simboloContainer.IID > minBlocks ? simboloDicaContainer.Y + simboloContainer.Height - simboloContainer.Height/2 : simboloDicaContainer.Y - simboloContainer.Height/2"
+												"y": "simboloContainer.IID > minBlocks ? simboloDicaContainer.Y + 10 + simboloContainer.Height - simboloContainer.Height/2 : simboloDicaContainer.Y + 10 - simboloContainer.Height/2"
 											}
 										},
 										{
@@ -10151,10 +10253,10 @@
 										{
 											"id": "pick-by-evaluate",
 											"objectClass": "System",
-											"sid": 425480980271288,
+											"sid": 631878409457865,
 											"parameters": {
 												"object": "celula",
-												"expression": "celula.isMain = 0 & celula.block <> celula.dica = 0"
+												"expression": "celula.isMain = 0 & celula.block = 0"
 											}
 										}
 									],
@@ -10192,15 +10294,6 @@
 												{
 													"callFunction": "saveTips",
 													"sid": 577707994020877
-												},
-												{
-													"id": "set-boolean-instvar",
-													"objectClass": "celula",
-													"sid": 845321627556706,
-													"parameters": {
-														"instance-variable": "block",
-														"value": "true"
-													}
 												}
 											],
 											"sid": 950230667735601
@@ -10222,11 +10315,12 @@
 									],
 									"actions": [
 										{
-											"id": "toggle-boolean-instvar",
+											"id": "set-boolean-instvar",
 											"objectClass": "celula",
-											"sid": 837678739587425,
+											"sid": 864833957617483,
 											"parameters": {
-												"instance-variable": "dica"
+												"instance-variable": "block",
+												"value": "true"
 											}
 										}
 									],
@@ -11135,17 +11229,9 @@
 								{
 									"id": "set-y",
 									"objectClass": "dicaInstruc",
-									"sid": 119145338662603,
+									"sid": 228235085384404,
 									"parameters": {
-										"y": "dicaInstruc.Y + 15"
-									}
-								},
-								{
-									"id": "set-y",
-									"objectClass": "DicaName",
-									"sid": 731291675535835,
-									"parameters": {
-										"y": "DicaName.Y + 15"
+										"y": "dicaInstruc.Y +20"
 									}
 								},
 								{
@@ -11157,11 +11243,19 @@
 									}
 								},
 								{
-									"id": "set-visible",
+									"id": "set-text",
 									"objectClass": "moedasRestantes",
-									"sid": 797518385846643,
+									"sid": 725970472984537,
 									"parameters": {
-										"visibility": "invisible"
+										"text": "moedas"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "moedasRestantes",
+									"sid": 510176365323874,
+									"parameters": {
+										"y": "moedasRestantes.Y + 20"
 									}
 								},
 								{
@@ -11201,6 +11295,22 @@
 								{
 									"callFunction": "dicaInvisivel",
 									"sid": 109902539883830
+								},
+								{
+									"id": "set-y",
+									"objectClass": "dicaInstruc",
+									"sid": 739467027678390,
+									"parameters": {
+										"y": "dicaInstruc.Y - 20"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "moedasRestantes",
+									"sid": 265225747044359,
+									"parameters": {
+										"y": "moedasRestantes.Y - 20"
+									}
 								}
 							],
 							"sid": 358312195197059
@@ -11422,6 +11532,11 @@
 											"sid": 231043426549288
 										},
 										{
+											"id": "destroy",
+											"objectClass": "symbolDesc",
+											"sid": 514150128475373
+										},
+										{
 											"id": "set-boolean-eventvar",
 											"objectClass": "System",
 											"sid": 538471659161318,
@@ -11505,14 +11620,6 @@
 										}
 									],
 									"actions": [
-										{
-											"id": "toggle-boolean-instvar",
-											"objectClass": "celula",
-											"sid": 499416799671780,
-											"parameters": {
-												"instance-variable": "dica"
-											}
-										},
 										{
 											"id": "set-boolean-instvar",
 											"objectClass": "celula",

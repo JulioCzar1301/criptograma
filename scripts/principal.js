@@ -54,7 +54,7 @@ async function OnBeforeProjectStart(runtime)
 	//window.Namespace.isSecOrChap = isSecOrChap;
 	//window.Namespace.idChapter = chapterID;
 	//caso do save
-	// saveExample = ""
+	//saveExample = ""
 	if( saveExample != ""){
 		const save = JSON.parse(saveExample)
 		console.log(save)
@@ -678,6 +678,7 @@ function Tick(runtime) {
 		
 		if(!grupoValido && filledCells == grupo.celulas.length){
 			runtime.callFunction("marcaTentativa")
+			runtime.globalVars.tentativasGeral++;
 		}
     }
 

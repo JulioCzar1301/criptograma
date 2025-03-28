@@ -196,8 +196,6 @@ async function OnBeforeProjectStart(runtime)
 			   break;
 			}
 
-
-			console.log(firstWord, firstQuestion.resposta[0])
 			let indexGoal = Array.from({ length: firstWord.length }, (_, i) => i);
 
 			runtime.globalVars.first_word = firstWord
@@ -261,8 +259,6 @@ async function OnBeforeProjectStart(runtime)
 				else{
 					otherQuestion = escolherPalavraAleatoria(data, attemptWord);
 
-
-
 					if(otherQuestion.resposta.length > 1){
 						multipleAnswer = otherQuestion.resposta;
 						continue;
@@ -272,6 +268,7 @@ async function OnBeforeProjectStart(runtime)
 						let match = false;
 						for(const index of indexGoal){
 							const letter = firstWord[index]
+
 						   // Verifica todas as letras da palavra para encontrar uma que permita a junção
 							for (let k = 0; k < otherWord.length; k++) {
 								const currentLetter = otherWord[k];
@@ -311,9 +308,17 @@ async function OnBeforeProjectStart(runtime)
 				  .filter(item => item.string) // Filtra os objetos que possuem o atributo 'string'
 				  .map(item => item.string);   // Mapeia apenas o valor do atributo 'string'
 
+
+                const coordenatesMainWord = boardComplete
+					.filter(item => item.posX !== undefined && item.posX !== null) // Mantém 0 e -0
+					.map(item => Math.abs(item.posX));
+
+ 
+			    console.log(coordenatesMainWord)
+                console.log(boardComplete)
 				console.log(words);
 				console.log(questionsSelected)
-				letters = getUniqueCharacters(words)
+				letters = getUniqueCharacters(words,coordenatesMainWord)
 				symbols = getSymbol(letters)
 
 				boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
@@ -696,18 +701,6 @@ function escolherPalavraAleatoria(lista, wordChoice) {
   return wordList[indiceAleatorio];
 }
 
-function getUniqueCharacters(words) {
-  const uniqueCharacters = new Set();
-  
-  words.forEach(word => {
-    word.split("").forEach(char => {
-      uniqueCharacters.add(char);
-    });
-  });
-
-  return Array.from(uniqueCharacters);
-}
-
 function getSymbol(letters){
     let symbolsIndex = Array.from({ length: 26 }, (_, i) => i);
 	let symbolsChar = [];
@@ -720,6 +713,36 @@ function getSymbol(letters){
 	
 	return symbolsChar
 }
+
+function getUniqueCharacters(words, coordinateMainWord) {
+  const wordsWithoutMain = []
+  const uniqueCharacters = new Set();
+  
+  //retirar caracters da palavra principal
+  for(let i=0; i < words.length; i++){
+    const palavra = words[i];
+	let novaPalavra = palavra.split("");
+	let aux = [];
+	for(let j=0; j < novaPalavra.length; j++){
+        if(j != coordinateMainWord[i]){
+		   aux.push(novaPalavra[j])
+		}
+	}
+    novaPalavra = aux
+	
+	novaPalavra = novaPalavra.join("");
+    console.log(novaPalavra)
+	wordsWithoutMain.push(novaPalavra)
+  }
+  wordsWithoutMain.forEach(word => {
+    word.split("").forEach(char => {
+      uniqueCharacters.add(char);
+    });
+  });
+
+  return Array.from(uniqueCharacters);
+}
+
 
 function normalizeWord(word) {
   return word

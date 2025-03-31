@@ -55,7 +55,7 @@ async function OnBeforeProjectStart(runtime)
 	//window.Namespace.idChapter = chapterID;
 	//caso do save
 	//saveExample = ""
-	if( saveExample != ""){
+	if(saveExample != ""){
 		const save = JSON.parse(saveExample)
 		console.log(save)
 		valid = true
@@ -70,7 +70,8 @@ async function OnBeforeProjectStart(runtime)
 		coinSave = save.coin
         console.log(save.coin)
 		window.Namespace.time = save.time
-		 window.Namespace.board = save.words
+		window.Namespace.board = save.words
+		runtime.globalVars.symbols = JSON.stringify(symbols)
 		
 		if(save.tipContentUsed){
 			runtime.objects.dicaSpot2.getFirstInstance().instVars.isBuyed = true;
@@ -324,7 +325,7 @@ async function OnBeforeProjectStart(runtime)
 				boardComplete = boardComplete.filter(item => item !== undefined && item !== null);
 				questionsSelected.sort((a, b) => a.index - b.index);
 
-				window.Namespace.symbols = JSON.stringify(symbols);
+				runtime.globalVars.symbols = JSON.stringify(symbols);
 				boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
 				window.Namespace.board = boardSave;
 				console.log(boardSave)
@@ -342,8 +343,6 @@ async function OnBeforeProjectStart(runtime)
 	}
 		
 		
-	
-	
 	runtime.addEventListener("tick", () => Tick(runtime));
 	
 	// LOGICA DE GERAÇÃO DA MALHA
@@ -375,23 +374,42 @@ async function OnBeforeProjectStart(runtime)
 			boardComplete.sort((a, b) => a.index - b.index);
 
 			// Chamada da malha final
-			for (let j = 0; j < boardComplete.length; j++) {
-			  runtime.callFunction(
-				"createGrid",
-				x + boardComplete[j].posX,
-				y + boardComplete[j].posY,
-				boardComplete[j].string.length,
-				boardComplete[j].string,
-				boardComplete[j].index,
-				boardComplete[j].complete,
-				mainComplete,
-				window.Namespace.tipLetterRandom,
-				window.Namespace.tipLetterSelected,
-			  );
-			  
-			   runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
+			if (saveExample != ""){
+				for (let j = 0; j < boardComplete.length; j++) {
+					runtime.callFunction(
+						"createGrid",
+						x + boardComplete[j].posX,
+						y + boardComplete[j].posY - 1,
+						boardComplete[j].string.length,
+						boardComplete[j].string,
+						boardComplete[j].index,
+						boardComplete[j].complete,
+						mainComplete,
+						window.Namespace.tipLetterRandom,
+						window.Namespace.tipLetterSelected,
+					);
+					
+					runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
+				}
+			} else {
+				for (let j = 0; j < boardComplete.length; j++) {
+						runtime.callFunction(
+							"createGrid",
+							x + boardComplete[j].posX,
+							y + boardComplete[j].posY,
+							boardComplete[j].string.length,
+							boardComplete[j].string,
+							boardComplete[j].index,
+							boardComplete[j].complete,
+							mainComplete,
+							window.Namespace.tipLetterRandom,
+							window.Namespace.tipLetterSelected,
+						);
+						
+						runtime.globalVars.words = runtime.globalVars.words + boardComplete[j].string + ","; 
+					}
 			}
-			
+
 			 // Obtém todas as instâncias de celula e letra
 			const celulas = runtime.objects.celula.getAllInstances();
 			const letras = runtime.objects.Letra.getAllInstances();

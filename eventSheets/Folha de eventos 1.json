@@ -235,7 +235,7 @@
 			"eventType": "variable",
 			"name": "TempoJogo",
 			"type": "number",
-			"initialValue": "120",
+			"initialValue": "240",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -9982,8 +9982,9 @@
 								{
 									"type": "script",
 									"script": [
-										"runtime.globalVars.symbols = window.Namespace.symbols"
-									]
+										"runtime.globalVars.symbols = JSON.stringify(window.Namespace.symbols)"
+									],
+									"disabled": true
 								},
 								{
 									"id": "parse",

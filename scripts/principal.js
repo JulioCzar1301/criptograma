@@ -326,9 +326,7 @@ async function OnBeforeProjectStart(runtime)
 				questionsSelected.sort((a, b) => a.index - b.index);
 
 				runtime.globalVars.symbols = JSON.stringify(symbols);
-				boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
-				window.Namespace.board = boardSave;
-				console.log(boardSave)
+				
 
 			}
 			else{
@@ -372,7 +370,11 @@ async function OnBeforeProjectStart(runtime)
 			runtime.globalVars.minX = 660 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
 			boardComplete.sort((a, b) => a.index - b.index);
+        
 
+	        boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
+			window.Namespace.board = boardSave;
+			console.log(boardSave)
 			// Chamada da malha final
 			if (saveExample != ""){
 				for (let j = 0; j < boardComplete.length; j++) {
@@ -516,7 +518,6 @@ async function OnBeforeProjectStart(runtime)
 			
 			
 			for (let j = 0; j < questionsSelected.length; j++) {
-			 console.log(questionsSelected[j])
 			  if(questionsSelected[j].question.imagePath){
 			  	 runtime.globalVars.existImage = true;
 			  }
@@ -562,7 +563,6 @@ async function OnBeforeProjectStart(runtime)
 
 function Tick(runtime) {
     if(saveExample != "" && fitTime){
-	    console.log(window.Namespace.time)
 		runtime.globalVars.TempoGasto = window.Namespace.time;
 		runtime.globalVars.moedas = coinSave;
 		fitTime = false;
@@ -612,6 +612,8 @@ function Tick(runtime) {
 		if(goal.includes(idQuestao)){
 			continue;
 		}
+
+		console.log("Ids avaliados: ", idQuestao)
 		
         // Verifica se todas as células do grupo cumprem a condição
         for (let i = 0; i < grupo.celulas.length; i++) {
@@ -632,8 +634,7 @@ function Tick(runtime) {
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
 		     let question;
-//             console.log(`O grupo com idQuestao ${idQuestao} cumpre a condição.`);
-//             return idQuestao;
+            console.log(idQuestao)
             for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
 				const letter = grupo.letras[i]
@@ -646,7 +647,7 @@ function Tick(runtime) {
 				for(let i = 0; i < runtime.objects.Lacuna.getAllInstances().length;i++){
 					const lacuna = runtime.objects.Lacuna.getAllInstances()[i]
 					lacuna.instVars.isSelected = false
-					console.log(lacuna.instVars.indice)
+					
 					if(idQuestao != -1 && lacuna.instVars.indice == idQuestao + 1 ){
 						runtime.globalVars.idPerguntaSelec = lacuna.instVars.idQuestao
 						lacuna.instVars.isSelected = true;

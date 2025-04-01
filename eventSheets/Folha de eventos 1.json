@@ -371,7 +371,7 @@
 				},
 				{
 					"id": "destroy",
-					"objectClass": "dicaSair",
+					"objectClass": "popupSair",
 					"sid": 571313789650938
 				},
 				{
@@ -430,7 +430,8 @@
 				},
 				{
 					"callFunction": "resetSave",
-					"sid": 474981509660118
+					"sid": 474981509660118,
+					"disabled": true
 				}
 			],
 			"sid": 412088733952578
@@ -2251,6 +2252,51 @@
 								"variable": "endgame"
 							},
 							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 186949041260412,
+							"parameters": {
+								"object": "dicaSpot0"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 506991722042062,
+							"parameters": {
+								"object": "dicaSpot1"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 266558549880935,
+							"parameters": {
+								"object": "dicaSpot2"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 291517222993126,
+							"parameters": {
+								"object": "hudContainer"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 780383764563503,
+							"parameters": {
+								"object": "botaoImagem"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [],
@@ -3102,7 +3148,7 @@
 											"objectClass": "System",
 											"sid": 818807022337633,
 											"parameters": {
-												"object-to-create": "dicaSair",
+												"object-to-create": "popupSair",
 												"layer": "3",
 												"x": "questaoImagem.BBoxRight + 30",
 												"y": "questaoImagem.BBoxTop + 80",
@@ -3349,14 +3395,14 @@
 							"objectClass": "Mouse",
 							"sid": 136827320276448,
 							"parameters": {
-								"object": "dicaSair"
+								"object": "popupSair"
 							}
 						}
 					],
 					"actions": [
 						{
 							"id": "set-opacity",
-							"objectClass": "dicaSair",
+							"objectClass": "popupSair",
 							"sid": 322126815357772,
 							"parameters": {
 								"opacity": "80"
@@ -3375,7 +3421,7 @@
 									"parameters": {
 										"mouse-button": "left",
 										"click-type": "clicked",
-										"object-clicked": "dicaSair"
+										"object-clicked": "popupSair"
 									}
 								}
 							],
@@ -3486,7 +3532,7 @@
 										},
 										{
 											"id": "destroy",
-											"objectClass": "dicaSair",
+											"objectClass": "popupSair",
 											"sid": 186848669811629
 										},
 										{
@@ -3518,7 +3564,7 @@
 							"objectClass": "Mouse",
 							"sid": 200546086586707,
 							"parameters": {
-								"object": "dicaSair"
+								"object": "popupSair"
 							},
 							"isInverted": true
 						}
@@ -3526,7 +3572,7 @@
 					"actions": [
 						{
 							"id": "set-opacity",
-							"objectClass": "dicaSair",
+							"objectClass": "popupSair",
 							"sid": 266994272313900,
 							"parameters": {
 								"opacity": "100"
@@ -3591,6 +3637,51 @@
 							"sid": 364515595866657,
 							"parameters": {
 								"variable": "endgame"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 703360787437742,
+							"parameters": {
+								"object": "dicaSpot0"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 803752765628554,
+							"parameters": {
+								"object": "dicaSpot1"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 126466833953510,
+							"parameters": {
+								"object": "dicaSpot2"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 418567414909265,
+							"parameters": {
+								"object": "hudContainer"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 300636179393885,
+							"parameters": {
+								"object": "botaoImagem"
 							},
 							"isInverted": true
 						}
@@ -8246,9 +8337,9 @@
 								{
 									"id": "set-text",
 									"objectClass": "jogMoedas",
-									"sid": 997270569402716,
+									"sid": 824904529813027,
 									"parameters": {
-										"text": "\"+\" & moedas"
+										"text": "\"+\" & moedasBonus"
 									}
 								},
 								{
@@ -8492,9 +8583,9 @@
 								{
 									"id": "set-text",
 									"objectClass": "jogMoedas",
-									"sid": 993850314836921,
+									"sid": 683333920842435,
 									"parameters": {
-										"text": "\"+\" & moedas"
+										"text": "\"+\" & moedasBonus"
 									}
 								},
 								{
@@ -9979,13 +10070,6 @@
 									}
 								},
 								{
-									"type": "script",
-									"script": [
-										"runtime.globalVars.symbols = JSON.stringify(window.Namespace.symbols)"
-									],
-									"disabled": true
-								},
-								{
 									"id": "parse",
 									"objectClass": "JSON",
 									"sid": 214194414448577,
@@ -10587,7 +10671,7 @@
 									"objectClass": "System",
 									"sid": 372857034706199,
 									"parameters": {
-										"object-to-create": "dicaSair",
+										"object-to-create": "popupSair",
 										"layer": "3",
 										"x": "dicaDescContainer.BBoxRight - 70",
 										"y": "dicaDescContainer.BBoxTop + 72",
@@ -11335,7 +11419,7 @@
 							"objectClass": "Mouse",
 							"sid": 586800128442557,
 							"parameters": {
-								"object": "dicaSair"
+								"object": "popupSair"
 							}
 						}
 					],
@@ -11359,7 +11443,7 @@
 							"objectClass": "Toque",
 							"sid": 545320419126665,
 							"parameters": {
-								"object": "dicaSair"
+								"object": "popupSair"
 							}
 						}
 					],
@@ -11375,7 +11459,7 @@
 									"sid": 431679207977713,
 									"parameters": {
 										"object": "dicaDescContainer",
-										"expression": "dicaDescContainer.IID = dicaSair.IID"
+										"expression": "dicaDescContainer.IID = popupSair.IID"
 									}
 								},
 								{
@@ -11384,7 +11468,7 @@
 									"sid": 479238304109046,
 									"parameters": {
 										"object": "dicaConteudo",
-										"expression": "dicaSair.IID = dicaConteudo.IID "
+										"expression": "popupSair.IID = dicaConteudo.IID "
 									}
 								}
 							],
@@ -11396,7 +11480,7 @@
 								},
 								{
 									"id": "destroy",
-									"objectClass": "dicaSair",
+									"objectClass": "popupSair",
 									"sid": 731053170532837
 								},
 								{

@@ -376,7 +376,7 @@ async function OnBeforeProjectStart(runtime)
 			window.Namespace.board = boardSave;
 			console.log(boardSave)
 			// Chamada da malha final
-			if (saveExample != ""){
+			if (saveExample != "" && boardComplete.length > 6){
 				for (let j = 0; j < boardComplete.length; j++) {
 					runtime.callFunction(
 						"createGrid",

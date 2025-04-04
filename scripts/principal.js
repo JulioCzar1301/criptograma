@@ -107,47 +107,7 @@ async function OnBeforeProjectStart(runtime)
 		
 	}
 	else{
-		// BLOCO 1: NOME DA SEÇÃO/CAPÍTULO
-		try {
-			var xhr = new XMLHttpRequest();
-			if (isSecOrChap == "section") {	
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/name/${sectionID}`, false);
-			}
-			else {
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/name/${chapterID}`, false);
-			}
-			xhr.send(null);
-			if (xhr.status === 200) {
-				var data = JSON.parse(xhr.responseText);
-				//console.log('nome da seção:', data);
-				runtime.globalVars.nomeSecao = JSON.stringify(data);
-			} else {
-				throw new Error('Network response was not ok');
-			}
-		} catch (error) {
-			console.error('Failed to fetch data:', error);
-		}
-
-		// BLOCO 2: QUESTÕES DA SEÇÃO/CAPÍTULO
-		try {
-			var xhr = new XMLHttpRequest();
-			if (isSecOrChap == "section") {	
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/questions/${sectionID}`, false);
-			}
-			else {
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/questions/${chapterID}`, false);
-			}
-			xhr.send(null);
-			if (xhr.status === 200) {
-				var data = JSON.parse(xhr.responseText);
-				console.log('questões:', data);
-				//runtime.globalVars.rawData = JSON.stringify(data);
-			} else {
-				throw new Error('Network response was not ok');
-			}
-		} catch (error) {
-			console.error('Failed to fetch data:', error);
-		}
+		var data = window.Namespace.rawData
 		
 		//runtime.globalVars.complete = true;
 	

@@ -1,6 +1,6 @@
 // Namespace da questão, para poder acessar em outro script
 window.Namespace = window.Namespace || {};
-
+window.Namespace.data = []
 function waitForMessage() {
   return new Promise((resolve) => {
     const messageHandler = (event) => {
@@ -53,6 +53,7 @@ async function main(){
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
 				console.log('Data fetched successfully:', data);
+				window.Namespace.data = data;
 				
 				if (data.state == 4) {
 					if (isSection) {

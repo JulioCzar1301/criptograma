@@ -307,14 +307,14 @@
 				{
 					"id": "on-start-of-layout",
 					"objectClass": "System",
-					"sid": 310572981180849
+					"sid": 904155356159791
 				}
 			],
 			"actions": [
 				{
 					"id": "set-text",
 					"objectClass": "secNome",
-					"sid": 743041634827256,
+					"sid": 244311356405032,
 					"parameters": {
 						"text": "uppercase(replace(nomeSecao, \"\"\"\", \"\"))"
 					}
@@ -332,82 +332,82 @@
 				{
 					"id": "destroy",
 					"objectClass": "celula",
-					"sid": 202562771142422
+					"sid": 346797868022157
 				},
 				{
 					"id": "destroy",
 					"objectClass": "Letra",
-					"sid": 997875822457547
+					"sid": 165137128181019
 				},
 				{
 					"id": "destroy",
 					"objectClass": "simbolo",
-					"sid": 330608767754537
+					"sid": 364421596878774
 				},
 				{
 					"id": "destroy",
 					"objectClass": "textQuestao",
-					"sid": 107530444932598
+					"sid": 961653210728820
 				},
 				{
 					"id": "destroy",
 					"objectClass": "Lacuna",
-					"sid": 100678229642473
+					"sid": 995968501307772
 				},
 				{
 					"id": "destroy",
 					"objectClass": "questaoContainer",
-					"sid": 129051059516024
+					"sid": 459722128244812
 				},
 				{
 					"id": "destroy",
 					"objectClass": "Resposta",
-					"sid": 477634083994858
+					"sid": 248452508084268
 				},
 				{
 					"id": "destroy",
 					"objectClass": "botaoImagem",
-					"sid": 383315644649465
+					"sid": 479796489028209
 				},
 				{
 					"id": "destroy",
 					"objectClass": "popupSair",
-					"sid": 571313789650938
+					"sid": 559092586463222
 				},
 				{
 					"id": "destroy",
 					"objectClass": "simboloDicaContainer",
-					"sid": 870347120843662
+					"sid": 158106146526190
 				},
 				{
 					"id": "destroy",
 					"objectClass": "Indice",
-					"sid": 288085357074691
+					"sid": 803635042159562
 				},
 				{
 					"id": "destroy",
 					"objectClass": "dicaDescContainer",
-					"sid": 945496112516800
+					"sid": 383003869806654
 				},
 				{
 					"id": "destroy",
 					"objectClass": "dicaContainer",
-					"sid": 137342667266397
+					"sid": 630299524665132
 				},
 				{
 					"id": "destroy",
 					"objectClass": "dicaConteudo",
-					"sid": 226385492255731
+					"sid": 585533349847845
 				},
 				{
 					"id": "destroy",
 					"objectClass": "DicaDescName",
-					"sid": 878098036193982
+					"sid": 667588120147828
 				},
 				{
 					"id": "destroy",
 					"objectClass": "simboloContainer",
-					"sid": 409899047251663
+					"sid": 633380467236572
 				},
 				{
 					"type": "comment",
@@ -422,7 +422,7 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 232734316076503,
+					"sid": 275439295148375,
 					"parameters": {
 						"variable": "words",
 						"value": "first_word & \",\" & words"
@@ -430,11 +430,75 @@
 				},
 				{
 					"callFunction": "resetSave",
-					"sid": 474981509660118,
+					"sid": 358820718823288,
 					"disabled": true
+				},
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 203461087542155,
+					"parameters": {
+						"tag": "\"tempo\""
+					}
 				}
 			],
-			"sid": 412088733952578
+			"sid": 927568096792191
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 671667160154895
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "BarraDeLoading",
+					"sid": 936721843480838,
+					"parameters": {
+						"width": "round(time*1589)"
+					}
+				}
+			],
+			"sid": 520664619412438
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-signal",
+					"objectClass": "System",
+					"sid": 449731431155488,
+					"parameters": {
+						"tag": "\"tempo\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 349168234731902,
+					"parameters": {
+						"seconds": "1.0",
+						"use-timescale": true
+					}
+				},
+				{
+					"id": "destroy",
+					"objectClass": "BarraDeLoading",
+					"sid": 143858173893005
+				},
+				{
+					"id": "destroy",
+					"objectClass": "LoadingImage",
+					"sid": 845767409002219
+				}
+			],
+			"sid": 452325730498408
 		},
 		{
 			"eventType": "group",
@@ -1963,16 +2027,26 @@
 									"sid": 581834583844472
 								},
 								{
+									"eventType": "variable",
+									"name": "aux",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 261241342147124
+								},
+								{
 									"eventType": "block",
 									"conditions": [
 										{
 											"id": "for",
 											"objectClass": "System",
-											"sid": 888950091841773,
+											"sid": 674454595448817,
 											"parameters": {
 												"name": "\"\"",
 												"start-index": "0",
-												"end-index": "tokencount(Resposta, \",\") - 1"
+												"end-index": "tokencount(resposta, \",\") - 1"
 											}
 										}
 									],
@@ -2025,13 +2099,23 @@
 											}
 										},
 										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 414865248226786,
+											"parameters": {
+												"variable": "aux",
+												"value": "tokenat(resposta, loopindex, \",\")"
+											}
+										},
+										{
 											"type": "script",
 											"script": [
 												"// Obtém a instância atual de Lacuna",
 												"const lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();",
 												"",
 												"// Obtém a resposta da instância atual",
-												"const resposta = lacunaInstance.instVars.resposta;",
+												"console.log(\"testeeeeeee \" + localVars.aux)",
+												"const resposta = localVars.aux;",
 												"",
 												"// Obtém a lista de palavras",
 												"const words = runtime.globalVars.words;",

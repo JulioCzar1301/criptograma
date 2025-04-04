@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 43202,
+	"savedWithRelease": 43203,
 	"name": "criptograma",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -38,6 +38,13 @@
 			"type": "plugin",
 			"id": "Text",
 			"name": "Texto",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "TiledBg",
+			"name": "Plano de Fundo em Blocos",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -159,7 +166,9 @@
 			"JSON",
 			"dica1",
 			"dica0",
-			"symbolDesc"
+			"symbolDesc",
+			"LoadingImage",
+			"BarraDeLoading"
 		],
 		"subfolders": [
 			{
@@ -615,8 +624,8 @@
 		"pixelRounding": false,
 		"zAxisScale": "normalized",
 		"fov": 0.7853981633974483,
-		"useLoaderLayout": false,
-		"fullscreenMode": "letterbox-scale",
+		"useLoaderLayout": true,
+		"fullscreenMode": "scale-outer",
 		"fullscreenQuality": "high",
 		"viewportFit": "auto",
 		"backgroundColor": [
@@ -638,7 +647,7 @@
 			1,
 			0
 		],
-		"orientations": "landscape",
+		"orientations": "portrait",
 		"webgpu": "auto",
 		"gpuPreference": "high-performance",
 		"scriptsType": "module",
@@ -650,8 +659,8 @@
 		"zNear": 1,
 		"zFar": 10000,
 		"maxSpriteSheetSize": 2048,
-		"loaderStyle": "splash",
-		"preloadSounds": true,
+		"loaderStyle": "none",
+		"preloadSounds": false,
 		"cordovaiOSScheme": "app",
 		"cordovaAndroidScheme": "https",
 		"exportFileStructure": "folders",
@@ -659,5 +668,5 @@
 	},
 	"viewportWidth": 1920,
 	"viewportHeight": 1000,
-	"firstLayout": null
+	"firstLayout": "Game"
 }

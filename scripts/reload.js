@@ -1,5 +1,20 @@
 // Namespace da questão, para poder acessar em outro script
 window.Namespace = window.Namespace || {};
+
+function waitForMessage() {
+  return new Promise((resolve) => {
+    const messageHandler = (event) => {
+      if (event.data) {
+        window.Namespace.message = event.data;
+        window.removeEventListener('message', messageHandler);
+        resolve(event.data);
+      }
+    };
+    
+    window.addEventListener('message', messageHandler);
+  });
+}
+
 window.Namespace.reload = false;
 window.Namespace.saveJSON;
 window.Namespace.time = 0;
@@ -14,6 +29,8 @@ async function main(){
 	window.Namespace.questionsOnly = [];
 	window.Namespace.erros = [];
 	window.Namespace.acertos = [];
+	window.parent?.postMessage('construct-ready', '*');
+	waitForMessage();
 	window.Namespace.message = "idJogadorPC,chapter,25ba2c14-a291-4f90-a444-414252245737";
 	window.Namespace.nameSection;
 	window.Namespace.nameChapter;
@@ -22,9 +39,9 @@ async function main(){
 	const isSection = parts[1] === "section";
 	const chapterID = isSection ? "" : parts[2];
 	const sectionID = isSection ? parts[2] : "";
+
 	let nameSection;
 	let nameChapter;
-	
 	
 	// Função que verifica se deve recarregar o jogo salvo
 	function getReloadStatus() {

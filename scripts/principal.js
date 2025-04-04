@@ -1,3 +1,18 @@
+window.Namespace = window.Namespace || {};
+
+function waitForMessage() {
+  return new Promise((resolve) => {
+    const messageHandler = (event) => {
+      if (event.data) {
+        window.Namespace.message = event.data;
+        window.removeEventListener('message', messageHandler);
+        resolve(event.data);
+      }
+    };
+    
+    window.addEventListener('message', messageHandler);
+  });
+}
 
 // Import any other script files here, e.g.:
 // import * as myModule from "./mymodule.js";
@@ -18,21 +33,23 @@ runOnStartup(async runtime =>
 	runtime.addEventListener("beforeprojectstart", () => OnBeforeProjectStart(runtime));
 });
 
+	// Envia mensagem de pronto
+	window.parent?.postMessage('construct-ready', '*');
+
+	// Aguarda mensagem ou usa valor padrão após timeout
+	waitForMessage();
+	window.Namespace.message = "idJogadorPC,chapter,25ba2c14-a291-4f90-a444-414252245737";
 
 async function OnBeforeProjectStart(runtime)
 {
-	// CHAMADA DA API
-
-	//let parts = window.Namespace.message.split(",");
-	//let isSecOrChap = parts[1] === "section";
-	//let chapterID = isSecOrChap ? "" : parts[2];f
-	//let sectionID = isSecOrChap ? parts[2] : "";
-	//runtime.globalVars.idJogador = parts[0];
+	// Processamento da mensagem
+	let parts = window.Namespace.message.split(",");
+	let isSecOrChap = parts[1] === "section";
+	let chapterID = isSecOrChap ? "" : parts[2];
+	let sectionID = isSecOrChap ? parts[2] : "";
+	runtime.globalVars.idJogador = parts[0];
 	
 	saveExample = window.Namespace.session.rawData;
-	let isSecOrChap = "chapter";
-	let sectionID = "c3c980a3-e832-4fbd-b964-42faa9a4145c";
-	let chapterID = "25ba2c14-a291-4f90-a444-414252245737";
 	
 	window.Namespace.sectionOrChapter = chapterID;
 // 	runtime.callFunction("resetSave")
@@ -47,8 +64,7 @@ async function OnBeforeProjectStart(runtime)
 	let symbols;
 	let letters;
 	
-	runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
-	
+	//runtime.globalVars.idJogador = "54e81458-80c1-708e-ca0c-ede29fa92a8d"; // Id do jogador sendo salvo na variável global da folha de eventos
 	
 	//window.Namespace.idSecao = sectionID;
 	//window.Namespace.isSecOrChap = isSecOrChap;
@@ -140,19 +156,17 @@ async function OnBeforeProjectStart(runtime)
 		//Escolhe palavras para montar o criptograma
 
 		let isOkGame = false;
-		const attemptWord = [];
+		
 
 
 		let attempt = 0;
 		const maxAttempt = 1000;
 		
-		
-		
-		
 		let attemptGame = 0;
 
 
 		while(!isOkGame && attemptGame < 1000000){
+			const attemptWord = [];
 			attemptGame++;
 			boardComplete = []
 			questionsSelected = []
@@ -339,13 +353,8 @@ async function OnBeforeProjectStart(runtime)
 
 		}
 	}
-		
-		
-	runtime.addEventListener("tick", () => Tick(runtime));
 	
-	// LOGICA DE GERAÇÃO DA MALHA
-
-		  if (valid) {
+	 if (valid) {
 
 			// parte em que to testando e me estressando horrores
 			let coordinates = []; // Array para armazenar todas as coordenadas
@@ -553,9 +562,8 @@ async function OnBeforeProjectStart(runtime)
 			}
 
 		  }
-// 		}
-// 			isOk = true
-
+		
+	runtime.addEventListener("tick", () => Tick(runtime));
 }
 
 //grupos validos
@@ -613,7 +621,7 @@ function Tick(runtime) {
 			continue;
 		}
 
-		console.log("Ids avaliados: ", idQuestao)
+		//console.log("Ids avaliados: ", idQuestao)
 		
         // Verifica se todas as células do grupo cumprem a condição
         for (let i = 0; i < grupo.celulas.length; i++) {

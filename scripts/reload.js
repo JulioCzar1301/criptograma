@@ -1,6 +1,6 @@
 // Namespace da questão, para poder acessar em outro script
 window.Namespace = window.Namespace || {};
-window.Namespace.data = []
+window.Namespace.nameSectionOrChapter = []
 function waitForMessage() {
   return new Promise((resolve) => {
     const messageHandler = (event) => {
@@ -53,7 +53,6 @@ async function main(){
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
 				console.log('Data fetched successfully:', data);
-				window.Namespace.data = data;
 				
 				if (data.state == 4) {
 					if (isSection) {
@@ -84,6 +83,7 @@ async function main(){
 			var xhr = new XMLHttpRequest();
 			if (isSection) {	
 				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/questions/${sectionID}`, false);
+				
 			}
 			else {
 				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/questions/${chapterID}`, false);
@@ -115,10 +115,12 @@ async function main(){
 				var data = JSON.parse(xhr.responseText);
 				console.log('Data fetched successfully:', data);
 				if (isSection) {
-					window.Namespace.nameSection = data;
+					window.Namespace.nameSectionOrChapter = data;
+					window.Namespace.nameSection = data
 				}
 				else {
-					window.Namespace.nameChapter = data;
+					window.Namespace.nameSectionOrChapter = data;
+					window.Namespace.nameChapter = data
 				}
 			} else {
 				throw new Error('Network response was not ok');

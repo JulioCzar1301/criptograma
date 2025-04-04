@@ -108,7 +108,7 @@ async function OnBeforeProjectStart(runtime)
 	}
 	else{
 		var data = window.Namespace.rawData
-		
+		runtime.globalVars.nomeSecao = window.Namespace.nameSectionOrChapter
 		//runtime.globalVars.complete = true;
 	
 		console.log(data)

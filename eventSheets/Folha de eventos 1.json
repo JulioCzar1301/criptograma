@@ -2114,7 +2114,7 @@
 												"const lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();",
 												"",
 												"// Obtém a resposta da instância atual",
-												"console.log(\"testeeeeeee \" + localVars.aux)",
+												"//console.log(\"testeeeeeee \" + localVars.aux)",
 												"const resposta = localVars.aux;",
 												"",
 												"// Obtém a lista de palavras",
@@ -7000,12 +7000,6 @@
 											"parameters": {
 												"frame-number": "4"
 											}
-										},
-										{
-											"type": "script",
-											"script": [
-												"console.log(\"oi\")"
-											]
 										}
 									],
 									"sid": 857331542140479
@@ -7540,12 +7534,6 @@
 										"variable": "qtdeRespostas",
 										"value": "Lacuna.PickedCount"
 									}
-								},
-								{
-									"type": "script",
-									"script": [
-										"console.log(\"qtde de respostas : \",localVars.qtdeRespostas)"
-									]
 								}
 							],
 							"sid": 543404575268774
@@ -7724,14 +7712,7 @@
 									}
 								}
 							],
-							"actions": [
-								{
-									"type": "script",
-									"script": [
-										"console.log(\"qtde de respostas caso não tenha : \",localVars.qtdeRespostas)"
-									]
-								}
-							],
+							"actions": [],
 							"sid": 718867865737449,
 							"children": [
 								{
@@ -8767,14 +8748,7 @@
 					"functionParameters": [],
 					"eventType": "function-block",
 					"conditions": [],
-					"actions": [
-						{
-							"type": "script",
-							"script": [
-								"console.log(\"tentativa marcada\")"
-							]
-						}
-					],
+					"actions": [],
 					"sid": 978252156486708,
 					"children": [
 						{
@@ -12144,8 +12118,6 @@
 							"script": [
 								"",
 								"",
-								"console.log(window.Namespace.board)",
-								"console.log(window.Namespace.question)",
 								"",
 								"const save = { words: window.Namespace.board,",
 								"\t\t\t   questions: window.Namespace.question,",
@@ -12191,7 +12163,6 @@
 							"type": "script",
 							"script": [
 								"let jogador = window.Namespace.message.split(',')[0];",
-								"console.log(window.Namespace.session)",
 								"window.Namespace.saveJSON = {",
 								"\t\"user\": jogador,",
 								"\t\"timestamp\": new Date().toISOString(),",
@@ -12331,7 +12302,6 @@
 								"",
 								"let jsonString = JSON.stringify(jsonObject);",
 								"",
-								"console.log(jsonString);",
 								"",
 								"fetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/game\", {",
 								"    method: \"POST\",",

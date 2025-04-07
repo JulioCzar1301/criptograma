@@ -1,18 +1,25 @@
 // Namespace da questão, para poder acessar em outro script
 window.Namespace = window.Namespace || {};
 window.Namespace.nameSectionOrChapter = []
+
 function waitForMessage() {
-  return new Promise((resolve) => {
-    const messageHandler = (event) => {
-      if (event.data) {
-        window.Namespace.message = event.data;
-        window.removeEventListener('message', messageHandler);
-        resolve(event.data);
-      }
-    };
-    
-    window.addEventListener('message', messageHandler);
-  });
+    return new Promise((resolve) => {
+        window.addEventListener('message', (event) => {
+            // Verifica a origem da mensagem para garantir segurança
+            // if (event.origin !== 'https://your-react-app-domain.com') {
+            //   return;
+            // }
+
+            // Acessa a mensagem recebida
+            const message = event.data;
+            ////console.log('Mensagem recebida no Construct:', message);
+            
+            // Armazena a mensagem em uma variável no namespace global
+            window.Namespace.message = message;
+
+            resolve();  // Resolve a Promise quando a mensagem for recebida
+        });
+    });
 }
 
 window.Namespace.reload = false;
@@ -25,13 +32,15 @@ window.Namespace.tipLetterRandom = "";
 window.Namespace.tipLetterSelected = "";
 
 async function main(){
+    await waitForMessage()
+	//console.log(window.Namespace.message)
 	// Função que verifica se deve recarregar o jogo salvo
 	window.Namespace.questionsOnly = [];
 	window.Namespace.erros = [];
 	window.Namespace.acertos = [];
 	window.parent?.postMessage('construct-ready', '*');
 	waitForMessage();
-	window.Namespace.message = "idJogadorPC,chapter,25ba2c14-a291-4f90-a444-414252245737";
+	// window.Namespace.message = "04380458-d071-70c2-622c-bf703e64af98,chapter,25ba2c14-a291-4f90-a444-414252245737";
 	window.Namespace.nameSection;
 	window.Namespace.nameChapter;
 	
@@ -52,7 +61,7 @@ async function main(){
 			xhr.send(null);
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
-				console.log('Data fetched successfully:', data);
+				//console.log('Data fetched successfully:', data);
 				
 				if (data.state == 4) {
 					if (isSection) {
@@ -91,7 +100,7 @@ async function main(){
 			xhr.send(null);
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
-				console.log('Data fetched successfully:', data);
+				//console.log('Data fetched successfully:', data);
 				window.Namespace.rawData = data;
 			} else {
 				throw new Error('Network response was not ok');
@@ -113,7 +122,7 @@ async function main(){
 			xhr.send(null);
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
-				console.log('Data fetched successfully:', data);
+				//console.log('Data fetched successfully:', data);
 				if (isSection) {
 					window.Namespace.nameSectionOrChapter = data;
 					window.Namespace.nameSection = data
@@ -138,7 +147,7 @@ async function main(){
 			xhr.send(null);
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
-				console.log('Data fetched successfully:', data);
+				//console.log('Data fetched successfully:', data);
 				window.Namespace.session = data.session;
 				window.Namespace.session.rawData = window.Namespace.session.rawData;
 				window.Namespace.time = window.Namespace.session.rawData.time

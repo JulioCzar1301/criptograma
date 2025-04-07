@@ -1,18 +1,6 @@
 window.Namespace = window.Namespace || {};
 
-function waitForMessage() {
-  return new Promise((resolve) => {
-    const messageHandler = (event) => {
-      if (event.data) {
-        window.Namespace.message = event.data;
-        window.removeEventListener('message', messageHandler);
-        resolve(event.data);
-      }
-    };
-    
-    window.addEventListener('message', messageHandler);
-  });
-}
+
 
 // Import any other script files here, e.g.:
 // import * as myModule from "./mymodule.js";
@@ -34,11 +22,11 @@ runOnStartup(async runtime =>
 });
 
 	// Envia mensagem de pronto
-	window.parent?.postMessage('construct-ready', '*');
+	// window.parent?.postMessage('construct-ready', '*');
 
 	// Aguarda mensagem ou usa valor padrão após timeout
-	waitForMessage();
-	window.Namespace.message = "idJogadorPC,chapter,25ba2c14-a291-4f90-a444-414252245737";
+	// waitForMessage();
+	// window.Namespace.message = "04380458-d071-70c2-622c-bf703e64af98,chapter,25ba2c14-a291-4f90-a444-414252245737";
 
 async function OnBeforeProjectStart(runtime)
 {
@@ -73,7 +61,7 @@ async function OnBeforeProjectStart(runtime)
 	//saveExample = ""
 	if(saveExample != ""){
 		const save = JSON.parse(saveExample)
-		console.log(save)
+		
 		valid = true
 		boardComplete = save.words.words
 		questionsSelected = save.questions
@@ -82,9 +70,9 @@ async function OnBeforeProjectStart(runtime)
 		questionSave = save.questions
 		runtime.globalVars.nomeSecao = save.nameSection
 		mainComplete = save.words.wordMainComplete;
-		console.log(save.time)
+		
 		coinSave = save.coin
-        console.log(save.coin)
+       
 		window.Namespace.time = save.time
 		window.Namespace.board = save.words
 		runtime.globalVars.symbols = JSON.stringify(symbols)
@@ -103,7 +91,7 @@ async function OnBeforeProjectStart(runtime)
 		window.Namespace.tipContentUsed = save.tipContentUsed;
 		window.Namespace.tipLetterRandom = save.tipLetterRandom;
 		window.Namespace.tipLetterSelected = save.tipLetterSelected;
-		console.log(window.Namespace.tipLetterSelected)
+		
 		
 	}
 	else{
@@ -111,7 +99,7 @@ async function OnBeforeProjectStart(runtime)
 		runtime.globalVars.nomeSecao = window.Namespace.nameSectionOrChapter
 		//runtime.globalVars.complete = true;
 	
-		console.log(data)
+		////console.log(data)
 
 		//Escolhe palavras para montar o criptograma
 
@@ -138,7 +126,7 @@ async function OnBeforeProjectStart(runtime)
 			let multipleAnswer = []
 			const firstQuestion = escolherPalavraAleatoria(data, attemptWord);
 			let firstWord ;
-			console.log(firstQuestion.resposta);
+			//console.log(firstQuestion.resposta);
 
 	// 		questionsSelected.push(firstQuestion);
 
@@ -146,7 +134,7 @@ async function OnBeforeProjectStart(runtime)
 				if(!attemptWord.includes(firstQuestion.resposta)){
 					attemptWord.push(firstQuestion.resposta);
 					firstWord = normalizeWord(firstQuestion.resposta[0]);
-					console.log("primeira palavra escolhida: ", firstWord)
+					//console.log("primeira palavra escolhida: ", firstWord)
 				}
 			}
 			else{
@@ -155,8 +143,8 @@ async function OnBeforeProjectStart(runtime)
 						attemptWord.push(word);
 						firstWord = normalizeWord(word)
 						multipleAnswer = firstQuestion.resposta.filter(item => normalizeWord(item) != firstWord)
-						console.log(multipleAnswer)
-						console.log("primeira palavra escolhida: ", firstWord)
+						//console.log(multipleAnswer)
+						//console.log("primeira palavra escolhida: ", firstWord)
 						break;
 					}
 				}
@@ -167,7 +155,7 @@ async function OnBeforeProjectStart(runtime)
 			}
 
 			if(attemptWord.length == data.length){
-			   console.log("Ja foram avaliadas todas as palavras")
+			   //console.log("Ja foram avaliadas todas as palavras")
 			   break;
 			}
 
@@ -187,7 +175,7 @@ async function OnBeforeProjectStart(runtime)
 
 						if(multipleAnswer.length == 0){
 						   multipleAnswer = null;
-						   console.log("Questao de multiplas respostas: ",otherQuestion)
+						   //console.log("Questao de multiplas respostas: ",otherQuestion)
 						   questionsSelected.push({question:otherQuestion, index:j});
 						   for(const word of aux){
 								boardComplete.push(word);
@@ -213,8 +201,8 @@ async function OnBeforeProjectStart(runtime)
 									}
 
 									if (max + min < 15) {
-										console.log("Próxima palavra escolhida: ", word);
-										console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
+										//console.log("Próxima palavra escolhida: ", word);
+										//console.log(`A palavra ${word} cruzou com a vertical no índice ${j} com letra ${letter}`);
 										aux.push({ string: word, posX: -k, posY: j , index:j, complete: false});
 										indexGoal = indexGoal.filter(item => item != j);
 										wordsChoiceComplete.push(word);
@@ -258,13 +246,13 @@ async function OnBeforeProjectStart(runtime)
 									}
 
 									if ((max + min < 15)) {
-										console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
+										//console.log(`A palavra ${otherWord} cruzou com a vertical no índice ${index} com letra ${letter}`);
 										boardComplete.push({ string: otherWord, posX: -k, posY: index ,index:index, complete: false});
 										indexGoal = indexGoal.filter(item => item != index);
 										wordsChoiceComplete.push(otherWord);
 										match = true;
 
-										console.log("Questão de resposta única: ", otherQuestion);
+										//console.log("Questão de resposta única: ", otherQuestion);
 										questionsSelected.push({question:otherQuestion, index:index});
 										break; // Sai do loop interno após encontrar uma letra que permite a junção
 									}
@@ -277,7 +265,7 @@ async function OnBeforeProjectStart(runtime)
 
 			if(boardComplete.length == firstWord.length){
 				isOkGame = true;
-				console.log(boardComplete)
+				//console.log(boardComplete)
 				valid = true
 				const words = boardComplete
 				  .filter(item => item.string) // Filtra os objetos que possuem o atributo 'string'
@@ -289,10 +277,10 @@ async function OnBeforeProjectStart(runtime)
 					.map(item => Math.abs(item.posX));
 
  
-			    console.log(coordenatesMainWord)
-                console.log(boardComplete)
-				console.log(words);
-				console.log(questionsSelected)
+			    //console.log(coordenatesMainWord)
+                //console.log(boardComplete)
+				//console.log(words);
+				//console.log(questionsSelected)
 				letters = getUniqueCharacters(words,coordenatesMainWord)
 				symbols = getSymbol(letters)
 
@@ -331,10 +319,10 @@ async function OnBeforeProjectStart(runtime)
 			// Quantidade de células no eixo x
 			const gridWidth = maxX - minX + 2;
 
-			console.log("Coordenadas:", coordinates);
-			console.log("Quantidade de células para a esquerda:", minX);
-			console.log("Quantidade de células para a direita:", maxX);
-			console.log("Células totais:", gridWidth);
+			//console.log("Coordenadas:", coordinates);
+			//console.log("Quantidade de células para a esquerda:", minX);
+			//console.log("Quantidade de células para a direita:", maxX);
+			//console.log("Células totais:", gridWidth);
 
 			runtime.globalVars.minX = 660 + Math.abs(minX) * 54 + (16 - gridWidth) * 27; // 27 = tamCelula/2
 
@@ -343,7 +331,7 @@ async function OnBeforeProjectStart(runtime)
 
 	        boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
 			window.Namespace.board = boardSave;
-			console.log(boardSave)
+			//console.log(boardSave)
 			// Chamada da malha final
 			if (saveExample != "" && boardComplete.length > 6){
 				for (let j = 0; j < boardComplete.length; j++) {
@@ -510,8 +498,8 @@ async function OnBeforeProjectStart(runtime)
 		  }
           
 		  runtime.callFunction("scrol",);
-		  console.log(boardComplete)
-		  console.log(questionsSelected)
+		  //console.log(boardComplete)
+		  //console.log(questionsSelected)
 
 		  for(let i = 1; i < runtime.objects.celula.getAllInstances().length ; i++){
 
@@ -581,13 +569,13 @@ function Tick(runtime) {
 			continue;
 		}
 
-		//console.log("Ids avaliados: ", idQuestao)
+		////console.log("Ids avaliados: ", idQuestao)
 		
         // Verifica se todas as células do grupo cumprem a condição
         for (let i = 0; i < grupo.celulas.length; i++) {
             const celula = grupo.celulas[i];
             const letter = grupo.letras[i];
-// 		    console.log(letter.text == "")
+// 		    //console.log(letter.text == "")
 			if(letter.text != ""){
 				filledCells++;
 			}
@@ -602,7 +590,7 @@ function Tick(runtime) {
         // Se o grupo for válido, retorna o idQuestao
         if (grupoValido) {
 		     let question;
-            console.log(idQuestao)
+            //console.log(idQuestao)
             for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
 				const letter = grupo.letras[i]
@@ -631,9 +619,9 @@ function Tick(runtime) {
 					
 				}
 				
-				console.log(idQuestao)
+				//console.log(idQuestao)
 				goal.push(idQuestao)
-				console.log(goal)
+				//console.log(goal)
 				runtime.callFunction("marcarAcerto")
 			}
 			else{
@@ -645,7 +633,7 @@ function Tick(runtime) {
 					boardSave.wordMainComplete = true;
 				}
 				else{
-					console.log(boardSave.words)
+					//console.log(boardSave.words)
 					boardSave.words[idQuestao].complete = true;
 				}
                 
@@ -675,7 +663,7 @@ function Tick(runtime) {
     }
 
     // Se nenhum grupo cumprir a condição, retorna null
-//     console.log("Nenhum grupo cumpre a condição.");
+//     //console.log("Nenhum grupo cumpre a condição.");
 	firstRun = false
     return null;
 	
@@ -718,7 +706,7 @@ function getUniqueCharacters(words, coordinateMainWord) {
     novaPalavra = aux
 	
 	novaPalavra = novaPalavra.join("");
-    console.log(novaPalavra)
+    //console.log(novaPalavra)
 	wordsWithoutMain.push(novaPalavra)
   }
   wordsWithoutMain.forEach(word => {

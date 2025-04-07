@@ -8457,6 +8457,12 @@
 									}
 								},
 								{
+									"type": "script",
+									"script": [
+										"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
+									]
+								},
+								{
 									"callFunction": "resetSave",
 									"sid": 754827416997808
 								}
@@ -8684,6 +8690,12 @@
 									"parameters": {
 										"frame-number": "0"
 									}
+								},
+								{
+									"type": "script",
+									"script": [
+										"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
+									]
 								},
 								{
 									"id": "set-boolean-eventvar",
@@ -12137,6 +12149,214 @@
 						}
 					],
 					"sid": 717203415172798
+				},
+				{
+					"eventType": "comment",
+					"text": "BASE: BOTÕES QUE ENVIAM MENSAGEM PARA A PLATAFORMA",
+					"text-color": [
+						0,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 1: AVANÇAR",
+					"text-color": [
+						0,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 491421463079288,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "fimProximo"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": [
+								"window.parent.postMessage({ type: 'GAME_NEXT' }, '*');"
+							]
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimProximo",
+							"sid": 689073933842032,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 338993254912339
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-button-released",
+							"objectClass": "Mouse",
+							"sid": 123713988310032,
+							"parameters": {
+								"mouse-button": "left"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimProximo",
+							"sid": 729221160054081,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 950609952007766
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 2: RETORNAR",
+					"text-color": [
+						0,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 508821867136074,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "fimVoltar"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": [
+								"window.parent.postMessage({ type: 'GAME_BACK' }, '*');"
+							]
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimVoltar",
+							"sid": 136962331316063,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 933704055461484
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-button-released",
+							"objectClass": "Mouse",
+							"sid": 479374003512164,
+							"parameters": {
+								"mouse-button": "left"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimVoltar",
+							"sid": 105193609731232,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 376320067738101
+				},
+				{
+					"eventType": "comment",
+					"text": "CASO 3: REINICIAR",
+					"text-color": [
+						0,
+						1,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 533455346203402,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "fimReiniciar"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": [
+								"window.parent.postMessage({ type: 'GAME_REFRESH' }, '*');"
+							]
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimReiniciar",
+							"sid": 813277151634574,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 319812746928044
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-button-released",
+							"objectClass": "Mouse",
+							"sid": 707587944669659,
+							"parameters": {
+								"mouse-button": "left"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "fimReiniciar",
+							"sid": 308957567156149,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 637302230204807
 				}
 			],
 			"sid": 312968649701192

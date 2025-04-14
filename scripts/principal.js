@@ -26,7 +26,7 @@ runOnStartup(async runtime =>
 
 	// Aguarda mensagem ou usa valor padrão após timeout
 	// waitForMessage();
-	//window.Namespace.message = "04380458-d071-70c2-622c-bf703e64af98,chapter,25ba2c14-a291-4f90-a444-414252245737";
+	window.Namespace.message = "04380458-d071-70c2-622c-bf703e64af98,chapter,25ba2c14-a291-4f90-a444-414252245737";
 
 async function OnBeforeProjectStart(runtime)
 {
@@ -67,6 +67,7 @@ async function OnBeforeProjectStart(runtime)
 		questionsSelected = save.questions
 		symbols = save.words.symbols
 		boardSave = save.words
+		console.log(boardSave)
 		questionSave = save.questions
 		runtime.globalVars.nomeSecao = save.nameSection
 		mainComplete = save.words.wordMainComplete;
@@ -329,7 +330,7 @@ async function OnBeforeProjectStart(runtime)
 			boardComplete.sort((a, b) => a.index - b.index);
         
 
-	        boardSave = {words:[...boardComplete], wordMainComplete:false, symbols: symbols}
+	        boardSave = {words:[...boardComplete], wordMainComplete:mainComplete, symbols: symbols}
 			window.Namespace.board = boardSave;
 			//console.log(boardSave)
 			// Chamada da malha final
@@ -591,13 +592,16 @@ function Tick(runtime) {
         if (grupoValido) {
 		     let question;
             //console.log(idQuestao)
+			let word = ''
             for (let i = 0; i < grupo.celulas.length; i++) {
 			    const celula = grupo.celulas[i];
 				const letter = grupo.letras[i]
+				word +=  letter.text
 				celula.instVars.block = true;
 				letter.instVars.block = true;
 				question = celula.instVars.idQuestao;
         	}
+			
 			
 			if(saveExample != "" && firstRun){
 				for(let i = 0; i < runtime.objects.Lacuna.getAllInstances().length;i++){
@@ -622,7 +626,7 @@ function Tick(runtime) {
 				//console.log(idQuestao)
 				goal.push(idQuestao)
 				//console.log(goal)
-				runtime.callFunction("marcarAcerto")
+				runtime.callFunction("marcarAcerto", word)
 			}
 			else{
 				runtime.callFunction("marcarAcerto")
@@ -640,7 +644,7 @@ function Tick(runtime) {
 				//Salvar malha
 				window.Namespace.board = boardSave;
 				window.Namespace.question = questionSave;
-				
+				console.log(boardSave)
 				 const save = { words: boardSave, 
 				 questions: questionSave, 
 				 nameSection: runtime.globalVars.nomeSecao, 

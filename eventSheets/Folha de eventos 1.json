@@ -273,16 +273,6 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "pontuacao",
-			"type": "number",
-			"initialValue": "0",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 503065969446773
-		},
-		{
-			"eventType": "variable",
 			"name": "tentativasGeral",
 			"type": "number",
 			"initialValue": "0",
@@ -1264,6 +1254,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 882441541156216
+						},
+						{
+							"name": "dificuldade",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 954858968025680
 						}
 					],
 					"eventType": "function-block",
@@ -1376,6 +1373,15 @@
 							"parameters": {
 								"instance-variable": "imagem",
 								"value": "imagePath"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "textQuestao",
+							"sid": 994847640674816,
+							"parameters": {
+								"instance-variable": "dificuldade",
+								"value": "dificuldade"
 							}
 						},
 						{
@@ -7054,7 +7060,7 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 424828989501996,
+									"sid": 200667401886235,
 									"parameters": {
 										"variable": "heigthInicial",
 										"value": "258"
@@ -7362,7 +7368,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 417869873894959,
+							"sid": 187223075007382,
 							"parameters": {
 								"object": "questaoContainer",
 								"expression": "questaoContainer.idQuestao <> \"temp\""
@@ -7371,7 +7377,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 292188487946372,
+							"sid": 602203981963684,
 							"parameters": {
 								"object": "Lacuna",
 								"expression": "Lacuna.idQuestao <> \"temp\""
@@ -7380,7 +7386,7 @@
 						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 446179409374669,
+							"sid": 953733379790743,
 							"parameters": {
 								"object": "textQuestao",
 								"expression": "textQuestao.idQuestao <> \"temp\""
@@ -7391,7 +7397,7 @@
 						{
 							"id": "set-y",
 							"objectClass": "questaoContainer",
-							"sid": 638252009786265,
+							"sid": 686438303630817,
 							"parameters": {
 								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? questaoContainer.posInitial- (Scroll.Y*2  - Scroll.posInitial) : questaoContainer.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
@@ -7399,7 +7405,7 @@
 						{
 							"id": "set-y",
 							"objectClass": "Lacuna",
-							"sid": 163594063078295,
+							"sid": 932868899343367,
 							"parameters": {
 								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? Lacuna.posInitial- (Scroll.Y*2  - Scroll.posInitial) : Lacuna.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
@@ -7407,13 +7413,13 @@
 						{
 							"id": "set-y",
 							"objectClass": "textQuestao",
-							"sid": 644406000110135,
+							"sid": 641798862581033,
 							"parameters": {
 								"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? textQuestao.posInitial- (Scroll.Y*2  - Scroll.posInitial) : textQuestao.posInitial- (Scroll.Y  - Scroll.posInitial)"
 							}
 						}
 					],
-					"sid": 255846848772351,
+					"sid": 445802938556500,
 					"children": [
 						{
 							"eventType": "comment",
@@ -7431,7 +7437,7 @@
 								{
 									"id": "pick-all",
 									"objectClass": "System",
-									"sid": 326903525395406,
+									"sid": 106518437769542,
 									"parameters": {
 										"object": "botaoImagem"
 									}
@@ -7441,13 +7447,13 @@
 								{
 									"id": "set-y",
 									"objectClass": "botaoImagem",
-									"sid": 738394311113359,
+									"sid": 986050889678242,
 									"parameters": {
 										"y": "Scroll.Y > (252 + Scroll.Height/2 + 10) ? botaoImagem.posInitial- (Scroll.Y*2  - Scroll.posInitial) : botaoImagem.posInitial- (Scroll.Y  - Scroll.posInitial)"
 									}
 								}
 							],
-							"sid": 418791975564305
+							"sid": 103502644240259
 						}
 					]
 				}
@@ -7670,19 +7676,19 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 595032162227222,
+									"sid": 737390545820113,
 									"parameters": {
-										"variable": "pontuacao",
-										"value": "tentativasGeral = 0 ? (acertos / 1) * 10 :  (acertos / tentativasGeral) * 100"
+										"variable": "moedasBonus",
+										"value": "tentativasGeral = 0 ? int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / 1)* 100))) : int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / tentativasGeral)* 100)))"
 									}
 								},
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 737390545820113,
+									"sid": 342978075804227,
 									"parameters": {
 										"variable": "moedasBonus",
-										"value": "tentativasGeral = 0 ? int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / 1)* 100))) : int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / tentativasGeral)* 100)))"
+										"value": "floor(moedasBonus/10)"
 									}
 								}
 							],
@@ -8273,6 +8279,11 @@
 							"parameters": {
 								"value": "acertos = textQuestao.Count"
 							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 508378825872354
 						}
 					],
 					"actions": [],
@@ -8282,6 +8293,10 @@
 							"eventType": "block",
 							"conditions": [],
 							"actions": [
+								{
+									"callFunction": "PostPontuacao",
+									"sid": 333147802988439
+								},
 								{
 									"id": "set-visible",
 									"objectClass": "fundoDesfoque",
@@ -8361,14 +8376,6 @@
 								},
 								{
 									"id": "set-visible",
-									"objectClass": "jogMelhorPontuacao",
-									"sid": 891636952310802,
-									"parameters": {
-										"visibility": "visible"
-									}
-								},
-								{
-									"id": "set-visible",
 									"objectClass": "jogMoedas",
 									"sid": 144010413792170,
 									"parameters": {
@@ -8381,22 +8388,6 @@
 									"sid": 686813067289172,
 									"parameters": {
 										"visibility": "visible"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "jogPontuacao",
-									"sid": 983983933239104,
-									"parameters": {
-										"text": "pontuacao"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "jogMelhorPontuacao",
-									"sid": 970809166109378,
-									"parameters": {
-										"text": "pontuacao"
 									}
 								},
 								{
@@ -8464,7 +8455,7 @@
 								},
 								{
 									"callFunction": "resetSave",
-									"sid": 754827416997808
+									"sid": 399858085208579
 								}
 							],
 							"sid": 822650538684218
@@ -8534,6 +8525,10 @@
 							"eventType": "block",
 							"conditions": [],
 							"actions": [
+								{
+									"callFunction": "PostPontuacao",
+									"sid": 440254204227883
+								},
 								{
 									"id": "set-time-scale",
 									"objectClass": "System",
@@ -8613,14 +8608,6 @@
 								},
 								{
 									"id": "set-visible",
-									"objectClass": "jogMelhorPontuacao",
-									"sid": 304112089622157,
-									"parameters": {
-										"visibility": "visible"
-									}
-								},
-								{
-									"id": "set-visible",
 									"objectClass": "jogMoedas",
 									"sid": 814004284260015,
 									"parameters": {
@@ -8633,22 +8620,6 @@
 									"sid": 379454210403096,
 									"parameters": {
 										"visibility": "visible"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "jogPontuacao",
-									"sid": 141935545800321,
-									"parameters": {
-										"text": "pontuacao"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "jogMelhorPontuacao",
-									"sid": 905180493812684,
-									"parameters": {
-										"text": "pontuacao"
 									}
 								},
 								{
@@ -12161,202 +12132,265 @@
 					]
 				},
 				{
-					"eventType": "comment",
-					"text": "CASO 1: AVANÇAR",
-					"text-color": [
-						0,
-						1,
-						1,
-						1
-					]
-				},
-				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "on-object-clicked",
-							"objectClass": "Mouse",
-							"sid": 491421463079288,
-							"parameters": {
-								"mouse-button": "left",
-								"click-type": "clicked",
-								"object-clicked": "fimProximo"
-							}
+							"id": "is-visible",
+							"objectClass": "telaFinal",
+							"sid": 816965224324136
 						}
 					],
 					"actions": [
 						{
 							"type": "script",
 							"script": [
-								"window.parent.postMessage({ type: 'GAME_NEXT' }, '*');"
+								"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
+							]
+						}
+					],
+					"sid": 304538600059070,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "CASO 1: AVANÇAR",
+							"text-color": [
+								0,
+								1,
+								1,
+								1
 							]
 						},
 						{
-							"id": "set-animation-frame",
-							"objectClass": "fimProximo",
-							"sid": 689073933842032,
-							"parameters": {
-								"frame-number": "1"
-							}
-						}
-					],
-					"sid": 338993254912339
-				},
-				{
-					"eventType": "block",
-					"conditions": [
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-visible",
+									"objectClass": "fimProximo",
+									"sid": 473048347012167
+								}
+							],
+							"actions": [],
+							"sid": 647225403214774,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 786276831175507,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "fimProximo"
+											}
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": [
+												"window.parent.postMessage({ type: 'GAME_NEXT' }, '*');"
+											]
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimProximo",
+											"sid": 499163226460277,
+											"parameters": {
+												"frame-number": "1"
+											}
+										}
+									],
+									"sid": 204030517210483
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-button-released",
+											"objectClass": "Mouse",
+											"sid": 956225847083331,
+											"parameters": {
+												"mouse-button": "left"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimProximo",
+											"sid": 780782006606220,
+											"parameters": {
+												"frame-number": "0"
+											}
+										}
+									],
+									"sid": 129912648513525
+								}
+							]
+						},
 						{
-							"id": "on-button-released",
-							"objectClass": "Mouse",
-							"sid": 123713988310032,
-							"parameters": {
-								"mouse-button": "left"
-							}
-						}
-					],
-					"actions": [
+							"eventType": "comment",
+							"text": "CASO 2: RETORNAR",
+							"text-color": [
+								0,
+								1,
+								1,
+								1
+							]
+						},
 						{
-							"id": "set-animation-frame",
-							"objectClass": "fimProximo",
-							"sid": 729221160054081,
-							"parameters": {
-								"frame-number": "0"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-visible",
+									"objectClass": "fimVoltar",
+									"sid": 343317774399941
+								}
+							],
+							"actions": [],
+							"sid": 428735192029973,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 787684717135375,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "fimVoltar"
+											}
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": [
+												"window.parent.postMessage({ type: 'GAME_BACK' }, '*');"
+											]
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimVoltar",
+											"sid": 544833960866193,
+											"parameters": {
+												"frame-number": "1"
+											}
+										}
+									],
+									"sid": 310391343869128
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-button-released",
+											"objectClass": "Mouse",
+											"sid": 700984422192523,
+											"parameters": {
+												"mouse-button": "left"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimVoltar",
+											"sid": 405453428287698,
+											"parameters": {
+												"frame-number": "0"
+											}
+										}
+									],
+									"sid": 326974326780338
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "CASO 3: REINICIAR",
+							"text-color": [
+								0,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-visible",
+									"objectClass": "fimReiniciar",
+									"sid": 505423339530485
+								}
+							],
+							"actions": [],
+							"sid": 428058599105361,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-object-clicked",
+											"objectClass": "Mouse",
+											"sid": 532450212185404,
+											"parameters": {
+												"mouse-button": "left",
+												"click-type": "clicked",
+												"object-clicked": "fimReiniciar"
+											}
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": [
+												"window.parent.postMessage({ type: 'GAME_REFRESH' }, '*');"
+											]
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimReiniciar",
+											"sid": 263203693212200,
+											"parameters": {
+												"frame-number": "1"
+											}
+										}
+									],
+									"sid": 997774188583676
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-button-released",
+											"objectClass": "Mouse",
+											"sid": 845471818827695,
+											"parameters": {
+												"mouse-button": "left"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "fimReiniciar",
+											"sid": 412694527370010,
+											"parameters": {
+												"frame-number": "0"
+											}
+										}
+									],
+									"sid": 542769113969713
+								}
+							]
 						}
-					],
-					"sid": 950609952007766
-				},
-				{
-					"eventType": "comment",
-					"text": "CASO 2: RETORNAR",
-					"text-color": [
-						0,
-						1,
-						1,
-						1
 					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-object-clicked",
-							"objectClass": "Mouse",
-							"sid": 508821867136074,
-							"parameters": {
-								"mouse-button": "left",
-								"click-type": "clicked",
-								"object-clicked": "fimVoltar"
-							}
-						}
-					],
-					"actions": [
-						{
-							"type": "script",
-							"script": [
-								"window.parent.postMessage({ type: 'GAME_BACK' }, '*');"
-							]
-						},
-						{
-							"id": "set-animation-frame",
-							"objectClass": "fimVoltar",
-							"sid": 136962331316063,
-							"parameters": {
-								"frame-number": "1"
-							}
-						}
-					],
-					"sid": 933704055461484
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-button-released",
-							"objectClass": "Mouse",
-							"sid": 479374003512164,
-							"parameters": {
-								"mouse-button": "left"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-animation-frame",
-							"objectClass": "fimVoltar",
-							"sid": 105193609731232,
-							"parameters": {
-								"frame-number": "0"
-							}
-						}
-					],
-					"sid": 376320067738101
-				},
-				{
-					"eventType": "comment",
-					"text": "CASO 3: REINICIAR",
-					"text-color": [
-						0,
-						1,
-						1,
-						1
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-object-clicked",
-							"objectClass": "Mouse",
-							"sid": 533455346203402,
-							"parameters": {
-								"mouse-button": "left",
-								"click-type": "clicked",
-								"object-clicked": "fimReiniciar"
-							}
-						}
-					],
-					"actions": [
-						{
-							"type": "script",
-							"script": [
-								"window.parent.postMessage({ type: 'GAME_REFRESH' }, '*');"
-							]
-						},
-						{
-							"id": "set-animation-frame",
-							"objectClass": "fimReiniciar",
-							"sid": 813277151634574,
-							"parameters": {
-								"frame-number": "1"
-							}
-						}
-					],
-					"sid": 319812746928044
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-button-released",
-							"objectClass": "Mouse",
-							"sid": 707587944669659,
-							"parameters": {
-								"mouse-button": "left"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-animation-frame",
-							"objectClass": "fimReiniciar",
-							"sid": 308957567156149,
-							"parameters": {
-								"frame-number": "0"
-							}
-						}
-					],
-					"sid": 637302230204807
 				}
 			],
 			"sid": 312968649701192
@@ -12534,6 +12568,194 @@
 						}
 					],
 					"sid": 580571214386684
+				},
+				{
+					"functionName": "PostPontuacao",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 866886547995878,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "scoreJogador",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 297844450264735
+						},
+						{
+							"eventType": "variable",
+							"name": "dificuldade",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 561993677683296
+						},
+						{
+							"eventType": "variable",
+							"name": "tempo",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 191884658290659
+						},
+						{
+							"eventType": "variable",
+							"name": "tentativas",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 911176062254828
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 167457833282172,
+									"parameters": {
+										"variable": "scoreJogador",
+										"value": "(acertos/Lacuna.Count)* 100"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 150730445508562,
+									"parameters": {
+										"variable": "tempo",
+										"value": "(TempoGasto/TempoJogo)* 100"
+									}
+								},
+								{
+									"type": "script",
+									"script": [
+										"const textQuestoes = runtime.objects.textQuestao.getAllInstances();",
+										"",
+										"// CALCULO DE DIFICULDADE MÉDIA",
+										"",
+										"// FACEIS",
+										"const questoesFaceis = textQuestoes.filter(instancia => {",
+										"  return (instancia.instVars.dificuldade === 1);",
+										"});",
+										"",
+										"// MEDIAS",
+										"const questoesMedias = textQuestoes.filter(instancia => {",
+										"  return (instancia.instVars.dificuldade === 2);",
+										"});",
+										"",
+										"// DIFIVEIS",
+										"const questoesDificeis = textQuestoes.filter(instancia => {",
+										"  return (instancia.instVars.dificuldade === 3);",
+										"});",
+										"",
+										"localVars.dificuldade = (((questoesFaceis.length + (questoesMedias.length*2) + (questoesDificeis.length * 3))/(textQuestoes.length*3))*100)",
+										"",
+										"// CALCULO DE NÚMERO DE TENTATIVAS",
+										"",
+										"textQuestoes.forEach(textQuestao => {",
+										"    if (textQuestao.instVars.tentativas !== undefined && typeof textQuestao.instVars.tentativas === 'number') {",
+										"        localVars.tentativas += textQuestao.instVars.tentativas;",
+										"    }",
+										"});"
+									]
+								},
+								{
+									"type": "script",
+									"script": [
+										"async function enviarDados() {",
+										"  const tempo = localVars.tempo;",
+										"  const tentativas = localVars.tentativas;",
+										"  const pontuacao = localVars.scoreJogador;",
+										"  const dificuldade = localVars.dificuldade;",
+										"  let pontuacaoIA = 0;",
+										"  let recomendacao = \"\";",
+										"",
+										"  // Tenta obter resposta da IA",
+										"  try {",
+										"    const respostaIA = await fetch(\"https://3.89.89.191.nip.io/nivel/\", {",
+										"      method: \"POST\",",
+										"      headers: { \"Content-Type\": \"application/json\" },",
+										"      body: JSON.stringify({",
+										"        pontuacao: pontuacao,",
+										"        tempo: tempo,",
+										"        dificuldade: dificuldade,",
+										"        tentativas: tentativas",
+										"      })",
+										"    });",
+										"",
+										"\t//console.log(\"pontuacao:\" + pontuacao, \"tempo\" + tempo, \"dificuldade: \" + dificuldade, \"tentativas:\" + tentativas)",
+										"",
+										"    if (!respostaIA.ok) throw new Error(\"Erro na resposta da IA\");",
+										"",
+										"    const dataIA = await respostaIA.json();",
+										"    pontuacaoIA = dataIA.pontuacao || pontuacao;",
+										"    recomendacao = dataIA.recomendacao || \"media\";",
+										"\tconst score = runtime.objects.jogPontuacao.getFirstInstance();",
+										"\tscore.text = Math.floor(pontuacaoIA).toString();",
+										"\tscore.runtime.redraw();",
+										"",
+										"    //console.log(\"Resposta IA:\", dataIA.pontuacao + \" | \" + dataIA.recomendacao);",
+										"",
+										"  } catch (erro) {",
+										"    console.warn(\"Erro ao obter dados da IA:\", erro);",
+										"  }",
+										"",
+										"//console.log(\"AAAAAAAAAAAAAAAAAAAAAAAAA:\", { pontuacaoIA, recomendacao })",
+										"",
+										"  // Envia para o back, independentemente da IA",
+										"  try {",
+										"    const [sub, tipo, id] = window.Namespace.message.split(',');",
+										"    const jsonObjectBack = {",
+										"      sub: sub,",
+										"      [tipo === \"section\" ? \"idSection\" : \"idChapter\"]: id,",
+										"      pontuacao: pontuacaoIA,",
+										"      recomendacao: recomendacao",
+										"    };",
+										"",
+										"    //console.log(\"Enviando ao back:\", jsonObjectBack);",
+										"",
+										"    const respostaBack = await fetch(\"https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/nivelPlayer\", {",
+										"      method: \"POST\",",
+										"      headers: { \"Content-Type\": \"application/json\" },",
+										"      body: JSON.stringify(jsonObjectBack)",
+										"    });",
+										"",
+										"    if (!respostaBack.ok) throw new Error(\"Erro na resposta do back\");",
+										"",
+										"    const respostaJson = await respostaBack.json();",
+										"    //console.log(\"Sucesso:\", respostaJson);",
+										"",
+										"  } catch (erro) {",
+										"    console.error(\"Erro ao enviar para o back:\", erro);",
+										"  }",
+										"}",
+										"",
+										"enviarDados();",
+										""
+									]
+								}
+							],
+							"sid": 314889563567500
+						}
+					]
 				}
 			],
 			"sid": 393212608266326

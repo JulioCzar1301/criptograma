@@ -25,22 +25,22 @@ function waitForMessage() {
 window.Namespace.reload = false;
 window.Namespace.saveJSON;
 window.Namespace.time = 0;
-window.Namespace.session ={};
+window.Namespace.session = {};
 window.Namespace.session.rawData = "";
 window.Namespace.tipContentUsed = false;
 window.Namespace.tipLetterRandom = "";
 window.Namespace.tipLetterSelected = "";
 
 async function main(){
-    // await waitForMessage()
+   	//await waitForMessage()
 	//console.log(window.Namespace.message)
 	// Função que verifica se deve recarregar o jogo salvo
 	window.Namespace.questionsOnly = [];
 	window.Namespace.erros = [];
 	window.Namespace.acertos = [];
 	window.parent?.postMessage('construct-ready', '*');
-	waitForMessage();
-	window.Namespace.message = "04380458-d071-70c2-622c-bf703e64af98,chapter,25ba2c14-a291-4f90-a444-414252245737";
+	//waitForMessage();
+	window.Namespace.message = "4438d4c8-90c1-7099-0bfc-e8bd42fa23c0,chapter,25ba2c14-a291-4f90-a444-414252245737";
 	window.Namespace.nameSection;
 	window.Namespace.nameChapter;
 	

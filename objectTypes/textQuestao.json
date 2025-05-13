@@ -81,6 +81,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 688395220641301
+		},
+		{
+			"name": "dificuldade",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 454625037543308
 		}
 	],
 	"behaviorTypes": [

@@ -772,7 +772,8 @@
 						"isCorrect": false,
 						"tempoQuestao": 0,
 						"posInitial": 0,
-						"tentativas": 0
+						"tentativas": 0,
+						"dificuldade": 0
 					},
 					"behaviors": {
 						"Fixar": {
@@ -1218,7 +1219,7 @@
 					"locked": false,
 					"world": {
 						"x": 856,
-						"y": 260,
+						"y": 258,
 						"width": 12,
 						"height": 255.59321999999997,
 						"originX": 0,
@@ -3149,66 +3150,6 @@
 						"height": 104,
 						"originX": 0.5,
 						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 3
-					}
-				},
-				{
-					"type": "jogMelhorPontuacao",
-					"properties": {
-						"text": "000",
-						"enable-bbcode": true,
-						"font": "OpenSans-Medium",
-						"size": 16,
-						"line-height": 0,
-						"bold": false,
-						"italic": false,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"horizontal-alignment": "left",
-						"vertical-alignment": "top",
-						"wrapping": "word",
-						"text-direction": "ltr",
-						"icon-set": -1,
-						"initially-visible": false,
-						"origin": "top-left",
-						"read-aloud": false
-					},
-					"uid": 38,
-					"sid": 686534620427049,
-					"tags": "",
-					"instanceVariables": {},
-					"behaviors": {
-						"NãoSalvar": {
-							"properties": {}
-						}
-					},
-					"instanceFolderItem": {
-						"sid": 686534620427049,
-						"expanded": true,
-						"folderName": "",
-						"indexInFolder": -1,
-						"folderNestingLevel": -1
-					},
-					"showing": true,
-					"locked": false,
-					"world": {
-						"x": 1052,
-						"y": 488,
-						"width": 194.93519598031224,
-						"height": 28.87200363640932,
-						"originX": 0,
-						"originY": 0,
 						"color": [
 							1,
 							1,

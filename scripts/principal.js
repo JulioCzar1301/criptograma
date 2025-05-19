@@ -65,7 +65,7 @@ async function OnBeforeProjectStart(runtime)
 		questionsSelected = save.questions
 		symbols = save.words.symbols
 		boardSave = save.words
-		console.log(boardSave)
+		//console.log(boardSave)
 		questionSave = save.questions
 		runtime.globalVars.nomeSecao = save.nameSection
 		mainComplete = save.words.wordMainComplete;

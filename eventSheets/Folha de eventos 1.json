@@ -283,6 +283,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "fatorScroll",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 261208984797023
+		},
+		{
+			"eventType": "variable",
 			"name": "symbols",
 			"type": "string",
 			"initialValue": "",
@@ -1744,6 +1754,7 @@
 										},
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"runtime.globalVars.existImage = true;"
 											]
@@ -1930,6 +1941,7 @@
 										},
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"// Obtém a instância atual de Lacuna",
 												"const lacunaInstance = runtime.objects.Lacuna.getFirstPickedInstance();",
@@ -5348,6 +5360,7 @@
 											"actions": [
 												{
 													"type": "script",
+													"language": "javascript",
 													"script": [
 														"// Obtém a resposta a ser comparada",
 														"const respostaLacunaNormalizada = normalizeWord(localVars.respostaLacuna);",
@@ -6921,6 +6934,15 @@
 										"variable": "heigthTotal",
 										"value": "heigthFinal - heigthInicial + scrolArea.Height "
 									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 437089346401071,
+									"parameters": {
+										"variable": "fatorScroll",
+										"value": "heigthFinal/scrolArea.Height"
+									}
 								}
 							],
 							"sid": 314430129996094
@@ -7295,6 +7317,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"console.log(\"cheguei nessa poha \")"
 							],
@@ -8264,6 +8287,7 @@
 								},
 								{
 									"type": "script",
+									"language": "javascript",
 									"script": [
 										"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
 									]
@@ -8479,6 +8503,7 @@
 								},
 								{
 									"type": "script",
+									"language": "javascript",
 									"script": [
 										"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
 									]
@@ -10094,6 +10119,7 @@
 										},
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"// CARREGA O JSON A PARTIR DA VARIAVEL GLOBAL SYMBOLS",
 												"const symbolsJSON = runtime.globalVars.symbols;",
@@ -10227,6 +10253,7 @@
 												},
 												{
 													"type": "script",
+													"language": "javascript",
 													"script": [
 														"window.Namespace.tipLetterRandom = localVars.aux"
 													]
@@ -10967,6 +10994,7 @@
 										},
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"window.Namespace.tipContentUsed = true;"
 											]
@@ -11491,6 +11519,7 @@
 										},
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"window.Namespace.tipLetterSelected = localVars.aux",
 												""
@@ -11913,6 +11942,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"",
 								"",
@@ -11958,6 +11988,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"window.parent.postMessage({ type: 'GAME_FINISHED' }, '*');"
 							]
@@ -12004,6 +12035,7 @@
 									"actions": [
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"window.parent.postMessage({ type: 'GAME_NEXT' }, '*');"
 											]
@@ -12084,6 +12116,7 @@
 									"actions": [
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"window.parent.postMessage({ type: 'GAME_BACK' }, '*');"
 											]
@@ -12164,6 +12197,7 @@
 									"actions": [
 										{
 											"type": "script",
+											"language": "javascript",
 											"script": [
 												"window.parent.postMessage({ type: 'GAME_REFRESH' }, '*');"
 											]
@@ -12240,6 +12274,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"let jogador = window.Namespace.message.split(',')[0];",
 								"window.Namespace.saveJSON = {",
@@ -12295,6 +12330,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"let jogador = window.Namespace.message.split(',')[0];",
 								"",
@@ -12368,6 +12404,7 @@
 					"actions": [
 						{
 							"type": "script",
+							"language": "javascript",
 							"script": [
 								"function generateUUID() {",
 								"    // Gera um UUID v4 no formato padrão",
@@ -12512,6 +12549,7 @@
 								},
 								{
 									"type": "script",
+									"language": "javascript",
 									"script": [
 										"const textQuestoes = runtime.objects.textQuestao.getAllInstances();",
 										"",
@@ -12545,6 +12583,7 @@
 								},
 								{
 									"type": "script",
+									"language": "javascript",
 									"script": [
 										"async function enviarDados() {",
 										"  const tempo = localVars.tempo;",

@@ -40,7 +40,7 @@ async function main(){
 	window.Namespace.acertos = [];
 	window.parent?.postMessage('construct-ready', '*');
 	//waitForMessage();
-	window.Namespace.message = "4438d4c8-90c1-7099-0bfc-e8bd42fa23c0,chapter,25ba2c14-a291-4f90-a444-414252245737";
+	window.Namespace.message = "948824b8-3051-7039-4c64-153b0f6c8dc8,chapter,8702111d-0f8e-465b-81db-518a7fbdc844";
 	window.Namespace.nameSection;
 	window.Namespace.nameChapter;
 	
@@ -48,6 +48,7 @@ async function main(){
 	const isSection = parts[1] === "section";
 	const chapterID = isSection ? "" : parts[2];
 	const sectionID = isSection ? parts[2] : "";
+    const idUser = parts[0]
 
 	let nameSection;
 	let nameChapter;
@@ -91,17 +92,43 @@ async function main(){
 		try {
 			var xhr = new XMLHttpRequest();
 			if (isSection) {	
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/section/questions/${sectionID}`, false);
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/question/nivelUser/${idUser}?idSection=${sectionID}`, false);
 				
 			}
 			else {
-				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/chapter/questions/${chapterID}`, false);
+				xhr.open("GET", `https://kfdnohrf5a.execute-api.us-east-1.amazonaws.com/dev/question/nivelUser/${idUser}?idChapter=${chapterID}`, false);
 			}
 			xhr.send(null);
 			if (xhr.status === 200) {
 				var data = JSON.parse(xhr.responseText);
-				//console.log('Data fetched successfully:', data);
-				window.Namespace.rawData = data;
+				console.log('Data fetched successfully:', data);
+                var dataFiltered = []
+				for(const question of data.questoes){
+					console.log(question)
+					let flag = true
+					let answersOfQuestion = []
+					for(const answer of question.resposta){
+						if(answersOfQuestion.includes(answer)){
+							flag = false;
+							break;
+						}
+
+						answersOfQuestion.push(answer)
+
+						if(/.*\d.*/.test(answer)){
+							flag = false;
+							break;
+						}
+					}
+
+					if(flag){
+						dataFiltered.push(question);
+					}
+				}
+			    //FILTRO QUESTÕES
+				window.Namespace.rawData = dataFiltered;
+                // console.log(dataFiltered)
+				
 			} else {
 				throw new Error('Network response was not ok');
 			}

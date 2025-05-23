@@ -2113,6 +2113,16 @@
 			"sid": 596248993150329
 		},
 		{
+			"eventType": "variable",
+			"name": "stopTime",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 283487671481197
+		},
+		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "manage questions",
@@ -8132,6 +8142,14 @@
 							"conditions": [],
 							"actions": [
 								{
+									"id": "toggle-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 878644377024501,
+									"parameters": {
+										"variable": "stopTime"
+									}
+								},
+								{
 									"callFunction": "PostPontuacao",
 									"sid": 333147802988439
 								},
@@ -8314,6 +8332,15 @@
 				{
 					"eventType": "block",
 					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 719393545617072,
+							"parameters": {
+								"variable": "endgame"
+							},
+							"isInverted": true
+						},
 						{
 							"id": "compare-eventvar",
 							"objectClass": "System",
@@ -8888,6 +8915,15 @@
 								"comparison": 2,
 								"time-seconds": "TempoJogo"
 							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 817895739462032,
+							"parameters": {
+								"variable": "stopTime"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [

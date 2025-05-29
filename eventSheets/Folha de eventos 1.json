@@ -9993,6 +9993,19 @@
 									"parameters": {
 										"data": "symbols"
 									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 876289944900677,
+									"parameters": {
+										"object-to-create": "popupSair",
+										"layer": "3",
+										"x": "simboloDicaContainer.BBoxRight + 30",
+										"y": "simboloDicaContainer.Y - 40",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
 								}
 							],
 							"sid": 480077217670760,
@@ -10176,6 +10189,30 @@
 										}
 									],
 									"sid": 283487104786057
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 765099053469461,
+											"parameters": {
+												"object": "cancelDica"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-visible",
+											"objectClass": "cancelDica",
+											"sid": 741315285753930,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 869898346561143
 								}
 							]
 						}
@@ -11323,7 +11360,7 @@
 				},
 				{
 					"eventType": "comment",
-					"text": "AUXILIARES PARA BLOCO DE DICA DE CONTEÚDO",
+					"text": "AUXILIARES PARA BLOCO DE DICA DE CONTEÚDO E BLOCO DE SIMBOLO ESCOLHIDO (CLIQUE NO BOTÃO DE FECHAR POPUP)",
 					"text-color": [
 						1,
 						1,
@@ -11367,9 +11404,25 @@
 							}
 						}
 					],
-					"actions": [],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "popupSair",
+							"sid": 201184175559350
+						}
+					],
 					"sid": 757364499499798,
 					"children": [
+						{
+							"eventType": "comment",
+							"text": "DICA DE CONTEUDO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
 						{
 							"eventType": "block",
 							"conditions": [
@@ -11397,11 +11450,6 @@
 									"id": "destroy",
 									"objectClass": "dicaDescContainer",
 									"sid": 369118592633254
-								},
-								{
-									"id": "destroy",
-									"objectClass": "popupSair",
-									"sid": 731053170532837
 								},
 								{
 									"id": "destroy",
@@ -11433,6 +11481,125 @@
 								}
 							],
 							"sid": 863326423274017
+						},
+						{
+							"eventType": "comment",
+							"text": "DICA DE SIMBOLO ESCOLHIDO",
+							"text-color": [
+								1,
+								1,
+								1,
+								1
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "dicaSpot0",
+									"sid": 352447844521216,
+									"parameters": {
+										"instance-variable": "isBuyed",
+										"value": "false"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 646964656983451,
+									"parameters": {
+										"variable": "moedas",
+										"value": "precoDica"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dicaSpot0",
+									"sid": 384139224720696,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "dica0",
+									"sid": 218161633728192,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"Comprada\""
+									}
+								},
+								{
+									"id": "destroy",
+									"objectClass": "simboloDicaContainer",
+									"sid": 757606448095273
+								},
+								{
+									"id": "destroy",
+									"objectClass": "symbolDesc",
+									"sid": 504066060882297
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 653764129375270,
+									"parameters": {
+										"variable": "endgame",
+										"value": "false"
+									}
+								},
+								{
+									"callFunction": "dicaInvisivel",
+									"sid": 133731246864988
+								}
+							],
+							"sid": 667125478109434
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 195978455452443,
+									"parameters": {
+										"object": "simbolo",
+										"expression": "simbolo.temp = 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "simbolo",
+									"sid": 511941737672651
+								}
+							],
+							"sid": 116763620153383
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 490996352903320,
+									"parameters": {
+										"object": "simboloContainer"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "simboloContainer",
+									"sid": 261999746142472
+								}
+							],
+							"sid": 708630403160141
 						}
 					]
 				},

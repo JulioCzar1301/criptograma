@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 44000,
+	"savedWithRelease": 44002,
 	"name": "criptograma",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -659,7 +659,7 @@
 		"zNear": 1,
 		"zFar": 10000,
 		"maxSpriteSheetSize": 2048,
-		"loaderStyle": "none",
+		"loaderStyle": "progress",
 		"preloadSounds": false,
 		"cordovaiOSScheme": "app",
 		"cordovaAndroidScheme": "https",

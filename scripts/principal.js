@@ -96,6 +96,7 @@ async function OnBeforeProjectStart(runtime)
 	else{
 		var data = window.Namespace.rawData
 		runtime.globalVars.nomeSecao = window.Namespace.nameSectionOrChapter
+		runtime.globalVars.moedas = window.Namespace.moedas
 		//runtime.globalVars.complete = true;
 	
 		////console.log(data)
@@ -643,7 +644,7 @@ function Tick(runtime) {
 				//Salvar malha
 				window.Namespace.board = boardSave;
 				window.Namespace.question = questionSave;
-				console.log(boardSave)
+				//console.log(boardSave)
 				 const save = { words: boardSave, 
 				 questions: questionSave, 
 				 nameSection: runtime.globalVars.nomeSecao, 

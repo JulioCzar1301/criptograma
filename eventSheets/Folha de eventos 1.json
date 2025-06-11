@@ -195,21 +195,11 @@
 			"eventType": "variable",
 			"name": "moedas",
 			"type": "number",
-			"initialValue": "50",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 721789724456399
-		},
-		{
-			"eventType": "variable",
-			"name": "moedasBonus",
-			"type": "number",
 			"initialValue": "0",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
-			"sid": 946447741484790
+			"sid": 721789724456399
 		},
 		{
 			"eventType": "variable",
@@ -7520,24 +7510,6 @@
 									"parameters": {
 										"visibility": "invisible"
 									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 737390545820113,
-									"parameters": {
-										"variable": "moedasBonus",
-										"value": "tentativasGeral = 0 ? int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / 1)* 100))) : int(((((TempoJogo - TempoGasto)/ TempoJogo) * 100) + ((acertos / tentativasGeral)* 100)))"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 342978075804227,
-									"parameters": {
-										"variable": "moedasBonus",
-										"value": "floor(moedasBonus/10)"
-									}
 								}
 							],
 							"sid": 893190228963110
@@ -8247,14 +8219,6 @@
 									}
 								},
 								{
-									"id": "set-text",
-									"objectClass": "jogMoedas",
-									"sid": 824904529813027,
-									"parameters": {
-										"text": "\"+\" & moedasBonus"
-									}
-								},
-								{
 									"id": "set-visible",
 									"objectClass": "telaFinal",
 									"sid": 558480949909815,
@@ -8486,14 +8450,6 @@
 									"sid": 379454210403096,
 									"parameters": {
 										"visibility": "visible"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "jogMoedas",
-									"sid": 683333920842435,
-									"parameters": {
-										"text": "\"+\" & moedasBonus"
 									}
 								},
 								{
@@ -8843,6 +8799,46 @@
 							"sid": 523169455244631
 						}
 					]
+				},
+				{
+					"functionName": "attMoedas",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "saldo",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 854544549369819
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"language": "javascript",
+							"script": [
+								"let amountJson = {",
+								"    \"amount\": localVars.saldo,",
+								"  };",
+								"",
+								"  let amountString = JSON.stringify(amountJson);",
+								"",
+								"  fetch(`https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/coins/${window.Namespace.message.split(',')[0]}`, {",
+								"    method: \"POST\",",
+								"    body: amountString",
+								"  })",
+								"    .then(response => response.json())",
+								"    .catch(error => console.error('Error:', error));"
+							]
+						}
+					],
+					"sid": 698281377663182
 				}
 			],
 			"sid": 264700288934629
@@ -10892,19 +10888,19 @@
 										{
 											"id": "set-boolean-instvar",
 											"objectClass": "dicaSpot0",
-											"sid": 297108366708546,
+											"sid": 836603639731752,
 											"parameters": {
-												"instance-variable": "isBuyed",
+												"instance-variable": "isSelected",
 												"value": "true"
 											}
 										},
 										{
-											"id": "subtract-from-eventvar",
-											"objectClass": "System",
-											"sid": 173724690936591,
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot0",
+											"sid": 982474893164004,
 											"parameters": {
-												"variable": "moedas",
-												"value": "precoDica"
+												"instance-variable": "isBuyed",
+												"value": "true"
 											}
 										},
 										{
@@ -10978,6 +10974,13 @@
 											}
 										},
 										{
+											"callFunction": "attMoedas",
+											"sid": 764228172939454,
+											"parameters": [
+												"- precoDica"
+											]
+										},
+										{
 											"id": "set-effect-enabled",
 											"objectClass": "dicaSpot1",
 											"sid": 885745655552784,
@@ -11046,6 +11049,13 @@
 												"variable": "moedas",
 												"value": "precoDica"
 											}
+										},
+										{
+											"callFunction": "attMoedas",
+											"sid": 968280356999363,
+											"parameters": [
+												"- precoDica"
+											]
 										},
 										{
 											"id": "set-effect-enabled",
@@ -11494,7 +11504,16 @@
 						},
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "dicaSpot0",
+									"sid": 100932896672550,
+									"parameters": {
+										"instance-variable": "isSelected"
+									}
+								}
+							],
 							"actions": [
 								{
 									"id": "set-boolean-instvar",
@@ -11506,12 +11525,12 @@
 									}
 								},
 								{
-									"id": "add-to-eventvar",
-									"objectClass": "System",
-									"sid": 646964656983451,
+									"id": "set-boolean-instvar",
+									"objectClass": "dicaSpot0",
+									"sid": 925841025092445,
 									"parameters": {
-										"variable": "moedas",
-										"value": "precoDica"
+										"instance-variable": "isSelected",
+										"value": "false"
 									}
 								},
 								{
@@ -11708,12 +11727,69 @@
 											"sid": 514150128475373
 										},
 										{
+											"id": "destroy",
+											"objectClass": "popupSair",
+											"sid": 363924616572033
+										},
+										{
 											"id": "set-boolean-eventvar",
 											"objectClass": "System",
 											"sid": 538471659161318,
 											"parameters": {
 												"variable": "endgame",
 												"value": "false"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot0",
+											"sid": 894617704844760,
+											"parameters": {
+												"instance-variable": "isSelected",
+												"value": "false"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "dicaSpot0",
+											"sid": 937978200771640,
+											"parameters": {
+												"instance-variable": "isBuyed",
+												"value": "true"
+											}
+										},
+										{
+											"id": "subtract-from-eventvar",
+											"objectClass": "System",
+											"sid": 671822602253306,
+											"parameters": {
+												"variable": "moedas",
+												"value": "precoDica"
+											}
+										},
+										{
+											"callFunction": "attMoedas",
+											"sid": 944637276455743,
+											"parameters": [
+												"- precoDica"
+											]
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dicaSpot0",
+											"sid": 116953108080355,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
+											}
+										},
+										{
+											"id": "set-effect-enabled",
+											"objectClass": "dica0",
+											"sid": 698096513882027,
+											"parameters": {
+												"mode": "enable",
+												"effect": "\"Comprada\""
 											}
 										},
 										{
@@ -12448,6 +12524,16 @@
 			"sid": 312968649701192
 		},
 		{
+			"eventType": "variable",
+			"name": "moedasFinal",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 634538271620588
+		},
+		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "manage save",
@@ -12818,6 +12904,10 @@
 										"    recomendacao = dataIA.recomendacao || \"media\";",
 										"\tconst score = runtime.objects.jogPontuacao.getFirstInstance();",
 										"\tscore.text = Math.floor(pontuacaoIA).toString();",
+										"\tconst coins = runtime.objects.jogMoedas.getFirstInstance();",
+										"\tcoins.text = \"+\" + Math.floor(pontuacaoIA/2).toString();",
+										"\truntime.callFunction(\"attMoedas\", Math.floor(pontuacaoIA/2).toString())",
+										"\t\t",
 										"\t//score.runtime.redraw();",
 										"",
 										"    //console.log(\"Resposta IA:\", dataIA.pontuacao + \" | \" + dataIA.recomendacao);",

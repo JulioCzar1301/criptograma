@@ -1,6 +1,7 @@
 // Namespace da questão, para poder acessar em outro script
 window.Namespace = window.Namespace || {};
 window.Namespace.nameSectionOrChapter = []
+window.Namespace.moedas = []
 
 function waitForMessage() {
     return new Promise((resolve) => {
@@ -40,9 +41,10 @@ async function main(){
 	window.Namespace.acertos = [];
 	window.parent?.postMessage('construct-ready', '*');
 	//waitForMessage();
-	window.Namespace.message = "948824b8-3051-7039-4c64-153b0f6c8dc8,chapter,8702111d-0f8e-465b-81db-518a7fbdc844";
+	window.Namespace.message = "948824b8-3051-7039-4c64-153b0f6c8dc8,chapter,25ba2c14-a291-4f90-a444-414252245737";
 	window.Namespace.nameSection;
 	window.Namespace.nameChapter;
+	window.Namespace.moedas;
 	
 	const parts = window.Namespace.message.split(",");
 	const isSection = parts[1] === "section";
@@ -136,6 +138,24 @@ async function main(){
 			console.error('Failed to fetch data:', error);
 		}
 	}
+
+	function getCoin() {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `https://ereik07xl4.execute-api.us-east-1.amazonaws.com/dev/coins/${idUser}`, false);
+        xhr.send(null);
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          window.Namespace.moedas = data.coins;
+          //console.log("Saldo: ", data.coins)
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+}
+
     // Função que puxa o nome da seção ou capítulo
 	function callName(){
 		try {
@@ -190,6 +210,7 @@ async function main(){
 	getReloadStatus();
 	if (!window.Namespace.reload) {
 		initialize()
+		getCoin()
 		callName()
 	}
 	else{
